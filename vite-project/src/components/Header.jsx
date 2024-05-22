@@ -1,0 +1,39 @@
+// import { Link } from "react-router-dom";
+
+function Header() {
+  
+    return (
+        <header>
+            <nav>
+                <button
+                    onClick={() => {
+                        localStorage.clear();
+                        setCurrentUser({});
+                        navigate("/home");
+                    }}
+                >Logout</button>
+                <button
+                    onClick={() => {
+                        localStorage.clear();
+                        setCurrentUser({});
+                        navigate("/home");
+                    }}
+                >Login</button>
+                <button
+                    onClick={() => {
+                        localStorage.clear();
+                        setCurrentUser({});
+                        navigate("/home");
+                    }}
+                >
+                    Signup
+                </button>
+                {/* <Link to={`/home/basket`}>Basket</Link> */}
+                <Link to={`/home/about`}>About</Link>
+                <Link to={`/home/gallery`}>Gallery</Link>
+                <Link to={`/home/sites`}>Sites</Link>
+            </nav>
+        </header>
+    );
+}
+export default Header;
