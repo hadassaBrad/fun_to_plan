@@ -18,9 +18,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/sites" element={<Sites />} />
           <Route path="/sites/:siteId" element={<Site />} />
-          <Route path="/tripRoute" element={<TripRoute />} />
+           <Route path="/tripRoute" element={<TripRoute />} /> 
+           <Route path="/basket" element={<Basket />} />
           
-
           <Route path="/admin" element={<Admin />} />
         </Route>
       </Routes>
