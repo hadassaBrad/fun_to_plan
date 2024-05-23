@@ -1,4 +1,4 @@
-import Sites from "./sites";
+
 import React from "react";
 
 function Sites() {

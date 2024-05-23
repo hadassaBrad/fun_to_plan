@@ -1,4 +1,4 @@
-import PermissionsManagement from "./permissionsManagement";
+
 import React from "react";
 
 function PermissionsManagement() {

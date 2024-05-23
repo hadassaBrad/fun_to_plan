@@ -1,9 +1,8 @@
-
 import React from "react";
 
-function Site() {
+function Basket() {
     return (
         <></>
     );
 }
-export default Site;
+export default Basket;

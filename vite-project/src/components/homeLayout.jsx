@@ -1,13 +1,14 @@
-// import { Outlet } from "react-router-dom";
-import Header from "./Header";
 import React from "react";
+import { Outlet } from "react-router-dom";
+import Header from "./Header";
 
 function HomeLayout() {
   return (
     <>
       <Header />
-      {/* <Outlet /> */}
+      <Outlet />
     </>
   );
 }
+
 export default HomeLayout;
