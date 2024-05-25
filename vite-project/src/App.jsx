@@ -13,9 +13,13 @@ import Basket from "./pages/Basket";
 
 export const UserContext = createContext();
 
+
+
 function App() {
+  const [user, setUser] = useState();
+
   return (
-    <UserContext.Provider value={""}>
+    <UserContext.Provider value={{user, setUser}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
