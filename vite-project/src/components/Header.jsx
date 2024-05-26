@@ -5,13 +5,13 @@ import { NavLink } from "react-router-dom"
 import { UserContext } from '../App'
 
 function Header() {
-    const userSession = useContext(UserContext);
+    const {userSession, setUserSession} = useContext(UserContext);
  console.log(userSession);
     const navigate = useNavigate();
     return (
         <header>
             <nav>
-                {userSession!=null && <button
+                {userSession !=null && <button
                     onClick={() => {
                         localStorage.clear();
                        // setCurrentUser({});
@@ -25,7 +25,7 @@ function Header() {
                 <Link to={`/home/basket`}> Basket </Link>
                 {userSession==="user"?   <Link to={`/home/tripRoute`}>  My Trip Routes  </Link>:null} 
              
-                {userSession===null&& <><button
+                {!userSession&& <><button
                     onClick={() => {
 
                     }}

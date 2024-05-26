@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import './App.css';
 import Home from './pages/Home';
-import HomeLayout from './components/HomeLayout';
+import HomeLayout from './components/homeLayout';
 import About from './pages/About';
 import Sites from './pages/Sites';
 import Gallery from './pages/Gallery';
@@ -13,10 +13,8 @@ import Basket from "./pages/Basket";
 
 export const UserContext = createContext();
 
-
-
 function App() {
-  const [userSession,setUserSession]=useState(null);
+  const [userSession,setUserSession]=useState();
 
   return (
     <UserContext.Provider value={{userSession, setUserSession}}>
