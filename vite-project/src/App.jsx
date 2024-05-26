@@ -16,10 +16,10 @@ export const UserContext = createContext();
 
 
 function App() {
-  const [user, setUser] = useState();
+  const [userSetion,setUserSetion]=useState(null);
 
   return (
-    <UserContext.Provider value={{user, setUser}}>
+    <UserContext.Provider value={{userSetion, setUserSetion}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
