@@ -5,26 +5,27 @@ import { NavLink } from "react-router-dom"
 import { UserContext } from '../App'
 
 function Header() {
-    const userSetion = useContext(userSetion);
- 
+    const userSession = useContext(UserContext);
+ console.log(userSession);
     const navigate = useNavigate();
     return (
         <header>
             <nav>
-                {user && <button
+                {userSession!=null && <button
                     onClick={() => {
                         localStorage.clear();
-                        setCurrentUser({});
+                       // setCurrentUser({});
                         navigate("/home");
                     }}
                 >Logout  </button>}
-              {userSetion==="admin"? <Link to={`/home/admin`}> Admin </Link>:null} 
+              {userSession==="admin"? <Link to={`/home/admin`}> Admin </Link>:null} 
                 <Link to={`/home/about`}> About </Link>
                 <Link to={`/home/gallery`}> Gallery </Link>
                 <Link to={`/home/sites`}> Sites </Link>
                 <Link to={`/home/basket`}> Basket </Link>
-                <Link to={`/home/tripRoute`}>  My Trip Routes  </Link>
-                {!user && <><button
+                {userSession==="user"?   <Link to={`/home/tripRoute`}>  My Trip Routes  </Link>:null} 
+             
+                {userSession===null&& <><button
                     onClick={() => {
 
                     }}
