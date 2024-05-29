@@ -1,14 +1,15 @@
 CREATE DATABASE IF NOT EXISTS funToPlanDB;
 USE funToPlanDB;
+DROP TABLE IF EXISTS basket;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS passwords;
 DROP TABLE IF EXISTS permissions;
 DROP TABLE IF EXISTS addresses;
 DROP TABLE IF EXISTS gallery;
+DROP TABLE IF EXISTS sites;
 DROP TABLE IF EXISTS difficulty;
 DROP TABLE IF EXISTS area;
 DROP TABLE IF EXISTS age;
-DROP TABLE IF EXISTS sites;
 
 CREATE TABLE passwords (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,6 +38,7 @@ CREATE TABLE users (
     password_id INT NOT NULL,
     email VARCHAR(225) NOT NULL,
     address_id INT,
+    phone_number INT,
     FOREIGN KEY (address_id) REFERENCES addresses(id),
     FOREIGN KEY (role_id) REFERENCES permissions(id),
     FOREIGN KEY (password_id) REFERENCES passwords(id)
@@ -80,4 +82,12 @@ CREATE TABLE sites (
     FOREIGN KEY (id_difficulty) REFERENCES difficulty(id),
     FOREIGN KEY (id_area) REFERENCES area(id),
     FOREIGN KEY (id_age) REFERENCES age(id)
+);
+
+create table basket(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+user_id int not null,
+site_id int not null,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (site_id) REFERENCES sites(id)
 );
