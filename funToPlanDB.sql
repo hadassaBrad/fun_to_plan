@@ -91,3 +91,41 @@ site_id int not null,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (site_id) REFERENCES sites(id)
 );
+
+
+INSERT INTO gallery (url, name) VALUES
+('https://lh5.googleusercontent.com/p/AF1QipONQVvtMTudYatxLHXQVPhnvYBd3lEkH9Pzf6f7=w101-h72-n-k-no-nu', 'הר הארבל'),
+('https://lh5.googleusercontent.com/p/AF1QipN6nbi6s4hbo2E_qdN8R7fOKI3XznHbYyzN3L-O=w101-h72-n-k-no-nu', 'הר הארבל'),
+('https://lh5.googleusercontent.com/p/AF1QipP2GMnGVuDKABzniHLJE46fZWtvjfUWTcPLFJW4=w101-h72-n-k-no-nu', 'הר הארבל'),
+('https://lh5.googleusercontent.com/p/AF1QipNKbVnrm6PciHeACWq8-WdCvzlFPNMxh-BRmnyL=w101-h72-n-k-no-nu', 'הר הארבל'),
+('https://lh3.googleusercontent.com/p/AF1QipNxUCY_2h7J8gQu4CTxJOdDdyE-gHvUmX13zP-_=s680-w680-h510', 'הר הארבל'),
+('https://lh5.googleusercontent.com/p/AF1QipOtyIJvkzkbygayQP_Z8XrKdV9jAHiaFiCo0rAZ=w540-h312-n-k-no', 'הר הארבל'),
+('https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcThU1L3CY4LI_LjCRPg0W6_liG9NK9S0UUbnsnziYBJOEH78lPxSbvF5UzCgR1SI91i5KGJt14CET04C2T92QJUdaQkwDpNxn-L5kDU1M8', 'גן לאומי מצדה'),
+('https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcSnygI9VXGU4UBab6pOB39J6isEkM05BSutzkOd0IB1u5vqReOYwLVHKnnTdlh6Wiru-GOVqngdX_38ngDAfDNjTGpsFyjBqgE8nQHA_A', 'גן לאומי מצדה'),
+('https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcTb-PEd0xcxwmuzQv0vN4FjFSBStnl9DC7DcbcO5DQ3-nstD20nDHWyK_GVFmXxmVVQIA9QYh9UFt6j19yOkRf2--_uMeAnN8ctXSTtfQ', 'גן לאומי מצדה'),
+('https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcThU1L3CY4LI_LjCRPg0W6_liG9NK9S0UUbnsnziYBJOEH78lPxSbvF5UzCgR1SI91i5KGJt14CET04C2T92QJUdaQkwDpNxn-L5kDU1M8', 'גן לאומי מצדה'),
+('https://lh3.googleusercontent.com/p/AF1QipOMzw13wDhhN2VhjGJPKeGt0g3VMHmGh1avtB4C=s680-w680-h510', 'גן לאומי מצדה'),
+('https://lh3.googleusercontent.com/p/AF1QipOM04Pml4i7M9aHj-8UwuhEZg-Sf1I9saYA22Xt=s680-w680-h510', 'גן לאומי מצדה'),
+('https://lh3.googleusercontent.com/p/AF1QipOOnPXW8mXXCU3twH63TLQsku-lXcz3HuhFtbye=s680-w680-h510', 'גן לאומי מצדה'),
+('https://lh3.googleusercontent.com/p/AF1QipN2g7xzIsB-3DW1HdcG7O53lg_FhzDhravXDmrQ=s680-w680-h510', 'גן לאומי מצדה'),
+('https://lh3.googleusercontent.com/p/AF1QipPiu_OwXJIByRqlNQxphXTKcIfEa9Pm_fqzs9n2=s680-w680-h510', 'גן לאומי מצדה'),
+('https://lh3.googleusercontent.com/p/AF1QipM29Hy1Fj44HUDj5PvXjBbAyC3oqG-BlAyryeGc=s680-w680-h510', 'גן לאומי מצדה'),
+('https://lh5.googleusercontent.com/p/AF1QipPl1kl0F2hkFBuigpJL8wqMMtJ37ocLSCzlPE8=w141-h235-n-k-no-nu', 'הר סדום'),
+('https://lh5.googleusercontent.com/p/AF1QipPUDdgxjh6-wlSIxXrZOnFHB5hfscPz2dUql2iP=w141-h118-n-k-no-nu', 'הר סדום'),
+('https://lh3.googleusercontent.com/p/AF1QipNIF_uZBcAcVo-DQ3oC8CPEIYoLzRTROQ19RgqB=s680-w680-h510', 'הר סדום'),
+('https://lh5.googleusercontent.com/p/AF1QipN0wf_Vh2m71wvMpfbOXNr8RyBROz3DphCYLfKF=w141-h101-n-k-no-nu', 'הר סדום'),
+('https://lh3.googleusercontent.com/p/AF1QipMWgDNIuV1U0hJRWOo85jhPlobxGiX1bEPj1AVZ=s680-w680-h510', 'הר סדום'),
+('https://lh5.googleusercontent.com/p/AF1QipN6IJr_4Y8iBFFQUgrkCgieVE3wwYCgGGw5DKfo=w141-h101-n-k-no-nu', 'הר סדום'),
+('https://lh5.googleusercontent.com/p/AF1QipPfh3yqD7bPNkryGTsecIS7i3lAmpxWGNkfcgoU=w540-h312-n-k-no', 'הר סדום'),
+('https://lh5.googleusercontent.com/p/AF1QipNmUj7nthGC00CBA74fHSyaOYYJYem69MYE35-g=w540-h312-n-k-no', 'הר סדום'),
+('https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcRk_RikI6jpCnLj56pWuIh83ePR9bgA4Vakak1DHfHW3rewQq23-eT2HQlhXGVHrCemkUbKo7W9bVBuWSrGXTw8u7smelldB0pAj9eO0g', 'הר סדום'),
+('https://lh5.googleusercontent.com/p/AF1QipPfh3yqD7bPNkryGTsecIS7i3lAmpxWGNkfcgoU=w540-h312-n-k-no', 'הר סדום'),
+('https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcT2tw_U9XKg_gmn17dNyW_rQLFoSRTIQOLQZG8_RT5cwAKixDLbeaSwtbcwNZqJ8FjdmhiNu7hpT_GJllejsd10APK5CNM4ZYobKRThMA', 'הר סדום'),
+('https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSfBgAQux71ZopennmayW1YDA2UKnaCW1X1ruZsBDa2Vna4AbzjEWM1e11RRu1ZkXmTVV7fmi0NRQ801VvbckMTaYjIlvbF8mh4IvbYxQ', 'נחל עוג');
+
+INSERT INTO permissions(role) VALUES
+('user'),
+('admin'),
+('worker');
+SELECT * FROM permissions
+
