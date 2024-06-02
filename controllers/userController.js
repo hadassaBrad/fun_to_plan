@@ -1,4 +1,4 @@
-const model = require('../models/galleryModel');
+const model = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -21,24 +21,42 @@ const numSaltRoundss = 10;
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
-async function createUser(role_id,  password, userName, email) {
+
+async function getUser(id) {
+  try {
+    const user = model.getUser(id);
+    const role = model.getRole(user.role_id);
+    const newUser = {
+      id: user.id,
+      role: role.role,
+      userName: user.user_name,
+      email: user.email,
+      address: user.address_id
+    }
+    return newUser;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function createUser(role_id, password, userName, email) {
   try {
     const result = await model.getUserByEmail(email);//checkes if he exists
     if (result.length != 0) {
       throw err;
     }
-   const hash = await bcrypt.hash(password, numSaltRoundss);
-    return model.createUser(role_id,  hash, userName, email);
-
+    const hash = await bcrypt.hash(password, numSaltRoundss);
+    const newUser = model.createUser(role_id, hash, userName, email);
+    return getUser(newUser.id);
   } catch (err) {
     throw err;
   }
 }
-const authenticate = (req, res) => {
-  const { username, password } = req.body;
- // שליפת המשתמש מהדאטה בייס            const user = users.find(u => u.username === username && u.password === password);
- //אם המשתמש קיים 
- if (user) {
+
+async function authenticate(req, res) {
+  const { username, password, email } = req.body;
+  const user = await model.getUserByEmail(email);//checkes if he exists
+  if (user) {
     const token = jwt.sign({ userId: user.id, role: user.role }, SECRET_KEY, { expiresIn: '1h' });
     req.session.token = token; // שמירת הטוקן ב-session
     res.cookie('token', token, { httpOnly: true });
@@ -48,13 +66,5 @@ const authenticate = (req, res) => {
   }
 };
 
-// const authenticate = (req, res) => {
-  
-    
-//       const token = jwt.sign({ userId: user.id, role: user.role }, SECRET_KEY, { expiresIn: '1h' });
-      
-  
-//   };
-  
 
-  module.exports = { authenticate }
+module.exports = { authenticate, createUser, getUser }

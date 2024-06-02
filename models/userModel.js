@@ -1,18 +1,6 @@
 const pool = require('../DB.js');
 
-// id int AI PK 
-// role_id int 
-// user_name varchar(225) 
-// password_id int 
-// email varchar(225)  
-// address_id
 
-
-// password varchar(225) 
-// loginAttempts int 
-// lastLogin datetime 
-// lastFailedLogin datetime 
-// account_status
 async function createUser(role_id,  password, userName, email) {
     try {
      const  datetime = new Date();
@@ -31,4 +19,35 @@ async function createUser(role_id,  password, userName, email) {
     }
 }
 
-module.exports = { createUser } 
+async function getUserByEmail(email) {
+    try {
+      const sql = 'SELECT * FROM users where email=?';
+      const result = await pool.query(sql, [email]);
+
+
+      return result[0];
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
+  async function getUser(id) {
+    try {
+      const sql = 'SELECT * FROM users  WHERE id = ?';
+      const result = await pool.query(sql, [id]);
+      return result[0];
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+  
+  async function getRole(id) {
+    try {
+      const sql = 'SELECT * FROM permissions  WHERE id = ?';
+      const result = await pool.query(sql, [id]);
+      return result[0];
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+module.exports = { createUser ,getUserByEmail, getUser, getRole} 
