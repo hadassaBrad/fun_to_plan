@@ -1,5 +1,10 @@
 import React from "react";
 import { useServer } from "../components/Server";
+import { useParams } from 'react-router-dom'
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../App';
+import { BsPlusLg } from "react-icons/bs";
 
 function Gallery() {
 
