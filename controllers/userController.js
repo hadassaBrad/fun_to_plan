@@ -1,7 +1,7 @@
 const model = require('../models/userModel');
 const jwt = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
+// const cookieParser = require('cookie-parser');
+// const session = require('express-session');
 const bcrypt = require("bcrypt")
 const numSaltRoundss = 10;
 // const SECRET_KEY = process.env.SECRET_KEY;
@@ -22,7 +22,7 @@ const numSaltRoundss = 10;
 const SECRET_KEY = process.env.SECRET_KEY;
 
 
-async function getUser(id) {
+async function getUser(id) {//אמור להמחק ולהיות בבקנד
   try {
     const user = model.getUser(id);
     const role = model.getRole(user.role_id);
@@ -52,18 +52,13 @@ async function createUser(role_id, password, userName, email) {
     throw err;
   }
 }
+async function loginUser() {
 
-async function authenticate(req, res) {
-  const { username, password, email } = req.body;
-  const user = await model.getUserByEmail(email);//checkes if he exists
-  if (user) {
-    const token = jwt.sign({ userId: user.id, role: user.role }, SECRET_KEY, { expiresIn: '1h' });
-    req.session.token = token; // שמירת הטוקן ב-session
-    res.cookie('token', token, { httpOnly: true });
-    res.json({ message: 'Authenticated', token });
-  } else {
-    res.status(401).json({ message: 'Invalid credentials' });
-  }
+}
+async function authenticate(user) {
+  const token = jwt.sign({ userId: user.id, role: user.role }, SECRET_KEY,);
+  return token
+
 };
 
 

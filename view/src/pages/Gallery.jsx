@@ -1,5 +1,5 @@
 import React from "react";
-import { useServer } from "../components/Server";
+import { useServer } from '../config';
 import { useParams } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useNavigate } from 'react-router-dom';

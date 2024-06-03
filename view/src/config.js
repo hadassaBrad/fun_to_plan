@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useState } from 'react';
-export const ServerContext = createContext();
+//import React, { createContext, useContext, useState } from 'react';
+//export const ServerContext = createContext();
 
-const Server = ({ requst }) => {
-const [user, serUser]=useState();
+// const Server = ({ requst }) => {
+// const [user, setUser]=useState();
 
     const baseUrl = "http://localhost:3000/";
 
@@ -10,7 +10,8 @@ const [user, serUser]=useState();
         searchKey = null,
         searchValue = null,
         start = 0,
-        limit = null) => {
+        limit = null,
+        ) => {
         try {
             let url = `${baseUrl}${entity}`;
             if (searchKey) {
@@ -117,14 +118,17 @@ const [user, serUser]=useState();
     //     }
     // };
 
-    return (
-        <ServerContext.Provider value={{ deleteData, postData, putData, getData, user, serUser }}>
-            {children}
-        </ServerContext.Provider>
-    );
-};
+//     return (
+//         <ServerContext.Provider value={{ deleteData, postData, putData, getData, user, setUser }}>
+//             {children}
+//         </ServerContext.Provider>
+//     );
+// };
 
-export const useServer = () => {
-    return useContext(ServerContext);
-}
-export default Server;
+// export const useServer = () => {
+//     return useContext(ServerContext);
+// }
+
+// export default Server;
+
+export default {getData,putData,postData,deleteData}

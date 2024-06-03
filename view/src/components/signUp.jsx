@@ -1,5 +1,5 @@
-import { useServer } from "../App";
-import useServer from '../config';
+import { useServer } from '../config';
+
 
 function SignUp() {
     const { user, setUser, postData } = useServer();
@@ -20,12 +20,12 @@ function SignUp() {
             }
         });
     }
-    const handleSubmit = (e) => {
+async function handleSubmit(e)  {
         if (formLogInData.username === "" || formLogInData.password === "")
             alert("please enter all the required details");
         else {                                                              //create new user in the server
             e.preventDefault();
-            const currentUser = postData("signUp", formLogInData)
+            const currentUser =  await postData("signUp", formLogInData)
             const token = currentUser.token;
             sessionStorage.setItem('token', token);
 

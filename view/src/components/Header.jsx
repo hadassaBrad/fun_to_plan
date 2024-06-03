@@ -2,7 +2,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { React, useContext } from 'react'
 import { NavLink } from "react-router-dom"
-import { UserContext } from '../App'
+import { UserContext } from '../App';
+import SignUp from './SignUp'
 
 function Header() {
     const {userSession, setUserSession} = useContext(UserContext);
@@ -14,7 +15,7 @@ function Header() {
                 {userSession !=null && <button
                     onClick={() => {
                         localStorage.clear();
-                       // setCurrentUser({});
+                       // setCurrentUser({});n
                         navigate("/home");
                     }}
                 >Logout  </button>}
@@ -32,7 +33,7 @@ function Header() {
                 >  Login  </button>
                     <button
                         onClick={() => {
-
+                    <SignUp></SignUp>
                         }}
                     >  Signup  </button></>}
             </nav>
