@@ -1,13 +1,13 @@
 const express = require('express');
-<<<<<<< HEAD
+
 const config = require('./config/config');
-=======
+
 
 const adminRouter = express.Router();
 
 // Define routes for admin
 
->>>>>>> 98f01a739fda180f7defff9211b1845ccd38578a
+
 const path = require('path');
 const session = require('express-session');
 const app = express();
@@ -35,23 +35,22 @@ app.use("/login",(req, res, next)=>{
   next();
 }, loginRouter);
 
-<<<<<<< HEAD
+
 app.use("/signUp",aignUpRouter);
 
 app.use("/admin",adminRouter);
 
-=======
-const loginRouter=require("./routes/loginRouter")
+
 app.use("/login",loginRouter);
 
-const signUpRouter=require("./routes/signUpRouter")
+
 app.use("/signUp",aignUpRouter);
 
-const adminRouter=require("./routes/adminRoter")
+
 app.use("/admin",signUpRouter);
 
 const galleryRouter=require("./routes/galleryRoter")
->>>>>>> 98f01a739fda180f7defff9211b1845ccd38578a
+
 app.use("/gallery", galleryRouter);
 
 
@@ -59,11 +58,10 @@ app.use("/basket",basketRouter)
 
 app.use("/site",sitesRouter)
 
-<<<<<<< HEAD
+
 
 app.use("/basket",basketRouter)
-=======
->>>>>>> 98f01a739fda180f7defff9211b1845ccd38578a
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
