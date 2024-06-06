@@ -8,10 +8,24 @@ async function createUser(role_id,  password, userName, email) {
         const resultPassword = await pool.query(sqlPassword, [password,1,datetime.getDate(),null,true ]);
         const passwordId = resultPassword[0].insertId
         
-        //מאיפה אני מקבלת את הרול איידי, זה מגיע תמיד כ0 או משהו כזה
+       
         const sql = "INSERT INTO users (`role_id`, `user_name`, `password_id`,`email` ) VALUES(?, ?, ?, ?)";
         const result = await pool.query(sql, [role_id, userName, passwordId, email]);
-        return result[0];
+       
+          // Retrieve the role name from the permissions table
+          const sqlRole = "SELECT role FROM permissions WHERE id = ?";
+          const resultRole = await pool.query(sqlRole, [role_id]);
+          const roleName = resultRole[0][0].role;
+          const user = {
+            id: userId,
+            role: roleName,
+            userName: userName,
+            email: email,
+            passwordId: passwordId
+        };
+
+        return user;
+
         //לבדוק בפוסטמן מה חוזר ומה צריך לקחת בחזרה
     } catch (err) {
         console.log(err);

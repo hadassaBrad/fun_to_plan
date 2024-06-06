@@ -1,15 +1,9 @@
 const express = require('express');
-
 const config = require('./config/config');
-
-
 const adminRouter = express.Router();
 
-// Define routes for admin
-
-
 const path = require('path');
-const session = require('express-session');
+//const session = require('express-session');
 const app = express();
 app.use (express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,45 +15,25 @@ const adminRouter=require("./routes/admin")
 const basketRouter=require("./routes/basketRoter")
 const galleryRouter=require("./routes/gallery")
 const sitesRouter=require("./routes/sitesRouter")
+const guideRouter=require ("./routes/guideRouter")
 const port = 3000;
 const SECRET_KEY = process.env.SECRET_KEY;
-app.use( session ({
-    secret: SECRET_KEY,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: true } 
-  }));
-  app.use(cors());
+// app.use( session ({
+//     secret: SECRET_KEY,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { secure: true } 
+//   }));
 
-app.use("/login",(req, res, next)=>{
-  next();
-}, loginRouter);
+app.use(cors());
 
-
-app.use("/signUp",aignUpRouter);
-
+app.use("/login", loginRouter);
+app.use("/signUp",signUpRouter);
 app.use("/admin",adminRouter);
-
-
-app.use("/login",loginRouter);
-
-
-app.use("/signUp",aignUpRouter);
-
-
-app.use("/admin",signUpRouter);
-
-const galleryRouter=require("./routes/galleryRoter")
-
+app.use("/guide",guideRouter)
 app.use("/gallery", galleryRouter);
-
-
 app.use("/basket",basketRouter)
-
 app.use("/site",sitesRouter)
-
-
-
 app.use("/basket",basketRouter)
 
 

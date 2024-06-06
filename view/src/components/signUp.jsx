@@ -27,6 +27,7 @@ async function handleSubmit(e)  {
             e.preventDefault();
             const currentUser =  await postData("signUp", formLogInData)
             const token = currentUser.token;
+            //const token = currentUser.session.token;
             sessionStorage.setItem('token', token);
 
             if (currentUser) {
