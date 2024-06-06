@@ -3,8 +3,7 @@ const express = require("express");
 const loginRouter = express.Router();
 loginRouter.use(express.json());
 loginRouter.use(express.urlencoded({ extended: true }));
-const { authenticate,postLogin } = require('../controllers/userController');
-const { postLogin } = require('../controllers/usersController.js');
+const { authenticate,postLogin } = require('../controllers/userController.js');
 loginRouter.route("/")
   .post(async (req, res) => {
     try {

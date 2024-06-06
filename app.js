@@ -9,11 +9,11 @@ app.use (express.json());
 app.use(express.urlencoded({ extended: true }));
 const cors = require('cors'); 
 
-const loginRouter=require("./routes/login")
-const signUpRouter=require("./routes/signUp")
-const adminRouter=require("./routes/admin")
+const loginRouter=require("./routes/loginRouter")
+const signUpRouter=require("./routes/signUpRouter")
+// const adminRouter=require("./routes/admin")
 const basketRouter=require("./routes/basketRoter")
-const galleryRouter=require("./routes/gallery")
+const galleryRouter=require("./routes/galleryRouter")
 const sitesRouter=require("./routes/sitesRouter")
 const guideRouter=require ("./routes/guideRouter")
 const port = 3000;
