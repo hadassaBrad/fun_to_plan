@@ -12,7 +12,6 @@ loginRouter.route("/")
       const token = authenticate(user)
       res.session.token = token; 
       res.send(user);
-      res.send(user);
     }
     catch (err) {
       if (err.message == "not Exsist") {

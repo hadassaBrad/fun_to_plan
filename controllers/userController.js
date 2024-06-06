@@ -22,23 +22,6 @@ const numSaltRoundss = 10;
 const SECRET_KEY = process.env.SECRET_KEY;
 
 
-// async function getUser(id) {//אמור להמחק ולהיות בבקנד
-//   try {
-//     const user = model.getUser(id);
-//     const role = model.getRole(user.role_id);
-//     const newUser = {
-//       id: user.id,
-//       role: role.role,
-//       userName: user.user_name,
-//       email: user.email,
-//       address: user.address_id
-//     }
-//     return newUser;
-//   } catch (err) {
-//     throw err;
-//   }
-// }
-
 async function createUser(role_id, password, userName, email) {
   try {
     const result = await model.getUserByEmail(email);//checkes if he exists
@@ -76,6 +59,23 @@ async function authenticate(user) {
   return token
 
 };
+async function getUser(id) {
+  try {
+    return model.getUser(id);
+  } catch (err) {
+    throw err;
+  }
+}
 
+async function getUserByEmail(email) {
+  try {
+    return model.getUserByEmail(email);
+  } catch (err) {
+    throw err;
+  }
+}
 
-module.exports = { authenticate, createUser, getUser,postLogin }
+async function updateUser() {
+
+}
+module.exports = { authenticate, createUser, getUser,postLogin,getUserByEmail,updateUser }
