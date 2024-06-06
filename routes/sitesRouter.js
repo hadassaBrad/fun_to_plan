@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-const { createSite, getSites, getSite, deleteSite, updateSite } = require('../controllers/todosController');
+const { createSite, getSites, getSite, deleteSite, updateSite } = require('../controllers/sitesController');
 const cors = require('cors');
 router.use(cors());
 

@@ -13,9 +13,8 @@ router.use(cors());
     router .post("/", async (req, res) => {
         try {
             const user = await createUser(req.body.role_id,  req.body.password, req.body.userName , req.body.email);
-            const token = authenticate(user)
-            res.session.token = token; 
-            res.send(user);
+            const token = await authenticate(user)
+            res.send({ user, token });
         }
         catch {
             res.status(401).send("this user is already exist, please login");

@@ -1,11 +1,11 @@
-import { useServer } from '../config';
+import { useContext, useState } from 'react';
+import  config  from '../config.js';
 
 
 function SignUp() {
-    const { user, setUser, postData } = useServer();
+    const { userSession, setUserSession } = useContext();
 
     const [formLogInData, setFormLogInData] = useState({
-       
         username: "",
         password: "",
         email:"",
@@ -25,13 +25,13 @@ async function handleSubmit(e)  {
             alert("please enter all the required details");
         else {                                                              //create new user in the server
             e.preventDefault();
-            const currentUser =  await postData("signUp", formLogInData)
+            const currentUser =  await config.postData("signUp", formLogInData)
             const token = currentUser.token;
             //const token = currentUser.session.token;
             sessionStorage.setItem('token', token);
 
             if (currentUser) {
-                setUser(currentUser);
+                setUserSession(currentUser);
                 //modal.close()
 
             } else {
