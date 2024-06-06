@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 const cors = require('cors'); 
 
 const loginRouter=require("./routes/login")
-const aignUpRouter=require("./routes/signUp")
+const signUpRouter=require("./routes/signUp")
 const adminRouter=require("./routes/admin")
 const basketRouter=require("./routes/basketRoter")
 const galleryRouter=require("./routes/gallery")
