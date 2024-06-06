@@ -45,10 +45,11 @@ async function getUserByEmail(email) {
     }
   }
 
-  async function getUser(id) {
+
+  async function getUser(email) {
     try {
-      const sql = 'SELECT * FROM users  WHERE id = ?';
-      const result = await pool.query(sql, [id]);
+      const sql = 'SELECT * FROM users NATURAL JOIN addresses NATURAL JOIN passwords NATURAL JOIN permissions WHERE users.email = ?';
+      const result = await pool.query(sql, [email]);
       return result[0];
     } catch (err) {
       throw new Error(err);
