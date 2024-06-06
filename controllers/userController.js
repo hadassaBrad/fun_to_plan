@@ -6,23 +6,8 @@ const jwt = require('jsonwebtoken');
 
 // const bcrypt = require("bcrypt")
 const numSaltRoundss = 10;
-// const SECRET_KEY = process.env.SECRET_KEY;
-// app.use(session({
-//     secret: SECRET_KEY,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: { secure: true } // set secure: true in production with HTTPS
-//   }));
-
-
-//מה צריך לעשות פה?
-//צריך עבור יצירת לקוח חדש: :
-//1. ליצור ולהצפין את הסיסמה ורק אז לשלוח אותה לפונקציית יצירת הלקוח במודל
-//2.ליצור טוקן
-//3.להחזיר את מה שצריך- ובעיקר להבין מה קרוה עם הסשן ואיך מחזירים אותו
 
 const SECRET_KEY = process.env.SECRET_KEY;
-
 
 async function createUser(role_id, password, userName, email) {
   try {
