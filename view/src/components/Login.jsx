@@ -1,8 +1,12 @@
-import { useState, Link } from 'react';
+import { useState, Link, useContext } from 'react';
 import useServer from '../config';
 import "../css/login.css"
-function Login() {
+import config from '../config.js';
+import { UserContext } from '../App.jsx';
 
+
+function Login() {
+    const { userSession, setUserSession } = useContext(UserContext);
 
     const [formLogInData, setFormLogInData] = useState({                       //keeps the input
         username: "",
@@ -23,17 +27,17 @@ function Login() {
             alert("please enter all the required details");
         else {                                                              //create new user in the server
             e.preventDefault();
-            const user = postData("login", formLogInData)
+            const user = config.postData("login", formLogInData)
             // fetch(`http://localhost:3000/users?username=${FormLogInData.username}`)
             const token = user.token;
-
-            const currentUser = users.find(user => user.website === FormLogInData.password);
-            if (currentUser) {
-                const userToLocalStorage = { ...currentUser, website: "" }
-                localStorage.setItem("user", JSON.stringify(userToLocalStorage));
-                setUser(currentUser);
+console.log(user);
+            //const currentUser = users.find(user => user.website === FormLogInData.password);
+            if (user.user) {
+               // const userToLocalStorage = { ...currentUser, website: "" }
+                // localStorage.setItem("user", JSON.stringify(userToLocalStorage));
+                setUserSession(user.user);
                 alert("succesfully connected");
-                navigate(`/home/users/${currentUser.id}`);
+              //  navigate(`/home/users/${currentUser.id}`);
             } else {
                 alert("Uncorrect userName or Password");
                 setFormLogInData({
@@ -41,7 +45,7 @@ function Login() {
                     password: "",
                     confirmPassword: "",
                 });
-                navigate("/login");
+             //   navigate("/login");
             }
         }
     }
@@ -77,9 +81,9 @@ function Login() {
                         className="input password-log"
                     />
                     <button className="button okey-log" type="submit">Continue</button><br />
-                    <nav>
+                    {/* <nav>
                         <Link className="link create-account-link" to="/register">Don't have an account? Create account</Link>
-                    </nav>
+                    </nav> */}
                 </form>
             </div>
         </div>
