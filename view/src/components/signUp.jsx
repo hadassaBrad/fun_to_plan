@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import config from '../config.js';
-import { UserContext } from '../App';
+import { UserContext } from '../App.jsx';
 
 
 
@@ -72,17 +72,13 @@ function SignUp() {
                         onChange={changeHandler}
                         className="input nameSign"
                     />
+                     <label htmlFor="email" className="FormField">Email: </label>
+                     <input type="text" className='input' value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)} /><br />
                     <label htmlFor="password" className="FormField">Password: </label>
                     <input
-                        id="password"
-                        type="password"
-                        name="password"
-                        placeholder="password"
-                        value={formsignInData.password}
-                        required
-                        onChange={changeHandler}
-                        className="input passwordsign"
+                        id="password" type="password"   name="password"  placeholder="password"  value={formsignInData.password}  required onChange={changeHandler}   className="input passwordsign"
                     />
+                       <input type="password" className='input' value={verifyPassword} placeholder="verify password" onChange={(e) => setVerifyPassword(e.target.value)} /><br />
                     <button className="button okeysign" onClick={handleSubmit}>Continue</button><br />
                     {/* <nav> <Link className="link linkCreateAccount" to="/register"> Don't have an account? Create account</Link> </nav> */}
                 </form>

@@ -1,14 +1,14 @@
-import { useServer } from "../App";
+import { useState, Link } from 'react';
 import useServer from '../config';
-
+import "../css/login.css"
 function Login() {
-    const { user, setUser, postData } = useServer();
+
 
     const [formLogInData, setFormLogInData] = useState({                       //keeps the input
         username: "",
         password: "",
         confirmPassword: "",
-    })
+    });
 
     const changeHandler = (event) => {                                         //handle input
         setFormLogInData(prevFormLogInData => {
@@ -25,7 +25,7 @@ function Login() {
             e.preventDefault();
             const user = postData("login", formLogInData)
             // fetch(`http://localhost:3000/users?username=${FormLogInData.username}`)
-         const token=user.token;
+            const token = user.token;
 
             const currentUser = users.find(user => user.website === FormLogInData.password);
             if (currentUser) {
@@ -43,42 +43,47 @@ function Login() {
                 });
                 navigate("/login");
             }
-        })
+        }
     }
-};
-return (
-    <div>
-        <div className='container formSignUpLogIn logInDiv'>
-            <form className="form login">
-                <h1 className="title">Log In</h1>
-                <label htmlFor="username" className="FormField">User Name: </label>
-                <input
-                    id="username"
-                    type="text"
-                    name="username"
-                    placeholder="username"
-                    value={FormLogInData.username}
-                    required
-                    onChange={changeHandler}
-                    className="input nameSign"
-                />
-                <label htmlFor="password" className="FormField">Password: </label>
-                <input
-                    id="password"
-                    type="password"
-                    name="password"
-                    placeholder="password"
-                    value={FormLogInData.password}
-                    required
-                    onChange={changeHandler}
-                    className="input passwordLog"
-                />
-                <button className="button okeyLog" onClick={handleSubmit}>Continue</button><br />
-                <nav> <Link className="link linkCreateAccount" to="/register"> Don't have an account? Create account</Link> </nav>
-            </form>
+
+
+
+    return (
+        <div className="overlay">
+            <div className="modal">
+                <button className="close-button" onClick={() => navigate('/')}>X</button>
+                <form className="form login" onSubmit={handleSubmit}>
+                    <h1 className="title">Log In</h1>
+                    <label htmlFor="username" className="form-field">User Name: </label>
+                    <input
+                        id="username"
+                        type="text"
+                        name="username"
+                        placeholder="username"
+                        value={formLogInData.username}
+                        required
+                        onChange={changeHandler}
+                        className="input name-sign"
+                    />
+                    <label htmlFor="password" className="form-field">Password: </label>
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        placeholder="password"
+                        value={formLogInData.password}
+                        required
+                        onChange={changeHandler}
+                        className="input password-log"
+                    />
+                    <button className="button okey-log" type="submit">Continue</button><br />
+                    <nav>
+                        <Link className="link create-account-link" to="/register">Don't have an account? Create account</Link>
+                    </nav>
+                </form>
+            </div>
         </div>
-    </div>
-)
+    );
 }
 
 export default Login;
