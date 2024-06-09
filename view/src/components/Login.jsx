@@ -25,7 +25,7 @@ function Login() {
             e.preventDefault();
             const user = postData("login", formLogInData)
             // fetch(`http://localhost:3000/users?username=${FormLogInData.username}`)
-         const token=user.token;
+            const token = user.token;
 
             const currentUser = users.find(user => user.website === FormLogInData.password);
             if (currentUser) {
@@ -43,7 +43,7 @@ function Login() {
                 });
                 navigate("/login");
             }
-        })
+        }
     }
 };
 return (
@@ -79,6 +79,6 @@ return (
         </div>
     </div>
 )
-}
+
 
 export default Login;

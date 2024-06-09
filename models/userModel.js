@@ -14,21 +14,14 @@ async function createUser(role_id, password, userName, email) {
     const seconds = now.getSeconds();
 
     const currentDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    console.log(currentDate);
-    // עכשיו אתה יכול להשתמש במשתנה currentDate בפנים של הפונקציה pool.query
     const sqlPassword = "INSERT INTO passwords (`password`,`loginAttempts`,`lastLogin`,`lastFailedLogin`,`account_status`) VALUES(?,?,?,?,?)";
     const resultPassword = await pool.query(sqlPassword, [password, 1, currentDate, null, true]);
     // const sqlPassword = "INSERT INTO passwords (`password`,`loginAttempts`,`lastLogin`,`lastFailedLogin`,`account_status`) VALUES(?,?,?,?,?)";
     // const resultPassword = await pool.query(sqlPassword, [password, 1, datetime.getDate(), null, true]);
     const passwordId = resultPassword[0].insertId
-    console.log(passwordId);
-
-
-
 
     const sql = "INSERT INTO users (`role_id`, `user_name`, `password_id`,`email` ) VALUES(?, ?, ?, ?)";
     const result = await pool.query(sql, [role_id, userName, passwordId, email]);
-console.log("result  "+result)
     // Retrieve the role name from the permissions table
     const sqlRole = "SELECT role FROM permissions WHERE id = ?";
     const resultRole = await pool.query(sqlRole, [role_id]);
@@ -39,10 +32,7 @@ console.log("result  "+result)
       email: email,
       passwordId: passwordId
     };
-console.log(user)
     return user;
-
-    //לבדוק בפוסטמן מה חוזר ומה צריך לקחת בחזרה
   } catch (err) {
     console.log(err);
     throw err;
@@ -63,23 +53,29 @@ async function getUserByEmail(email) {
 }
 
 
-  async function getUser(email) {
-    try {
-      const sql = 'SELECT * FROM users NATURAL JOIN addresses NATURAL JOIN passwords NATURAL JOIN permissions WHERE users.email = ?';
-      const result = await pool.query(sql, [email]);
-      return result[0];
-    } catch (err) {
-      throw new Error(err);
-    }
+async function getUser(email, password) {
+  try {
+    console.log(email + " *  email  * ")
+    const sql = 'SELECT users.id, users.user_name, users.email, users.phone_number,  permissions.role, passwords.password FROM  users INNER JOIN passwords ON users.password_id = passwords.id INNER JOIN  permissions ON  users.role_id = permissions.id WHERE  users.email = ?';
+    const result = await pool.query(sql, [email]);
+    console.log("result: in modelll  " + result[0])
+    return result[0];
+  } catch (err) {
+    throw new Error(err);
   }
-  
-  async function getRole(id) {
-    try {
-      const sql = 'SELECT * FROM permissions  WHERE id = ?';
-      const result = await pool.query(sql, [id]);
-      return result[0];
-    } catch (err) {
-      throw new Error(err);
-    }
+}
+
+async function getRole(id) {
+  try {
+    const sql = 'SELECT * FROM permissions  WHERE id = ?';
+    const result = await pool.query(sql, [id]);
+    return result[0];
+  } catch (err) {
+    throw new Error(err);
   }
-module.exports = { createUser ,getUserByEmail, getUser, getRole} 
+}
+
+
+
+
+module.exports = { createUser, getUserByEmail, getUser, getRole } 

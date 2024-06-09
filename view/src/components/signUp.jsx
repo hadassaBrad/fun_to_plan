@@ -37,11 +37,11 @@ function SignUp() {
             }
             const currentUser = await config.postData("signUp", body)
             const token = currentUser.token;
-            //const token = currentUser.session.token;
             sessionStorage.setItem('token', token);
 
             if (currentUser) {
                 setUserSession(currentUser);
+                console.log("signed upppppppp")
                 //modal.close()
 
             } else {
@@ -88,7 +88,6 @@ function SignUp() {
                 </form>
             </div>
         </div>
-    )
-        ;
+    );
 }
 export default SignUp;

@@ -2,22 +2,32 @@ const express = require("express");
 const loginRouter = express.Router();
 loginRouter.use(express.json());
 loginRouter.use(express.urlencoded({ extended: true }));
-const { authenticate,postLogin } = require('../controllers/userController.js');
+const { authenticate, postLogin } = require('../controllers/userController.js');
 loginRouter.route("/")
   .post(async (req, res) => {
     try {
       const user = await postLogin(req.body.email, req.body.password);
-      const token = authenticate(user)
-      res.session.token = token; 
-      res.send(user);
+      const token = await authenticate(user)
+      res.send({ user, token });
     }
     catch (err) {
-      if (err.message == "not Exsist") {
-        res.status(401).send("this user not exist, please signup");
-      }
-      if (err.message == "not valid password") {
-        res.status(401).send("email or password is not valid");
-      }
+      res.status(401).send(err.message);
+
     }
   })
-  module.exports = loginRouter;
+module.exports = loginRouter;
+
+
+//מה נרצה שיהיה לנו בזמן של הלוגין
+
+//דבר ראשון:
+//האם הוא חסום???
+
+//דבר שני:
+//מתי שמצליחים לרשום להעלות את הזה שלו...
+
+//דבר שלישי:
+//שלא מצליחים להירשם, לעלות את הזה הזה
+
+//דבר רביעי:
+//
