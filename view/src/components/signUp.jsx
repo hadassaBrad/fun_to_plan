@@ -1,90 +1,112 @@
-import { useContext, useEffect, useState } from 'react';
+
+import { useContext, useState } from 'react';
 import config from '../config.js';
 import { UserContext } from '../App.jsx';
+import "../css/signUp.css";
 
-
-
-function SignUp() {
-
+function SignUp({ onClose }) {
     const { userSession, setUserSession } = useContext(UserContext);
 
-    const [formsignInData, setFormsignInData] = useState({
+    const [formSignUpData, setFormSignUpData] = useState({
         username: "",
         password: "",
         email: "",
         confirmPassword: "",
-    })
-
+    });
 
     const changeHandler = (event) => {
-        setFormsignInData(prevFormsignInData => {
-            return {
-                ...prevFormsignInData,
-                [event.target.name]: event.target.value
-            }
-        });
+        setFormSignUpData(prevFormSignUpData => ({
+            ...prevFormSignUpData,
+            [event.target.name]: event.target.value
+        }));
     }
+
     async function handleSubmit(e) {
-        if (formsignInData.username === "" || formsignInData.password === "")
-            alert("please enter all the required details");
-        else {                                                              //create new user in the server
-            e.preventDefault();
+        e.preventDefault();
+        if (formSignUpData.username === "" || formSignUpData.password === "") {
+            alert("Please enter all the required details");
+        } else {
             const body = {
                 role_id: 1,
-                password: formsignInData.password,
-                userName: formsignInData.username,
-                email: formsignInData.email
+                password: formSignUpData.password,
+                userName: formSignUpData.username,
+                email: formSignUpData.email
             }
-            const currentUser = await config.postData("signUp", body)
+            const currentUser = await config.postData("signUp", body);
             const token = currentUser.token;
-            //const token = currentUser.session.token;
             sessionStorage.setItem('token', token);
 
             if (currentUser) {
                 setUserSession(currentUser);
-                //modal.close()
-
+                alert("Successfully registered");
             } else {
-                alert("failed to save user");
-                setFormsignInData({
+                alert("Failed to save user");
+                setFormSignUpData({
                     username: "",
                     password: "",
+                    email: "",
                     confirmPassword: "",
                 });
-
             }
         }
     }
 
     return (
-        <div>
-            <div className='container formSignUpsignIn signInDiv'>
-                <form className="form signin">
+        <div className="overlay">
+            <div className="modal">
+                <button className="close-button" onClick={onClose }
+        >X</button>
+                <form className="form signup" onSubmit={handleSubmit}>
                     <h1 className="title">Sign Up</h1>
-                    <label htmlFor="username" className="FormField">User Name: </label>
+                    <br/>
                     <input
                         id="username"
                         type="text"
                         name="username"
                         placeholder="username"
-                        value={formsignInData.username}
+                        value={formSignUpData.username}
                         required
                         onChange={changeHandler}
-                        className="input nameSign"
+                        className="input name-sign"
                     />
-                     <label htmlFor="email" className="FormField">Email: </label>
-                     <input type="text" className='input' value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)} /><br />
-                    <label htmlFor="password" className="FormField">Password: </label>
+                    <br/>
                     <input
-                        id="password" type="password"   name="password"  placeholder="password"  value={formsignInData.password}  required onChange={changeHandler}   className="input passwordsign"
+                        id="email"
+                        type="text"
+                        name="email"
+                        placeholder="email"
+                        value={formSignUpData.email}
+                        required
+                        onChange={changeHandler}
+                        className="input email-sign"
                     />
-                       <input type="password" className='input' value={verifyPassword} placeholder="verify password" onChange={(e) => setVerifyPassword(e.target.value)} /><br />
-                    <button className="button okeysign" onClick={handleSubmit}>Continue</button><br />
-                    {/* <nav> <Link className="link linkCreateAccount" to="/register"> Don't have an account? Create account</Link> </nav> */}
+                   <br/>
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        placeholder="password"
+                        value={formSignUpData.password}
+                        required
+                        onChange={changeHandler}
+                        className="input password-sign"
+                    />
+                 <br/>
+                    <input
+                        id="confirmPassword"
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="confirm password"
+                        value={formSignUpData.confirmPassword}
+                        required
+                        onChange={changeHandler}
+                        className="input confirm-password-sign"
+                    />    <br/>
+                    <button className="button okey-sign" type="submit">Continue</button><br />
                 </form>
             </div>
         </div>
-    )
-        ;
+    );
 }
+
 export default SignUp;

@@ -36,7 +36,7 @@ const [showLogin,setShowLogin]=useState(false);
                     </>
                 }
             </nav>
-            {showSignUp && <SignUp />}
+            {showSignUp && <SignUp onClose={() => setShowSignUp(false)} />}
             {showLogin && <Login />}
         </header>
     );
