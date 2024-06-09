@@ -55,7 +55,6 @@ async function getUserByEmail(email) {
 
 async function getUser(email, password) {
   try {
-    console.log(email + " *  email  * ")
     const sql = 'SELECT users.id, users.user_name, users.email, users.phone_number,  permissions.role, passwords.password FROM  users INNER JOIN passwords ON users.password_id = passwords.id INNER JOIN  permissions ON  users.role_id = permissions.id WHERE  users.email = ?';
     const result = await pool.query(sql, [email]);
     console.log("result: in modelll  " + result[0])

@@ -13,7 +13,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 async function createUser(role_id, password, userName, email) {
   try {
     const result = await model.getUserByEmail(email);//checkes if he exists
-    if (result)
+    if (result==[])
       throw new Error("user already exists, please login");
     //מה לבדוק פה??
     //מה בדיוק להחזיר בכלל???
