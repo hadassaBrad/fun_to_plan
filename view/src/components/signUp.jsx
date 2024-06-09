@@ -1,31 +1,41 @@
-import { useContext, useState } from 'react';
-import  config  from '../config.js';
+import { useContext, useEffect, useState } from 'react';
+import config from '../config.js';
+import { UserContext } from '../App';
+
 
 
 function SignUp() {
-    const { userSession, setUserSession } = useContext();
 
-    const [formLogInData, setFormLogInData] = useState({
+    const { userSession, setUserSession } = useContext(UserContext);
+
+    const [formsignInData, setFormsignInData] = useState({
         username: "",
         password: "",
-        email:"",
+        email: "",
         confirmPassword: "",
     })
 
+
     const changeHandler = (event) => {
-        setFormLogInData(prevFormLogInData => {
+        setFormsignInData(prevFormsignInData => {
             return {
-                ...prevFormLogInData,
+                ...prevFormsignInData,
                 [event.target.name]: event.target.value
             }
         });
     }
-async function handleSubmit(e)  {
-        if (formLogInData.username === "" || formLogInData.password === "")
+    async function handleSubmit(e) {
+        if (formsignInData.username === "" || formsignInData.password === "")
             alert("please enter all the required details");
         else {                                                              //create new user in the server
             e.preventDefault();
-            const currentUser =  await config.postData("signUp", formLogInData)
+            const body = {
+                role_id: 1,
+                password: formsignInData.password,
+                userName: formsignInData.username,
+                email: formsignInData.email
+            }
+            const currentUser = await config.postData("signUp", body)
             const token = currentUser.token;
             //const token = currentUser.session.token;
             sessionStorage.setItem('token', token);
@@ -36,7 +46,7 @@ async function handleSubmit(e)  {
 
             } else {
                 alert("failed to save user");
-                setFormLogInData({
+                setFormsignInData({
                     username: "",
                     password: "",
                     confirmPassword: "",
@@ -48,16 +58,16 @@ async function handleSubmit(e)  {
 
     return (
         <div>
-            <div className='container formSignUpLogIn logInDiv'>
-                <form className="form login">
-                    <h1 className="title">Log In</h1>
+            <div className='container formSignUpsignIn signInDiv'>
+                <form className="form signin">
+                    <h1 className="title">Sign Up</h1>
                     <label htmlFor="username" className="FormField">User Name: </label>
                     <input
                         id="username"
                         type="text"
                         name="username"
                         placeholder="username"
-                        value={formLogInData.username}
+                        value={formsignInData.username}
                         required
                         onChange={changeHandler}
                         className="input nameSign"
@@ -68,12 +78,12 @@ async function handleSubmit(e)  {
                         type="password"
                         name="password"
                         placeholder="password"
-                        value={formLogInData.password}
+                        value={formsignInData.password}
                         required
                         onChange={changeHandler}
-                        className="input passwordLog"
+                        className="input passwordsign"
                     />
-                    <button className="button okeyLog" onClick={handleSubmit}>Continue</button><br />
+                    <button className="button okeysign" onClick={handleSubmit}>Continue</button><br />
                     {/* <nav> <Link className="link linkCreateAccount" to="/register"> Don't have an account? Create account</Link> </nav> */}
                 </form>
             </div>

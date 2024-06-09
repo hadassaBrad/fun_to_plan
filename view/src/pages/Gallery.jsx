@@ -1,54 +1,36 @@
 import React from "react";
-import {  useState, useEffect } from 'react';
-import  config  from '../config';
-// import { useParams } from 'react-router-dom'
-// import InfiniteScroll from 'react-infinite-scroll-component';
-// import { useNavigate } from 'react-router-dom';
-// import { UserContext } from '../App';
-// import { BsPlusLg } from "react-icons/bs";
+import { useState, useEffect } from 'react';
+import config from '../config';
 
-// function Gallery() {
+function Gallery() {
+    const [photos, setPhotos] = useState([]);
 
-//     const [photos, setPhotos] = useState([]);
+    useEffect(() => {
+        const fetchPhotos = async () => {
+            try {
+                const data = await config.getData("gallery");
+                console.log(data);
+                setPhotos(data);
+            } catch (error) {
+                console.error("Error fetching photos:", error);
+            }
+        };
 
-    // useEffect(() => {
-    //     setPhotos(config.getData("photos"));
-    // }, []);
+        fetchPhotos();
+    }, []);
 
-    // return (
-    //     <>
-    //         {photos.map((photo) => (
-    //             <img src={photo.url} />
-    //         ))}
-    //     </>
-    // );
-    function Gallery() {
-        const [photos, setPhotos] = useState([]);
-    
-        useEffect(() => {
-            const fetchPhotos = async () => {
-                try {
-                    const data = await config.getData("photos");
-                    console.log(data);
-                    setPhotos(data);
-                } catch (error) {
-                    console.error("Error fetching photos:", error);
-                }
-            };
-    
-            fetchPhotos();
-        }, []);
-    
-        return (
-            <>
-                {photos.length > 0 ? (
-                    photos.map((photo) => (
-                        <img key={photo.id} src={photo.url} alt={photo.title} />
-                    ))
-                ) : (
-                    <p>No photos available</p>
-                )}
-            </>
-        );
+    return (
+        <>
+            {photos.length > 0 ? (
+                photos.map((photo) => (
+                    <img key={photo.id} src={photo.url} alt={photo.title} height={100} width={180} />
+                ))
+            ) : (
+                <p>No photos available</p>
+            )}
+            <br />
+            <button>more photos</button>
+        </>
+    );
 }
 export default Gallery;
