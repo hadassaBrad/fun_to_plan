@@ -14,6 +14,7 @@ router.use(cors());
         try {
             const user = await createUser(req.body.role_id,  req.body.password, req.body.userName , req.body.email);
             const token = await authenticate(user)
+            console.log({ user, token });
             res.send({ user, token });
         }
         catch {

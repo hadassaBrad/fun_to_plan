@@ -32,9 +32,10 @@ function SignUp({ onClose }) {
                 email: formSignUpData.email
             }
             const currentUser = await config.postData("signUp", body);
+            console.log("currentUser  1  " + currentUser);
             const token = currentUser.token;
             sessionStorage.setItem('token', token);
-
+            console.log("currentUser  2  " + token);
             if (currentUser) {
                 setUserSession(currentUser);
                 alert("Successfully registered");
@@ -54,11 +55,11 @@ function SignUp({ onClose }) {
     return (
         <div className="overlay">
             <div className="modal">
-                <button className="close-button" onClick={onClose }
-        >X</button>
+                <button className="close-button" onClick={onClose}
+                >X</button>
                 <form className="form signup" onSubmit={handleSubmit}>
                     <h1 className="title">Sign Up</h1>
-                    <br/>
+                    <br />
                     <input
                         id="username"
                         type="text"
@@ -69,7 +70,7 @@ function SignUp({ onClose }) {
                         onChange={changeHandler}
                         className="input name-sign"
                     />
-                    <br/>
+                    <br />
                     <input
                         id="email"
                         type="text"
@@ -80,7 +81,7 @@ function SignUp({ onClose }) {
                         onChange={changeHandler}
                         className="input email-sign"
                     />
-                   <br/>
+                    <br />
                     <input
                         id="password"
                         type="password"
@@ -91,7 +92,7 @@ function SignUp({ onClose }) {
                         onChange={changeHandler}
                         className="input password-sign"
                     />
-                 <br/>
+                    <br />
                     <input
                         id="confirmPassword"
                         type="password"
@@ -101,7 +102,7 @@ function SignUp({ onClose }) {
                         required
                         onChange={changeHandler}
                         className="input confirm-password-sign"
-                    />    <br/>
+                    />    <br />
                     <button className="button okey-sign" type="submit" >Continue</button><br />
                 </form>
             </div>

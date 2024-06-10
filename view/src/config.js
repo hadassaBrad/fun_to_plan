@@ -14,7 +14,7 @@ const getData = async (entity,
         if (limit) {
             url += `&_start=${start}&_limit=${limit}`;
         }
-        console.log("url  "  +url);
+        console.log("url  " + url);
         const response = await fetch(url);
         console.log(response)
         const newData = await response.json();
@@ -39,20 +39,39 @@ const putData = async (entity, idToUpdate, body) => {
         });
 }
 
-const postData = async (entity, body) => {
-    fetch(`${baseUrl}${entity}`, {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
+// const postData = async (entity, body) => {
+//     fetch(`${baseUrl}${entity}`, {
+//         method: 'POST',
+//         body: JSON.stringify(body),
+//         headers: {
+//             'Content-type': 'application/json; charset=UTF-8',
 
-        },
-    })
-        .then((response) => response.json())
-        .then((json) => {
-            return json;
+//         },
+//     })
+//         .then((response) => response.json())
+//         .then((json) => {
+//             console.log(json)
+//             return json;
+//         });
+// }
+const postData = async (entity, body) => {
+    try {
+        const response = await fetch(`${baseUrl}${entity}`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
         });
-}
+        const json = await response.json();
+        console.log(json);
+        return json;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+};
+
 
 const deleteData = async (entity, idToDelete) => {
     try {
