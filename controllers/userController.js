@@ -3,9 +3,7 @@ const model = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 // const cookieParser = require('cookie-parser');
 // const session = require('express-session');
-
-
-// const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt")
 const numSaltRoundss = 10;
 
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -13,7 +11,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 async function createUser(role_id, password, userName, email) {
   try {
     const result = await model.getUserByEmail(email);//checkes if he exists
-    if (result==[])
+    if (result == [])
       throw new Error("user already exists, please login");
     //מה לבדוק פה??
     //מה בדיוק להחזיר בכלל???
@@ -22,7 +20,7 @@ async function createUser(role_id, password, userName, email) {
     // if (result != 1) {
     //   throw err;
     // }
-    const hash = 7587 //await bcrypt.hash(password, numSaltRoundss);
+    const hash = await bcrypt.hash(password, numSaltRoundss);
     const newUser = model.createUser(role_id, hash, userName, email);
     return newUser;
 
@@ -33,53 +31,53 @@ async function createUser(role_id, password, userName, email) {
 async function postLogin(email, password) {
   try {
     const result = await model.getUser(email);
-    console.log(result+"  in controller");
+    console.log(result + "  in controller");
     if (result.length == 0) {
       throw new Error("this user does not exist, please signup");
     }
 
     const tablePassword = result[0].password;
-    // if (!(await bcrypt.compare(password, tablePassword))) {
-    //   throw new Error("not valid password");
-    // }
-    // else {
-    console.log("tablePassword" + tablePassword + "password")
-    if (tablePassword != password) {
-      throw new Error("this user does not exist, please signup");
+    console.log("result[0].password"+result[0].password)
+    console.log("password"+password)
+    if (!(await bcrypt.compare(password, tablePassword))) {
+      console.log("in ifff")
+      throw new Error("not valid password");
     }
     else {
-      return result[0];
+      console.log("tablePassword" + tablePassword + "password")
+     
+        return result[0];
+      
+    }}
+  catch (err) {
+      throw err;
     }
   }
-  catch (err) {
-    throw err;
-  }
-}
 
 async function authenticate(user) {
-  const token = jwt.sign({ userId: user.id, role: user.role }, SECRET_KEY,);
-  return token
+    const token = jwt.sign({ userId: user.id, role: user.role }, SECRET_KEY,);
+    return token
 
-};
-async function getUser(id) {
-  try {
-    return model.getUser(id);
-  } catch (err) {
-    throw err;
+  };
+  async function getUser(id) {
+    try {
+      return model.getUser(id);
+    } catch (err) {
+      throw err;
+    }
   }
-}
 
-async function getUserByEmail(email) {
-  try {
-    console.log("in create user get by id");
+  async function getUserByEmail(email) {
+    try {
+      console.log("in create user get by id");
 
-    return model.getUserByEmail(email);
-  } catch (err) {
-    throw err;
+      return model.getUserByEmail(email);
+    } catch (err) {
+      throw err;
+    }
   }
-}
 
-async function updateUser() {
+  async function updateUser() {
 
-}
-module.exports = { authenticate, createUser, getUser, postLogin, getUserByEmail, updateUser }
+  }
+  module.exports = { authenticate, createUser, getUser, postLogin, getUserByEmail, updateUser }

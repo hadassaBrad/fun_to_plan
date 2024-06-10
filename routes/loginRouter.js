@@ -7,8 +7,14 @@ loginRouter.route("/")
   .post(async (req, res) => {
     try {
       const user = await postLogin(req.body.email, req.body.password);
+      console.log(user);
       const token = await authenticate(user)
-      res.send({ user, token });
+      console.log(token)
+      user={
+        ...user,
+        token:token
+      }
+      res.send(user);
     }
     catch (err) {
       res.status(401).send(err.message);

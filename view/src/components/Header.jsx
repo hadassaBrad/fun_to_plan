@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { React, useContext, useState } from 'react'
 import { NavLink } from "react-router-dom"
 import { UserContext } from '../App';
-import SignUp from './SignUp'
+import SignUp from "./SignUp";
 import Login from "./Login";
 function Header() {
     const {userSession, setUserSession} = useContext(UserContext);
@@ -37,7 +37,7 @@ const [showLogin,setShowLogin]=useState(false);
                 }
             </nav>
             {showSignUp && <SignUp onClose={() => setShowSignUp(false)} />}
-            {showLogin && <Login onClose={() => setShowSignUp(false)}/>}
+            {showLogin && <Login  onClose={() => setShowLogin(false)} />}
         </header>
     );
 

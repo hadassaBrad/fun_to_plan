@@ -127,5 +127,5 @@ INSERT INTO permissions(role) VALUES
 ('user'),
 ('admin'),
 ('worker');
-SELECT * FROM permissions
+SELECT * FROM users
 
