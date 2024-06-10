@@ -5,11 +5,11 @@ import config from '../config.js';
 import { UserContext } from '../App.jsx';
 
 
-function Login() {
+function Login({ onClose }) {
     const { userSession, setUserSession } = useContext(UserContext);
 
     const [formLogInData, setFormLogInData] = useState({                       //keeps the input
-        username: "",
+        email: "",
         password: "",
         confirmPassword: "",
     });
@@ -22,15 +22,16 @@ function Login() {
             }
         });
     }
-    const handleSubmit = (e) => {
-        if (formLogInData.username === "" || formLogInData.password === "")
+    async function handleSubmit  (e)  {
+        if (formLogInData.email === "" || formLogInData.password === "")
             alert("please enter all the required details");
         else {                                                              //create new user in the server
             e.preventDefault();
-            const user = config.postData("login", formLogInData)
-            // fetch(`http://localhost:3000/users?username=${FormLogInData.username}`)
-            const token = user.token;
-console.log(user);
+            const user = await config.postData("login", formLogInData)
+            console.log(user);
+
+            // fetch(`http://localhost:3000/users?email=${FormLogInData.email}`)
+        const token = user.token;
             //const currentUser = users.find(user => user.website === FormLogInData.password);
             if (user.user) {
                // const userToLocalStorage = { ...currentUser, website: "" }
@@ -39,9 +40,9 @@ console.log(user);
                 alert("succesfully connected");
               //  navigate(`/home/users/${currentUser.id}`);
             } else {
-                alert("Uncorrect userName or Password");
+                alert("Uncorrect email or Password");
                 setFormLogInData({
-                    username: "",
+                    email: "",
                     password: "",
                     confirmPassword: "",
                 });
@@ -55,16 +56,16 @@ console.log(user);
     return (
         <div className="overlay">
             <div className="modal">
-                <button className="close-button" onClick={() => navigate('/')}>X</button>
+                          <button className="close-button" onClick={onClose }>X</button>
                 <form className="form login" onSubmit={handleSubmit}>
                     <h1 className="title">Log In</h1>
-                    <label htmlFor="username" className="form-field">User Name: </label>
+                    <label htmlFor="email" className="form-field">User Name: </label>
                     <input
-                        id="username"
+                        id="email"
                         type="text"
-                        name="username"
-                        placeholder="username"
-                        value={formLogInData.username}
+                        name="email"
+                        placeholder="email"
+                        value={formLogInData.email}
                         required
                         onChange={changeHandler}
                         className="input name-sign"

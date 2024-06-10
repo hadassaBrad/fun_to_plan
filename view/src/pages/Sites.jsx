@@ -1,6 +1,6 @@
 import React from "react";
 import Site from '../components/Site'
-import SignUp from "../components/SignUp";
+
 
 function Sites() {
 
