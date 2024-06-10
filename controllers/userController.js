@@ -30,27 +30,35 @@ async function createUser(role_id, password, userName, email) {
 }
 async function postLogin(email, password) {
   try {
-    const result = await model.getUser(email);
-    console.log(result + "  in controller");
+     const result = await model.getUser(email);
+     console.log("get the user in login ");
     if (result.length == 0) {
+      console.log("this user does not exist, please signup")
       throw new Error("this user does not exist, please signup");
     }
 
     const tablePassword = result[0].password;
-    console.log("result[0].password"+result[0].password)
-    console.log("password"+password)
     if (!(await bcrypt.compare(password, tablePassword))) {
-      console.log("in ifff")
+      console.log("not valid password")
+   const result= await model.putFailLogin(email);
       throw new Error("not valid password");
     }
     else {
-      console.log("tablePassword" + tablePassword + "password")
-     
-        return result[0];
+      console.log("returns the user");
+      const user = {
+        role: result.role,
+        userName: result.userName,
+        email: result.email,
+        //passwordId: passwordId
+      };
+     const result= await model. putSuccsesLogin(user.email);
+      console.log("user "+user.userName);
+        return user;
       
     }}
   catch (err) {
       throw err;
+      
     }
   }
 
@@ -80,4 +88,4 @@ async function authenticate(user) {
   async function updateUser() {
 
   }
-  module.exports = { authenticate, createUser, getUser, postLogin, getUserByEmail, updateUser }
+  module.exports = { authenticate, createUser, getUser, postLogin, getUserByEmail, }

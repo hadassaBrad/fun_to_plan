@@ -6,7 +6,7 @@ import { UserContext } from '../App.jsx';
 
 
 function Login({ onClose }) {
-    const { userSession, setUserSession } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     const [formLogInData, setFormLogInData] = useState({                       //keeps the input
         email: "",
@@ -27,16 +27,20 @@ function Login({ onClose }) {
             alert("please enter all the required details");
         else {                                                              //create new user in the server
             e.preventDefault();
-            const user = await config.postData("login", formLogInData)
+            const body={
+                email:formLogInData.email,
+                password:formLogInData.password
+            }
+            const user = await config.postData("login", body)
             console.log(user);
 
             // fetch(`http://localhost:3000/users?email=${FormLogInData.email}`)
         const token = user.token;
             //const currentUser = users.find(user => user.website === FormLogInData.password);
-            if (user.user) {
+            if (user) {
                // const userToLocalStorage = { ...currentUser, website: "" }
                 // localStorage.setItem("user", JSON.stringify(userToLocalStorage));
-                setUserSession(user.user);
+                setUser(user);
                 alert("succesfully connected");
                 onClose();
               //  navigate(`/home/users/${currentUser.id}`);

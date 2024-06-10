@@ -4,7 +4,7 @@ import { UserContext } from '../App.jsx';
 import "../css/signUp.css";
 
 function SignUp({ onClose }) {
-    const { userSession, setUserSession } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     const [formSignUpData, setFormSignUpData] = useState({
         username: "",
@@ -37,7 +37,7 @@ function SignUp({ onClose }) {
             sessionStorage.setItem('token', token);
             console.log("currentUser  2  " + token);
             if (currentUser) {
-                setUserSession(currentUser);
+                setUser(currentUser);
                 alert("Successfully registered");
                 onClose();
             } else {
