@@ -6,34 +6,30 @@ const { authenticate, postLogin } = require('../controllers/userController.js');
 loginRouter.route("/")
   .post(async (req, res) => {
     try {
+      console.log("in Login roter")
       const user = await postLogin(req.body.email, req.body.password);
-      console.log(user);
       const token = await authenticate(user)
       console.log(token)
       user={
         ...user,
         token:token
-      }
-      res.send(user);
+      };
+      console.log("sendthe user to client "+user);
+   res.send(user);
+  
     }
     catch (err) {
-      res.status(401).send(err.message);
-
+      if (err.message == "not Exsist") {
+        res.status(401).send("this user not exist, please signup");
+      }
+      if (err.message == "not valid password") {
+        res.status(401).send("email or password is not valid");
+      }
     }
   })
 module.exports = loginRouter;
 
 
 //מה נרצה שיהיה לנו בזמן של הלוגין
+//לחשוב על זה: האם ברגע שמשהו עבר את הסף המותא אז חוסמים לו את החשבון? האם החסימה שלו במשך 5 דקות מלהכנס היא קשורה לשרת או ללקוח?
 
-//דבר ראשון:
-//האם הוא חסום???
-
-//דבר שני:
-//מתי שמצליחים לרשום להעלות את הזה שלו...
-
-//דבר שלישי:
-//שלא מצליחים להירשם, לעלות את הזה הזה
-
-//דבר רביעי:
-//

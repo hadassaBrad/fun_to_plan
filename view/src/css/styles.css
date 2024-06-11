@@ -1,0 +1,62 @@
+/* הקובץ styles.css */
+.header {
+    background-color: #e0f7fa; /* צבע תכלת נעים */
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-link {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #00796b; /* צבע טורקיז כהה */
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #004d40; /* כהה יותר בעת מעבר עכבר */
+}
+
+.auth-button {
+    background-color: #00796b; /* צבע טורקיז כהה */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: #004d40; /* כהה יותר בעת מעבר עכבר */
+}
+
+.logout-button {
+    background-color: #d32f2f; /* צבע אדום */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #b71c1c; /* כהה יותר בעת מעבר עכבר */
+}
+
+.icon {
+    margin-right: 8px;
+}
