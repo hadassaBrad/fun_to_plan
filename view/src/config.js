@@ -12,7 +12,7 @@ const getData = async (entity,
             url += `?${searchKey}=${searchValue}`;
         }
         if (limit) {
-            url += `&_start=${start}&_limit=${limit}`;
+            url += `?&_start=${start}&_limit=${limit}`;
         }
         console.log("url  " + url);
         const response = await fetch(url);

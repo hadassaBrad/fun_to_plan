@@ -2,6 +2,7 @@ const pool = require('../DB');
 
 async function getGallery(start, limit) {
   try {
+    console.log("start"+start+" limit "+limit);
     const sql = 'SELECT * FROM gallery limit ?, ?';
     const result = await pool.query(sql, [start, limit]);
     return result[0];
