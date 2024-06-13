@@ -5,15 +5,20 @@ const getData = async (entity,
     searchValue = null,
     start = 0,
     limit = null,
+    id=null,
 ) => {
     try {
         let url = `${baseUrl}${entity}`;
+        if (id) {
+            url += `/${id}`;
+        }
         if (searchKey) {
             url += `?${searchKey}=${searchValue}`;
         }
         if (limit) {
             url += `?&_start=${start}&_limit=${limit}`;
         }
+     
         console.log("url  " + url);
         const response = await fetch(url);
         console.log(response)
@@ -39,21 +44,6 @@ const putData = async (entity, idToUpdate, body) => {
         });
 }
 
-// const postData = async (entity, body) => {
-//     fetch(`${baseUrl}${entity}`, {
-//         method: 'POST',
-//         body: JSON.stringify(body),
-//         headers: {
-//             'Content-type': 'application/json; charset=UTF-8',
-
-//         },
-//     })
-//         .then((response) => response.json())
-//         .then((json) => {
-//             console.log(json)
-//             return json;
-//         });
-// }
 const postData = async (entity, body) => {
     try {
         const response = await fetch(`${baseUrl}${entity}`, {
@@ -63,14 +53,20 @@ const postData = async (entity, body) => {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         });
+      
+        if (!response.ok) {
+            const responseData = await response.json();
+            if (responseData && responseData.error) {
+                const error = new Error(responseData.error);
+                throw error;
+            } else {
+                throw new Error('Failed to post data');
+            }
+        }
+      
         const json = await response.json();
         console.log(json);
         return json;
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText);
-
-        }
     } catch (error) {
         console.error('Error:', error.message);
         console.log(error.message);

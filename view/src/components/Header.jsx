@@ -8,7 +8,7 @@ import Login from "./Login";
 import "../css/styles.css"; // הוספת קובץ ה-CSS
 
 function Header() {
-    const { userSession, setUserSession } = useContext(UserContext);
+    const {user,setUser} = useContext(UserContext);
     const navigate = useNavigate();
     const [showSignUp, setShowSignUp] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
@@ -16,28 +16,34 @@ function Header() {
     return (
         <header className="header">
             <nav className="nav">
-                {userSession !== null && 
-                    <button className="logout-button" onClick={() => { 
-                        localStorage.clear(); 
+                {console.log("user  " + user)}
+                {user !== null &&<>
+                    <button className="logout-button" onClick={() => {
+                        localStorage.clear();
                         navigate("/home");
                     }}>
                         <span className="icon">🔒</span> Logout
-                    </button>}
-                {userSession === "admin" && <Link className="nav-link" to={`/home/admin`}>Admin</Link>}
+                    </button>
+                    <br/>
+                    {console.log("user  " + user.userName)}
+                   <br/>
+                    <h2>🤬{user.userName}</h2></>
+                    }
+                {user && user.role === "admin" && <Link className="nav-link" to={`/home/admin`}>Admin</Link>}
                 <Link className="nav-link" to={`/home/about`}>About</Link>
                 <Link className="nav-link" to={`/home/gallery`}>Gallery</Link>
                 <Link className="nav-link" to={`/home/sites`}>Sites</Link>
                 <Link className="nav-link" to={`/home/basket`}>Basket</Link>
-                {userSession === "user" && <Link className="nav-link" to={`/home/tripRoute`}>My Trip Routes</Link>}
-                {!userSession && 
+                {user && user.role === "user" && <Link className="nav-link" to={`/home/tripRoute`}>My Trip Routes</Link>}
+                {!user &&
                     <>
                         <button className="auth-button" onClick={() => setShowLogin(true)}>Login</button>
                         <button className="auth-button" onClick={() => setShowSignUp(true)}>Signup</button>
                     </>
                 }
             </nav>
-            {showSignUp && <SignUp onClose={() => setShowSignUp(false)} />}
-            {showLogin && <Login  onClose={() => setShowLogin(false)} />}
+            {showSignUp && <SignUp onClose={() => setShowSignUp(false)} openLogin={() => setShowLogin(true)} />}
+            {showLogin && <Login onClose={() => setShowLogin(false)} openSignUp={() => setShowSignUp(true)} />}
         </header>
     );
 }

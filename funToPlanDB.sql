@@ -67,6 +67,7 @@ CREATE TABLE age (
 
 CREATE TABLE sites (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    site_name VARCHAR(225) NOT NULL,
     url VARCHAR(225) NOT NULL,
     description VARCHAR(225),
     popularity INT NOT NULL,
@@ -122,6 +123,7 @@ INSERT INTO gallery (url, name) VALUES
 ('https://lh5.googleusercontent.com/p/AF1QipPfh3yqD7bPNkryGTsecIS7i3lAmpxWGNkfcgoU=w540-h312-n-k-no', 'הר סדום'),
 ('https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcT2tw_U9XKg_gmn17dNyW_rQLFoSRTIQOLQZG8_RT5cwAKixDLbeaSwtbcwNZqJ8FjdmhiNu7hpT_GJllejsd10APK5CNM4ZYobKRThMA', 'הר סדום'),
 ('https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSfBgAQux71ZopennmayW1YDA2UKnaCW1X1ruZsBDa2Vna4AbzjEWM1e11RRu1ZkXmTVV7fmi0NRQ801VvbckMTaYjIlvbF8mh4IvbYxQ', 'נחל עוג');
+
 
 INSERT INTO permissions(role) VALUES
 ('user'),

@@ -3,9 +3,9 @@ import config from '../config.js';
 import { UserContext } from '../App.jsx';
 import "../css/signUp.css";
 
-function SignUp({ onClose }) {
+function SignUp({ onClose, openLogin }) {
     const { user, setUser } = useContext(UserContext);
-
+    const [signUpError, setSignUpError] = useState('');
     const [formSignUpData, setFormSignUpData] = useState({
         username: "",
         password: "",
@@ -22,6 +22,7 @@ function SignUp({ onClose }) {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setSignUpError("");
         if (formSignUpData.username === "" || formSignUpData.password === "") {
             alert("Please enter all the required details");
         } else {
@@ -31,25 +32,37 @@ function SignUp({ onClose }) {
                 userName: formSignUpData.username,
                 email: formSignUpData.email
             }
-            const currentUser = await config.postData("signUp", body);
-            console.log("currentUser  1  " + currentUser);
-            const token = currentUser.token;
-            sessionStorage.setItem('token', token);
-            console.log("currentUser  2  " + token);
-            if (currentUser) {
-                setUser(currentUser);
-                alert("Successfully registered");
-                onClose();
-            } else {
-                alert("Failed to save user");
-                setFormSignUpData({
-                    username: "",
-                    password: "",
-                    email: "",
-                    confirmPassword: "",
-                });
+            try {
+
+                const response = await config.postData("signUp", body);
+                console.log("response  1  " + response);
+                const token = response.token;
+                sessionStorage.setItem('token', token);
+                console.log("response  2  " + token);
+                if (response) {
+                    setUser(response.user);
+                    alert("Successfully registered");
+                    onClose();
+                } else {
+                    alert("Failed to save user");
+                    setFormSignUpData({
+                        username: "",
+                        password: "",
+                        email: "",
+                        confirmPassword: "",
+                    });
+                }
+            } catch (err) {
+                console.log(err.message);
+                setSignUpError(err.message);
             }
+
         }
+    }
+
+    function moveToLogin() {
+        onClose();
+        openLogin();
     }
 
     return (
@@ -103,7 +116,15 @@ function SignUp({ onClose }) {
                         onChange={changeHandler}
                         className="input confirm-password-sign"
                     />    <br />
-                    <button    className="button okey-sign" type="submit" >Continue</button><br />
+                    <button className="button okey-sign" type="submit" >Continue</button><br />
+                    {signUpError && <p className='error' style={{ color: signUpError == "Registration successful" ? 'green' : "red" }}>{signUpError}</p>}
+
+                    <br />
+                    {/* <button onClick={moveToLogin}>not signed up? login</button> */}
+                    <a href="#"  style={{textDecoration: 'none', borderBottom: '1px dashed transparent', transition: 'borderColor 0.3s'}} onClick={moveToLogin}>already signed up? login</a>
+
+                    
+                    <br />
                 </form>
             </div>
         </div>

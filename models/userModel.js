@@ -67,7 +67,7 @@ async function putFailLogin(email) {
       WHERE u.email = ?;
     `;
     await pool.query(updateSql, [email]);
-    
+
     // קבלת מספר ניסיונות הכניסה המעודכן
     const selectSql = `
       SELECT p.loginAttempts 
@@ -76,7 +76,7 @@ async function putFailLogin(email) {
       WHERE u.email = ?;
     `;
     const [rows] = await pool.query(selectSql, [email]);
-    
+
     // אם נמצא משתמש, החזר את מספר הניסיונות המעודכן
     if (rows.length > 0) {
       return rows[0].loginAttempts;
@@ -88,7 +88,7 @@ async function putFailLogin(email) {
   }
 }
 
-async function  putSuccsesLogin(email){
+async function putSuccsesLogin(email) {
   try {
     console.log("in seccess login")
     const sql = "SELECT  password_id  FROM users where  users.email =?"
@@ -96,20 +96,21 @@ async function  putSuccsesLogin(email){
     console.log(result[0]);
     console.log("second success")
     const sql2 = `UPDATE passwords SET lastLogin = ? WHERE id = ?`;
-    const result2= await pool.query(sql2, [currentDate, result[0].password_id]);
-console.log("third success");
+    const result2 = await pool.query(sql2, [currentDate, result[0].password_id]);
+    console.log("third success");
   }
   catch {
     throw new Error;
   }
 }
+
 async function getUserByEmail(email) {
   try {
-    console.log("in get by id in user model 1     " + email);
-
+    console.log("in get by id in user model 1  dddddddd   " + email);
     const sql = 'SELECT * FROM users where email=?';
     const result = await pool.query(sql, [email]);
-
+    console.log("ddddddddddddddddddddddddddddddddddddd");
+    console.log(result[0]);
     return result[0];
   } catch (err) {
     throw new Error(err);
@@ -143,4 +144,4 @@ async function getRole(id) {
 
 
 
-module.exports = { createUser,putSuccsesLogin, getUserByEmail,getUser, getRole, putFailLogin };
+module.exports = { createUser, putSuccsesLogin, getUserByEmail, getUser, getRole, putFailLogin };

@@ -6,9 +6,7 @@ function SiteCard({ key, url, name }) {
         <>
             <h1>{name}</h1>
             <img src={url} alt={name} />
-            <button onClick={() => window.location.href = `/site/${site.id}`}>
-        קרא עוד
-      </button>
+            <button onClick={() => window.location.href = `/site/${site.id}`}>read more</button>
         </>
     );
 }

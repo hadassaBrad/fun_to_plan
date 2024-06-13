@@ -14,7 +14,7 @@ import Basket from "./pages/Basket";
 export const UserContext = createContext();
 
 function App() {
-  const [user,setUser]=useState();
+  const [user,setUser]=useState(null);
 
   return (
     <UserContext.Provider value={{user, setUser}}>

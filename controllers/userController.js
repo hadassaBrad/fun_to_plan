@@ -11,16 +11,11 @@ const SECRET_KEY = process.env.SECRET_KEY;
 async function createUser(role_id, password, userName, email) {
   try {
     const result = await model.getUserByEmail(email);//checkes if he exists
-    if (result == [])
+    console.log("RESULT CHECKING:   "+result.length);
+    if (result.length != 0) {
       console.log("the user already exist")
       throw new Error("user already exists, please login");
-    //מה לבדוק פה??
-    //מה בדיוק להחזיר בכלל???
-
-    //
-    // if (result != 1) {
-    //   throw err;
-    // }
+    }
     const hash = await bcrypt.hash(password, numSaltRoundss);
     const newUser = model.createUser(role_id, hash, userName, email);
     return newUser;
@@ -35,7 +30,7 @@ async function postLogin(email, password) {
     const result = await model.getUser(email);
     console.log("get the user in login ");
     if (result.length == 0) {
-      console.log("this user does not exist, please signup " )
+      console.log("this user does not exist, please signup ")
       throw new Error("this user does not exist, please signup");
     }
 
@@ -57,7 +52,7 @@ async function postLogin(email, password) {
         //passwordId: passwordId
       };
       console.log("user " + user);
-     await model.putSuccsesLogin(user.email);
+      await model.putSuccsesLogin(user.email);
       console.log("user " + user.userName);
       return user;
 

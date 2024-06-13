@@ -16,13 +16,22 @@ loginRouter.route("/")
     }
     catch (err) {
       if (err.message == "not Exsist") {
-        res.status(401).send("this user not exist, please signup");
-      }
+        console.log("in catch login 1");
+        const error = new Error('user does not exists');
+        res.status(401).json({ error: error.message });      }
       if (err.message == "not valid password") {
         // res.status(401).send("email or password is not valid");
-        res.status(401).json({ message: "email or password is not valid" });
-      }
+        console.log("in catch login 1");
+        const error = new Error('not valid password');
+        res.status(401).json({ error: error.message });      }
+
+        else{
+          console.log("in else in catch here err "+err.message)
+          const error = new Error(err.message);
+          res.status(401).json({ error: error.message });     
+        }
     }
+
   })
 module.exports = loginRouter;
 
