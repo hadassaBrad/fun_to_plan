@@ -42,9 +42,20 @@ function Gallery() {
         
         }
             {photos.length > 0 ? (
-                photos.map((photo) => (
-                    <img key={photo.id} src={photo.url} alt={photo.title} height={100} width={180} />
-                ))
+                // photos.map((photo) => (
+                //     <img key={photo.id} src={photo.url} alt={photo.title} height={100} width={180} />
+                // )
+            
+                photos.map(photo => (
+                    <img
+                        key={photo.id}
+                        src={photo.url}
+                        alt={photo.name}
+                        title={photo.name} // Setting the title attribute to display the name on hover
+                        height={100} width={180}
+                    />
+                )
+            )
             ) : (
                 <p>No photos available</p>
             )}
