@@ -19,8 +19,8 @@ function Header() {
                 {console.log("user  " + user)}
                 {user !== null &&<>
                     <button className="logout-button" onClick={() => {
-                        localStorage.clear();
-                        navigate("/home");
+                      sessionStorage.clear();
+                      setUser(null);
                     }}>
                         <span className="icon">🔒</span> Logout
                     </button>
