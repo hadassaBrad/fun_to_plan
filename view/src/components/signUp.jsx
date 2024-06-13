@@ -103,7 +103,7 @@ function SignUp({ onClose }) {
                         onChange={changeHandler}
                         className="input confirm-password-sign"
                     />    <br />
-                    <button className="button okey-sign" type="submit" >Continue</button><br />
+                    <button    className="button okey-sign" type="submit" >Continue</button><br />
                 </form>
             </div>
         </div>

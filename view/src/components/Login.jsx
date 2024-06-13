@@ -36,33 +36,33 @@ function Login({ onClose }) {
             try {
 
                 const response = await config.postData("login", body)
-                console.log("user  " + user);
            
                 
                 // fetch(`http://localhost:3000/users?email=${FormLogInData.email}`)
-                const token = user.token;
+                const token = response.token;
                 //const currentUser = users.find(user => user.website === FormLogInData.password);
-                if (response) {
-                    // const userToLocalStorage = { ...currentUser, website: "" }
-                    // localStorage.setItem("user", JSON.stringify(userToLocalStorage));
+                if (response.ok) {
+                    console.log("response: "+response)
+             
                     setUser(user);
                     alert("succesfully connected");
                     onClose();
                     //  navigate(`/home/users/${currentUser.id}`);
                 } else {
-                    alert("Uncorrect email or Password");
+                   // alert("Uncorrect email or Password");
                     setFormLogInData({
                         email: "",
                         password: "",
                         confirmPassword: "",
                     });
+                    throw(response.message)
                     //   navigate("/login");
                 }
             }
 
             catch (err) {
-                console.log(err.message)
-                setLoginError(err.message);
+                console.log(err)
+                setLoginError(err);
             }
         }
     }

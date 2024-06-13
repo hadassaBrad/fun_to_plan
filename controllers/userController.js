@@ -12,6 +12,7 @@ async function createUser(role_id, password, userName, email) {
   try {
     const result = await model.getUserByEmail(email);//checkes if he exists
     if (result == [])
+      console.log("the user already exist")
       throw new Error("user already exists, please login");
     //מה לבדוק פה??
     //מה בדיוק להחזיר בכלל???
@@ -34,7 +35,7 @@ async function postLogin(email, password) {
     const result = await model.getUser(email);
     console.log("get the user in login ");
     if (result.length == 0) {
-      console.log("this user does not exist, please signup")
+      console.log("this user does not exist, please signup " )
       throw new Error("this user does not exist, please signup");
     }
 
