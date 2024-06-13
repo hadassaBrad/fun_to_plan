@@ -66,8 +66,14 @@ const postData = async (entity, body) => {
         const json = await response.json();
         console.log(json);
         return json;
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText);
+
+        }
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error:', error.message);
+        console.log(error.message);
         throw error;
     }
 };

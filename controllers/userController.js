@@ -28,64 +28,72 @@ async function createUser(role_id, password, userName, email) {
     throw err;
   }
 }
+
 async function postLogin(email, password) {
   try {
-     const result = await model.getUser(email);
-     console.log("get the user in login ");
+    const result = await model.getUser(email);
+    console.log("get the user in login ");
     if (result.length == 0) {
       console.log("this user does not exist, please signup")
       throw new Error("this user does not exist, please signup");
     }
 
     const tablePassword = result[0].password;
+
+    console.log(result);
     if (!(await bcrypt.compare(password, tablePassword))) {
-      console.log("not valid password")
-   const result= await model.putFailLogin(email);
+      console.log("not Exist")
+      await model.putFailLogin(email);
       throw new Error("not valid password");
     }
     else {
-      console.log("returns the user");
+      console.log(result);
+      console.log("returns the user     vvbhnjhgfghjkjhg");
       const user = {
-        role: result.role,
-        userName: result.userName,
-        email: result.email,
+        role: result[0].role,
+        userName: result[0].user_name,
+        email: result[0].email,
         //passwordId: passwordId
       };
-     const result= await model. putSuccsesLogin(user.email);
-      console.log("user "+user.userName);
-        return user;
-      
-    }}
-  catch (err) {
-      throw err;
-      
+      console.log("user " + user);
+     await model.putSuccsesLogin(user.email);
+      console.log("user " + user.userName);
+      return user;
+
     }
   }
+  catch (err) {
+    console.log(err);
+    throw err;
+
+  }
+}
 
 async function authenticate(user) {
-    const token = jwt.sign({ userId: user.id, role: user.role }, SECRET_KEY,);
-    return token
+  const token = jwt.sign({ userId: user.id, role: user.role }, SECRET_KEY,);
+  return token
 
-  };
-  async function getUser(id) {
-    try {
-      return model.getUser(id);
-    } catch (err) {
-      throw err;
-    }
+};
+
+async function getUser(id) {
+  try {
+    return model.getUser(id);
+  } catch (err) {
+    throw err;
   }
+}
 
-  async function getUserByEmail(email) {
-    try {
-      console.log("in create user get by id");
+async function getUserByEmail(email) {
+  try {
+    console.log("in create user get by id");
 
-      return model.getUserByEmail(email);
-    } catch (err) {
-      throw err;
-    }
+    return model.getUserByEmail(email);
+  } catch (err) {
+    throw err;
   }
+}
 
-  async function updateUser() {
+async function updateUser() {
 
-  }
-  module.exports = { authenticate, createUser, getUser, postLogin, getUserByEmail, }
+}
+module.exports = { authenticate, createUser, getUser, postLogin, getUserByEmail, }

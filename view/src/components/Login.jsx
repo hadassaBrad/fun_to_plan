@@ -6,7 +6,9 @@ import { UserContext } from '../App.jsx';
 
 
 function Login({ onClose }) {
-    const { user, setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext); 
+       const [loginError, setLoginError] = useState('');
+
 
     const [formLogInData, setFormLogInData] = useState({                       //keeps the input
         email: "",
@@ -22,36 +24,45 @@ function Login({ onClose }) {
             }
         });
     }
-    async function handleSubmit  (e)  {
+    async function handleSubmit(e) {
         if (formLogInData.email === "" || formLogInData.password === "")
             alert("please enter all the required details");
         else {                                                              //create new user in the server
             e.preventDefault();
-            const body={
-                email:formLogInData.email,
-                password:formLogInData.password
+            const body = {
+                email: formLogInData.email,
+                password: formLogInData.password
             }
-            const user = await config.postData("login", body)
-            console.log(user);
+            try {
 
-            // fetch(`http://localhost:3000/users?email=${FormLogInData.email}`)
-        const token = user.token;
-            //const currentUser = users.find(user => user.website === FormLogInData.password);
-            if (user) {
-               // const userToLocalStorage = { ...currentUser, website: "" }
-                // localStorage.setItem("user", JSON.stringify(userToLocalStorage));
-                setUser(user);
-                alert("succesfully connected");
-                onClose();
-              //  navigate(`/home/users/${currentUser.id}`);
-            } else {
-                alert("Uncorrect email or Password");
-                setFormLogInData({
-                    email: "",
-                    password: "",
-                    confirmPassword: "",
-                });
-             //   navigate("/login");
+                const response = await config.postData("login", body)
+                console.log("user  " + user);
+           
+                
+                // fetch(`http://localhost:3000/users?email=${FormLogInData.email}`)
+                const token = user.token;
+                //const currentUser = users.find(user => user.website === FormLogInData.password);
+                if (response) {
+                    // const userToLocalStorage = { ...currentUser, website: "" }
+                    // localStorage.setItem("user", JSON.stringify(userToLocalStorage));
+                    setUser(user);
+                    alert("succesfully connected");
+                    onClose();
+                    //  navigate(`/home/users/${currentUser.id}`);
+                } else {
+                    alert("Uncorrect email or Password");
+                    setFormLogInData({
+                        email: "",
+                        password: "",
+                        confirmPassword: "",
+                    });
+                    //   navigate("/login");
+                }
+            }
+
+            catch (err) {
+                console.log(err.message)
+                setLoginError(err.message);
             }
         }
     }
@@ -61,7 +72,7 @@ function Login({ onClose }) {
     return (
         <div className="overlay">
             <div className="modal">
-                          <button className="close-button" onClick={onClose }>X</button>
+                <button className="close-button" onClick={onClose}>X</button>
                 <form className="form login" onSubmit={handleSubmit}>
                     <h1 className="title">Log In</h1>
                     <label htmlFor="email" className="form-field">User Name: </label>
@@ -86,6 +97,7 @@ function Login({ onClose }) {
                         onChange={changeHandler}
                         className="input password-log"
                     />
+                     {loginError && <p className='error' style={{ color: loginError == "Registration successful" ? 'green' : "red" }}>{loginError}</p>}
                     <button className="button okey-log" type="submit">Continue</button><br />
                     {/* <nav>
                         <Link className="link create-account-link" to="/register">Don't have an account? Create account</Link>

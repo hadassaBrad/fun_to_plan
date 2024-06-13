@@ -38,32 +38,66 @@ async function createUser(role_id, password, userName, email) {
     throw err;
   }
 }
-async function putFailLogin (email) {
+// async function putFailLogin (email) {
+//   try {
+//     const sql = "SELECT  password_id  FROM users where users.email =?"
+//     const result = await pool.query(sql, [email]);
+//     const sql3 = "SELECT  loginAttempts  FROM passwords where id =?"
+//     const newresult = await pool.query(sql3, [result[0][0].password_id]);
+//     if (newresult[0] > 5) {
+//       throw new Error("to Mach Incorrect access requests")
+//     }
+//     const sql2 = `UPDATE passwords SET lastFailedLogin = ?, loginAttempts= ? WHERE id = ?`;
+//     const result3 = await pool.query(sql2, [currentDate, newresult[0][0].loginAttempts + 1, result[0][0].password_id]);
+//   }
+//   catch (err) {
+//     console.log(err)
+//     throw err;
+
+//   }
+// }
+async function putFailLogin(email) {
   try {
-    const sql = "SELECT  password_id  FROM users where  users.email =?"
-    const result = await pool.query(sql, [email]);
-    sql = "SELECT  loginAttempts  FROM passwords where  id =?"
-    const newresult = await pool.query(sql, [result]);
-    if (newresult[0] > 5) {
-      throw new Error("to Mach Incorrect access requests")
+    // עדכון מספר ניסיונות הכניסה ותאריך הכשלון האחרון
+    const updateSql = `
+      UPDATE passwords p
+      JOIN users u ON u.password_id = p.id
+      SET p.loginAttempts = p.loginAttempts + 1, 
+          p.lastFailedLogin = NOW()
+      WHERE u.email = ?;
+    `;
+    await pool.query(updateSql, [email]);
+    
+    // קבלת מספר ניסיונות הכניסה המעודכן
+    const selectSql = `
+      SELECT p.loginAttempts 
+      FROM passwords p
+      JOIN users u ON u.password_id = p.id
+      WHERE u.email = ?;
+    `;
+    const [rows] = await pool.query(selectSql, [email]);
+    
+    // אם נמצא משתמש, החזר את מספר הניסיונות המעודכן
+    if (rows.length > 0) {
+      return rows[0].loginAttempts;
+    } else {
+      throw new Error("User not found");
     }
-    console.log(result[0]);
-    const sql2 = `UPDATE passwords SET lastFailedLogin = ? loginAttempts= ? WHERE id = ?`;
-    const result3 = await pool.query(sql2, [currentDate, newresult[0] + 1, result[0]]);
-
-  }
-  catch (err) {
+  } catch (err) {
     throw err;
-
   }
 }
+
 async function  putSuccsesLogin(email){
   try {
+    console.log("in seccess login")
     const sql = "SELECT  password_id  FROM users where  users.email =?"
     const result = await pool.query(sql, [email]);
+    console.log(result[0]);
+    console.log("second success")
     const sql2 = `UPDATE passwords SET lastLogin = ? WHERE id = ?`;
-    const result2= await pool.query(sql2, [currentDate, result[0]]);
-
+    const result2= await pool.query(sql2, [currentDate, result[0].password_id]);
+console.log("third success");
   }
   catch {
     throw new Error;
