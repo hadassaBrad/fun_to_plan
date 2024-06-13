@@ -17,23 +17,23 @@ function App() {
   const [user,setUser]=useState(null);
 
   return (
-    <UserContext.Provider value={{user, setUser}}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" element={<HomeLayout />}>
-            <Route index element={<Home />} />
-            <Route path="gallery" element={<Gallery />} />
-            <Route path="about" element={<About />} />
-            <Route path="sites" element={<Sites />} />
-            <Route path="sites/:siteId" element={<Site />} />
-            <Route path="tripRoute" element={<TripRoute />} />
-            <Route path="basket" element={<Basket />} />
-            <Route path="admin" element={<Admin />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </UserContext.Provider>
+    <UserContext.Provider value={{ user, setUser }}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/home" element={<HomeLayout />}>
+          <Route index element={<Home />} />
+          <Route path="gallery" element={<Gallery />} />
+          <Route path="about" element={<About />} />
+          <Route path="sites" element={<Sites />}/> 
+          <Route path="sites/:siteId" element={<Site />} />
+          <Route path="tripRoute" element={<TripRoute />} />
+          <Route path="basket" element={<Basket />} />
+          <Route path="admin" element={<Admin />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </UserContext.Provider>
   );
 }
 

@@ -72,8 +72,8 @@ const postData = async (entity, body) => {
         console.log(error.message);
         throw error;
     }
-};
 
+}
 
 const deleteData = async (entity, idToDelete) => {
     try {

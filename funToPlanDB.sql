@@ -69,6 +69,7 @@ CREATE TABLE sites (
     id INT AUTO_INCREMENT PRIMARY KEY,
     site_name VARCHAR(225) NOT NULL,
     url VARCHAR(225) NOT NULL,
+        site_name VARCHAR(225) NOT NULL,
     description VARCHAR(225),
     popularity INT NOT NULL,
     id_difficulty INT NOT NULL,
@@ -129,5 +130,29 @@ INSERT INTO permissions(role) VALUES
 ('user'),
 ('admin'),
 ('worker');
+INSERT INTO  difficulty(level) VALUES 
+('Easy '),
+('Moderate '),
+('Challenging '),
+('Difficult '),
+('Very Difficult');
+INSERT INTO  area(name_area) VALUES
+('north'),
+('South'),
+(' East'),
+(' West');
+INSERT INTO  age(age_range) VALUES
+('children'),
+('teen ager'),
+('adults'),
+('families');
+insert into sites(site_name, url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length) values
+('Mekorot Yarakon','https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSfBgAQux71ZopennmayW1YDA2UKnaCW1X1ruZsBDa2Vna4AbzjEWM1e11RRu1ZkXmTVV7fmi0NRQ801VvbckMTaYjIlvbF8mh4IvbYxQ',
+"Some in wastewater and some from waste originating from industrial plants that discharge their waste into the river waters",
+5,1,1,500,1,null,null,25,20,250), 
+('dont know may you do?!! ','https://lh5.googleusercontent.com/p/AF1QipPfh3yqD7bPNkryGTsecIS7i3lAmpxWGNkfcgoU=w540-h312-n-k-no',
+"
+Alongvery very nicccccccccc the river waters.",
+7,2,3,250,2,null,null,45,40,670);
 SELECT * FROM users
 
