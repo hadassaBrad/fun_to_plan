@@ -10,6 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 const cors = require('cors'); 
 
 const loginRouter=require("./routes/loginRouter")
+
 const signUpRouter=require("./routes/signUpRouter")
 // const adminRouter=require("./routes/admin")
 const basketRouter=require("./routes/basketRouter")
@@ -33,7 +34,7 @@ app.use("/admin",adminRouter);
 //app.use("/guide",guideRouter)
 app.use("/gallery", galleryRouter);
 // app.use("/basket",basketRouter);
-app.use("/site",sitesRouter);
+app.use("/sites",sitesRouter);
 
 
 app.listen(port, () => {

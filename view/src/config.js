@@ -5,15 +5,20 @@ const getData = async (entity,
     searchValue = null,
     start = 0,
     limit = null,
+    id=null,
 ) => {
     try {
         let url = `${baseUrl}${entity}`;
+        if (id) {
+            url += `/${id}`;
+        }
         if (searchKey) {
             url += `?${searchKey}=${searchValue}`;
         }
         if (limit) {
             url += `?&_start=${start}&_limit=${limit}`;
         }
+     
         console.log("url  " + url);
         const response = await fetch(url);
         console.log(response)
@@ -63,21 +68,27 @@ const postData = async (entity, body) => {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         });
+      
+        if (!response.ok) {
+            const responseData = await response.json();
+            if (responseData && responseData.error) {
+                const error = new Error(responseData.error);
+                throw error;
+            } else {
+                throw new Error('Failed to post data');
+            }
+        }
+      
         const json = await response.json();
         console.log(json);
         return json;
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText);
-
-        }
     } catch (error) {
         console.error('Error:', error.message);
         console.log(error.message);
         throw error;
     }
-};
 
+}
 
 const deleteData = async (entity, idToDelete) => {
     try {

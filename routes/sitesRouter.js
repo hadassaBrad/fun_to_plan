@@ -8,7 +8,11 @@ router.use(cors());
 
 router.get("/", async (req, res) => {
     try {
-        res.send(await getSites());
+        const start = parseInt(req.query._start) || 0;
+        const limit = parseInt(req.query._limit) || 10;
+        console.log("gaaaaaaa")
+
+        res.send(await getSites(start, limit));
     } catch (err) {
         const error = {
             message: err.message
