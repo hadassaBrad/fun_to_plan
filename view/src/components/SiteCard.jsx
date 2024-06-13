@@ -4,13 +4,13 @@ import React from "react";
 function SiteCard({ key, url, name }) {
     return (
         <>
-            <h1>{name}</h1>
-            <img src={url} alt={name} />
-            <button onClick={() => window.location.href = `/site/${site.id}`}>
-        קרא עוד
-      </button>
+            <h1>{site.site_name}</h1>
+            <h2>url:{site.url}</h2>
+            <button>add to basket</button>
+
         </>
     );
+        
 }
 
 export default SiteCard;

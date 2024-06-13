@@ -68,6 +68,7 @@ CREATE TABLE age (
 CREATE TABLE sites (
     id INT AUTO_INCREMENT PRIMARY KEY,
     url VARCHAR(225) NOT NULL,
+        site_name VARCHAR(225) NOT NULL,
     description VARCHAR(225),
     popularity INT NOT NULL,
     id_difficulty INT NOT NULL,
