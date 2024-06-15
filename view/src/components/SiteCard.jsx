@@ -4,8 +4,14 @@ import { useContext, useState } from 'react';
 import config from '../config.js';
 import { UserContext } from '../App.jsx';
 import { Link } from "react-router-dom";
-function SiteCard({ site, }) {
+
+function SiteCard({ site, setSites, sites }) {
     const { user, setUser } = useContext(UserContext);
+    let isAdmin = false;
+    if (user) {
+        isAdmin = user.role === "admin";
+    };
+
     async function addToBasket() {
 
         if (user) {
@@ -16,7 +22,6 @@ function SiteCard({ site, }) {
 
         else {
             if (localStorage.getItem("basket")) {
-                console.log("in iff");
                 const currentSites = JSON.parse(localStorage.getItem("basket"));
                 const allSites = [...currentSites, site];
                 const siteExists = currentSites.some(existingSite => existingSite.id === site.id);
@@ -35,6 +40,19 @@ function SiteCard({ site, }) {
         }
     }
 
+    async function deleteSite() {
+        if (window.confirm('Are you sure you wish to delete this item?')) {
+            try {
+                await config.deleteData("sites", site.id);
+                //deleting the site from the array of sites...
+                const filteredSites = sites.filter(siteInSites => siteInSites.id !== site.id);
+                setSites(filteredSites);
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+    }
 
     return (
         <>
@@ -47,6 +65,8 @@ function SiteCard({ site, }) {
                 src={site.url}
                 height={100} width={180}
             />
+            {isAdmin && <button onClick={deleteSite}>✖️</button>}
+
             <button onClick={addToBasket}>add to basket</button>
             <Link className="nav-link" to={`/home/sites/${site.id}`}>Learn More</Link>
 

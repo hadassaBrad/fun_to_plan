@@ -16,8 +16,15 @@ async function getSite(id){
       } catch (err) {
           throw err;
       }
-  
-
 }
 
-module.exports={getSites,getSite}
+async function deleteSite(id){
+    try{
+console.log("in delete function");
+return model.deleteSite(id);
+    }catch(err){
+        throw err;
+    }
+}
+
+module.exports={getSites,getSite, deleteSite}

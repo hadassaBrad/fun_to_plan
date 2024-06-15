@@ -44,17 +44,14 @@ function Sites() {
 
   return (
     <div>
-      {console.log(sites)
-      }
+      {console.log(sites)}
       {sites.length > 0 ? (
-        // sites.map((photo) => (
-        //     <img key={photo.id} src={photo.url} alt={photo.title} height={100} width={180} />
-        // )
-      
         sites.map(site => (
           <SiteCard
             site={site}// Setting the title attribute to display the name on hover
             height={100} width={180}
+            setSites={setSites}
+            sites={sites}
           />
         )
         )

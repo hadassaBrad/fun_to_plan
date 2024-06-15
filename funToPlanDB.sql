@@ -69,7 +69,6 @@ CREATE TABLE sites (
     id INT AUTO_INCREMENT PRIMARY KEY,
     site_name VARCHAR(225) NOT NULL,
     url VARCHAR(225) NOT NULL,
-        site_name VARCHAR(225) NOT NULL,
     description VARCHAR(225),
     popularity INT NOT NULL,
     id_difficulty INT NOT NULL,
@@ -154,5 +153,11 @@ insert into sites(site_name, url, description, popularity, id_difficulty, id_are
 "
 Alongvery very nicccccccccc the river waters.",
 7,2,3,250,2,null,null,45,40,670);
+
+insert into passwords(password, loginAttempts, lastLogin, account_status) values
+('$2b$10$T8orXcY8jiNlOqImWUDp6uroW/u8P5IOJa0Mv/8dFMG9GzaBSJyja',1, '2024-06-15 21:35:39', 1);
+insert into users(role_id, user_name, password_id, email) values
+(2, 'admin', 1, 'admin@gmail.com');
+
 SELECT * FROM users
 

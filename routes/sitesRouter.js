@@ -62,6 +62,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     try{
         const id = req.params.id;
+        console.log("in delete router!!!!!")
         await deleteSite(id);
         res.send();
     }catch (err) {
