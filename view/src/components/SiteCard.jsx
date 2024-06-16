@@ -15,15 +15,17 @@ function SiteCard({ site, setSites, sites }) {
     async function addToBasket() {
 
         if (user) {
-         const   body={
-            userid:user.id,
-            siteId:site.id
-           };
-            
+            console.log("user:  "+user);
+            console.log("site  "+site.id)
+            const body = {
+                userid: user.id,
+                siteId: site.id
+            };
+
             try {
 
-               const data = await config.postData("basket",body);
-               
+                const data = await config.postData("basket", body);
+
             } catch (error) {
                 console.error("Error fetching site:", error);
             }

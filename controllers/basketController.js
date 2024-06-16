@@ -10,6 +10,7 @@ async function getBasket(id) {
 }
 async function createBasket(siteId,userid) {
     try {
+        console.log("basket controller..");
         return model.createBasket(siteId,userid);
     } catch (err) {
         throw err;

@@ -21,6 +21,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
+        console.log("post rotuter...")
         const response = await createBasket(req.body.userid ,req.body.siteId);
          res.send(await getSingleBasket(response.id));
     } catch (err) {
