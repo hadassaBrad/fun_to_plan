@@ -14,7 +14,7 @@ async function getGallery(start, limit) {
 
 async function createPhoto(id, url, name) {
   try {
-    const sql = "INSERT INTO comments (`id`, `url`, `name`) VALUES(?, ?, ?)";
+    const sql = "INSERT INTO gallery (`id`, `url`, `name`) VALUES(?, ?, ?)";
     const result = await pool.query(sql, [id, url, name]);
     return result[0];
   } catch (err) {

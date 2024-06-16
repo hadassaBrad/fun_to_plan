@@ -3,7 +3,7 @@ import config from '../config.js';
 import { UserContext } from '../App.jsx';
 import BasketCard from '../components/BasketCard.jsx';
 
-
+//?user_id=${user.id}
 function Basket() {
     const { user } = useContext(UserContext);
     const [sites, setSites] = useState([]);
