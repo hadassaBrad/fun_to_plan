@@ -32,6 +32,7 @@ async function deleteAllBasket(id) {
 }
 async function deleteSingleBasket (user_id, site_id) {
     try {
+        console.log("in delete controler basket")
         return model.deleteSingleBasket(user_id, site_id);
     } catch (err) {
         throw err;

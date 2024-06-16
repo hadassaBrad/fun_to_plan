@@ -8,7 +8,8 @@ function BasketCard({ site }) {
     async function removeFromBasket() {
 
         if (user) {
-      config.deleteData("basket", site.id, user.id);
+          
+     await config.deleteData("basket", site.site_id, user.id);
         }
         else {
 
@@ -18,7 +19,7 @@ function BasketCard({ site }) {
             localStorage.setItem("basket", JSON.stringify(updatedSites));
 
         }
-        setRenderBasket(!renderBasket) ;
+       // setRenderBasket(!renderBasket) ;
     }
     return (
         <>

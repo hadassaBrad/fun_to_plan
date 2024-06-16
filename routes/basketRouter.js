@@ -9,6 +9,7 @@ router.use(cors());
 router.get("/", async (req, res) => {
  try {
     const id = req.query.user_id;
+    console.log("id: "+id);
     res.send(await getBasket(id));
     } catch (err) {
         const error = {
