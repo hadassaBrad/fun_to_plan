@@ -42,33 +42,3 @@ app.listen(port, () => {
 });
 
 
-// // Define routes for admin
-// adminRouter.get('/', (req, res) => {
-//   res.send('Welcome to the admin section');
-// });
-
-// adminRouter.get('/dashboard', (req, res) => {
-//   res.send('This is the admin dashboard');
-// });
-
-// // In your main app file
-// const express = require('express');
-// const app = express();
-
-// const session = require('express-session');
-
-// // Configure session with a secret key
-// app.use(session({
-//   secret: 'your_secret_key_here',
-//   resave: false,
-//   saveUninitialized: true
-// }));
-
-// // Use the admin router
-// app.use('/admin', adminRouter);
-
-// // Start the server
-// const PORT = 3000;
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });

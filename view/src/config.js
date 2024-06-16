@@ -79,13 +79,17 @@ const postData = async (entity, body,) => {
 
 }
 
-const deleteData = async (entity, idToDelete, userId) => {
+const deleteData = async (entity, idToDelete, userId=null) => {
     try {
+       
         let url = `${baseUrl}${entity}/${idToDelete}`;
-        if(userId)
-        url +=`?user_id=${userId}`   
+        console.log("url: "+url);
+        if(userId){
+        url +=`?user_id=${userId}`  
+        console.log("url with userid: "+url);
+    } 
   
- 
+    console.log("url befor fetch: "+url);
         const res = await fetch(`${url}`, {
             method: 'DELETE',
         });
