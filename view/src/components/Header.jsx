@@ -13,8 +13,6 @@ function Header() {
     const navigate = useNavigate();
     const [showSignUp, setShowSignUp] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
-    const [showAdminSite, setShowAdminSite] = useState(false);
-
     return (
         <header className="header">
             <nav className="nav">
@@ -32,7 +30,7 @@ function Header() {
                     <h2>🤬{user.userName}</h2></>
                 }
                 {user && user.role === "admin" &&
-                    <button className="auth-button" onClick={() => setShowAdminSite(true)}>Admin</button>}
+                    <Link className="admin-link" to="/home/admin">Admin</Link>}
                 <Link className="nav-link" to={`/home`}>Home</Link>
                 <Link className="nav-link" to={`/home/about`}>About</Link>
                 <Link className="nav-link" to={`/home/gallery`}>Gallery</Link>
@@ -48,7 +46,6 @@ function Header() {
             </nav>
             {showSignUp && <SignUp onClose={() => setShowSignUp(false)} openLogin={() => setShowLogin(true)} />}
             {showLogin && <Login onClose={() => setShowLogin(false)} openSignUp={() => setShowSignUp(true)} />}
-            {showAdminSite && <AdminSite onClose={() => setShowAdminSite(false)} />}
         </header>
     );
 }
