@@ -26,7 +26,7 @@ async function getBasket(id) {
 async function createBasket(siteId,userid){
     try { 
       
-              const sql = "INSERT INTO basket (`user_id `, `  site_id`) VALUES(?, ?)";
+              const sql = "INSERT INTO basket (`user_id`, `  site_id`) VALUES(?, ?)";
               const result = await pool.query(sql, [userid, siteId]);
               console.log("in model  createBasket "+ result[0]);
               return result[0];

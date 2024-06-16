@@ -30,6 +30,7 @@ async function createUser(role_id, password, userName, email) {
       role: roleName,
       userName: userName,
       email: email,
+      id:id
       //passwordId: passwordId
     };
     return user;
