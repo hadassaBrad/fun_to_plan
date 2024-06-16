@@ -37,7 +37,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         console.log("in routeeerrrrrrrrrrrrrrrrr      "+req.body);
-        const response = await createSite(req.body.siteName, req.body.url, req.body.description, req.body.popularity, req.body.difficulty, req.body.area, req.body.price, req.body.age, req.body.openingHour, req.body.closingHour, req.body.latitude, req.body.longitude, req.body.trackLength);
+        const response = await createSite(req.body.siteName, req.body.url, req.body.description, req.body.popularity, req.body.difficultyLevel, req.body.area, req.body.price, req.body.age, req.body.openingHour, req.body.closingHour, req.body.latitude, req.body.longitude, req.body.trackLength);
         res.send(await getSite(response.insertId));
     } catch (err) {
         const error = {

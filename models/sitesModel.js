@@ -29,7 +29,7 @@ async function createSite(site_name,url, description, popularity, id_difficulty,
     console.log("site_name  "+site_name);
     console.log("popularity "+popularity);
     console.log("id_area  "+id_area);
-    console.log("id_difficulty"+id_difficulty)
+    console.log("id_difficulty"+id_difficulty);
     const sql = "INSERT INTO sites (`site_name`,`url`, `description`, `popularity`, `id_difficulty`, `id_area`, `price`, `id_age`, `opening_hour`, `closing_hour`, `latitude`, `longitude`, `track_length`) VALUES(?, ?, ?,?,?,?,?,?,?,?,?,?,?)";
     const result = await pool.query(sql, [site_name, url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length]);
     return result[0];
