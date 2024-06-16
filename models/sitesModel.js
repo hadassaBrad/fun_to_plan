@@ -23,6 +23,23 @@ async function getSite(id) {
     throw err;
   }
 }
+
+async function createSite(site_name,url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length) {
+  try {
+    console.log("site_name  "+site_name);
+    console.log("popularity "+popularity);
+    console.log("id_area  "+id_area);
+    console.log("id_difficulty"+id_difficulty)
+    const sql = "INSERT INTO sites (`site_name`,`url`, `description`, `popularity`, `id_difficulty`, `id_area`, `price`, `id_age`, `opening_hour`, `closing_hour`, `latitude`, `longitude`, `track_length`) VALUES(?, ?, ?,?,?,?,?,?,?,?,?,?,?)";
+    const result = await pool.query(sql, [site_name, url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length]);
+    return result[0];
+  
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
 async function deleteSite(id) {
 
   try {
@@ -36,4 +53,4 @@ async function deleteSite(id) {
 }
 
 
-module.exports = { getSites, getSite, deleteSite }
+module.exports = { getSites, getSite, deleteSite,createSite }

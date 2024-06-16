@@ -17,6 +17,14 @@ async function getSite(id){
           throw err;
       }
 }
+async function createSite(site_name, url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length){
+    try {
+        console.log("poar several site    "+site_name);
+          return model.createSite(site_name,url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length);
+      } catch (err) {
+          throw err;
+      }
+}
 
 async function deleteSite(id){
     try{
@@ -27,4 +35,4 @@ return model.deleteSite(id);
     }
 }
 
-module.exports={getSites,getSite, deleteSite}
+module.exports={getSites,getSite, deleteSite, createSite}
