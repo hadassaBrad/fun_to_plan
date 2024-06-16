@@ -6,6 +6,7 @@ const getData = async (entity,
     start = 0,
     limit = null,
     id=null,
+    userId=null
 ) => {
     try {
         let url = `${baseUrl}${entity}`;
@@ -18,7 +19,10 @@ const getData = async (entity,
         if (limit) {
             url += `?&_start=${start}&_limit=${limit}`;
         }
-     
+     if(userId)
+        {
+            url +=`?user_id=${userId}`   
+        }
         console.log("url  " + url);
         const response = await fetch(url);
         console.log(response)
@@ -44,7 +48,7 @@ const putData = async (entity, idToUpdate, body) => {
         });
 }
 
-const postData = async (entity, body) => {
+const postData = async (entity, body,) => {
     try {
         const response = await fetch(`${baseUrl}${entity}`, {
             method: 'POST',
@@ -75,9 +79,14 @@ const postData = async (entity, body) => {
 
 }
 
-const deleteData = async (entity, idToDelete) => {
+const deleteData = async (entity, idToDelete, userId) => {
     try {
-        const res = await fetch(`${baseUrl}${entity}/${idToDelete}`, {
+        let url = `${baseUrl}${entity}/${idToDelete}`;
+        if(userId)
+        url +=`?user_id=${userId}`   
+  
+ 
+        const res = await fetch(`${url}`, {
             method: 'DELETE',
         });
 

@@ -1,13 +1,14 @@
 import React from "react";
-// import Site from "./Site";
+import config from '../config.js';
 import { useState, useEfect, useContext } from "react";
 import { UserContext } from '../App.jsx';
 function BasketCard({ site }) {
     const { user, setUser } = useContext(UserContext);
-
+    const {renderBasket,setRenderBasket}=useState(false)
     async function removeFromBasket() {
+
         if (user) {
-            //fetch, make render
+      config.deleteData("basket", site.id, user.id);
         }
         else {
 
@@ -17,6 +18,7 @@ function BasketCard({ site }) {
             localStorage.setItem("basket", JSON.stringify(updatedSites));
 
         }
+        setRenderBasket(!renderBasket) ;
     }
     return (
         <>

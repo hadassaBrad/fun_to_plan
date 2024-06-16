@@ -45,9 +45,10 @@ router.delete("/", async (req, res)=>{
 
 router.delete("/:id", async (req, res) => {
     try{
-        const id = req.params.id;
+        const site_id = req.params.id;
+        const user_id = req.query.user_id;
         console.log("in delete router!")
-        await deleteSingleBasket(id);
+        await deleteSingleBasket( site_id,user_id);
         res.send();
     }catch (err) {
         const error = {

@@ -45,10 +45,11 @@ async function deleteAllBasket(id){
               throw err;
             }
 }
-async function deleteSingleBasket(id){
+async function deleteSingleBasket(user_id, site_id){
     try {
-              const sql = `DELETE FROM basket WHERE id = ?`;
-              await pool.query(sql, [id]);
+   
+              const sql = `DELETE FROM basket WHERE   user_id= ? AND site_id= ?`;
+              await pool.query(sql, [user_id,site_id]);
             } catch (err) {
               console.error('Error deleting basket:', err);
               throw err;

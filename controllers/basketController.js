@@ -29,9 +29,9 @@ async function deleteAllBasket(id) {
         throw err;
     }
 }
-async function deleteSingleBasket (id) {
+async function deleteSingleBasket (user_id, site_id) {
     try {
-        return model.deleteSingleBasket(id);
+        return model.deleteSingleBasket(user_id, site_id);
     } catch (err) {
         throw err;
     }
