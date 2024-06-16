@@ -50,6 +50,7 @@ async function postLogin(email, password) {
         role: result[0].role,
         userName: result[0].user_name,
         email: result[0].email,
+        id:result[0].id,
         //passwordId: passwordId
       };
       console.log("user " + user);
