@@ -4,9 +4,12 @@ import { useContext, useState } from 'react';
 import config from '../config.js';
 import { UserContext } from '../App.jsx';
 import { Link } from "react-router-dom";
+import AdminSite from "./AdminSite.jsx";
 
 function SiteCard({ site, setSites, sites }) {
     const { user, setUser } = useContext(UserContext);
+    const [showAdminSite, setShowAdminSite] = useState(false);
+
     let isAdmin = false;
     if (user) {
         isAdmin = user.role === "admin";
@@ -48,7 +51,7 @@ function SiteCard({ site, setSites, sites }) {
     }
 
     async function deleteSite() {
-        if (window.confirm('Are you sure you wish to delete this item?')) {
+        if (window.confirm('Are you sure you want to delete this item?')) {
             try {
                 await config.deleteData("sites", site.id);
                 //deleting the site from the array of sites...
@@ -59,6 +62,24 @@ function SiteCard({ site, setSites, sites }) {
                 console.log(err);
             }
         }
+    }
+
+    async function updateSite() {
+
+
+setShowAdminSite(true);
+
+        // if (window.confirm('Are you sure you want to update this item?')) {
+        //     try {
+        //         const updatedSite=  await config.putData("sites", site.id, site);
+        //         //deleting the site from the array of sites...
+        //         const filteredSites = sites.filter(siteInSites => siteInSites.id !== site.id);
+        //         setSites([...filteredSites, updatedSite]);
+        //     }
+        //     catch (err) {
+        //         console.log(err);
+        //     }
+        // }
     }
 
     return (
@@ -73,9 +94,13 @@ function SiteCard({ site, setSites, sites }) {
                 height={100} width={180}
             />
             {isAdmin && <button onClick={deleteSite}>✖️</button>}
+            {isAdmin && <button onClick={updateSite}>UPDATE SITE</button>}
+
 
             <button onClick={addToBasket}>add to basket</button>
             <Link className="nav-link" to={`/home/sites/${site.id}`}>Learn More</Link>
+
+            {showAdminSite && <AdminSite site={site} onClose={() => setShowAdminSite(false)} />}
 
         </>
     );

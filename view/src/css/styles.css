@@ -1,18 +1,39 @@
 /* הקובץ styles.css */
 .header {
-    background-color: #e0f7fa; /* צבע תכלת נעים */
+    background-color: #e1feff; /* צבע תכלת נעים */
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; /* פריסת כל רוחב הדף */
+    position: fixed; /* קיבוע למעלה */
+    top: 0; /* למעלה */
+    left: 0; /* בקו התחלה של הדף */
+    z-index: 1000; /* עליונות על אלמנטים אחרים */
 }
 
-.nav {
+.navbar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px; /* מרווח קטן מקצה העמוד */
+}
+
+.nav-left,
+.nav-right {
+    flex: 1; /* מרחיב את הצדדים */
+    display: flex;
+    align-items: center;
+}
+
+.nav-center {
+    flex: 2; /* מרחיב את החלק המרכזי */
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
 .nav-link {
-    margin: 0 15px;
+    margin: 0 30px; /* רווחים גדולים יותר בין קישורים */
     text-decoration: none;
     color: #00796b; /* צבע טורקיז כהה */
     font-weight: bold;
@@ -22,6 +43,11 @@
 
 .nav-link:hover {
     color: #004d40; /* כהה יותר בעת מעבר עכבר */
+    text-decoration: underline; /* קו תחתי בעת מעבר עכבר */
+}
+
+.nav-link:active {
+    text-decoration: underline; /* קו תחתי בעת לחיצה */
 }
 
 .auth-button {
@@ -41,22 +67,57 @@
 }
 
 .logout-button {
-    background-color: #d32f2f; /* צבע אדום */
+    background-color: #004d40; 
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 10px 20px; /* התאמת גודל הכפתור */
     font-size: 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
     transition: background-color 0.3s ease;
+    margin-left: 20px; /* מרווח קטן מקצה העמוד */
 }
 
 .logout-button:hover {
-    background-color: #b71c1c; /* כהה יותר בעת מעבר עכבר */
+    background-color: #004d40; /* כהה יותר בעת מעבר עכבר */
 }
 
 .icon {
     margin-right: 8px;
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px; /* התאמת המרווח למובייל */
+    }
+
+    .nav-left,
+    .nav-right {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .nav-center {
+        margin-bottom: 20px;
+    }
+
+    .nav-link {
+        margin: 10px 0; /* מרווחים מותאמים למובייל */
+    }
+
+    .auth-button {
+        margin: 10px 0;
+    }
+
+    .logout-button {
+        margin: 10px 0;
+    }
+}
+
+body {
+    padding-top: 100px; /* מרווח כדי להימנע מחפיפה עם הכותרת */
 }
