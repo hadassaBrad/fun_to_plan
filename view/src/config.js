@@ -10,18 +10,23 @@ const getData = async (entity,
 ) => {
     try {
         let url = `${baseUrl}${entity}`;
+        console.log('url'+url);
         if (id) {
             url += `/${id}`;
+            console.log('url id');
         }
         if (searchKey) {
             url += `?${searchKey}=${searchValue}`;
+            console.log(' url += `?${searchKey}=${searchValue}`;');
         }
         if (limit) {
             url += `?&_start=${start}&_limit=${limit}`;
+            console.log('rl += `?&_start=${start}&_limit=${limit}`;');
         }
      if(userId)
         {
             url +=`?user_id=${userId}`   
+            console.log(' url +=`?user_id=${userId}`   ');
         }
         console.log("url  " + url);
         const response = await fetch(url);
@@ -30,7 +35,9 @@ const getData = async (entity,
         console.log(newData);
         return newData;
     } catch (error) {
+        console.log('"Error fetching data:", error')
         console.error("Error fetching data:", error);
+     
     }
 };
 
