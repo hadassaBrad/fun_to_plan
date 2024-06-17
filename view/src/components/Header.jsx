@@ -6,30 +6,31 @@ import { UserContext } from '../App';
 import SignUp from "./SignUp";
 import Login from "./Login";
 import "../css/styles.css"; // הוספת קובץ ה-CSS
+import AdminSite from "./AdminSite";
 
 function Header() {
-    const {user,setUser} = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
     const [showSignUp, setShowSignUp] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
-
     return (
         <header className="header">
             <nav className="nav">
                 {console.log("user  " + user)}
-                {user !== null &&<>
+                {user !== null && <>
                     <button className="logout-button" onClick={() => {
-                      sessionStorage.clear();
-                      setUser(null);
+                        sessionStorage.clear();
+                        setUser(null);
                     }}>
                         <span className="icon">🔒</span> Logout
                     </button>
-                    <br/>
+                    <br />
                     {console.log("user  " + user.userName)}
-                   <br/>
+                    <br />
                     <h2>🤬{user.userName}</h2></>
-                    }
-                {user && user.role === "admin" && <Link className="nav-link" to={`/home/admin`}>Admin</Link>}
+                }
+                {user && user.role === "admin" &&
+                    <Link className="admin-link" to="/home/admin">Admin</Link>}
                 <Link className="nav-link" to={`/home`}>Home</Link>
                 <Link className="nav-link" to={`/home/about`}>About</Link>
                 <Link className="nav-link" to={`/home/gallery`}>Gallery</Link>

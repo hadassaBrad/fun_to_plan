@@ -48,9 +48,9 @@ const putData = async (entity, idToUpdate, body) => {
         });
 }
 
-const postData = async (entity, body,) => {
+const postData = async (entity, body) => {
     try {
-        console.log(body);
+        console.log(body.url);
         const response = await fetch(`${baseUrl}${entity}`, {
             method: 'POST',
             body: JSON.stringify(body),
