@@ -33,6 +33,7 @@ async function createUser(role_id, password, userName, email) {
       id:id
       //passwordId: passwordId
     };
+    console.log("user "+user)
     return user;
   } catch (err) {
     console.log(err);

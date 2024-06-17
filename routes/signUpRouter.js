@@ -17,9 +17,9 @@ router.post("/", async (req, res) => {
         console.log({ user, token });
         res.send({ user, token });
     }
-    catch {
-        console.log("in catch")
-        const error = new Error('user already exists');
+    catch(err) {
+        console.log("in catch"+err)
+        const error = new Error(err);
         res.status(401).json({ error: error.message });
     }
 })
