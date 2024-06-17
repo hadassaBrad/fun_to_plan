@@ -17,6 +17,7 @@ const basketRouter=require("./routes/basketRouter")
 const galleryRouter=require("./routes/galleryRouter")
 const sitesRouter=require("./routes/sitesRouter")
 const guideRouter=require ("./routes/guideRouter")
+const userRouter=require ("./routes/userRouter")
 const port = 3000;
 const SECRET_KEY = process.env.SECRET_KEY;
 // app.use( session ({
@@ -25,9 +26,8 @@ const SECRET_KEY = process.env.SECRET_KEY;
 //     saveUninitialized: false,
 //     cookie: { secure: true } 
 //   }));
-
 app.use(cors());
-
+app.use("/users",userRouter);
 app.use("/login", loginRouter);
 app.use("/signUp",signUpRouter);
 app.use("/admin",adminRouter);

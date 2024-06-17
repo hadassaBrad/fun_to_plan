@@ -1,7 +1,10 @@
 import { React, useContext, useState } from 'react'
+import { Link } from "react-router-dom";
+
 import AdminSite from "../components/AdminSite";
 
 import { UserContext } from '../App';
+// import UsersTable from "./UsersTable";
 
 
 function Admin() {
@@ -10,9 +13,12 @@ function Admin() {
 
 
     return (
-        <>   {user && user.role === "admin" &&
-            <button className="auth-button" onClick={() => setShowAdminSite(true)}>Admin</button>}
+        <>
+            <Link className="nav-link" to="/home/usersTable">usersTable</Link>
+
+            <button className="auth-button" onClick={() => setShowAdminSite(true)}>Admin</button>
             {showAdminSite && <AdminSite onClose={() => setShowAdminSite(false)} />}</>
+            
     );
 }
 export default Admin;

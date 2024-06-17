@@ -8,7 +8,50 @@ const minutes = now.getMinutes();
 const seconds = now.getSeconds();
 
 const currentDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+async function getAllUsers() {
+  console.log("Users modal getAllUsers");
+  try {
+    const sql = `
+      SELECT 
+        u.id,
+        u.user_name,
+        u.email,
+        u.phone_number,
+        a.city,
+        a.street,
+        p.role,
+        pw.loginAttempts,
+        pw.lastLogin,
+        pw.lastFailedLogin,
+        pw.account_status 
+      FROM 
+        users u 
+      LEFT JOIN 
+        addresses a ON u.address_id = a.id 
+      LEFT JOIN 
+        permissions p ON u.role_id = p.id 
+      LEFT JOIN 
+        passwords pw ON u.password_id = pw.id
+    `;
+    const [rows] = await pool.query(sql);
+    return rows;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
 
+async function getUsers() {
+  try {
+    console.log("Users modal");
+    const sql = 'SELECT id, user_name, email FROM users';
+    const result = await pool.query(sql);
+    return result[0];
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
 async function createUser(role_id, password, userName, email) {
   try {
     console.log("create user in model");
@@ -146,4 +189,4 @@ async function getRole(id) {
 
 
 
-module.exports = { createUser, putSuccsesLogin, getUserByEmail, getUser, getRole, putFailLogin };
+module.exports = {getAllUsers, getUsers, createUser, putSuccsesLogin, getUserByEmail, getUser, getRole, putFailLogin };

@@ -7,7 +7,14 @@ const bcrypt = require("bcrypt")
 const numSaltRoundss = 10;
 
 const SECRET_KEY = process.env.SECRET_KEY;
-
+async function getUsers() {
+  try {
+      console.log("in controller getUsers");
+      return model.getAllUsers();
+  } catch (err) {
+      throw err;
+  }
+}
 async function createUser(role_id, password, userName, email) {
   try {
     const result = await model.getUserByEmail(email);//checkes if he exists
@@ -66,6 +73,7 @@ async function postLogin(email, password) {
 }
 
 async function authenticate(user) {
+  console.log('authenticate');
   const token = jwt.sign({ userId: user.id, role: user.role }, SECRET_KEY,);
   return token
 
@@ -92,4 +100,4 @@ async function getUserByEmail(email) {
 async function updateUser() {
 
 }
-module.exports = { authenticate, createUser, getUser, postLogin, getUserByEmail, }
+module.exports = { getUsers, authenticate, createUser, getUser, postLogin, getUserByEmail, }

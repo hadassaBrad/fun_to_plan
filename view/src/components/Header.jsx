@@ -30,7 +30,7 @@ function Header() {
                     <h2>🤬{user.userName}</h2></>
                 }
                 {user && user.role === "admin" &&
-                    <Link className="admin-link" to="/home/admin">Admin</Link>}
+                    <Link className="nav-link" to="/home/admin">Admin</Link>}
                 <Link className="nav-link" to={`/home`}>Home</Link>
                 <Link className="nav-link" to={`/home/about`}>About</Link>
                 <Link className="nav-link" to={`/home/gallery`}>Gallery</Link>
