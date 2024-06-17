@@ -19,18 +19,21 @@ async function createUser(role_id, password, userName, email) {
     // const sqlPassword = "INSERT INTO passwords (`password`,`loginAttempts`,`lastLogin`,`lastFailedLogin`,`account_status`) VALUES(?,?,?,?,?)";
     // const resultPassword = await pool.query(sqlPassword, [password, 1, datetime.getDate(), null, true]);
     const passwordId = resultPassword[0].insertId
-
+    console.log("resulst"+ resultPassword);
     const sql = "INSERT INTO users (`role_id`, `user_name`, `password_id`,`email` ) VALUES(?, ?, ?, ?)";
     const result = await pool.query(sql, [role_id, userName, passwordId, email]);
+
+    console.log("result "+result)
     // Retrieve the role name from the permissions table
     const sqlRole = "SELECT role FROM permissions WHERE id = ?";
     const resultRole = await pool.query(sqlRole, [role_id]);
+    console.log("resultRole "+resultRole);
     const roleName = resultRole[0][0].role;
     const user = {
       role: roleName,
       userName: userName,
       email: email,
-      id:id
+      id:result[0].insertId
       //passwordId: passwordId
     };
     console.log("user "+user)

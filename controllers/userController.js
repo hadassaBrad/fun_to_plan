@@ -8,6 +8,23 @@ const numSaltRoundss = 10;
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
+// async function createUser(role_id, password, userName, email) {
+//   try {
+//     const result = await model.getUserByEmail(email);//checkes if he exists
+//     console.log("RESULT CHECKING:   " + result);
+//     if (result.length != 0) {
+//       console.log("the user already exist")
+//       throw new Error("user already exists, please login");
+//     }
+//     const hash = await bcrypt.hash(password, numSaltRoundss);
+//     const newUser = model.createUser(role_id, hash, userName, email);
+//     console.log("new user in controller  "+newUser)
+//     return newUser;
+
+//   } catch (err) {
+//     throw err;
+//   }
+// }
 async function createUser(role_id, password, userName, email) {
   try {
     const result = await model.getUserByEmail(email);//checkes if he exists

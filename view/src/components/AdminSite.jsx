@@ -1,65 +1,3 @@
-// import React from "react";
-// // import Site from "./Site";
-// import { useState, useEfect, useContext } from "react";
-// import { UserContext } from '../App.jsx';
-// function AdminSite({ site }) {
-//     const { user, setUser } = useContext(UserContext);
-//     const [site, setSite] = useState({
-//         siteName:"",
-//         url:"",
-//         description:"",
-//         popularity:"",
-//         difficultyLevel:"",
-//         area:"",
-//         price:"",
-//         age:"",
-//         openingHour:"",
-//         closingHour:"",
-//         latitude:"",
-//         logitude:"",
-//         trackLength:""
-//     });
-
-//     return (
-//         <>
-//             <form className="form login" onSubmit={handleSubmit}>
-//                 <h1 className="title">Enter site details</h1>
-//                 <label htmlFor="email" className="form-field">User Name: </label>
-//                 <input
-//                     id=""
-//                     type="text"
-//                     name="email"
-//                     placeholder="email"
-//                     value={formLogInData.email}
-//                     required
-//                     onChange={changeHandler}
-//                     className="input name-sign"
-//                 />
-//                 <label htmlFor="password" className="form-field">Password: </label>
-//                 <input
-//                     id="password"
-//                     type="password"
-//                     name="password"
-//                     placeholder="password"
-//                     value={formLogInData.password}
-//                     required
-//                     onChange={changeHandler}
-//                     className="input password-log"
-//                 />
-//                 <button className="button okey-log" type="submit">Continue</button><br />
-//                 {loginError && <p className='error' style={{ color: loginError == "Registration successful" ? 'green' : "red" }}>{loginError}</p>}
-//                 <br />
-//                 {/* <button onClick={moveToSignUp}>not signed up? sign up</button> */}
-//                 <a href="#" onClick={moveToSignUp}>not signed up? sign up</a>
-//                 <br />
-//             </form>
-//         </>
-//     );
-
-// }
-
-// export default AdminSite;
-
 
 import React, { useState, useContext } from "react";
 import { UserContext } from '../App.jsx';
@@ -110,16 +48,11 @@ function AdminSite({ onClose }) {
         try {
             console.log("site:   " + site);
             const response = await config.postData("sites", site)
-            // fetch('/api/sites', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(site),
-            // });
-            if (response.ok) {
-                console.log("Site details submitted successfully");
-                onClose(); // Close the modal after successful submission
+            if (response) {
+                
+            console.log("Site details submitted successfully");
+               alert("Site added successfuly")
+            onClose(); // Close the modal after successful submission
             } else {
                 console.error("Failed to submit site details");
             }
