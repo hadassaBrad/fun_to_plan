@@ -9,7 +9,7 @@ import AdminSite from "./AdminSite.jsx";
 function SiteCard({ site, setSites, sites }) {
     const { user, setUser } = useContext(UserContext);
     const [showAdminSite, setShowAdminSite] = useState(false);
-
+    const [siteForUpdate, setSiteForUpdate] = useState();
     let isAdmin = false;
     if (user) {
         isAdmin = user.role === "admin";
@@ -37,7 +37,7 @@ function SiteCard({ site, setSites, sites }) {
             localStorage.setItem("basket", JSON.stringify([site]));
         }
     }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
 
     async function deleteSite() {
         if (window.confirm('Are you sure you want to delete this item?')) {
@@ -53,10 +53,23 @@ function SiteCard({ site, setSites, sites }) {
         }
     }
 
+    async function onClickSave(site) {
+        try {
+            const result = await config.putData("sites", site.id, site)
+            return result;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    }
+
     async function updateSite() {
 
 
-setShowAdminSite(true);
+        const currentSite = await config.getData("sites", null, null, null, null, site.id);
+        setSiteForUpdate(currentSite);
+        setShowAdminSite(true);
+        setShowAdminSite(true);
 
         // if (window.confirm('Are you sure you want to update this item?')) {
         //     try {
@@ -89,8 +102,8 @@ setShowAdminSite(true);
             <button onClick={addToBasket}>add to basket</button>
             <Link className="nav-link" to={`/home/sites/${site.id}`}>Learn More</Link>
 
-            {showAdminSite && <AdminSite site={site} onClose={() => setShowAdminSite(false)} />}
-
+            {console.log(siteForUpdate)}
+            {showAdminSite && <AdminSite onClickSave={onClickSave} site={siteForUpdate} setSite={setSiteForUpdate} onClose={() => setShowAdminSite(false)} />}
         </>
     );
 }

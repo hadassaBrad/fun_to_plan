@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { UserContext } from '../App.jsx';
 import config from '../config.js';
 
-function AdminSite({ onClose, site, setSite }) {
+function AdminSite({ onClose, site, setSite, onClickSave }) {
     const { user, setUser } = useContext(UserContext);
     // const [site, setSite] = useState({
     //     siteName: "",
@@ -47,11 +47,11 @@ function AdminSite({ onClose, site, setSite }) {
         // לוגיקה לשליחת הנתונים לשרת
         try {
             console.log("site:   " + site);
-            const response = await config.postData("sites", site)
+            const response = onClickSave(site);//await config.postData("sites", site)
             if (response) {
                 
             console.log("Site details submitted successfully");
-               alert("Site added successfuly")
+               alert("Site X successfuly")
             onClose(); // Close the modal after successful submission
             } else {
                 console.error("Failed to submit site details");

@@ -1,5 +1,6 @@
 import { React, useContext, useState } from 'react'
 import AdminSite from "../components/AdminSite";
+import config from '../config.js';
 
 import { UserContext } from '../App';
 
@@ -16,6 +17,17 @@ import { UserContext } from '../App';
 //     );
 // }
 // export default Admin;
+async function onClickSave(site) {
+    try {
+        const result = await config.postData("sites", site)
+        return result;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
+
+
 function Admin() {
     const { user, setUser } = useContext(UserContext);
     const [showAdminSite, setShowAdminSite] = useState(false);
@@ -38,7 +50,7 @@ function Admin() {
     return (
         <>   {user && user.role === "admin" &&
             <button className="auth-button" onClick={() => setShowAdminSite(true)}>Admin</button>}
-            {showAdminSite && <AdminSite site={site} setSite={setSite} onClose={() => setShowAdminSite(false)} />}
+            {showAdminSite && <AdminSite onClickSave={onClickSave} site={site} setSite={setSite} onClose={() => setShowAdminSite(false)} />}
         </>
     );
 }

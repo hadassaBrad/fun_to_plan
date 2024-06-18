@@ -53,8 +53,16 @@ async function deleteSite(id) {
 }
 
 async function updateSite(site_name,url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length){
- const sql = `UPDATE sites SET site_name = ?,url = ?, description = ?, popularity = ?, id_difficulty = ?, id_area = ?, price = ?, id_age = ?, opening_hour = ?, closing_hour = ?, latitude = ?, longitude = ?, track_length = ?`
+ try{
+  const sql = `UPDATE sites SET site_name = ?,url = ?, description = ?, popularity = ?, id_difficulty = ?, id_area = ?, price = ?, id_age = ?, opening_hour = ?, closing_hour = ?, latitude = ?, longitude = ?, track_length = ?`
+ const result = await pool.query(sql, [site_name, url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length]);
+ return result[0];
+  
+} catch (err) {
+  console.log(err);
+}
 }
 
 
-module.exports = { getSites, getSite, deleteSite,createSite }
+
+module.exports = { getSites, getSite, deleteSite,createSite, updateSite }
