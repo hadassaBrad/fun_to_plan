@@ -1,0 +1,49 @@
+/* gallery.css */
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .gallery-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .gallery-container img:hover {
+    transform: scale(1.05);
+  }
+  
+  .gallery-container button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .gallery-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* כאן נגדיר שנכניס כמה שיותר תמונות בשורה עם רוחב מינימלי של 180px */
+    gap: 10px; /* מרווח בין התמונות */
+  }
+  
+  .gallery-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px; /* כדי להעניק פינות מעוגלות לתמונות */
+  }
+  

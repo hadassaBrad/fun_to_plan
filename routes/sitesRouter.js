@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        console.log("in router      "+req.body);
+        console.log("in router      " + req.body);
         const response = await createSite(req.body.siteName, req.body.url, req.body.description, req.body.popularity, req.body.difficultyLevel, req.body.area, req.body.price, req.body.age, req.body.openingHour, req.body.closingHour, req.body.latitude, req.body.longitude, req.body.trackLength);
         res.send(await getSite(response.insertId));
     } catch (err) {
@@ -50,7 +50,8 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
     try {
         const id = req.params.id;
-        await updateSite(id, req.body.url, req.body.description, req.body.popularity, req.body.id_difficulty, req.body.id_area, req.body.price, req.body.id_age, req.body.opening_hour, req.body.closing_hour, req.body.latitude, req.body.longitude, req.body.track_length)
+        console.log("in put roter  " + id)
+        await updateSite(id, req.body.siteName, req.body.url, req.body.description, req.body.popularity, req.body.difficultyLevel, req.body.area, req.body.price, req.body.age, req.body.openingHour, req.body.closingHour, req.body.latitude, req.body.longitude, req.body.trackLength)
         res.send(await getTodo(id));
     } catch (err) {
         const error = {
@@ -61,12 +62,12 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-    try{
+    try {
         const id = req.params.id;
         console.log("in delete router!!!!!")
         await deleteSite(id);
         res.send();
-    }catch (err) {
+    } catch (err) {
         const error = {
             message: err.message
         }

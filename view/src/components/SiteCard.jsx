@@ -9,46 +9,35 @@ import AdminSite from "./AdminSite.jsx";
 function SiteCard({ site, setSites, sites }) {
     const { user, setUser } = useContext(UserContext);
     const [showAdminSite, setShowAdminSite] = useState(false);
-
+    const [siteForUpdate, setSiteForUpdate] = useState();
     let isAdmin = false;
     if (user) {
         isAdmin = user.role === "admin";
     };
 
     async function addToBasket() {
-
-        if (user) {
-            const body = {
-                userid: user.id,
-                siteId: site.id
-            };
-
-            try {
-                const data = await config.postData("basket", body);
-            } catch (error) {
-                console.error("Error fetching site:", error);
+        if (localStorage.getItem("basket")) {
+            const currentSites = JSON.parse(localStorage.getItem("basket"));
+            const allSites = [...currentSites, site];
+            const siteExists = currentSites.some(existingSite => existingSite.id === site.id);
+            if (!siteExists) {
+                localStorage.setItem("basket", JSON.stringify(allSites));
+                if (user) {
+                    const body = { userid: user.id, siteId: site.id };
+                    try {
+                        await config.postData("basket", body);
+                    } catch (error) {
+                        console.error("Error fetching site:", error);
+                    }
+                }
+            } else {
+                console.log("already exist");
             }
-        }
-
-        else {
-            if (localStorage.getItem("basket")) {
-                const currentSites = JSON.parse(localStorage.getItem("basket"));
-                const allSites = [...currentSites, site];
-                const siteExists = currentSites.some(existingSite => existingSite.id === site.id);
-                if (!siteExists)
-                    localStorage.setItem("basket", JSON.stringify(allSites))
-                else
-                    console.log("already exist");
-
-            }
-            else {
-                console.log(" in else " + JSON.stringify(site));
-                localStorage.setItem("basket", JSON.stringify([site]))
-
-            }
-
+        } else {
+            localStorage.setItem("basket", JSON.stringify([site]));
         }
     }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
     async function deleteSite() {
         if (window.confirm('Are you sure you want to delete this item?')) {
@@ -66,8 +55,9 @@ function SiteCard({ site, setSites, sites }) {
 
     async function updateSite() {
 
-
-setShowAdminSite(true);
+        const currentSite = await config.getData("sites", null, null, null, null, site.id);
+        setSiteForUpdate(currentSite);
+        setShowAdminSite(true);
 
         // if (window.confirm('Are you sure you want to update this item?')) {
         //     try {
@@ -99,9 +89,8 @@ setShowAdminSite(true);
 
             <button onClick={addToBasket}>add to basket</button>
             <Link className="nav-link" to={`/home/sites/${site.id}`}>Learn More</Link>
-
-            {showAdminSite && <AdminSite site={site} onClose={() => setShowAdminSite(false)} />}
-
+            {console.log(siteForUpdate)}
+            {showAdminSite && <AdminSite site={siteForUpdate} setSite={setSiteForUpdate} onClose={() => setShowAdminSite(false)} />}
         </>
     );
 }

@@ -1,6 +1,8 @@
 /* הקובץ styles.css */
 .header {
-    background-color: #e1feff; /* צבע תכלת נעים */
+    /* transition: transform 0.5s, background-color 0.5s;
+    background-color: rgba(0, 0, 0, 0.1); */
+    background-color: rgb(168, 206, 211);
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%; /* פריסת כל רוחב הדף */

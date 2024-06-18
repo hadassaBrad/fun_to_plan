@@ -27,6 +27,15 @@ async function createSite(site_name, url, description, popularity, id_difficulty
     }
 }
 
+async function updateSite(site_name, url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length)
+{
+    try {
+        console.log("poar several site    " + id_difficulty);
+        return model.updateSite(site_name, url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length);
+    } catch (err) {
+        throw err;
+    }
+}
 async function deleteSite(id) {
     try {
         console.log("in delete function");
@@ -36,4 +45,4 @@ async function deleteSite(id) {
     }
 }
 
-module.exports = { getSites, getSite, deleteSite, createSite }
+module.exports = { getSites, getSite, deleteSite, createSite, updateSite }

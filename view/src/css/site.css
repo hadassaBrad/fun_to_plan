@@ -1,0 +1,244 @@
+/* סגנון הכפתור קבל תכנון מסלול */
+.plan-route-button {
+    background-color: #007bff; /* רקע גוון תכלת */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.plan-route-button:hover {
+    background-color: #0056b3; /* צבע תכלת כהה במצב ריחוף */
+}
+
+/* סגנון הכפתור קבל עוד */
+.get-more-button {
+    color: #007bff; /* צבע תכלת לכפתור שקוף */
+    background-color: transparent;
+    border: 1px solid #007bff; /* גבול דק */
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.get-more-button:hover {
+    color: white; /* צבע טקסט לבן במצב ריחוף */
+    background-color: #007bff; /* רקע תכלת במצב ריחוף */
+    border-color: #0056b3; /* גבול תכלת כהה במצב ריחוף */
+}
+.site-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.site-buttons-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.site-buttons-container > * {
+    margin-bottom: 10px;
+}
+.site-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.site-buttons-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* כאן מציינים את המרחק מהשוליים של המסך */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+}
+
+.site-buttons-container > * {
+    margin-bottom: 10px;
+}
+.site-buttons-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+    z-index: 1000; /* להכניס לפנייה גבוהה יותר מהאלמנטים האחרים כדי שיהיה מושחז על יתר התוכן */
+}
+
+.site-buttons-container > * {
+    margin-bottom: 10px;
+}
+
+/* כפתור קבל תכנון מסלול */
+.plan-route-button {
+      background-color: #12fff3; /* כחול בהיר */
+    ; /* כחול כהה */
+    color: #fff; /* צבע טקסט לבן */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.plan-route-button:hover {
+    background-color: #12fff3; /* כחול בהיר */
+}
+.site-buttons-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+    z-index: 1000; /* יוצא מעל כל התוכן */
+}
+
+.site-buttons-container > * {
+    margin-bottom: 10px;
+}
+
+/* כפתור קבל תכנון מסלול */
+.plan-route-button {
+    background-color: #007bff; /* כחול כהה */
+    color: #fff; /* צבע טקסט לבן */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.plan-route-button:hover {
+    background-color: #0056b3; /* כחול בהיר */
+}
+.site-buttons-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+    z-index: 1000; /* להכניס לפנייה גבוהה יותר מהאלמנטים האחרים כדי שיהיה מושחז על יתר התוכן */
+}
+
+.site-buttons-container > * {
+    margin-bottom: 10px;
+}
+
+/* כפתור קבל תכנון מסלול */
+.plan-route-button {
+    background-color: #007bff; /* כחול כהה */
+    color: #fff; /* צבע טקסט לבן */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.plan-route-button:hover {
+    background-color: #0056b3; /* כחול בהיר */
+}
+.site-buttons-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    z-index: 1000; /* להכניס לפנייה גבוהה יותר מהאלמנטים האחרים כדי שיהיה מושחז על יתר התוכן */
+}
+
+.site-buttons-container > * {
+    margin-bottom: 10px;
+}
+
+/* כפתור קבל עוד */
+.get-more-button {
+    color: #007bff; /* צבע תכלת לכפתור שקוף */
+    background-color: transparent;
+    color: #00796b; /* צבע טורקיז כהה */
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+}
+
+.get-more-button:hover {
+    color: rgb(0, 0, 0); /* צבע טקסט לבן במצב ריחוף */
+    color: #00796b; /* צבע טורקיז כהה */
+   
+}
+
+/* כפתור קבל תכנון מסלול */
+.plan-route-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* כאן מציינים את המרחק מהשוליים של  background-color: #747c7b; המסך */
+    color: #030303; /* צבע טורקיז כהה */
+  
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    z-index: 1000; /* יוצא מעל כל התוכן */
+    background-color: rgb(168, 206, 211);
+}
+
+.plan-route-button:hover {
+    background-color: rgb(138, 184, 190);}
+

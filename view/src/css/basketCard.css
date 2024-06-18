@@ -1,0 +1,65 @@
+.basket-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    max-width: 300px;
+    background-color: #e0e0e0; /* צבע רקע פחות בהיר */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.basket-card:hover {
+    transform: translateY(-5px);
+    background-color: #e0e0e0; /* שינוי צבע רקע במצב ריחוף */
+}
+
+.basket-card-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.basket-card-content {
+    text-align: center;
+}
+
+.basket-card-title {
+    font-size: 1.2em;
+    margin: 12px 0;
+}
+
+.basket-card-button {
+    background-color: #99f0e1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.basket-card-button:hover {
+    background-color:  #99f0e1;
+}
+
+/* רספונסיביות */
+@media (max-width: 600px) {
+    .basket-card {
+        max-width: 100%;
+        margin: 8px;
+    }
+
+    .basket-card-title {
+        font-size: 1em;
+    }
+
+    .basket-card-button {
+        font-size: 0.9em;
+        padding: 8px 16px;
+    }
+}

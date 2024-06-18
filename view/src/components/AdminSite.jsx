@@ -3,23 +3,23 @@ import React, { useState, useContext } from "react";
 import { UserContext } from '../App.jsx';
 import config from '../config.js';
 
-function AdminSite({ onClose }) {
+function AdminSite({ onClose, site, setSite }) {
     const { user, setUser } = useContext(UserContext);
-    const [site, setSite] = useState({
-        siteName: "",
-        url: "",
-        description: "",
-        popularity: "",
-        difficultyLevel: "",
-        area: "",
-        price: "",
-        age: "",
-        openingHour: "",
-        closingHour: "",
-        latitude: "",
-        longitude: "",
-        trackLength: ""
-    });
+    // const [site, setSite] = useState({
+    //     siteName: "",
+    //     url: "",
+    //     description: "",
+    //     popularity: "",
+    //     difficultyLevel: "",
+    //     area: "",
+    //     price: "",
+    //     age: "",
+    //     openingHour: "",
+    //     closingHour: "",
+    //     latitude: "",
+    //     longitude: "",
+    //     trackLength: ""
+    // });
     const [formError, setFormError] = useState('');
 
     const changeHandler = (e) => {
