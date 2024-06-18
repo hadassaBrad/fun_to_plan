@@ -9,7 +9,7 @@ import AdminSite from "./AdminSite.jsx";
 function SiteCard({ site, setSites, sites }) {
     const { user, setUser } = useContext(UserContext);
     const [showAdminSite, setShowAdminSite] = useState(false);
-    const [siteForUpdate, setSiteForUpdate] = useState();
+
     let isAdmin = false;
     if (user) {
         isAdmin = user.role === "admin";
@@ -55,9 +55,8 @@ function SiteCard({ site, setSites, sites }) {
 
     async function updateSite() {
 
-        const currentSite = await config.getData("sites", null, null, null, null, site.id);
-        setSiteForUpdate(currentSite);
-        setShowAdminSite(true);
+
+setShowAdminSite(true);
 
         // if (window.confirm('Are you sure you want to update this item?')) {
         //     try {
@@ -89,8 +88,9 @@ function SiteCard({ site, setSites, sites }) {
 
             <button onClick={addToBasket}>add to basket</button>
             <Link className="nav-link" to={`/home/sites/${site.id}`}>Learn More</Link>
-            {console.log(siteForUpdate)}
-            {showAdminSite && <AdminSite site={siteForUpdate} setSite={setSiteForUpdate} onClose={() => setShowAdminSite(false)} />}
+
+            {showAdminSite && <AdminSite site={site} onClose={() => setShowAdminSite(false)} />}
+
         </>
     );
 }

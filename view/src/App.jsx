@@ -10,30 +10,32 @@ import Site from './pages/Site';
 import Admin from './pages/Admin';
 import TripRoute from "./pages/TripRoute";
 import Basket from "./pages/Basket";
+import UsersTable from "./pages/UsersTable";
 
 export const UserContext = createContext();
 
 function App() {
-  const [user,setUser]=useState(null);
+  const [user, setUser] = useState(null);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<HomeLayout />}>
-          <Route index element={<Home />} />
-          <Route path="gallery" element={<Gallery />} />
-          <Route path="about" element={<About />} />
-          <Route path="sites" element={<Sites />}/> 
-          <Route path="sites/:siteId" element={<Site />} />
-          <Route path="tripRoute" element={<TripRoute />} />
-          <Route path="basket" element={<Basket />} />
-          <Route path="admin" element={<Admin />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </UserContext.Provider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<HomeLayout />}>
+            <Route index element={<Home />} />
+            <Route path="gallery" element={<Gallery />} />
+            <Route path="about" element={<About />} />
+            <Route path="sites" element={<Sites />} />
+            <Route path="sites/:siteId" element={<Site />} />
+            <Route path="tripRoute" element={<TripRoute />} />
+            <Route path="basket" element={<Basket />} />
+            <Route path="admin" element={<Admin />} />{/*י לעשות סוג של סגירה ופתיחה לניתובים בתוך האדמין */}
+            <Route path="usersTable" element={<UsersTable />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 
