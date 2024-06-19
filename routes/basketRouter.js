@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-const { getBasket, createBasket, getSingleBasket, deleteAllBasket, deleteSingleBasket } = require('../controllers/basketController');
+const { getBasket, createBasket, getSingleBasket, deleteAllBasket, deleteSingleBasket,createMultyPileBasket } = require('../controllers/basketController');
 const cors = require('cors');
 router.use(cors());
 
@@ -22,9 +22,15 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        console.log("post rotuter...")
-        const response = await createBasket(req.body.userid ,req.body.siteId);
-         res.send(await getSingleBasket(response.id));
+        console.log("post rotuter... req.body.data.userid "+req.body.data[0].userid )
+        if(req.body.data.length==1)
+      { const response = await createBasket(req.body.data[0].userid ,req.body.data[0].siteId);
+        console.log("response in post single basket")
+         res.send(await getSingleBasket(response.id));}
+         else{
+            const response = await createMultyPileBasket(req.body.data);
+           
+         }
     } catch (err) {
         const error = {
             message: err.message
@@ -50,7 +56,7 @@ router.delete("/:id", async (req, res) => {
         const site_id = req.params.id;
         const user_id = req.query.user_id;
         console.log("in delete router!")
-        await deleteSingleBasket( site_id,user_id);
+        await deleteSingleBasket( user_id,site_id);
         res.send();
     }catch (err) {
         const error = {

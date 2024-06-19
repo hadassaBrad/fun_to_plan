@@ -8,10 +8,18 @@ async function getBasket(id) {
         throw err;
     }
 }
-async function createBasket(siteId,userid) {
+async function createBasket(userid,siteId) {
     try {
-        console.log("basket controller..");
-        return model.createBasket(siteId,userid);
+        console.log("basket controller.. in single basket"+userid+" "+siteId);
+        return model.createBasket(userid,siteId);
+    } catch (err) {
+        throw err;
+    }
+}
+async function createMultyPileBasket(data){
+    try {
+        console.log("basket controller. MultyPileBasket.");
+        return model.createMultyPileBasket(data);
     } catch (err) {
         throw err;
     }
@@ -30,7 +38,7 @@ async function deleteAllBasket(id) {
         throw err;
     }
 }
-async function deleteSingleBasket (user_id, site_id) {
+async function deleteSingleBasket (user_id,site_id) {
     try {
         console.log("in delete controler basket")
         return model.deleteSingleBasket(user_id, site_id);
@@ -38,4 +46,4 @@ async function deleteSingleBasket (user_id, site_id) {
         throw err;
     }
 }
-module.exports = {getBasket, createBasket, getSingleBasket, deleteAllBasket, deleteSingleBasket }
+module.exports = {getBasket, createBasket, getSingleBasket, deleteAllBasket, deleteSingleBasket,createMultyPileBasket }

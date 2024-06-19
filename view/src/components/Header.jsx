@@ -1,6 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { React, useContext, useState } from 'react';
 import { UserContext } from '../App';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+
 import SignUp from "./SignUp";
 import Login from "./Login";
 import "../css/styles.css"; // ׳”׳•׳¡׳₪׳× ׳§׳•׳‘׳¥ ׳”-CSS
@@ -16,13 +20,17 @@ function Header() {
                 <div className="nav-left">
                     {user !== null && <>
                         <button className="logout-button" onClick={() => {
-                            sessionStorage.clear();
+                           localStorage.removeItem("basket");
+                           sessionStorage.clear();
                             setUser(null);
                         }}>
-                            <span className="icon">נ”’</span> Logout
+                            <span className="icon">🔐</span> Logout
                         </button>
                         <br />
-                        <h2>נ‘©{user.userName}</h2>
+                        <h2>
+    <FontAwesomeIcon icon={faUser} className="d-inline-block dropdown-toggle icon-no-margin" /> {"    "+user.userName}
+
+</h2>
                     </>}
                 </div>
                 <div className="nav-center">

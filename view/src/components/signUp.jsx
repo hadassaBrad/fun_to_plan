@@ -56,7 +56,10 @@ function SignUp({ onClose, openLogin }) {
                 console.log(err.message);
                 setSignUpError(err.message);
             }
-
+            if(localStorage.getItem("basket")!=[])
+            {
+                //לשלוח את כל הסל ולהוסיף אותו
+            }
         }
     }
 

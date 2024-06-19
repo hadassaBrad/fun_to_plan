@@ -22,19 +22,21 @@ function SiteCard({ site, setSites, sites }) {
             const siteExists = currentSites.some(existingSite => existingSite.id === site.id);
             if (!siteExists) {
                 localStorage.setItem("basket", JSON.stringify(allSites));
-                if (user) {
-                    const body = { userid: user.id, siteId: site.id };
-                    try {
-                        await config.postData("basket", body);
-                    } catch (error) {
-                        console.error("Error fetching site:", error);
-                    }
-                }
+             
             } else {
                 console.log("already exist");
             }
         } else {
             localStorage.setItem("basket", JSON.stringify([site]));
+        }
+        if (user) {
+            const body = { data: [{ userid: user.id, siteId: site.id }] };
+            console.log("addToBasket ",body)
+            try {
+                await config.postData("basket", body);
+            } catch (error) {
+                console.error("Error fetching site:", error);
+            }
         }
     }
 
