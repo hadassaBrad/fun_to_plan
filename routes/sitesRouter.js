@@ -10,9 +10,18 @@ router.get("/", async (req, res) => {
     try {
         const start = parseInt(req.query._start) || 0;
         const limit = parseInt(req.query._limit) || 10;
-        console.log("gaaaaaaa")
-
-        res.send(await getSites(start, limit));
+        console.log("gaaaaaaa");
+        const allSites = await getSites(start, limit);
+        console.log("all sites....  "+allSites);
+        console.log(allSites);
+        const sitesToReturn = allSites.map(site => {
+            return {
+                id: site.id,
+                siteName: site.site_name,
+                url: site.url
+            }
+        })
+        res.status(200).send(sitesToReturn);
     } catch (err) {
         const error = {
             message: err.message
@@ -25,7 +34,24 @@ router.get("/:id", async (req, res) => {
     try {
         const id = req.params.id;
         const site = await getSite(id);
-        res.send(site)
+        const newSite = {
+            id: site.id,
+            siteName: site.site_name,
+            url: site.url,
+            description: site.description,
+            popularity: site.popularity,
+            difficultyLevel: site.id_difficulty,
+            area: site.id_area,
+            price: site.price,
+            age: site.id_age,
+            openingHour: site.opening_hour,
+            closingHour: site.closing_hour,
+            latitude: site.latitude,
+            longitude: site.longitude,
+            trackLength: site.track_length
+        }
+
+        res.status(200).send(newSite);
     } catch (err) {
         const error = {
             message: err.message
@@ -38,7 +64,24 @@ router.post("/", async (req, res) => {
     try {
         console.log("in router      " + req.body);
         const response = await createSite(req.body.siteName, req.body.url, req.body.description, req.body.popularity, req.body.difficultyLevel, req.body.area, req.body.price, req.body.age, req.body.openingHour, req.body.closingHour, req.body.latitude, req.body.longitude, req.body.trackLength);
-        res.send(await getSite(response.insertId));
+        const site=await getSite(response.insertId);
+        const newSite = {
+            id: site.id,
+            siteName: site.site_name,
+            url: site.url,
+            description: site.description,
+            popularity: site.popularity,
+            difficultyLevel: site.id_difficulty,
+            area: site.id_area,
+            price: site.price,
+            age: site.id_age,
+            openingHour: site.opening_hour,
+            closingHour: site.closing_hour,
+            latitude: site.latitude,
+            longitude: site.longitude,
+            trackLength: site.track_length
+        }
+        res.status(200).send(newSite);
     } catch (err) {
         const error = {
             message: err.message
@@ -49,11 +92,29 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     try {
-        console.log("in put of sites router");
         const id = req.params.id;
-        console.log("in put roter  " + id)
-        await updateSite(id, req.body.siteName, req.body.url, req.body.description, req.body.popularity, req.body.difficultyLevel, req.body.area, req.body.price, req.body.age, req.body.openingHour, req.body.closingHour, req.body.latitude, req.body.longitude, req.body.trackLength)
-        res.send(await getTodo(id));
+
+        const updatedSite = await updateSite(id, req.body.siteName, req.body.url, req.body.description, req.body.popularity, req.body.difficultyLevel, req.body.area, req.body.price, req.body.age, req.body.openingHour, req.body.closingHour, req.body.latitude, req.body.longitude, req.body.trackLength)
+        console.log("updatedSite  " + id);
+        const site = await getSite(id);
+        const newSite = {
+            id: site.id,
+            siteName: site.site_name,
+            url: site.url,
+            description: site.description,
+            popularity: site.popularity,
+            difficultyLevel: site.id_difficulty,
+            area: site.id_area,
+            price: site.price,
+            age: site.id_age,
+            openingHour: site.opening_hour,
+            closingHour: site.closing_hour,
+            latitude: site.latitude,
+            longitude: site.longitude,
+            trackLength: site.track_length
+        }
+        console.log(newSite);
+        res.status(200).send(newSite);
     } catch (err) {
         const error = {
             message: err.message

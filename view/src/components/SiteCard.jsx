@@ -22,22 +22,23 @@ function SiteCard({ site, setSites, sites }) {
             const siteExists = currentSites.some(existingSite => existingSite.id === site.id);
             if (!siteExists) {
                 localStorage.setItem("basket", JSON.stringify(allSites));
-                if (user) {
-                    const body = { userid: user.id, siteId: site.id };
-                    try {
-                        await config.postData("basket", body);
-                    } catch (error) {
-                        console.error("Error fetching site:", error);
-                    }
-                }
+             
             } else {
                 console.log("already exist");
             }
         } else {
             localStorage.setItem("basket", JSON.stringify([site]));
         }
+        if (user) {
+            const body = { data: [{ userid: user.id, siteId: site.id }] };
+            console.log("addToBasket ",body)
+            try {
+                await config.postData("basket", body);
+            } catch (error) {
+                console.error("Error fetching site:", error);
+            }
+        }
     }
-
 
     async function deleteSite() {
         if (window.confirm('Are you sure you want to delete this item?')) {
@@ -55,7 +56,11 @@ function SiteCard({ site, setSites, sites }) {
 
     async function onClickSave(site) {
         try {
+            console.log("in click save:  " + site)
             const result = await config.putData("sites", site.id, site)
+            console.log(result);
+            const filteredSites = sites.filter(siteInSites => siteInSites.id !== site.id);
+            setSites([...filteredSites, result]);
             return result;
         } catch (err) {
             console.log(err);
@@ -64,10 +69,10 @@ function SiteCard({ site, setSites, sites }) {
     }
 
     async function updateSite() {
-
-
         const currentSite = await config.getData("sites", null, null, null, null, site.id);
+        console.log(currentSite);
         setSiteForUpdate(currentSite);
+        console.log(siteForUpdate);
         setShowAdminSite(true);
         setShowAdminSite(true);
 
@@ -86,23 +91,24 @@ function SiteCard({ site, setSites, sites }) {
 
     return (
         <>
-            <h1>{site.site_name}</h1>
-
+        {console.log(site)}
+<h1>{site.siteName}</h1>
             <img
 
-                alt={site.site_name}
-                title={site.site_name} // Setting the title attribute to display the name on hover
+                alt={site.siteName}
+                title={site.siteName} // Setting the title attribute to display the name on hover
                 src={site.url}
                 height={100} width={180}
             />
             {isAdmin && <button onClick={deleteSite}>✖️</button>}
             {isAdmin && <button onClick={updateSite}>UPDATE SITE</button>}
+            {console.log(site)}
 
 
             <button onClick={addToBasket}>add to basket</button>
             <Link className="nav-link" to={`/home/sites/${site.id}`}>Learn More</Link>
+            {console.log(site)}
 
-            {console.log(siteForUpdate)}
             {showAdminSite && <AdminSite onClickSave={onClickSave} site={siteForUpdate} setSite={setSiteForUpdate} onClose={() => setShowAdminSite(false)} />}
         </>
     );

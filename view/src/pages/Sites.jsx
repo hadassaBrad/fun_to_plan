@@ -22,6 +22,7 @@ function Sites() {
         console.log(sites);
         console.log("fetching data of sites... ");
         const data = await config.getData("sites", null, null, begin, limit);
+        console.log(data);
         if (sites.length === 0) {
           setSites([...data]);
         }
