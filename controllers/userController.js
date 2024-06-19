@@ -72,11 +72,12 @@ async function postLogin(email, password) {
       console.log("returns the user     vvbhnjhgfghjkjhg");
       const user = {
         id:result[0].id,
-        role: result[0].role,
+        role: result[0].role_name,
         userName: result[0].user_name,
         email: result[0].email,
       };
-      console.log("user " + user);
+      console.log("user ")
+      console.log( user);
       await model.putSuccsesLogin(user.email);
       console.log("user " + user.userName);
       return user;

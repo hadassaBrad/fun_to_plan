@@ -18,6 +18,8 @@ function SiteCard({ site, setSites, sites }) {
     async function addToBasket() {
         if (localStorage.getItem("basket")) {
             const currentSites = JSON.parse(localStorage.getItem("basket"));
+            console.log("current sites");
+            console.log(currentSites);
             const allSites = [...currentSites, site];
             const siteExists = currentSites.some(existingSite => existingSite.id === site.id);
             if (!siteExists) {
@@ -57,7 +59,9 @@ function SiteCard({ site, setSites, sites }) {
     async function onClickSave(site) {
         try {
             console.log("in click save:  " + site)
+            
             const result = await config.putData("sites", site.id, site)
+            console.log("result of site card")
             console.log(result);
             const filteredSites = sites.filter(siteInSites => siteInSites.id !== site.id);
             setSites([...filteredSites, result]);
