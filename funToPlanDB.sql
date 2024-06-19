@@ -159,5 +159,4 @@ insert into passwords(password, loginAttempts, lastLogin, account_status) values
 insert into users(role_id, user_name, password_id, email) values
 (2, 'admin', 1, 'admin@gmail.com');
 
-SELECT * FROM users
-
+  SELECT * FROM users  INNER JOIN passwords ON users.password_id = passwords.id INNER JOIN permissions ON users.role_id = permissions.id WHERE users.email = 'hadassa26162@gmail.com';

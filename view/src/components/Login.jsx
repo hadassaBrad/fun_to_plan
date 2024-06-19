@@ -40,7 +40,8 @@ function Login({ onClose, openSignUp }) {
                 if (response) {
                     console.log("response: " + response)
                     setUser(response);
-                    console.log(user);
+                    console.log("user: " +response.id)
+                 
                     alert("succesfully connected");
                     onClose();
                 } else {
@@ -58,6 +59,7 @@ function Login({ onClose, openSignUp }) {
                 console.log(err);
                 setLoginError(err.message);
             }
+          
         }
     }
 

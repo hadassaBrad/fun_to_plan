@@ -53,7 +53,7 @@ async function createUser(role_id, password, userName, email) {
 async function postLogin(email, password) {
   try {
     const result = await model.getUser(email);
-    console.log("get the user in login ");
+    console.log("get the user in login.the user: "+result[0].id);
     if (result.length == 0) {
       console.log("this user does not exist, please signup ")
       throw new Error("this user does not exist, please signup");

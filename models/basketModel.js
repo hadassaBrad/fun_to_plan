@@ -48,6 +48,21 @@ async function createBasket(userid,siteId){
               throw err;
             }
 }
+async function createMultyPileBasket(data){
+  try { 
+    console.log("in createMultyPileBasket "+data);
+    let resArrey=[];
+     for (let i=0;i<data.length;i++ ) {
+      const res = createBasket(data[i].userid, data[i].siteId);
+      resArray = [...resArray, res];      
+     }
+   
+    return resArrey;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
 
 async function deleteAllBasket(id){
     try {
@@ -70,4 +85,4 @@ async function deleteSingleBasket(user_id, site_id){
             }
 }
 
-module.exports = {getBasket, createBasket, getSingleBasket, deleteAllBasket, deleteSingleBasket }
+module.exports = {getBasket, createBasket, getSingleBasket, deleteAllBasket, deleteSingleBasket ,createMultyPileBasket}

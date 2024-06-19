@@ -43,7 +43,7 @@ async function getAllUsers() {
 
 async function getUsers() {
   try {
-    console.log("Users modal");
+    console.log("Users modal.");
     const sql = 'SELECT id, user_name, email FROM users';
     const result = await pool.query(sql);
     return result[0];
@@ -79,7 +79,7 @@ async function createUser(role_id, password, userName, email) {
       id:result[0].insertId
       //passwordId: passwordId
     };
-    console.log("user "+user)
+    console.log("user "+user.id)
     return user;
   } catch (err) {
     console.log(err);
@@ -169,9 +169,11 @@ async function getUserByEmail(email) {
 async function getUser(email) {
   try {
     console.log("in login modael");
-    const sql = 'SELECT* FROM users   INNER JOIN passwords ON users.password_id = passwords.id INNER JOIN  permissions ON  users.role_id = permissions.id WHERE  users.email = ?';
+    const sql = 'SELECT   users.id, users.role_id, users.user_name, users.email, passwords.password, permissions.role AS role_name FROM users INNER JOIN passwords ON users.password_id = passwords.id INNER JOIN permissions ON users.role_id = permissions.id WHERE users.email = ?';
+;
+
     const result = await pool.query(sql, [email]);
-    console.log("modal result " + result[0])
+    console.log("modal result for login  " + result[0][0].id+"email: "+result[0][0].email);
     return result[0];
   } catch (err) {
     console.log("in login modael");
