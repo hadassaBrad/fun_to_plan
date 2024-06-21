@@ -63,7 +63,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-import SignUp from "./SignUp";
+import SignUp from "./SignUp"
 import Login from "./Login";
 import "../css/styles.css"; // ׳”׳•׳¡׳₪׳× ׳§׳•׳‘׳¥ ׳”-CSS
 
@@ -106,7 +106,7 @@ function Header() {
                     <Link className="nav-link" to={`/home/sites`}>Sites</Link>
                     <Link className="nav-link" to={`/home/basket`}>Basket</Link>
                     {user !== null && user.role === "user" && <Link className="nav-link" to={`/home/tripRoute`}>My Trip Routes</Link>}
-                    {user !== null && user.role === "admin" && <Link className="admin-link" to="/home/admin">Admin</Link>}
+                    {user !== null && user.role === "admin" && <Link className="nav-link" to="/home/admin">Admin</Link>}
                 </div>
                 <div className="nav-right">
                     {!user && <>

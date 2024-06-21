@@ -1,4 +1,5 @@
-import { React, useContext, useState } from 'react'
+import { React, useContext, useState, } from 'react'
+import { Link, useNavigate } from "react-router-dom";
 import AdminSite from "../components/AdminSite";
 import config from '../config.js';
 
@@ -27,6 +28,15 @@ async function onClickSave(site) {
     }
 }
 
+async function PermissionsManagement() {
+    try {
+        const result = await config.postData("sites", site)
+        return result;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
 
 function Admin() {
     const { user, setUser } = useContext(UserContext);
@@ -49,7 +59,9 @@ function Admin() {
 
     return (
         <>   {user && user.role === "admin" &&
-            <button className="auth-button" onClick={() => setShowAdminSite(true)}>Admin</button>}
+            <button className="auth-button" onClick={() => setShowAdminSite(true)}>Add sites </button>}
+            {user && user.role === "admin" &&
+            <Link className="nav-link" to={`/home/admin/PermissionsManagement`}>Permissions management </Link>}
             {showAdminSite && <AdminSite onClickSave={onClickSave} site={site} setSite={setSite} onClose={() => setShowAdminSite(false)} />}
         </>
     );

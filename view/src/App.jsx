@@ -11,7 +11,7 @@ import Admin from './pages/Admin';
 import TripRoute from "./pages/TripRoute";
 import Basket from "./pages/Basket";
 import UsersTable from "./pages/UsersTable";
-
+import PermissionsManagement from "./pages/PermissionsManagement"
 export const UserContext = createContext();
 
 function App() {
@@ -30,7 +30,11 @@ function App() {
             <Route path="sites/:siteId" element={<Site />} />
             <Route path="tripRoute" element={<TripRoute />} />
             <Route path="basket" element={<Basket />} />
-            <Route path="admin" element={<Admin />} />{/*י לעשות סוג של סגירה ופתיחה לניתובים בתוך האדמין */}
+              <Route path="admin/PermissionsManagement" element={<PermissionsManagement />}/>
+            <Route path="admin" element={<Admin />}></Route>
+
+      {/*י לעשות סוג של סגירה ופתיחה לניתובים בתוך האדמין */}
+            
             <Route path="usersTable" element={<UsersTable />} />
           </Route>
         </Routes>

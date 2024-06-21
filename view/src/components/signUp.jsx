@@ -11,12 +11,14 @@ function SignUp({ onClose, openLogin }) {
         password: "",
         email: "",
         confirmPassword: "",
+        confirmguide: false,
     });
 
     const changeHandler = (event) => {
+        const { name, value, type, checked } = event.target;
         setFormSignUpData(prevFormSignUpData => ({
             ...prevFormSignUpData,
-            [event.target.name]: event.target.value
+            [name]: type === 'checkbox' ? checked : value
         }));
     }
 
@@ -30,10 +32,11 @@ function SignUp({ onClose, openLogin }) {
                 role_id: 1,
                 password: formSignUpData.password,
                 userName: formSignUpData.username,
-                email: formSignUpData.email
+                email: formSignUpData.email,
+                confirmguide: formSignUpData.confirmguide
             }
             try {
-
+                console.log(body);
                 const response = await config.postData("signUp", body);
                 console.log("response  1  " + response);
                 const token = response.token;
@@ -50,14 +53,14 @@ function SignUp({ onClose, openLogin }) {
                         password: "",
                         email: "",
                         confirmPassword: "",
+                        confirmguide: false,
                     });
                 }
             } catch (err) {
                 console.log(err.message);
                 setSignUpError(err.message);
             }
-            if(localStorage.getItem("basket")!=[])
-            {
+            if (localStorage.getItem("basket") != []) {
                 //לשלוח את כל הסל ולהוסיף אותו
             }
         }
@@ -119,14 +122,21 @@ function SignUp({ onClose, openLogin }) {
                         onChange={changeHandler}
                         className="input confirm-password-sign"
                     />    <br />
+                    <label>Do you want to work with us? Check here and we will connect you by email</label>
+                    <input
+                        id="guide"
+                        type="checkbox"
+                        name="confirmguide"
+                        checked={formSignUpData.confirmguide}
+                        onChange={changeHandler}
+                        className="input confirm-guide-sign"
+                    />    <br />
+
                     <button className="button okey-sign" type="submit" >Continue</button><br />
-                    {signUpError && <p className='error' style={{ color: signUpError == "Registration successful" ? 'green' : "red" }}>{signUpError}</p>}
+                    {signUpError && <p className='error' style={{ color: signUpError === "Registration successful" ? 'green' : "red" }}>{signUpError}</p>}
 
                     <br />
-                    {/* <button onClick={moveToLogin}>not signed up? login</button> */}
-                    <a href="#"  style={{textDecoration: 'none', borderBottom: '1px dashed transparent', transition: 'borderColor 0.3s'}} onClick={moveToLogin}>already signed up? login</a>
-
-                    
+                    <a href="#" style={{ textDecoration: 'none', borderBottom: '1px dashed transparent', transition: 'borderColor 0.3s' }} onClick={moveToLogin}>already signed up? login</a>
                     <br />
                 </form>
             </div>

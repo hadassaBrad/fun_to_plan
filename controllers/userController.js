@@ -33,8 +33,18 @@ async function getUsers() {
 //     throw err;
 //   }
 // }
-async function createUser(role_id, password, userName, email) {
+async function createUser(role_id, password, userName, email,confirmguide) {
   try {
+    if(confirmguide){
+        try {
+            await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!`);
+            console.log("Email sent successfully");
+        } catch (mailError) {
+            console.error("Failed to send email: ", mailError);
+            return res.status(500).json({ error: "Failed to send email" });
+      
+    }
+    }
     const result = await model.getUserByEmail(email);//checkes if he exists
     console.log("RESULT CHECKING:   "+result.length);
     if (result.length != 0) {
