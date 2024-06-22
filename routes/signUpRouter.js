@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { authenticate, createUser } = require('../controllers/userController');
-const sendMail = require('../mailService'); // וודא שהנתיב נכון
+
 const cors = require('cors');
 
 router.use(express.json());

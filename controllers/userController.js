@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 // const session = require('express-session');
 const bcrypt = require("bcrypt")
 const numSaltRoundss = 10;
-
+const sendMail = require('../services/mailService'); // וודא שהנתיב נכון
 const SECRET_KEY = process.env.SECRET_KEY;
 async function getUsers() {
   try {
