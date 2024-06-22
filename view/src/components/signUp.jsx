@@ -22,6 +22,19 @@ function SignUp({ onClose, openLogin }) {
         }));
     }
 
+    function addBasketToDB(newUser) {
+        const items = localStorage.getItem("basket")
+        if (items) {
+            console.log("items... ");
+            console.log( JSON.parse(items));
+            const body={
+                site:JSON.parse(items),
+                user:newUser
+            }
+            config.postData("basket",body);
+        }
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
         setSignUpError("");
@@ -45,6 +58,7 @@ function SignUp({ onClose, openLogin }) {
                 if (response) {
                     setUser(response.user);
                     alert("Successfully registered");
+                    addBasketToDB(response.user);
                     onClose();
                 } else {
                     alert("Failed to save user");

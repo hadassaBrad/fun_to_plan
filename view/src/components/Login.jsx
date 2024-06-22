@@ -24,6 +24,27 @@ function Login({ onClose, openSignUp }) {
         });
     }
 
+    function addBasketToDB(connectedUser) {
+        const result = window.confirm("Do you want to delete the basket you had before?");
+        if (result) {
+            config.deleteAllDataByKey("basket", "user_id", connectedUser.id);
+        } else {
+
+        } 
+
+        //לא עובד ההוספה אחרי המחיקה מהכל...
+        const items = localStorage.getItem("basket")
+        if (items) {
+            console.log("items... ");
+            console.log(JSON.parse(items));
+            const body = {
+                site: JSON.parse(items),
+                user: connectedUser
+            }
+            config.postData("basket", body);
+        }
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
         if (formLogInData.email === "" || formLogInData.password === "")
@@ -40,9 +61,10 @@ function Login({ onClose, openSignUp }) {
                 if (response) {
                     console.log("response: " + response)
                     setUser(response);
-                    console.log("user: " +response.id)
-                 
+                    console.log("user: " + response.id)
+
                     alert("succesfully connected");
+                    addBasketToDB(response);
                     onClose();
                 } else {
                     // alert("Uncorrect email or Password");
@@ -59,7 +81,7 @@ function Login({ onClose, openSignUp }) {
                 console.log(err);
                 setLoginError(err.message);
             }
-          
+
         }
     }
 

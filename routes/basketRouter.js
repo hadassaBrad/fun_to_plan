@@ -22,14 +22,17 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        console.log("post rotuter... req.body.data.userid " + req.body.data[0].userid)
-        if (req.body.data.length == 1) {
-            const response = await createBasket(req.body.data[0].userid, req.body.data[0].siteId);
+        console.log("in router basket, am i here?????")
+        console.log(req.body);
+        console.log(req.body.length);
+        console.log(req.body.length)
+        if (req.body.site.length == 1) {
+            const response = await createBasket(req.body.user.id, req.body.site.id);
             console.log("response in post single basket")
             res.send(await getSingleBasket(response.id));
         }
         else {
-            const response = await createMultyPileBasket(req.body.data);
+            const response = await createMultyPileBasket(req.body);
 
         }
     } catch (err) {
@@ -51,6 +54,7 @@ router.delete("/", async (req, res) => {
         res.status(500).send(error);
     }
 });
+
 
 router.delete("/:id", async (req, res) => {
     try {
