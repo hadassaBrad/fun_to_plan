@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 // const session = require('express-session');
 const bcrypt = require("bcrypt")
 const numSaltRoundss = 10;
-
+const sendMail = require('../services/mailService'); // וודא שהנתיב נכון
+const fetchGPTResponse=require('../services/GPTService'); 
 const SECRET_KEY = process.env.SECRET_KEY;
 async function getUsers() {
   try {
@@ -35,8 +36,10 @@ async function getUsers() {
 // }
 async function createUser(role_id, password, userName, email,confirmguide) {
   try {
+   
     if(confirmguide){
         try {
+         
             await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!`);
             console.log("Email sent successfully");
         } catch (mailError) {
@@ -62,6 +65,7 @@ async function createUser(role_id, password, userName, email,confirmguide) {
 
 async function postLogin(email, password) {
   try {
+    fetchGPTResponse("מה התאריך היום?");
     const result = await model.getUser(email);
     console.log("get the user in login.the user: "+result[0].id);
     if (result.length == 0) {
