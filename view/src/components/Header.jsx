@@ -73,7 +73,15 @@ function Header() {
     const [showSignUp, setShowSignUp] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
 
-
+    function deleteCookie(name) {
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    }
+    function logOut() {
+        localStorage.removeItem( "basket" )
+ deleteCookie('jwt');
+ console.log(document.cookie);
+        setUser(null);
+    }
     return (
         <header className="header">
             <nav className="navbar">
@@ -82,11 +90,7 @@ function Header() {
                     {console.log(user.userName)} */}
                     {user !== null && <>
                         <button className="logout-button" onClick={() => {
-                            localStorage.removeItem(
-                                "basket"
-                            )
-                            sessionStorage.clear();
-                            setUser(null);
+                            logOut();
                         }}>
                             <span className="icon">🔐</span> Logout
                         </button>
@@ -105,7 +109,7 @@ function Header() {
                     <Link className="nav-link" to={`/home/gallery`}>Gallery</Link>
                     <Link className="nav-link" to={`/home/sites`}>Sites</Link>
                     {console.log(user)}
-                    {(user==null || user.role == "user") && <Link className="nav-link" to={`/home/basket`}>Basket</Link>}
+                    {(user == null || user.role == "user") && <Link className="nav-link" to={`/home/basket`}>Basket</Link>}
                     {user !== null && user.role === "user" && <Link className="nav-link" to={`/home/tripRoute`}>My Trip Routes</Link>}
                     {user !== null && user.role === "admin" && <Link className="nav-link" to="/home/admin">Admin</Link>}
                 </div>

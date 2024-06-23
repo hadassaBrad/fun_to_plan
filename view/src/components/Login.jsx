@@ -84,7 +84,7 @@ function Login({ onClose, openSignUp }) {
             try {
 
                 const response = await config.postData("login", body)
-                const token = response.token;
+                // const token = response.token;
                 if (response) {
                     console.log("response: " + response)
                     setUser(response);

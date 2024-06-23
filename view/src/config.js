@@ -60,6 +60,7 @@ const getData = async (entity,
 const putData = async (entity, idToUpdate, body) => {
     return fetch(`${baseUrl}${entity}/${idToUpdate}`, {
         method: 'PUT',
+        credentials: "include",
         body: JSON.stringify(body),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
@@ -78,6 +79,7 @@ const postData = async (entity, body) => {
         console.log(body);
         const response = await fetch(`${baseUrl}${entity}`, {
             method: 'POST',
+            credentials: "include",
             body: JSON.stringify(body),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -117,6 +119,7 @@ const deleteData = async (entity, idToDelete, userId = null) => {
         console.log("url befor fetch: " + url);
         const res = await fetch(`${url}`, {
             method: 'DELETE',
+            credentials: "include"
         });
 
         if (!res.ok) {
@@ -136,6 +139,7 @@ const deleteAllDataByKey = async (entity, key, id) => {
         console.log("url: " + url);
         const res = await fetch(`${url}`, {
             method: 'DELETE',
+            credentials: "include"
         });
         if (!res.ok) {
             throw new Error(`Failed to delete ${entity}`);

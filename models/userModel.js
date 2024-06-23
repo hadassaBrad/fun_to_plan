@@ -180,6 +180,20 @@ async function getUser(email) {
     throw new Error(err);
   }
 }
+async function getUserById(id) {
+  try {
+    console.log("in login modael");
+    const sql = 'SELECT   users.id, users.role_id, users.user_name, users.email, passwords.password, permissions.role AS role_name FROM users INNER JOIN passwords ON users.password_id = passwords.id INNER JOIN permissions ON users.role_id = permissions.id WHERE users.id = ?';
+;
+
+    const result = await pool.query(sql, [id]);
+    console.log("modal result for login  " + result[0][0].id+"email: "+result[0][0].email);
+    return result[0];
+  } catch (err) {
+    console.log("in login modael");
+    throw new Error(err);
+  }
+}
 
 async function getRole(id) {
   try {
@@ -194,4 +208,4 @@ async function getRole(id) {
 
 
 
-module.exports = {getAllUsers, getUsers, createUser, putSuccsesLogin, getUserByEmail, getUser, getRole, putFailLogin };
+module.exports = {getAllUsers, getUsers, createUser, putSuccsesLogin, getUserByEmail, getUser, getRole, putFailLogin ,getUserById};

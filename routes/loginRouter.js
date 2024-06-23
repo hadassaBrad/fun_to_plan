@@ -2,36 +2,32 @@ const express = require("express");
 const loginRouter = express.Router();
 loginRouter.use(express.json());
 loginRouter.use(express.urlencoded({ extended: true }));
-const { authenticate, postLogin } = require('../controllers/userController.js');
+const { postLogin } = require('../controllers/userController.js');
 loginRouter.route("/")
   .post(async (req, res) => {
     try {
-      const user = await postLogin(req.body.email, req.body.password);
-      const token = await authenticate(user)
-      const newUser = {
-        ...user,
-        token: token
-      };
-    res.send(newUser);
+      const response = await postLogin(req, res);
+      res.send({user:response.user, token:response.token});
     }
     catch (err) {
       if (err.message == "not Exsist") {
         console.log("in catch login 1");
         const error = new Error('user does not exists');
-        res.status(401).json({ error: error.message });      }
+        res.status(401).json({ error: error.message });
+      }
       if (err.message == "not valid password") {
         // res.status(401).send("email or password is not valid");
         console.log("in catch login 1");
         const error = new Error('not valid password');
-        res.status(401).json({ error: error.message });      }
+        res.status(401).json({ error: error.message });
+      }
 
-        else{
-          console.log("in else in catch here err "+err.message)
-          const error = new Error(err.message);
-          res.status(401).json({ error: error.message });     
-        }
+      else {
+        console.log("in else in catch here err " + err.message)
+        const error = new Error(err.message);
+        res.status(401).json({ error: error.message });
+      }
     }
-
   })
 module.exports = loginRouter;
 

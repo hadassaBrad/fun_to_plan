@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { authenticate, createUser } = require('../controllers/userController');
+const { createUser } = require('../controllers/userController');
 
 const cors = require('cors');
 
@@ -10,13 +10,8 @@ router.use(cors());
 
 router.post("/", async (req, res) => {
     try {
-        console.log("in router signup");
-        const user = await createUser(req.body.role_id, req.body.password, req.body.userName, req.body.email,req.body.confirmguide);
-        console.log("Created user: ", user);
-       
-        const token = await authenticate(user);
-        console.log({ user, token });
-        res.send({ user, token });
+        const response = await createUser(req,res);
+        res.send({user:response.user, token:response.token});
     } catch (err) {
         console.log("Error in signup: ", err);
         res.status(500).json({ error: "User creation failed" });
