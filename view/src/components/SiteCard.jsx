@@ -24,7 +24,7 @@ function SiteCard({ site, setSites, sites }) {
             const siteExists = currentSites.some(existingSite => existingSite.id === site.id);
             if (!siteExists) {
                 localStorage.setItem("basket", JSON.stringify(allSites));
-             
+
             } else {
                 console.log("already exist");
             }
@@ -32,8 +32,13 @@ function SiteCard({ site, setSites, sites }) {
             localStorage.setItem("basket", JSON.stringify([site]));
         }
         if (user) {
-            const body = { data: [{ userid: user.id, siteId: site.id }] };
-            console.log("addToBasket ",body)
+            console.log("in basket");
+            //  const body = { data: [{ userid: user.id, siteId: site.id }] };
+            const body = {
+                site: [site],
+                user: user
+            }
+            console.log("addToBasket ", body);
             try {
                 await config.postData("basket", body);
             } catch (error) {
@@ -59,7 +64,7 @@ function SiteCard({ site, setSites, sites }) {
     async function onClickSave(site) {
         try {
             console.log("in click save:  " + site)
-            
+
             const result = await config.putData("sites", site.id, site)
             console.log("result of site card")
             console.log(result);
@@ -95,8 +100,8 @@ function SiteCard({ site, setSites, sites }) {
 
     return (
         <>
-        {console.log(site)}
-<h1>{site.siteName}</h1>
+            {console.log(site)}
+            <h1>{site.siteName}</h1>
             <img
 
                 alt={site.siteName}
@@ -109,7 +114,7 @@ function SiteCard({ site, setSites, sites }) {
             {console.log(site)}
 
 
-            <button onClick={addToBasket}>add to basket</button>
+            {(user == null || user.role == "user") && <button onClick={addToBasket}>add to basket</button>}
             <Link className="nav-link" to={`/home/sites/${site.id}`}>Learn More</Link>
             {console.log(site)}
 

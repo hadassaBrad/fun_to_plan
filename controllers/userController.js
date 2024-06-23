@@ -65,7 +65,7 @@ async function createUser(role_id, password, userName, email,confirmguide) {
 
 async function postLogin(email, password) {
   try {
-    fetchGPTResponse("מה התאריך היום?");
+   // fetchGPTResponse("מה התאריך היום?");
     const result = await model.getUser(email);
     console.log("get the user in login.the user: "+result[0].id);
     if (result.length == 0) {

@@ -95,8 +95,7 @@ async function getBasket(id) {
       SELECT basket.site_id, sites.url 
       FROM basket 
       JOIN sites ON basket.site_id = sites.id 
-      WHERE basket.user_id = ?;
-  `;
+      WHERE basket.user_id = ?`;
     let result = await pool.query(sql, [id]);
     console.log("result of get basket: " + result);
     //    result = result[0].map(row => ({

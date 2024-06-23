@@ -24,16 +24,10 @@ function Login({ onClose, openSignUp }) {
         });
     }
 
-    function addBasketToDB(connectedUser) {
-        const result = window.confirm("Do you want to delete the basket you had before?");
-        if (result) {
-            config.deleteAllDataByKey("basket", "user_id", connectedUser.id);
-        } else {
-
-        } 
-
-        //לא עובד ההוספה אחרי המחיקה מהכל...
-        const items = localStorage.getItem("basket")
+    async function deleteBasketFromDBAddToLS(connectedUser) {
+        console.log("deleting basket of database");
+        await config.deleteAllDataByKey("basket", "user_id", connectedUser.id);
+        const items = localStorage.getItem("basket");
         if (items) {
             console.log("items... ");
             console.log(JSON.parse(items));
@@ -42,6 +36,39 @@ function Login({ onClose, openSignUp }) {
                 user: connectedUser
             }
             config.postData("basket", body);
+        }
+    }
+    async function deleteBasketFromLSAddToDB(connectedUser) {
+        console.log("in getting basket from local storage");
+        if (localStorage.getItem("basket") != null)
+            localStorage.removeItem(
+                "basket"
+            );
+        const items = await config.getData("basket", "user_id", connectedUser.id);
+        console.log("items...  ")
+        console.log(items.message);
+        if (items.length) {
+            localStorage.setItem("basket", JSON.stringify(items));
+        }
+    }
+
+    async function addBasketToDB(connectedUser) {
+        if (connectedUser.role != "user") {
+            return;
+        }
+        if (localStorage.getItem("basket") == null) {
+            deleteBasketFromLSAddToDB(connectedUser);
+            return;
+        }
+
+        const result = window.confirm("Do you want to change the basket you had before in DB with the new one?");
+        if (result) {
+            //deletes all data that existed before in DB
+            deleteBasketFromDBAddToLS(connectedUser);
+        }
+        else {
+            //deletes all data it had before in local-storage
+            deleteBasketFromLSAddToDB(connectedUser)
         }
     }
 
@@ -64,6 +91,8 @@ function Login({ onClose, openSignUp }) {
                     console.log("user: " + response.id)
 
                     alert("succesfully connected");
+                    console.log("response........");
+                    console.log(response);
                     addBasketToDB(response);
                     onClose();
                 } else {
