@@ -1,17 +1,17 @@
 const { getUserById } = require('../controllers/userController');
 require('dotenv').config();
-const verifyAdmin = async (req, res, next) => {
+const verifyguide = async (req, res, next) => {
   try{
     console.log("in midllwear verifyAdmin");
     const user = await getUserById(req.user);
-    if(user.role_id==2){ next();    }
+    if(user.role_id==3){ next();    }
     else
     return res.sendStatus(403); // טוקן לא תקין
 
   }  catch (err) {
-    console.log("in verify admin ", err);
-    res.status(500).json({ error: "User creation failed" });
+    console.log("in verify guide ", err);
+    res.status(500).json({ error: "guide verify failed" });
 }
    
   }
-module.exports = verifyAdmin
+module.exports = verifyguide

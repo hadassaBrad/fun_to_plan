@@ -13,9 +13,13 @@ const sitesRouter=require("./routes/sitesRouter")
 const guideRouter=require ("./routes/guideRouter")
 const userRouter=require ("./routes/userRouter")
 const authenticationRouter=require("./routes/authonticationRouter");
+const logoutRouter = require("./routes/logoutRouter");
 const SECRET_KEY = process.env.SECRET_KEY;
 const app = express();
 const verifyJWT=require("./middlewares/verifyJWT");
+const verifyAdmin=require("./middlewares/verifyAdmin");
+const verifyUser=require("./middlewares/verifyUser");
+const verifyguide=require("./middlewares/verifyguide");
 app.use (express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(cors());
@@ -30,12 +34,12 @@ app.use("/authentication", verifyJWT,authenticationRouter);
 app.use("/users",userRouter);
 app.use("/login", loginRouter);
 app.use("/signUp",signUpRouter);
-app.use("/admin",adminRouter);
+app.use("/admin",verifyJWT,verifyAdmin,adminRouter);
 //app.use("/guide",guideRouter)
 app.use("/gallery", galleryRouter);
 app.use("/basket",basketRouter);
 app.use("/sites",sitesRouter);
-
+app.use("/logout",logoutRouter)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

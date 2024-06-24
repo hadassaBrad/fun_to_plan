@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const verifyJWT = (req, res, next) => {
-    const token = req.cookies.jwt;
+  try{const token = req.cookies.jwt;
     console.log("in midllwear verifyJWT");
     if (!token) {
       console.log("any token");
@@ -20,6 +20,10 @@ const verifyJWT = (req, res, next) => {
         req.user = decoded.userId; // נניח שאתה משתמש בשדה userId בטוקן
         next();
       }
-    );
+    );}  
+    catch (err) {
+      console.log("in auth ", err);
+      res.status(500).json({ error: "User creation failed" });
+  }
   }
 module.exports = verifyJWT

@@ -4,8 +4,10 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const { getBasket, createBasket, getSingleBasket, deleteAllBasket, deleteSingleBasket, createMultyPileBasket } = require('../controllers/basketController');
 const cors = require('cors');
-router.use(cors());
-
+router.use(cors({
+ origin: 'http://localhost:5173', // Replace with your frontend app URL
+ credentials: true
+}));
 router.get("/", async (req, res) => {
     try {
         const id = req.query.user_id;

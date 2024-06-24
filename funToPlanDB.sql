@@ -128,7 +128,8 @@ INSERT INTO gallery (url, name) VALUES
 INSERT INTO permissions(role) VALUES
 ('user'),
 ('admin'),
-('worker');
+('guide'),
+('guideWating');
 INSERT INTO  difficulty(level) VALUES 
 ('Easy '),
 ('Moderate '),

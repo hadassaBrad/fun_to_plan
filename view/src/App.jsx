@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import './App.css';
 import Home from './pages/Home';
@@ -11,22 +11,33 @@ import Admin from './pages/Admin';
 import TripRoute from "./pages/TripRoute";
 import Basket from "./pages/Basket";
 import UsersTable from "./pages/UsersTable";
-import PermissionsManagement from "./pages/PermissionsManagement"
-export const UserContext = createContext();
-import { useEffect } from 'react';
+// import PermissionsManagement from "./pages/PermissionsManagement";
 import config from './config.js';
+
+export const UserContext = createContext();
+
 function App() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    
     async function fetchData() {
-    const curentUser=await config.getData("authentication",null,null,null,null,null,null);
-    console.log("curentUser:");
-    console.log(curentUser[0]);
-   setUser(curentUser[0]);
+      const currentUser = await config.getData("authentication", null, null, null, null, null, null);
+     if(currentUser)
+      setUser(currentUser);
+    else
+    setUser(null);
+      setLoading(false);
     }
 
     fetchData();
-}, []);
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading indicator while user data is being fetched
+  }
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
@@ -40,11 +51,8 @@ function App() {
             <Route path="sites/:siteId" element={<Site />} />
             <Route path="tripRoute" element={<TripRoute />} />
             <Route path="basket" element={<Basket />} />
-              <Route path="admin/PermissionsManagement" element={<PermissionsManagement />}/>
+            {/* <Route path="admin/PermissionsManagement" element={<PermissionsManagement />} /> */}
             <Route path="admin" element={<Admin />}></Route>
-
-      {/*י לעשות סוג של סגירה ופתיחה לניתובים בתוך האדמין */}
-            
             <Route path="usersTable" element={<UsersTable />} />
           </Route>
         </Routes>
