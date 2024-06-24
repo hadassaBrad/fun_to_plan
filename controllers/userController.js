@@ -16,10 +16,10 @@ async function getUsers() {
   }
 }
 
-async function handleGuide() {
+async function handleGuide(req,res) {
   try {
     req.body.role_id = 4;
-    await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!`);
+   // await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!`);
     console.log("Email sent successfully");
   } catch (mailError) {
     throw new Error("Failed to send email: ", mailError);
@@ -29,7 +29,7 @@ async function handleGuide() {
 }
 
 async function createUser(req, res) {
-  const role_id = req.body.role_id;
+  let role_id = req.body.role_id;
   const password = req.body.password;
   const userName = req.body.userName;
   const email = req.body.email;
@@ -37,7 +37,9 @@ async function createUser(req, res) {
 
   try {
 
-    if (confirmguide) { handleGuide(req, res) };
+    if (confirmguide) {   role_id = 4;
+      // await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!`);
+       console.log("Email sent successfully"); };
     const result = await model.getUserByEmail(email);//checkes if he exists
     if (result.length != 0) {
       console.log("the user already exist")
@@ -45,7 +47,7 @@ async function createUser(req, res) {
     }
     //יצירת הצפנה
     const hash = await bcrypt.hash(password, numSaltRoundss);
-    const newUser = model.createUser(role_id, hash, userName, email);
+    const newUser = await model.createUser(role_id, hash, userName, email);
 
     const token = jwt.sign(
       { "userId": newUser.id },

@@ -55,12 +55,10 @@ async function getUsers() {
 async function createUser(role_id, password, userName, email) {
   try {
     console.log("create user in model");
-
+console .log("user details: "+email +"role_id "+role_id)
 
     const sqlPassword = "INSERT INTO passwords (`password`,`loginAttempts`,`lastLogin`,`lastFailedLogin`,`account_status`) VALUES(?,?,?,?,?)";
     const resultPassword = await pool.query(sqlPassword, [password, 1, currentDate, null, true]);
-    // const sqlPassword = "INSERT INTO passwords (`password`,`loginAttempts`,`lastLogin`,`lastFailedLogin`,`account_status`) VALUES(?,?,?,?,?)";
-    // const resultPassword = await pool.query(sqlPassword, [password, 1, datetime.getDate(), null, true]);
     const passwordId = resultPassword[0].insertId
     console.log("resulst"+ resultPassword);
     const sql = "INSERT INTO users (`role_id`, `user_name`, `password_id`,`email` ) VALUES(?, ?, ?, ?)";
