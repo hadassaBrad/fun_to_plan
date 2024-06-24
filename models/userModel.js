@@ -186,6 +186,7 @@ async function getUserById(id) {
 
     const result = await pool.query(sql, [id]);
     console.log("modal result for login  " + result[0][0].id+"email: "+result[0][0].email);
+    
     return result[0];
   } catch (err) {
     console.log("in login modael");

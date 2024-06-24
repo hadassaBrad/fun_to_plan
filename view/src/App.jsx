@@ -17,13 +17,16 @@ import { useEffect } from 'react';
 import config from './config.js';
 function App() {
   const [user, setUser] = useState(null);
-//   useEffect(() => {
-//     async function fetchData() {
-    
-//     }
+  useEffect(() => {
+    async function fetchData() {
+    const curentUser=await config.getData("authentication",null,null,null,null,null,null);
+    console.log("curentUser:");
+    console.log(curentUser[0]);
+   setUser(curentUser[0]);
+    }
 
-//     fetchData();
-// }, []);
+    fetchData();
+}, []);
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>

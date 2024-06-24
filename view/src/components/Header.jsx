@@ -69,10 +69,12 @@ import "../css/styles.css"; // ׳”׳•׳¡׳₪׳× ׳§׳•׳‘׳¥ ׳”-
 
 function Header() {
     const { user, setUser } = useContext(UserContext);
+    console.log("user in header start render: ");
+    console.log(user);
     const navigate = useNavigate();
     const [showSignUp, setShowSignUp] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
-console.log("user in header: "+user)
+
     function deleteCookie(name) {
         document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     }
@@ -99,19 +101,17 @@ console.log("user in header: "+user)
                         </button>
                         <br />
                         <h2>
-                            {console.log("userin the header: "+user.userName)}
-                            {user.userName}
+                          {user.userName}
                             {/* <FontAwesomeIcon icon={faUser} className="d-inline-block dropdown-toggle icon-no-margin" /> {"    " + user.userName} */}
                         </h2>
                     </>}
                 </div>
                 <div className="nav-center">
-                    {console.log(user)}
                     <Link className="nav-link" to={`/home`}>Home</Link>
                     <Link className="nav-link" to={`/home/about`}>About</Link>
                     <Link className="nav-link" to={`/home/gallery`}>Gallery</Link>
                     <Link className="nav-link" to={`/home/sites`}>Sites</Link>
-                    {console.log(user)}
+                  
                     {(user == null || user.role == "user") && <Link className="nav-link" to={`/home/basket`}>Basket</Link>}
                     {user !== null && user.role === "user" && <Link className="nav-link" to={`/home/tripRoute`}>My Trip Routes</Link>}
                     {user !== null && user.role === "admin" && <Link className="nav-link" to="/home/admin">Admin</Link>}

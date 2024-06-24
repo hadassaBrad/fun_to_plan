@@ -28,7 +28,11 @@ const getData = async (entity,
             console.log(' url +=`?user_id=${userId}`   ');
         }
         console.log("url  " + url);
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            method: 'GET', // או POST, או כל שיטה אחרת שאתה משתמש בה
+            credentials: 'include', // שולח את העוגיות עם הבקשה
+          });
+          
         console.log(response)
         const newData = await response.json();
         console.log("new data:  in config ");
