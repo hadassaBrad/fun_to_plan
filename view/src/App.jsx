@@ -14,7 +14,7 @@ import UsersTable from "./pages/UsersTable";
 import PermissionsManagement from "./pages/PermissionsManagement"
 export const UserContext = createContext();
 import { useEffect } from 'react';
-import config from '../config.js';
+import config from './config.js';
 function App() {
   const [user, setUser] = useState(null);
   useEffect(() => {
