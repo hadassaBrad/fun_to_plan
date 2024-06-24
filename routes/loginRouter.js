@@ -7,7 +7,9 @@ loginRouter.route("/")
   .post(async (req, res) => {
     try {
       const response = await postLogin(req, res);
-      res.send({user:response.user, token:response.token});
+      console.log("response in postlogin")
+      console.log(response);
+      res.send(response);
     }
     catch (err) {
       if (err.message == "not Exsist") {

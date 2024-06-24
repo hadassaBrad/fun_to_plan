@@ -84,16 +84,17 @@ function Login({ onClose, openSignUp }) {
             try {
 
                 const response = await config.postData("login", body)
+                console.log(response);
                 // const token = response.token;
                 if (response) {
-                    console.log("response: " + response)
-                    setUser(response);
+                    console.log("response.user: " + response.user)
+                    setUser(response.user);
                     console.log("user: " + response.id)
 
                     alert("succesfully connected");
                     console.log("response........");
-                    console.log(response);
-                    addBasketToDB(response);
+                    console.log(response.user);
+                    addBasketToDB(response.user);
                     onClose();
                 } else {
                     // alert("Uncorrect email or Password");

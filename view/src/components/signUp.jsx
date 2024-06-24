@@ -51,11 +51,9 @@ function SignUp({ onClose, openLogin }) {
             try {
                 console.log(body);
                 const response = await config.postData("signUp", body);
-                console.log("response  1  " + response);
-                const token = response.token;
-                sessionStorage.setItem('token', token);
-                console.log("response  2  " + token);
-                if (response) {
+                console.log("response  1  " );
+                console.log(response.user);
+                if (response.user) {
                     setUser(response.user);
                     alert("Successfully registered");
                     addBasketToDB(response.user);

@@ -72,15 +72,18 @@ function Header() {
     const navigate = useNavigate();
     const [showSignUp, setShowSignUp] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
-
+console.log("user in header: "+user)
     function deleteCookie(name) {
         document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     }
+    
     function logOut() {
-        localStorage.removeItem( "basket" )
+        localStorage.removeItem( "basket" );
+
  deleteCookie('jwt');
  console.log(document.cookie);
         setUser(null);
+        navigate(`/home`);
     }
     return (
         <header className="header">
@@ -96,7 +99,7 @@ function Header() {
                         </button>
                         <br />
                         <h2>
-                            {console.log(user)}
+                            {console.log("userin the header: "+user.userName)}
                             {user.userName}
                             {/* <FontAwesomeIcon icon={faUser} className="d-inline-block dropdown-toggle icon-no-margin" /> {"    " + user.userName} */}
                         </h2>

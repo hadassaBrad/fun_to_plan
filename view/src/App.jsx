@@ -14,16 +14,16 @@ import UsersTable from "./pages/UsersTable";
 import PermissionsManagement from "./pages/PermissionsManagement"
 export const UserContext = createContext();
 import { useEffect } from 'react';
-import config from '../config.js';
+import config from './config.js';
 function App() {
   const [user, setUser] = useState(null);
-  useEffect(() => {
-    async function fetchData() {
+//   useEffect(() => {
+//     async function fetchData() {
     
-    }
+//     }
 
-    fetchData();
-}, []);
+//     fetchData();
+// }, []);
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
