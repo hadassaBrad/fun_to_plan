@@ -166,15 +166,13 @@ async function getUserByEmail(email) {
 
 async function getUser(email) {
   try {
-    console.log("in login modael");
-    const sql = 'SELECT   users.id, users.role_id, users.user_name, users.email, passwords.password, permissions.role AS role_name FROM users INNER JOIN passwords ON users.password_id = passwords.id INNER JOIN permissions ON users.role_id = permissions.id WHERE users.email = ?';
-;
-
+    console.log("in login modael" );
+    const sql = 'SELECT users.id, users.role_id, users.user_name, users.email, passwords.password, permissions.role AS role_name FROM users INNER JOIN passwords ON users.password_id = passwords.id INNER JOIN permissions ON users.role_id = permissions.id WHERE users.email = ?';
     const result = await pool.query(sql, [email]);
-    console.log("modal result for login  " + result[0][0].id+"email: "+result[0][0].email);
+    // console.log("modal result for login  " + result[0][0].id+"email: "+result[0][0].email);
     return result[0];
   } catch (err) {
-    console.log("in login modael");
+    console.log("in login modael at catch of get user");
     throw new Error(err);
   }
 }
