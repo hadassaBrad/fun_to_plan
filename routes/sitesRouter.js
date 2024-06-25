@@ -8,7 +8,8 @@ router.use(cors({
  origin: 'http://localhost:5173', // Replace with your frontend app URL
  credentials: true
 }));
-
+const verifyJWT=require("../middlewares/verifyJWT");
+const verifyAdmin=require("../middlewares/verifyAdmin");
 router.get("/", async (req, res) => {
     try {
         const start = parseInt(req.query._start) || 0;
@@ -63,7 +64,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/",verifyJWT, verifyAdmin, async (req, res) => {
     try {
         console.log("in router      " + req.body);
         const response = await createSite(req.body.siteName, req.body.url, req.body.description, req.body.popularity, req.body.difficultyLevel, req.body.area, req.body.price, req.body.age, req.body.openingHour, req.body.closingHour, req.body.latitude, req.body.longitude, req.body.trackLength);
@@ -93,7 +94,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id",verifyJWT, verifyAdmin, async (req, res) => {
     try {
         const id = req.params.id;
 
@@ -126,7 +127,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verifyJWT, verifyAdmin,async (req, res) => {
     try {
         const id = req.params.id;
         console.log("in delete router!!!!!")

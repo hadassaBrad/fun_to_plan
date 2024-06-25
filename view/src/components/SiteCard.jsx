@@ -109,7 +109,9 @@ function SiteCard({ site, setSites, sites }) {
                 src={site.url}
                 height={100} width={180}
             />
-            {isAdmin && <button onClick={deleteSite}>✖️</button>}
+            {isAdmin && 
+            <button onClick={deleteSite}>✖️</button>
+            }
             {isAdmin && <button onClick={updateSite}>UPDATE SITE</button>}
             {console.log(site)}
 
