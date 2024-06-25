@@ -65,8 +65,8 @@ async function postLogin(req,res) {
  const email=req.body.email;
  const password=req.body.password;
   try {
+    console.log("email, in user login controller  "+ email);
     const result = await model.getUser(email);
-
     if (result.length == 0) {
       console.log("this user does not exist, please signup ")
       throw new Error("this user does not exist, please signup");
