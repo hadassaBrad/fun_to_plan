@@ -4,11 +4,17 @@ const router = express.Router();
 // const session = require('express-session');
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-const { getUsers } = require('../controllers/userController');
+const { getUsers, getAllWaitinGuides } = require('../controllers/userController');
 const cors = require('cors');
 router.use(cors());
 router.get("/", async (req, res) => {
     try {
+        const id = req.query.role_id;
+        if (id == 4) {
+            console.log("in user router, getAllWaitinGuides");
+            const allWaitinGuides = await getAllWaitinGuides();
+            res.status(200).send(allWaitinGuides);
+        }
         console.log("getUsers router")
         res.send(await getUsers());
     } catch (err) {
@@ -17,7 +23,6 @@ router.get("/", async (req, res) => {
         }
         res.status(500).send(error);
     }
-})
+});
+
 module.exports = router;
-
-

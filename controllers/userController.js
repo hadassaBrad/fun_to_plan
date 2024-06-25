@@ -27,7 +27,15 @@ async function handleGuide(req,res) {
 
   }
 }
-
+async function getAllWaitinGuides(){
+  try {
+    console.log("in user controler, getAllWaitinGuides");
+  const allWaitinGuides=await model.getAllWaitinGuides();
+   return allWaitinGuides;
+} catch (err) {
+  throw err; 
+}
+}
 async function createUser(req, res) {
   let role_id = req.body.role_id;
   const password = req.body.password;
@@ -105,16 +113,6 @@ async function postLogin(req,res) {
   }
 }
 
-// async function authenticate(req) {
-//   const accessToken = jwt.sign(
-//     { "username": foundUser.username },
-//     process.env.ACCESS_TOKEN_SECRET,
-//     { expiresIn: '30s' }
-//   );
-//   // const token = jwt.sign({ userId: user.id, role: user.role }, SECRET_KEY,);
-//   // return token
-
-// };
 
 async function getUser(id) {
   try {
@@ -143,4 +141,4 @@ async function getUserByEmail(email) {
 async function updateUser() {
 
 }
-module.exports = { getUsers,  createUser, getUser, postLogin, getUserByEmail, getUserById}
+module.exports = { getUsers,  createUser, getUser, postLogin, getUserByEmail, getUserById,getAllWaitinGuides}
