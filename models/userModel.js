@@ -184,7 +184,7 @@ async function getUserById(id) {
 
     const result = await pool.query(sql, [id]);
     console.log("modal result for login  " + result[0][0].id+"email: "+result[0][0].email);
-    
+
     return result[0];
   } catch (err) {
     console.log("in login modael");
@@ -201,8 +201,18 @@ async function getRole(id) {
     throw new Error(err);
   }
 }
+async function getAllWaitinGuides(){
+  try {
+    console.log("in user model, getAllWaitinGuides");
+    const sql = 'SELECT  users.user_name, users.email,  permissions.role AS role_name FROM users INNER JOIN permissions ON users.role_id = permissions.id WHERE role_id = ?';
+    const result = await pool.query(sql, [4]);
+    console.log(result[0])
+    return result[0];
+  } catch (err) {
+    throw new Error(err);
+  }
+}
 
 
 
-
-module.exports = {getAllUsers, getUsers, createUser, putSuccsesLogin, getUserByEmail, getUser, getRole, putFailLogin ,getUserById};
+module.exports = {getAllUsers, getUsers, createUser, putSuccsesLogin, getUserByEmail, getUser, getRole, putFailLogin ,getUserById,getAllWaitinGuides};

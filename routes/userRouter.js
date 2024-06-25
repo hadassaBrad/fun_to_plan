@@ -11,6 +11,12 @@ const cors = require('cors');
 router.use(cors());
 router.get("/", verifyJWT, verifyAdmin, async (req, res) => {
     try {
+        const id = req.query.role_id;
+        if (id == 4) {
+            console.log("in user router, getAllWaitinGuides");
+            const allWaitinGuides = await getAllWaitinGuides();
+            res.status(200).send(allWaitinGuides);
+        }
         console.log("getUsers router")
         res.send(await getUsers());
     } catch (err) {
@@ -19,5 +25,6 @@ router.get("/", verifyJWT, verifyAdmin, async (req, res) => {
         }
         res.status(500).send(error);
     }
-})
+});
+
 module.exports = router;
