@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
+const verifyAdmin=require("../middlewares/verifyAdmin");
+const verifyJWT=require("../middlewares/verifyJWT");
+
 const { createPhoto, getGallery, deletePhoto } = require('../controllers/galleryController');
 
 const cors = require('cors');
@@ -24,7 +27,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.post("/", async (req, res) => {
+router.post("/", verifyJWT, verifyAdmin, async (req, res) => {
     try {
         const response = await createPhoto(req.body.id, req.body.url, req.body.name)
         res.send(await getGallery(response.insertId));
@@ -36,7 +39,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verifyJWT, verifyAdmin, async (req, res) => {
     try {
         const id = req.params.id;
         await deletePhoto(id);

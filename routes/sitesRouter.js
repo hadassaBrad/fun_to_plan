@@ -127,7 +127,7 @@ router.put("/:id",verifyJWT, verifyAdmin, async (req, res) => {
     }
 });
 
-router.delete("/:id", verifyJWT, verifyAdmin,async (req, res) => {
+router.delete("/:id", verifyJWT, verifyAdmin, async (req, res) => {
     try {
         const id = req.params.id;
         console.log("in delete router!!!!!")

@@ -4,10 +4,12 @@ const router = express.Router();
 // const session = require('express-session');
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
+const verifyJWT=require("../middlewares/verifyJWT");
+const verifyAdmin=require("../middlewares/verifyAdmin");
 const { getUsers } = require('../controllers/userController');
 const cors = require('cors');
 router.use(cors());
-router.get("/", async (req, res) => {
+router.get("/", verifyJWT, verifyAdmin, async (req, res) => {
     try {
         console.log("getUsers router")
         res.send(await getUsers());
@@ -19,5 +21,3 @@ router.get("/", async (req, res) => {
     }
 })
 module.exports = router;
-
-

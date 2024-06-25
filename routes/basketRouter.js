@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 })
 
 
-router.post("/", async (req, res) => {
+router.post("/",  async (req, res) => {
     try {
         console.log("in router basket, am i here?????")
         console.log(req.body);
@@ -61,7 +61,7 @@ router.delete("/", async (req, res) => {
 });
 
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id",  async (req, res) => {
     try {
         console.log("in delete router!")
 

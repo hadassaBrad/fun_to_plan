@@ -45,7 +45,9 @@ async function createSite(site_name, url, description, popularity, id_difficulty
 async function deleteSite(id) {
 
   try {
-    const sql = 'DELETE FROM sites WHERE id= ? '
+    const sqlBasket = 'DELETE FROM basket where site_id=?'
+    await pool.query(sqlBasket, [id]);
+    const sql = 'DELETE FROM sites WHERE id= ?'
     const result = await pool.query(sql, [id]);
     console.log("site deleted");
     return result[0];
