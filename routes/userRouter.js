@@ -8,7 +8,10 @@ const verifyJWT = require("../middlewares/verifyJWT");
 const verifyAdmin = require("../middlewares/verifyAdmin");
 const { getUsers, getAllWaitinGuides } = require('../controllers/userController');
 const cors = require('cors');
-router.use(cors());
+router.use(cors({
+    origin: 'http://localhost:5173', // Replace with your frontend app URL
+    credentials: true
+   }));
 router.get("/", verifyJWT, verifyAdmin, async (req, res) => {
     try {
         const id = req.query.user_id;
