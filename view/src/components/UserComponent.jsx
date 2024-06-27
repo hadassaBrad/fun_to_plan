@@ -3,6 +3,8 @@ import React, { useState, useContext } from 'react';
 import '../css/userComponent.css';
 import { UserContext } from '../App.jsx';
 import config from '../config.js';
+// src/UserComponent.js
+
 
 const UserComponent = ({ name, email, role }) => {
   const [selectedRole, setSelectedRole] = useState(role);
@@ -14,7 +16,7 @@ const UserComponent = ({ name, email, role }) => {
   };
 
   const handleConfirmClick = () => {
-    // Here you can add the logic to update the role in the backend or context
+    // כאן תוכל להוסיף לוגיקה לעדכון התפקיד בבקאנד או בקונטקסט
     console.log(`Updated role for ${name}: ${selectedRole}`);
     setIsChanged(false);
   };
@@ -24,10 +26,10 @@ const UserComponent = ({ name, email, role }) => {
       <p className="user_name">{name}</p>
       <p className="user_email">{email}</p>
       <select className="user_role" value={selectedRole} onChange={handleRoleChange}>
-        <option value="1">user</option>
-        <option value="2">admin</option>
-        <option value="3">guide</option>
-        <option value="4">guide waiting</option>
+        <option value="user">user</option>
+        <option value="admin">admin</option>
+        <option value="guide">guide</option>
+        <option value="guide waiting">guide waiting</option>
       </select>
       {isChanged && (
         <button className="confirm-button" onClick={handleConfirmClick}>
