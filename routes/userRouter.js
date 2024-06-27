@@ -20,9 +20,11 @@ router.get("/", verifyJWT, verifyAdmin, async (req, res) => {
             const allWaitinGuides = await getAllWaitinGuides();
             res.status(200).send(allWaitinGuides);
         }
-        else{  console.log("getUsers router")
-            res.send(await getUsers());}
-      
+        else {
+            console.log("getUsers router")
+            res.send(await getUsers());
+        }
+
     } catch (err) {
         const error = {
             message: err.message
