@@ -69,6 +69,4 @@ async function updateSite(id, site_name, url, description, popularity, id_diffic
   }
 }
 
-
-
 module.exports = { getSites, getSite, deleteSite, createSite, updateSite }

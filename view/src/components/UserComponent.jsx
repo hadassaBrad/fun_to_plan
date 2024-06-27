@@ -6,26 +6,41 @@ import config from '../config.js';
 // src/UserComponent.js
 
 
-const UserComponent = ({ name, email, role }) => {
+const UserComponent = ({ id, name, email, role, guides, setGuides, setHasGuides }) => {
+  console.log("role: "+role);
   const [selectedRole, setSelectedRole] = useState(role);
   const [isChanged, setIsChanged] = useState(false);
+
+  
 
   const handleRoleChange = (e) => {
     setSelectedRole(e.target.value);
     setIsChanged(true);
   };
 
-  const  handleConfirmClick = async() => {
-    try {body={
-      
-    }
-      await config.putData("user", body);
-  } catch (error) {
+  const handleConfirmClick = async () => {
+    try {
+      const body = {
+        role: selectedRole
+      }
+      console.log("in confirm click");
+      await config.putData("users", id, body);
+      console.log(`Updated role for ${name}: ${selectedRole}`);
+      setIsChanged(false);
+
+      console.log("guides");
+      console.log(guides);
+      //to check why this is not working.....
+      const guidesUpdated = guides.filter(guide => guide.id != id);
+      if (guidesUpdated.length == 0)
+        setHasGuides(false);
+      console.log("guides");
+      console.log(guidesUpdated);
+      setGuides(guidesUpdated);
+    } catch (error) {
       console.error("Error fetching site:", error);
-  }
+    }
     // כאן תוכל להוסיף לוגיקה לעדכון התפקיד בבקאנד או בקונטקסט
-    console.log(`Updated role for ${name}: ${selectedRole}`);
-    setIsChanged(false);
   };
 
   return (

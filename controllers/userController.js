@@ -16,10 +16,10 @@ async function getUsers() {
   }
 }
 
-async function handleGuide(req,res) {
+async function handleGuide(req, res) {
   try {
     req.body.role_id = 4;
-   // await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!`);
+    // await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!`);
     console.log("Email sent successfully");
   } catch (mailError) {
     throw new Error("Failed to send email: ", mailError);
@@ -27,14 +27,16 @@ async function handleGuide(req,res) {
 
   }
 }
-async function getAllWaitinGuides(){
+async function getAllWaitinGuides() {
   try {
     console.log("in user controler, getAllWaitinGuides");
-  const allWaitinGuides=await model.getAllWaitinGuides();
-   return allWaitinGuides;
-} catch (err) {
-  throw err; 
-}
+    const allWaitinGuides = await model.getAllWaitinGuides();
+    console.log("all waiting guides...");
+    console.log(allWaitinGuides);
+    return allWaitinGuides;
+  } catch (err) {
+    throw err;
+  }
 }
 async function createUser(req, res) {
   let role_id = req.body.role_id;
@@ -45,9 +47,11 @@ async function createUser(req, res) {
 
   try {
 
-    if (confirmguide) {   role_id = 4;
+    if (confirmguide) {
+      role_id = 4;
       // await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!`);
-       console.log("Email sent successfully"); };
+      console.log("Email sent successfully");
+    };
     const result = await model.getUserByEmail(email);//checkes if he exists
     if (result.length != 0) {
       console.log("the user already exist")
@@ -63,17 +67,17 @@ async function createUser(req, res) {
       { expiresIn: '1d' }
     );
     res.cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
-    return {user:newUser, token:token};
+    return { user: newUser, token: token };
   } catch (err) {
     throw err;
   }
 }
 
-async function postLogin(req,res) {
- const email=req.body.email;
- const password=req.body.password;
+async function postLogin(req, res) {
+  const email = req.body.email;
+  const password = req.body.password;
   try {
-    console.log("email, in user login controller  "+ email);
+    console.log("email, in user login controller  " + email);
     const result = await model.getUser(email);
     if (result.length == 0) {
       console.log("this user does not exist, please signup ")
@@ -99,11 +103,11 @@ async function postLogin(req,res) {
         process.env.SECRET_KEY,
         { expiresIn: '1d' }
       );
-      console.log("token; "+token);
+      console.log("token; " + token);
       res.cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
       console.log(res.cookie);
-      return {user:user, token:token};
-     // return user;
+      return { user: user, token: token };
+      // return user;
 
     }
   }
@@ -121,7 +125,7 @@ async function getUser(id) {
     throw err;
   }
 }
-async function getUserById(id){
+async function getUserById(id) {
   try {
     return model.getUserById(id);
   } catch (err) {
@@ -138,12 +142,12 @@ async function getUserByEmail(email) {
   }
 }
 
-async function updateUserPermition(id,role_id) {
+async function updateUserPermition(id, role) {
   try {
     console.log("in updateUser by id controler");
-    return model.updateUserPermition(id,role_id);
+    return model.updateUserPermition(id, role);
   } catch (err) {
     throw err;
   }
 }
-module.exports = { getUsers,  createUser, getUser, postLogin, getUserByEmail, getUserById,getAllWaitinGuides,updateUserPermition}
+module.exports = { getUsers, createUser, getUser, postLogin, getUserByEmail, getUserById, getAllWaitinGuides, updateUserPermition }

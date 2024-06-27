@@ -6,7 +6,6 @@ const verifyJWT = (req, res, next) => {
     if (!token) {
       console.log("any token");
       return res.sendStatus(401); // ללא טוקן
-     
     }
   
     jwt.verify(
