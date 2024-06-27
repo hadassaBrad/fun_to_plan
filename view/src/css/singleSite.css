@@ -1,0 +1,39 @@
+.site-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.site-container h2 {
+    font-size: 1.2em;
+    margin: 20px 0 10px;
+    color:#00796b;
+}
+
+.site-container img {
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.site-container p, .site-container span {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.site-container .label {
+    font-weight: bold;
+    color: #555;
+}
+
+.site-container .value {
+    margin-left: 10px;
+    color: #333;
+}
