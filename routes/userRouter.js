@@ -4,9 +4,9 @@ const router = express.Router();
 // const session = require('express-session');
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-const verifyJWT=require("../middlewares/verifyJWT");
-const verifyAdmin=require("../middlewares/verifyAdmin");
-const { getUsers ,getAllWaitinGuides} = require('../controllers/userController');
+const verifyJWT = require("../middlewares/verifyJWT");
+const verifyAdmin = require("../middlewares/verifyAdmin");
+const { getUsers, getAllWaitinGuides } = require('../controllers/userController');
 const cors = require('cors');
 router.use(cors());
 router.get("/", verifyJWT, verifyAdmin, async (req, res) => {
@@ -17,8 +17,11 @@ router.get("/", verifyJWT, verifyAdmin, async (req, res) => {
             const allWaitinGuides = await getAllWaitinGuides();
             res.status(200).send(allWaitinGuides);
         }
-        console.log("getUsers router")
-        res.send(await getUsers());
+        else {
+            console.log("getUsers router")
+            res.send(await getUsers());
+        }
+
     } catch (err) {
         const error = {
             message: err.message
