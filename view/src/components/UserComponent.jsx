@@ -15,7 +15,14 @@ const UserComponent = ({ name, email, role }) => {
     setIsChanged(true);
   };
 
-  const handleConfirmClick = () => {
+  const  handleConfirmClick = async() => {
+    try {body={
+      
+    }
+      await config.putData("user", body);
+  } catch (error) {
+      console.error("Error fetching site:", error);
+  }
     // כאן תוכל להוסיף לוגיקה לעדכון התפקיד בבקאנד או בקונטקסט
     console.log(`Updated role for ${name}: ${selectedRole}`);
     setIsChanged(false);

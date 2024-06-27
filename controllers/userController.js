@@ -138,7 +138,12 @@ async function getUserByEmail(email) {
   }
 }
 
-async function updateUser() {
-
+async function updateUserPermition(id,role_id) {
+  try {
+    console.log("in updateUser by id controler");
+    return model.updateUserPermition(id,role_id);
+  } catch (err) {
+    throw err;
+  }
 }
-module.exports = { getUsers,  createUser, getUser, postLogin, getUserByEmail, getUserById,getAllWaitinGuides}
+module.exports = { getUsers,  createUser, getUser, postLogin, getUserByEmail, getUserById,getAllWaitinGuides,updateUserPermition}
