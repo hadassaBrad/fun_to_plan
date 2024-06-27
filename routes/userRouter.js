@@ -6,12 +6,12 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const verifyJWT=require("../middlewares/verifyJWT");
 const verifyAdmin=require("../middlewares/verifyAdmin");
-const { getUsers } = require('../controllers/userController');
+const { getUsers ,getAllWaitinGuides} = require('../controllers/userController');
 const cors = require('cors');
 router.use(cors());
 router.get("/", verifyJWT, verifyAdmin, async (req, res) => {
     try {
-        const id = req.query.role_id;
+        const id = req.query.user_id;
         if (id == 4) {
             console.log("in user router, getAllWaitinGuides");
             const allWaitinGuides = await getAllWaitinGuides();
