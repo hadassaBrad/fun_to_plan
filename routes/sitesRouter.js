@@ -44,17 +44,18 @@ router.get("/:id", async (req, res) => {
             url: site.url,
             description: site.description,
             popularity: site.popularity,
-            difficultyLevel: site.id_difficulty,
-            area: site.id_area,
+            difficultyLevel: site.difficulty_level,
+            area: site.area_name,
             price: site.price,
-            age: site.id_age,
+            age: site.age_range,
             openingHour: site.opening_hour,
             closingHour: site.closing_hour,
             latitude: site.latitude,
             longitude: site.longitude,
             trackLength: site.track_length
         }
-
+        console.log("in result of get site router:");
+console.log(newSite);
         res.status(200).send(newSite);
     } catch (err) {
         const error = {
@@ -85,6 +86,8 @@ router.post("/",verifyJWT, verifyAdmin, async (req, res) => {
             longitude: site.longitude,
             trackLength: site.track_length
         }
+      
+        console.log(newSite);
         res.status(200).send(newSite);
     } catch (err) {
         const error = {
@@ -117,6 +120,7 @@ router.put("/:id",verifyJWT, verifyAdmin, async (req, res) => {
             longitude: site.longitude,
             trackLength: site.track_length
         }
+      
         console.log(newSite);
         res.status(200).send(newSite);
     } catch (err) {

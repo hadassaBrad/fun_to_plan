@@ -15,9 +15,11 @@ async function getSites(start, limit) {
 async function getSite(id) {
   try {
     console.log(id);
-    const sql = 'SELECT * FROM sites  WHERE id = ? ';
+    const sql = "SELECT s.id, s.site_name, s.url, s.description, s.popularity, d.level AS difficulty_level, a.name_area AS area_name, ag.age_range AS age_range, s.price, s.opening_hour, s.closing_hour, s.latitude, s.longitude, s.track_length FROM sites s LEFT JOIN difficulty d ON s.id_difficulty = d.id LEFT JOIN area a ON s.id_area = a.id LEFT JOIN age ag ON s.id_age = ag.id WHERE s.id = ?;"
+;
     const result = await pool.query(sql, [id]);
-    console.log("result in get site: " + result[0][0]);
+    console.log("result in get site: " );
+    console.log( result[0][0]);
     console.log("get site in model ")
     return result[0][0];
   } catch (err) {
