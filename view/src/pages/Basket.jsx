@@ -92,12 +92,18 @@ function Basket() {
 
     return (
         <div className="basket-container">
-            {sites.length > 0 ? (
-                sites.map(site => (
+            {sites.length > 0 ? (<>
+             {sites.map(site => (
                     <BasketCard key={site.id} site={site} renderSites={renderSites} className="basket-card" />
-                ))
-            ) : (
-                <p>No items in the basket</p>
+                ))} 
+            <button className="plan-route-button">
+        קבל תכנון מסלול
+           </button>
+           </>
+            ) : (<>
+                <p>No items in the basket</p><br/>
+                <p>When you will add sites to the basket, we'll be able to build you a trip route...</p>
+                </>
             )}
         </div>
     );

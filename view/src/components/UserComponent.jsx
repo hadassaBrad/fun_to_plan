@@ -1,10 +1,7 @@
-// src/UserComponent.js
 import React, { useState, useContext } from 'react';
 import '../css/userComponent.css';
 import { UserContext } from '../App.jsx';
 import config from '../config.js';
-// src/UserComponent.js
-
 
 const UserComponent = ({ id, name, email, role, guides, setGuides, setHasGuides }) => {
   console.log("role: "+role);

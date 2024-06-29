@@ -63,9 +63,6 @@ function Sites() {
       <button onClick={handleMoresitesBtn}>more sites</button>
 
 
-      <button className="plan-route-button">
-        קבל תכנון מסלול
-      </button>
     </div>
   );
 }
