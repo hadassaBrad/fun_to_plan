@@ -4,8 +4,9 @@ const adminRouter = express.Router();
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const cors = require('cors'); 
-const loginRouter=require("./routes/loginRouter")
-const signUpRouter=require("./routes/signUpRouter")
+const loginRouter=require("./routes/loginRouter");
+const signUpRouter=require("./routes/signUpRouter");
+const tripsRouter=require("./routes/tripsRouter");
 // const adminRouter=require("./routes/admin")
 const basketRouter=require("./routes/basketRouter")
 const galleryRouter=require("./routes/galleryRouter")
@@ -39,8 +40,8 @@ app.use("/admin",verifyJWT,verifyAdmin,adminRouter);
 app.use("/gallery", galleryRouter);
 app.use("/basket",basketRouter);
 app.use("/sites",sitesRouter);
-app.use("/logout",logoutRouter)
-
+app.use("/logout",logoutRouter);
+app.use("/tripsRouter",tripsRouter);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
