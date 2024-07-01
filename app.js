@@ -41,7 +41,7 @@ app.use("/gallery", galleryRouter);
 app.use("/basket",basketRouter);
 app.use("/sites",sitesRouter);
 app.use("/logout",logoutRouter);
-app.use("/tripsRouter",tripsRouter);
+//app.use("/tripsRouter",tripsRouter);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
