@@ -44,7 +44,7 @@ function Login({ onClose, openSignUp }) {
             localStorage.removeItem(
                 "basket"
             );
-        const items = await config.getData("basket", "user_id", connectedUser.id);
+        const items = await config.getData("basket", ["user_id"], [connectedUser.id]);
         console.log("items...  ")
         console.log(items.message);
         if (items.length) {

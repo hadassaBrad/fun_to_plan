@@ -11,7 +11,7 @@ function Gallery() {
         const fetchPhotos = async () => {
             try {
                 console.log("fetching data of gallery... ");
-                const data = await config.getData("gallery", null, null, begin, limit);
+                const data = await config.getData("gallery", [], [], begin, limit);
                 console.log(data);
                 console.log(photos);
                 if(photos.length===0)

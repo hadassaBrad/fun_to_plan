@@ -6,7 +6,7 @@ function UsersTable() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await config.getData("users", null, null, null, null, null); // Example fetch function, adjust as needed
+                const data = await config.getData("users", [], [], null, null, null); // Example fetch function, adjust as needed
                 setUsers(data);
             } catch (error) {
                 console.error("Error fetching data from DB:", error);

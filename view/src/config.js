@@ -1,8 +1,8 @@
 const baseUrl = "http://localhost:3000/";
 
 const getData = async (entity,
-    searchKey = null,
-    searchValue = null,
+    searchKey = [],
+    searchValue = [],
     start = 0,
     limit = null,
     id = null,
@@ -15,8 +15,11 @@ const getData = async (entity,
             url += `/${id}`;
             console.log('url id');
         }
-        if (searchKey) {
-            url += `?${searchKey}=${searchValue}`;
+        console.log("searchKey");
+        console.log(searchKey);
+        if(searchKey)
+        for (let i = 0; i < searchKey.length; i++) {
+            url += `?${searchKey[i]}=${searchValue[i]}`;
             console.log(' url += `?${searchKey}=${searchValue}`;');
         }
         if (limit) {
@@ -28,11 +31,12 @@ const getData = async (entity,
             console.log(' url +=`?user_id=${userId}`   ');
         }
         console.log("url  " + url);
+        
         const response = await fetch(url, {
             method: 'GET', // או POST, או כל שיטה אחרת שאתה משתמש בה
             credentials: 'include', // שולח את העוגיות עם הבקשה
-          });
-          
+        });
+
         console.log(response)
         const newData = await response.json();
         console.log("new data:  in config ");

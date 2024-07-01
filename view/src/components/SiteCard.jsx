@@ -78,7 +78,7 @@ function SiteCard({ site, setSites, sites }) {
     }
 
     async function updateSite() {
-        const currentSite = await config.getData("sites", null, null, null, null, site.id);
+        const currentSite = await config.getData("sites", [], [], null, null, site.id);
         console.log(currentSite);
         setSiteForUpdate(currentSite);
         console.log(siteForUpdate);

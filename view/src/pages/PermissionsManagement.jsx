@@ -10,7 +10,7 @@ function PermissionsManagement() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await config.getData("users", null, null, null, null, null, 4); // Example fetch function, adjust as needed
+                const data = await config.getData("users", [], [], null, null, null, 4); // Example fetch function, adjust as needed
                 console.log("the guides that wating: " + data);
                 if (data.length == 0) {
                     setHasGuides(false);
