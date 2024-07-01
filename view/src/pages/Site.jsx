@@ -11,7 +11,7 @@ function Site() {
         const fetchSite = async () => {
             try {
                 console.log("fetching data of site... " + siteId);
-                const data = await config.getData("sites", null, null, null, null, siteId);
+                const data = await config.getData("sites", [], [], null, null, siteId);
                 setSite(data);
                 console.log("data in specific site " + data.id);
             } catch (error) {
