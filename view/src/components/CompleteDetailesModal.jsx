@@ -69,6 +69,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import '../css/completeDetails.css';
+import config from '../config'
 
 Modal.setAppElement('#root'); // Set the app element to avoid screen reader issues
 
@@ -77,7 +78,7 @@ function CompleteDetailesModal ({ isOpen, onClose })  {
   const [cost, setCost] = useState('');
   const [numOfHours, setNumOfHours] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!startPoint || !cost || !numOfHours) {
       alert('All fields are required!');
@@ -85,6 +86,16 @@ function CompleteDetailesModal ({ isOpen, onClose })  {
     }
     // Handle form submission logic here
     alert(`Start Point: ${startPoint}, Cost: ${cost}, Number of Hours: ${numOfHours}`);
+    if(!user){// need to show login!!
+      }
+    const sites=localStorage.getItem("basket");
+    const body={
+      startPoint:startPoint,
+      cost:cost,
+      numOfHours:numOfHours,
+      sites:sites
+    }
+    const response = await config.postData("trips", body);
     onClose(); // Close the modal after submission
   };
 const handleSclose=(e)=>{
