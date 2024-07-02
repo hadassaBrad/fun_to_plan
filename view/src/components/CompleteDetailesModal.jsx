@@ -99,7 +99,6 @@ function CompleteDetailesModal({ isOpen, onClose }) {
           onChange={changeHandler}
           className="input confirm-guide-sign"
         />
-
         <br />
         {wantsGuide &&
           <div>
