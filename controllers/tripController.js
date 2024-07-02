@@ -9,19 +9,26 @@ router.use(cors({
     credentials: true
 }));
 
-async function buildTripRoute(wantsGuide, startPoint, cost, numOfHours) {
+async function buildTripRoute(id,wantsGuide, startPoint, cost, numOfHours) {
     try { 
 
-        const coordinates = await getAddress(startPoint); 
+        const coordinates = await getcoordinates(startPoint); 
         console.log("in controller, coordinates: "+coordinates[0]+" /" +coordinates[1]);
-        //return model.getSites(start, limit);
+       
+       
+        if(wantsGuide)
+            {
+                addGuide(id) ;
+            }
     } catch (err) {
         throw err;
     }
 }
 
+async function addGuide(id,){
 
-async function getAddress(startPoint) {
+}
+async function getcoordinates(startPoint) {
     try {
         const fetch = require('node-fetch');
         startPoint="hakfir 3 givat zeev israel"
@@ -49,4 +56,4 @@ async function getAddress(startPoint) {
         throw err;
     }
 }
-module.exports = { buildTripRoute, getAddress }
+module.exports = { buildTripRoute,  }
