@@ -11,6 +11,7 @@ function CompleteDetailesModal({ isOpen, onClose }) {
   const [cost, setCost] = useState('');
   const [numOfHours, setNumOfHours] = useState('');
   const [wantsGuide, setWantsGuide] = useState(false);
+  const [dateForTrip, setDateForTrip] = useState(null);
   const { user, setUser, showLogin, setShowLogin } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
@@ -22,15 +23,21 @@ function CompleteDetailesModal({ isOpen, onClose }) {
       alert('All fields are required!');
       return;
     }
+    if (wantsGuide && dateForTrip == null) {
+      alert('If you want a guide, you must enter date of trip');
+      return;
+    }
     // Handle form submission logic here
     alert(`Start Point: ${startPoint}, Cost: ${cost}, Number of Hours: ${numOfHours}, wants guide: ${wantsGuide}`);
 
     const sites = localStorage.getItem("basket");
     const body = {
+      userId: user.id,
       wantsGuide: wantsGuide,
       startPoint: startPoint,
       cost: cost,
-      numOfHours: numOfHours
+      numOfHours: numOfHours,
+      dateForTrip: dateForTrip
     }
     const response = await config.postData("trips", body);
     onClose(); // Close the modal after submission
@@ -94,6 +101,14 @@ function CompleteDetailesModal({ isOpen, onClose }) {
         />
 
         <br />
+        {wantsGuide &&
+          <div>
+            <label for="date">Select date for trip:</label>
+            <input type="date" id="birthday" name="date" value={dateForTrip}
+              onChange={(e) => setDateForTrip(e.target.value)}
+            ></input>
+          </div>
+        }
         <button type="submit" className="button">Submit</button>
       </form>
     </Modal>
