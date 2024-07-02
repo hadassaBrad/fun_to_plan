@@ -14,9 +14,9 @@ router.post("/", async (req, res) => {
         console.log("in router tripsss, am i here?????")
         console.log(req.body);
        
-        buildTripRoute(req.body.userId,req.body.wantsGuide, req.body.startPoint, req.body.cost, req.body.numOfHours, req.body.dateForTrip);
+        const response =  await  buildTripRoute(req.body.userId,req.body.wantsGuide, req.body.startPoint, req.body.cost, req.body.numOfHours, req.body.dateForTrip);
 
-        console.log("in single basket....... ")
+       
         // const response = await createBasket(req.body.user.id, req.body.site[0].id);
 
     } catch (err) {

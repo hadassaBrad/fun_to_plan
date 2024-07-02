@@ -35,7 +35,7 @@ function fitnessFunction(chromosome, basket, startingPoint, maxTime, maxCost) {
         const distance = calculateDistance(currentSite, nextSite);
         totalDistance += distance;
         totalTime += calculateTime(distance);
-        totalCost += calculateCost(distance);
+        totalCost += calculateCost(distance)+currentSite.cost;
         currentSite = nextSite;
     }
 
@@ -69,7 +69,7 @@ function mutate(chromosome, mutationRate, basket) {
 }
 
 // Genetic Algorithm
-function geneticAlgorithm(basket, startingPoint, maxTime, maxCost, populationSize = 100, generations = 100, mutationRate = 0.01) {
+async function geneticAlgorithm(basket, startingPoint, maxTime, maxCost, populationSize = 100, generations = 100, mutationRate = 0.01) {
     // Initial population
     let population = Array.from({ length: populationSize }, () => 
         basket.map((_, index) => index).sort(() => Math.random() - 0.5)
@@ -103,17 +103,17 @@ function geneticAlgorithm(basket, startingPoint, maxTime, maxCost, populationSiz
     // Get the best solution
     const bestIndividual = population.reduce((best, individual) => 
         fitnessFunction(individual, basket, startingPoint, maxTime, maxCost) < fitnessFunction(best, basket, startingPoint, maxTime, maxCost) ? individual : best, population[0]);
-    
+   
     return bestIndividual.map(index => basket[index]);
 }
 module.exports={geneticAlgorithm};
 // // Sample usage
-// const startingPoint = { latitude: 32.0853, longitude: 34.7818 }; // Example starting point
+// const startingPoint = { latitude: 32.0853, longitude: 34.7818 ,cost=o }; // Example starting point
 // const maxTime = 8; // 8 hours
 // const maxCost = 500; // Example budget
 
 // const basket = [
-//     { latitude: 32.0853, longitude: 34.7818, id: 1 },
+//     { latitude: 32.0853, longitude: 34.7818, id: 1,cost: 100 },
 //     { latitude: 31.7683, longitude: 35.2137, id: 2 },
 //     // Add more sites with their respective latitude, longitude, and id
 // ];
