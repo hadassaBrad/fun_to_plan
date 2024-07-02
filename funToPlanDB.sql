@@ -93,6 +93,13 @@ site_id int not null,
     FOREIGN KEY (site_id) REFERENCES sites(id)
 );
 
+CREATE TABLE tripRoute (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    route JSON NOT NULL,
+    trip_date DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
 
 INSERT INTO gallery (url, name) VALUES
 ('https://lh5.googleusercontent.com/p/AF1QipONQVvtMTudYatxLHXQVPhnvYBd3lEkH9Pzf6f7=w101-h72-n-k-no-nu', 'הר הארבל'),
