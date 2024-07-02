@@ -10,12 +10,11 @@ import Login from "./Login";
 import "../css/styles.css"; // ׳”׳•׳¡׳₪׳× ׳§׳•׳‘׳¥ ׳”-CSS
 
 function Header() {
-    const { user, setUser } = useContext(UserContext);
+    const { user, setUser, showLogin, setShowLogin } = useContext(UserContext);
     console.log("user in header start render: ");
     console.log(user);
     const navigate = useNavigate();
     const [showSignUp, setShowSignUp] = useState(false);
-    const [showLogin, setShowLogin] = useState(false);
 
 
     async function logOut() {

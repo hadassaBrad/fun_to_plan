@@ -19,6 +19,8 @@ export const UserContext = createContext();
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showLogin, setShowLogin] = useState(false);
+
 
   useEffect(() => {
     
@@ -39,7 +41,7 @@ function App() {
   }
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, showLogin, setShowLogin }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />

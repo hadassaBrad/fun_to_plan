@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Modal from 'react-modal';
 import '../css/completeDetails.css';
 import config from '../config'
+import { UserContext } from '../App';
 
 Modal.setAppElement('#root'); // Set the app element to avoid screen reader issues
 
@@ -9,20 +10,30 @@ function CompleteDetailesModal({ isOpen, onClose }) {
   const [startPoint, setStartPoint] = useState('');
   const [cost, setCost] = useState('');
   const [numOfHours, setNumOfHours] = useState('');
+  const { user, setUser, showLogin, setShowLogin } = useContext(UserContext);
+
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     if (!user) {// need to show login!!
+  //       setShowLogin(true);
+  //     }
+  //   }
+  //   fetchData();
+  // }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user) {// need to show login!!
+      setShowLogin(true);
+    }
     if (!startPoint || !cost || !numOfHours) {
       alert('All fields are required!');
       return;
     }
     // Handle form submission logic here
     alert(`Start Point: ${startPoint}, Cost: ${cost}, Number of Hours: ${numOfHours}`);
-    if (!user) {// need to show login!!
-       
-      
 
-    }
     const sites = localStorage.getItem("basket");
     const body = {
       sites: sites,
