@@ -10,7 +10,7 @@ async function createPhoto(id, url, name) {
 
 async function getGallery(start, limit) {
     try {
-        console.log("gaaaaaaa")
+    
         return model.getGallery(start, limit);
     } catch (err) {
         throw err;
@@ -25,5 +25,7 @@ async function deletePhoto(id) {
         throw err;
     }
 }
+
+
 
 module.exports = { deletePhoto, getGallery, createPhoto}
