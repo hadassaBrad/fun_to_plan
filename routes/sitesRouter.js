@@ -10,6 +10,7 @@ router.use(cors({
 }));
 const verifyJWT=require("../middlewares/verifyJWT");
 const verifyAdmin=require("../middlewares/verifyAdmin");
+
 router.get("/", async (req, res) => {
     try {
         const start = parseInt(req.query._start) || 0;
