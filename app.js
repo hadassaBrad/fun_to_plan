@@ -36,7 +36,7 @@ app.use("/users",userRouter);
 app.use("/login", loginRouter);
 app.use("/signUp",signUpRouter);
 app.use("/admin",verifyJWT,verifyAdmin,adminRouter);
-//app.use("/guide",guideRouter)
+app.use("/guide",guideRouter)
 app.use("/gallery", galleryRouter);
 app.use("/basket",basketRouter);
 app.use("/sites",sitesRouter);
