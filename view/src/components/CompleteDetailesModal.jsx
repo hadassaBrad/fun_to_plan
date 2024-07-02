@@ -10,17 +10,8 @@ function CompleteDetailesModal({ isOpen, onClose }) {
   const [startPoint, setStartPoint] = useState('');
   const [cost, setCost] = useState('');
   const [numOfHours, setNumOfHours] = useState('');
+  const [wantsGuide, setWantsGuide] = useState(false);
   const { user, setUser, showLogin, setShowLogin } = useContext(UserContext);
-
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     if (!user) {// need to show login!!
-  //       setShowLogin(true);
-  //     }
-  //   }
-  //   fetchData();
-  // }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,11 +23,11 @@ function CompleteDetailesModal({ isOpen, onClose }) {
       return;
     }
     // Handle form submission logic here
-    alert(`Start Point: ${startPoint}, Cost: ${cost}, Number of Hours: ${numOfHours}`);
+    alert(`Start Point: ${startPoint}, Cost: ${cost}, Number of Hours: ${numOfHours}, wants guide: ${wantsGuide}`);
 
     const sites = localStorage.getItem("basket");
     const body = {
-      sites: sites,
+      wantsGuide: wantsGuide,
       startPoint: startPoint,
       cost: cost,
       numOfHours: numOfHours
@@ -47,6 +38,11 @@ function CompleteDetailesModal({ isOpen, onClose }) {
   const handleSclose = (e) => {
     onClose();
   }
+  const changeHandler = (event) => {
+    const { name, checked } = event.target;
+    setWantsGuide(checked);
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -87,6 +83,17 @@ function CompleteDetailesModal({ isOpen, onClose }) {
             className="input"
           />
         </div>
+        <label>Do you want a guide to guide on you trip?</label>
+        <input
+          id="guide"
+          type="checkbox"
+          name="confirmguide"
+          checked={wantsGuide}
+          onChange={changeHandler}
+          className="input confirm-guide-sign"
+        />
+
+        <br />
         <button type="submit" className="button">Submit</button>
       </form>
     </Modal>

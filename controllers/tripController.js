@@ -9,7 +9,7 @@ router.use(cors({
     credentials: true
 }));
 
-async function buildTripRoute(sites, startPoint, cost, numOfHours) {
+async function buildTripRoute(wantsGuide, startPoint, cost, numOfHours) {
     try { 
 
         const coordinates = await getAddress(startPoint); 
