@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
     try {
         console.log("in router tripsss, am i here?????")
         console.log(req.body);
-        //  { startPoint: '5', cost: '100', numOfHours: '6' }
+       
         buildTripRoute(req.body.sites, req.body.startPoint, req.body.cost, req.body.numOfHours);
         console.log("in single basket....... ")
         // const response = await createBasket(req.body.user.id, req.body.site[0].id);

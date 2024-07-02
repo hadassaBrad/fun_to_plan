@@ -3,19 +3,50 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const cors = require('cors');
+const geneticAlgorithm=require("../services/tripService")
 router.use(cors({
- origin: 'http://localhost:5173', // Replace with your frontend app URL
- credentials: true
+    origin: 'http://localhost:5173', // Replace with your frontend app URL
+    credentials: true
 }));
 
-async function buildTripRoute(sites,startPoint,cost,numOfHours) {
-    try {
+async function buildTripRoute(sites, startPoint, cost, numOfHours) {
+    try { 
 
-
-        console.log("in controller' haddasssa is sweet");
+        const coordinates = await getAddress(startPoint); 
+        console.log("in controller, coordinates: "+coordinates[0]+" /" +coordinates[1]);
         //return model.getSites(start, limit);
     } catch (err) {
         throw err;
     }
 }
-module.exports = { buildTripRoute }
+
+
+async function getAddress(startPoint) {
+    try {
+        const fetch = require('node-fetch');
+        startPoint="hakfir 3 givat zeev israel"
+        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(startPoint)}`;
+ 
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    const { lat, lon } = data[0];
+                    console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+                    return [lat,lon];
+                  
+                } else {
+                    console.log('Address not found.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+        console.log("in geting the adress .trip controler");
+   
+    } catch (err) {
+        throw err;
+    }
+}
+module.exports = { buildTripRoute, getAdress }
