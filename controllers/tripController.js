@@ -49,4 +49,4 @@ async function getAddress(startPoint) {
         throw err;
     }
 }
-module.exports = { buildTripRoute, getAdress }
+module.exports = { buildTripRoute, getAddress }
