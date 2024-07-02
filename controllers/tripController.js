@@ -9,7 +9,7 @@ router.use(cors({
     credentials: true
 }));
 
-async function buildTripRoute(id,wantsGuide, startPoint, cost, numOfHours) {
+async function buildTripRoute(id,wantsGuide, startPoint, cost, numOfHours, date) {
     try { 
 
         const coordinates = await getcoordinates(startPoint); 
@@ -18,14 +18,17 @@ async function buildTripRoute(id,wantsGuide, startPoint, cost, numOfHours) {
        
         if(wantsGuide)
             {
-                addGuide(id) ;
+                addGuide(id, date) ;
             }
     } catch (err) {
         throw err;
     }
 }
 
-async function addGuide(id,){
+async function addGuide(id, date){
+   
+
+
 
 }
 async function getcoordinates(startPoint) {
