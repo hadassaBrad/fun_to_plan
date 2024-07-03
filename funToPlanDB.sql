@@ -156,27 +156,27 @@ INSERT INTO  age(age_range) VALUES
 ('teen ager'),
 ('adults'),
 ('families');
-insert into sites(site_name, url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length) values
-('Mekorot Yarakon','https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSfBgAQux71ZopennmayW1YDA2UKnaCW1X1ruZsBDa2Vna4AbzjEWM1e11RRu1ZkXmTVV7fmi0NRQ801VvbckMTaYjIlvbF8mh4IvbYxQ',
-"Some in wastewater and some from waste originating from industrial plants that discharge their waste into the river waters",
-5,1,1,500,1,null,null,25,20,250), 
-('dont know may you do?!! ','https://lh5.googleusercontent.com/p/AF1QipPfh3yqD7bPNkryGTsecIS7i3lAmpxWGNkfcgoU=w540-h312-n-k-no',
-"
-Alongvery very nicccccccccc the river waters.",
-7,2,3,250,2,null,null,45,40,670);
+-- הוספת נתונים לטבלה עם 20 אתרים ועם נתונים עבור שדות id_difficulty, id_area, id_age וקישורים תקינים לתמונות
 INSERT INTO sites (
     site_name, url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length
 ) VALUES
-('Masada', 'https://example.com/masada.jpg', 'An ancient fortress in the Southern District of Israel.', 85, 2, 3, 50, 1, '08:00:00', '17:00:00', 31.3156, 35.3533, 700),
-('Ein Gedi Nature Reserve', 'https://example.com/ein_gedi.jpg', 'A nature reserve located west of the Dead Sea.', 90, 1, 3, 20, 2, '08:00:00', '16:00:00', 31.4542, 35.3882, 4000),
-('Timna Park', 'https://example.com/timna.jpg', 'A large desert park in the Negev desert.', 80, 2, 2, 30, 3, '08:00:00', '17:00:00', 29.7873, 34.9766, 10000),
-('Mount Hermon', 'https://example.com/hermon.jpg', 'The highest mountain in Israel, located in the north.', 95, 3, 1, 75, 3, '08:00:00', '16:00:00', 33.4167, 35.8500, 2000),
-('Banias Nature Reserve', 'https://example.com/banias.jpg', 'A natural spring in the Golan Heights.', 85, 1, 1, 40, 2, '08:00:00', '16:00:00', 33.2481, 35.6902, 3500),
-('Ramon Crater', 'https://example.com/ramon.jpg', 'A geological feature of Israel\'s Negev desert.', 70, 2, 2, 20, 1, '08:00:00', '17:00:00', 30.6097, 34.8013, 4500),
-('Yehudiya Forest Nature Reserve', 'https://example.com/yehudiya.jpg', 'A nature reserve in the central Golan Heights.', 80, 1, 1, 25, 2, '08:00:00', '16:00:00', 32.9667, 35.6833, 6000),
-('Mount Carmel National Park', 'https://example.com/carmel.jpg', 'A national park in northern Israel.', 85, 1, 1, 30, 2, '08:00:00', '17:00:00', 32.7447, 35.0395, 3000),
-('Arbel National Park', 'https://example.com/arbel.jpg', 'A national park and nature reserve in northern Israel.', 75, 2, 1, 15, 3, '08:00:00', '17:00:00', 32.8333, 35.5000, 2500),
-('Tel Dan Nature Reserve', 'https://example.com/teldan.jpg', 'A nature reserve and archaeological site in northern Israel.', 85, 1, 1, 30, 1, '08:00:00', '17:00:00', 33.2490, 35.6534, 3500);
+('מצדה', 'https://www.pexels.com/photo/aerial-photography-of-ancient-city-1128545/', 'מבצר עתיק במחוז הדרומי של ישראל.', 85, 1, 3, 50, 1, '08:00:00', '17:00:00', 31.3156, 35.3533, 700),
+('שמורת עין גדי', 'https://www.pexels.com/photo/nature-green-tree-outdoors-104827/', 'שמורת טבע הממוקמת מערבית לים המלח.', 90, 2, 3, 20, 2, '08:00:00', '16:00:00', 31.4542, 35.3882, 4000),
+('פארק תימנע', 'https://www.pexels.com/photo/brown-rock-formation-1167029/', 'פארק מדברי גדול במדבר הנגב.', 80, 1, 2, 30, 3, '08:00:00', '17:00:00', 29.7873, 34.9766, 10000),
+('הר חרמון', 'https://www.pexels.com/photo/snow-capped-mountain-under-clear-blue-sky-1462021/', 'הר הגבוה ביותר בישראל, הממוקם בצפון.', 95, 3, 1, 75, 3, '08:00:00', '16:00:00', 33.4167, 35.8500, 2000),
+('שמורת בניאס', 'https://www.pexels.com/photo/waterfall-against-trees-257360/', 'מעיין טבעי בגולן.', 85, 1, 1, 40, 2, '08:00:00', '16:00:00', 33.2481, 35.6902, 3500),
+('מכתש רמון', 'https://www.pexels.com/photo/canyon-under-blue-sky-1904232/', 'תופעה גיאולוגית במדבר הנגב.', 70, 2, 2, 20, 1, '08:00:00', '17:00:00', 30.6097, 34.8013, 4500),
+('שמורת יהודיה', 'https://www.pexels.com/photo/green-trees-during-daytime-6748807/', 'שמורת טבע במרכז הגולן.', 80, 1, 1, 25, 2, '08:00:00', '16:00:00', 32.9667, 35.6833, 6000),
+('פארק הר כרמל הלאומי', 'https://www.pexels.com/photo/trees-near-mountain-3720670/', 'פארק לאומי בצפון ישראל.', 85, 1, 1, 30, 2, '08:00:00', '17:00:00', 32.7447, 35.0395, 3000),
+('פארק ארבל הלאומי', 'https://www.pexels.com/photo/landscape-photo-of-mountains-7893967/', 'פארק לאומי ושמורה טבעית בצפון ישראל.', 75, 2, 1, 15, 3, '08:00:00', '17:00:00', 32.8333, 35.5000, 2500),
+('שמורת תל דן', 'https://www.pexels.com/photo/footpath-by-trees-in-forest-256481/', 'שמורת טבע ואתר ארכיאולוגי בצפון ישראל.', 85, 1, 1, 30, 1, '08:00:00', '17:00:00', 33.2490, 35.6534, 3500),
+('ים כנרת', 'https://www.pexels.com/photo/landscape-photography-of-body-of-water-7384869/', 'האגם הגדול ביותר בישראל.', 90, 1, 3, 40, 1, '08:00:00', '18:00:00', 32.8704, 35.6177, 0),
+('פארק חוף אחזיב הלאומי', 'https://www.pexels.com/photo/beach-shoreline-during-golden-hour-3286950/', 'פארק לאומי בחוף הצפוני של ישראל.', 80, 2, 1, 25, 2, '08:00:00', '17:00:00', 33.0247, 35.1024, 0),
+('שמורת עין עבדת', 'https://www.pexels.com/photo/photography-of-canyon-1324624/', 'נחל גדול במדבר הנגב.', 75, 3, 2, 30, 2, '08:00:00', '16:00:00', 30.7833, 34.7333, 0),
+('קיסריה המריטימה', 'https://www.pexels.com/photo/landscape-photography-of-sea-2486168/', 'עיר עתיקה על חופי הים התיכון של ישראל.', 85, 2, 1, 35, 1, '08:00:00', '18:00:00', 32.5000, 34.8958, 0),
+('העיר העתיקה בירושלים', 'https://www.pexels.com/photo/city-with-lights-at-night-1227985/', 'הלב ההיסטורי של ירושלים.', 95, 3, 1, 50, 1, '08:00:00', '19:00:00', 31.7780, 35.2355, 0),
+('ים המלח', 'https://www.pexels.com/photo/landscape-photography-of-desert-6755442/', 'הנקודה הנמוכה ביותר בכדור הארץ, מפורסם בשל מי הים העשירות במלח.', 90, 3, 3, 60, 2, '08:00:00', '18:00:00', 31.4965, 35.4945, 0),
+('עכו העתיקה', 'https://www.pexels.com/photo/cityscape-photography-of-a-old-city-3573381/', 'עיר היסטורית על חופי צפון ישראל.', 80, 1, 1, 30,)
 
 insert into passwords(password, loginAttempts, lastLogin, account_status) values
 ('$2b$10$T8orXcY8jiNlOqImWUDp6uroW/u8P5IOJa0Mv/8dFMG9GzaBSJyja',1, '2024-06-15 21:35:39', 1);
