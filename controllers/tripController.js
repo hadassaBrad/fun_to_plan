@@ -48,7 +48,9 @@ const newRoute=model.createTripRoute(id,bestRoute);
 async function addGuide(tripId, date) {
     try {
         const allGuidesByDate = await model.getGuidesByDate(date,tripId);
-        return allGuidesByDate[0];
+        const result = await model.addGuideToTrip(tripId, allGuidesByDate[0].id, date);
+        console.log(result);
+return result;
     }
 
     catch (err) {
