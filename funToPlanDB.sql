@@ -164,6 +164,19 @@ insert into sites(site_name, url, description, popularity, id_difficulty, id_are
 "
 Alongvery very nicccccccccc the river waters.",
 7,2,3,250,2,null,null,45,40,670);
+INSERT INTO sites (
+    site_name, url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length
+) VALUES
+('Masada', 'https://example.com/masada.jpg', 'An ancient fortress in the Southern District of Israel.', 85, 2, 3, 50, 1, '08:00:00', '17:00:00', 31.3156, 35.3533, 700),
+('Ein Gedi Nature Reserve', 'https://example.com/ein_gedi.jpg', 'A nature reserve located west of the Dead Sea.', 90, 1, 3, 20, 2, '08:00:00', '16:00:00', 31.4542, 35.3882, 4000),
+('Timna Park', 'https://example.com/timna.jpg', 'A large desert park in the Negev desert.', 80, 2, 2, 30, 3, '08:00:00', '17:00:00', 29.7873, 34.9766, 10000),
+('Mount Hermon', 'https://example.com/hermon.jpg', 'The highest mountain in Israel, located in the north.', 95, 3, 1, 75, 3, '08:00:00', '16:00:00', 33.4167, 35.8500, 2000),
+('Banias Nature Reserve', 'https://example.com/banias.jpg', 'A natural spring in the Golan Heights.', 85, 1, 1, 40, 2, '08:00:00', '16:00:00', 33.2481, 35.6902, 3500),
+('Ramon Crater', 'https://example.com/ramon.jpg', 'A geological feature of Israel\'s Negev desert.', 70, 2, 2, 20, 1, '08:00:00', '17:00:00', 30.6097, 34.8013, 4500),
+('Yehudiya Forest Nature Reserve', 'https://example.com/yehudiya.jpg', 'A nature reserve in the central Golan Heights.', 80, 1, 1, 25, 2, '08:00:00', '16:00:00', 32.9667, 35.6833, 6000),
+('Mount Carmel National Park', 'https://example.com/carmel.jpg', 'A national park in northern Israel.', 85, 1, 1, 30, 2, '08:00:00', '17:00:00', 32.7447, 35.0395, 3000),
+('Arbel National Park', 'https://example.com/arbel.jpg', 'A national park and nature reserve in northern Israel.', 75, 2, 1, 15, 3, '08:00:00', '17:00:00', 32.8333, 35.5000, 2500),
+('Tel Dan Nature Reserve', 'https://example.com/teldan.jpg', 'A nature reserve and archaeological site in northern Israel.', 85, 1, 1, 30, 1, '08:00:00', '17:00:00', 33.2490, 35.6534, 3500);
 
 insert into passwords(password, loginAttempts, lastLogin, account_status) values
 ('$2b$10$T8orXcY8jiNlOqImWUDp6uroW/u8P5IOJa0Mv/8dFMG9GzaBSJyja',1, '2024-06-15 21:35:39', 1);
