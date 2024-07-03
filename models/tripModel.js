@@ -37,4 +37,14 @@ async function getGuidesByDate(tripId,date) {
       throw new Error(err);
     }
   }
-module.exports = {createTripRoute,  getGuidesByDate, getBasketForTrip}
+
+  async function addGuideToTrip(tripId, guideId, tripDate){
+    const sql = `UPDATE trips SET guide_id = ?,trip_date = ? WHERE id = ?`
+    const result = await pool.query(sql, [guideId, tripDate, tripId]);
+    console.log("result in getBasketForTrip model:  " );
+    console.log(result[0]);
+    return result[0];
+  }
+
+
+module.exports = {createTripRoute,  getGuidesByDate, getBasketForTrip, addGuideToTrip}
