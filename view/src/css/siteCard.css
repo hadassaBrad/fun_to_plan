@@ -1,20 +1,27 @@
+/* קונטיינר הכרטיסים */
+.site-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* כרטיס יחיד */
 .site-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px;
-    margin: 10px;
-    width: 200px;
-    background-color: rgba(0, 0, 0, 0.1); /* רקע כהה יותר */
+    padding: 16px;
+    background-color: #e0e0e0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, background-color 0.3s;
 }
 
 .site-card:hover {
     transform: translateY(-5px);
-    background-color: rgba(0, 0, 0, 0.2); /* שינוי צבע רקע במצב ריחוף */
+    background-color: #d0d0d0;
 }
 
 .site-card-img {
@@ -24,45 +31,41 @@
 }
 
 .site-card-title {
-    font-size: 1.1em;
-    margin: 8px 0;
+    font-size: 1.2em;
+    margin: 12px 0;
 }
 
 .site-card-button {
-    color: #00796b; /* צבע טורקיז כהה */
- 
+    background-color: #99f0e1;
+    color: white;
     border: none;
     border-radius: 4px;
-    padding: 8px 16px;
+    padding: 10px 20px;
     cursor: pointer;
-    font-size: 0.9em;
+    font-size: 1em;
     transition: background-color 0.3s;
-    margin: 5px 0;
+    margin: 8px 0;
 }
 
-
+.site-card-button:hover {
+    background-color: #77d7c7;
+}
 
 .site-card-link {
-    /* color: #007bff; */
     text-decoration: none;
-    margin-top: 8px;
+    color: #007bff;
+    font-size: 1em;
+    margin: 8px 0;
 }
 
 .site-card-link:hover {
     text-decoration: underline;
 }
 
-/* עיצוב הרשת */
-.site-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 /* רספונסיביות */
 @media (max-width: 600px) {
     .site-card {
-        width: 100%;
+        max-width: 100%;
         margin: 8px;
     }
 
@@ -71,7 +74,7 @@
     }
 
     .site-card-button {
-        font-size: 0.8em;
-        padding: 6px 12px;
+        font-size: 0.9em;
+        padding: 8px 16px;
     }
 }
