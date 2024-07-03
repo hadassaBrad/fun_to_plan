@@ -215,13 +215,13 @@ async function getAllWaitinGuides() {
 }
 async function updateUserPermition(id, role) {
   try {
-    console.log("in user model, updateUserPermition role:  "+role);
+    console.log("in user model, updateUserPermition role:  " + role);
     const sqlRoles = `SELECT id FROM permissions WHERE role=?`
     const resultRole = await pool.query(sqlRoles, [role]);
     console.log("role_id: ");
     console.log(resultRole);
-const role_id=resultRole[0][0].id;
-console.log(role_id);
+    const role_id = resultRole[0][0].id;
+    console.log(role_id);
     const sql = `UPDATE users SET  role_id = ? WHERE id = ?`;
     const result = await pool.query(sql, [role_id, id]);
     console.log(result[0])
@@ -244,4 +244,24 @@ async function getGuides() {
   }
 }
 
-module.exports = {getGuides, getAllUsers, getUsers, createUser, putSuccsesLogin, getUserByEmail, getUser, getRole, putFailLogin, getUserById, getAllWaitinGuides, updateUserPermition };
+async function getGuidesByDate(date) {
+  try {
+    console.log("in user model, getAllGuides by date");
+
+
+    //לכל טיול שבתאריך הזה לבדוק האם באחד מהם זה המדריך, להחזיר את כל שאר המדריכים
+
+//מחזיר את כל המדריכים שלא יכולים לעשות טיול באותו התאריך
+    const sql = "SELECT users.id, users.user_name FROM users WHERE role_id=? AND users.id NOT IN (SELECT guide_id FROM triproute WHERE trip_date=? "
+    const resulst = await pool.query(sql, [3, date]);
+ 
+    console.log(result[0][0]);
+    if(result[0][0]==null)
+      throw new Error("no guide for this date");
+    return result[0][0];
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
+module.exports = { getGuides, getGuidesByDate, getAllUsers, getUsers, createUser, putSuccsesLogin, getUserByEmail, getUser, getRole, putFailLogin, getUserById, getAllWaitinGuides, updateUserPermition };
