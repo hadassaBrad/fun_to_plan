@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { React, useContext, useState } from 'react';
 import { UserContext } from '../App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { SlBasket } from "react-icons/sl";
 
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -50,7 +51,7 @@ function Header() {
                         <br />
                         <h2>
                             {user.userName}
-                            {/* <FontAwesomeIcon icon={faUser} className="d-inline-block dropdown-toggle icon-no-margin" /> {"    " + user.userName} */}
+                            {/* {<FontAwesomeIcon icon={faUser} className="d-inline-block dropdown-toggle icon-no-margin" />  { user.userName} */}
                         </h2>
                     </>}
                 </div>
@@ -60,7 +61,11 @@ function Header() {
                     <Link className="nav-link" to={`/home/gallery`}>Gallery</Link>
                     <Link className="nav-link" to={`/home/sites`}>Sites</Link>
 
-                    {(user == null || user.role == "user") && <Link className="nav-link" to={`/home/basket`}>Basket</Link>}
+                    {(user == null || user.role == "user") && (
+                <Link className="nav-link" to={`/home/basket`}>
+                    <SlBasket />
+                </Link>
+            )}
                     {user !== null && user.role === "user" && <Link className="nav-link" to={`/home/tripRoute`}>My Trip Routes</Link>}
                     {user !== null && user.role === "admin" && <Link className="nav-link" to="/home/admin">Admin</Link>}
                 </div>

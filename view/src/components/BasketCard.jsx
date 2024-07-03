@@ -26,14 +26,17 @@ function BasketCard({ site, renderSites, className }) {
 
     return (
         <div className={`basket-card ${className}`}>
-            <img
+            <h2>{site.site_name}</h2>{
+               
+            }
+.            <img
                 className="basket-card-img"
                 alt={site.site_name}
-                title={site.site_name}
+               
                 src={site.url}
             />
             <div className="basket-card-content">
-                <h2 className="basket-card-title">{site.site_name}</h2>
+                
                 <button className="basket-card-button" onClick={removeFromBasket}>
                     Remove From Basket
                 </button>

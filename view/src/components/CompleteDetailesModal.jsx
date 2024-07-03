@@ -13,7 +13,12 @@ function CompleteDetailesModal({ isOpen, onClose }) {
   const [wantsGuide, setWantsGuide] = useState(false);
   const [dateForTrip, setDateForTrip] = useState(null);
   const { user, setUser, showLogin, setShowLogin } = useContext(UserContext);
+  const [minDate, setMinDate] = useState('');
 
+  useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+    setMinDate(today);
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {// need to show login!!
@@ -105,7 +110,7 @@ function CompleteDetailesModal({ isOpen, onClose }) {
         {wantsGuide &&
           <div>
             <label for="date">Select date for trip:</label>
-            <input type="date" id="birthday" name="date" value={dateForTrip}
+            <input type="date"     min={minDate} id="birthday" name="date" value={dateForTrip}
               onChange={(e) => setDateForTrip(e.target.value)}
             ></input>
           </div>

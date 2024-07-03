@@ -92,7 +92,7 @@ const pool = require('../DB');
 async function getBasket(id) {
   try {
     const sql = `
-      SELECT basket.site_id, sites.url 
+     SELECT basket.site_id, sites.url ,sites.site_name
       FROM basket 
       JOIN sites ON basket.site_id = sites.id 
       WHERE basket.user_id = ?`;
