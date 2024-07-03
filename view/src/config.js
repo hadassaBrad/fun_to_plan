@@ -96,6 +96,8 @@ const postData = async (entity, body) => {
 
         if (!response.ok) {
             const responseData = await response.json();
+            console.log("response data");
+            console.log(responseData);
             if (responseData && responseData.error) {
                 const error = new Error(responseData.error);
                 throw error;
@@ -105,6 +107,7 @@ const postData = async (entity, body) => {
         }
 
         const json = await response.json();
+        console.log("json...");
         console.log(json);
         return json;
     } catch (error) {

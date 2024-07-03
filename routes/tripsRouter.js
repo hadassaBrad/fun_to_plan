@@ -13,10 +13,12 @@ router.post("/", async (req, res) => {
     try {
         console.log("in router tripsss, am i here?????")
         console.log(req.body);
-       
-        const response =  await  buildTripRoute(req.body.userId,req.body.wantsGuide, req.body.startPoint, req.body.cost, req.body.numOfHours, req.body.dateForTrip);
 
-       
+        const response = await buildTripRoute(req.body.userId, req.body.wantsGuide, req.body.startPoint, req.body.cost, req.body.numOfHours, req.body.dateForTrip);
+        console.log("response in router!!!!!!!!!!!!!")
+        console.log(response);
+        res.status(200).send(response);
+
         // const response = await createBasket(req.body.user.id, req.body.site[0].id);
 
     } catch (err) {

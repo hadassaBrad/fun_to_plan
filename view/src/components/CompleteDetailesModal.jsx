@@ -40,6 +40,8 @@ function CompleteDetailesModal({ isOpen, onClose }) {
       dateForTrip: dateForTrip
     }
     const response = await config.postData("trips", body);
+    console.log("response");
+    console.log(response);
     onClose(); // Close the modal after submission
   };
   const handleSclose = (e) => {

@@ -12,7 +12,6 @@ router.use(cors({
   }));
   
 
-
 router.post("/", async (req, res) => {
     try {
         const response = await createUser(req,res);
