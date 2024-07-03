@@ -99,7 +99,9 @@ CREATE TABLE tripRoute (
     user_id INT NOT NULL,
     route JSON NOT NULL,
     trip_date DATE NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    guide_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (guide_id) REFERENCES users(id)
 );
 
 INSERT INTO gallery (url, name) VALUES
