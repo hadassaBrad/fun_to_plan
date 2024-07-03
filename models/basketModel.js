@@ -105,7 +105,7 @@ async function getBasket(id) {
     if (result[0].length === 0) {
       throw new Error('No sites found in the basket for the given user.');
     }
-    console.log("in model  getBasket " + result[0][0].url);
+    console.log("in model  getBasket " + result[0]);
     return result[0];
   } catch (err) {
     console.error('Error geting basket:', err);

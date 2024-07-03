@@ -3,54 +3,48 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const cors = require('cors');
-const geneticAlgorithm = require("../services/tripService");
-const { getGuides } = require("../models/userModel")
+const geneticAlgorithm=require("../services/tripService")
 router.use(cors({
     origin: 'http://localhost:5173', // Replace with your frontend app URL
     credentials: true
 }));
 
-async function buildTripRoute(id, wantsGuide, startPoint, cost, numOfHours, date) {
-    try {
+async function buildTripRoute(id,wantsGuide, startPoint, cost, numOfHours, date) {
+    try { 
 
-        const coordinates = await getcoordinates(startPoint);
-        console.log("in controller, coordinates: " + coordinates[0] + " /" + coordinates[1]);
-
-
-        if (wantsGuide) {
-            addGuide(tripId, date);
-        }
+        const coordinates = await getcoordinates(startPoint); 
+        console.log("in controller, coordinates: "+coordinates[0]+" /" +coordinates[1]);
+       
+       
+        if(wantsGuide)
+            {
+                addGuide(id, date) ;
+            }
     } catch (err) {
         throw err;
     }
 }
 
-async function addGuide(tripId, date) {
-    try {
-        const allGuidesByDate = await getGuidesByDate(date);
-        return allGuidesByDate[0];
-    }
+async function addGuide(id, date){
+   
 
-    catch (err) {
-        throw err;
-    }
 
 
 }
 async function getcoordinates(startPoint) {
     try {
         const fetch = require('node-fetch');
-        startPoint = "hakfir 3 givat zeev israel"
+        startPoint="hakfir 3 givat zeev israel"
         const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(startPoint)}`;
-
+ 
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
                     const { lat, lon } = data[0];
                     console.log(`Latitude: ${lat}, Longitude: ${lon}`);
-                    return [lat, lon];
-
+                    return [lat,lon];
+                  
                 } else {
                     console.log('Address not found.');
                 }
@@ -60,9 +54,9 @@ async function getcoordinates(startPoint) {
             });
 
         console.log("in geting the adress .trip controler");
-
+   
     } catch (err) {
         throw err;
     }
 }
-module.exports = { buildTripRoute, }
+module.exports = { buildTripRoute,  }
