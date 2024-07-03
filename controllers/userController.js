@@ -49,7 +49,11 @@ async function createUser(req, res) {
 
     if (confirmguide) {
       role_id = 4;
-      // await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!`);
+       await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!
+        we will be in touch with you in the next days`);
+ //send to the admin:       await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!
+       //   we will be in touch with you on the next days`);
+     
       console.log("Email sent successfully");
     };
     const result = await model.getUserByEmail(email);//checkes if he exists
