@@ -98,7 +98,7 @@ CREATE TABLE tripRoute (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     route JSON NOT NULL,
-    trip_date DATE NOT NULL,
+    trip_date DATE,
     guide_id INT,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (guide_id) REFERENCES users(id)

@@ -9,8 +9,12 @@ async function getBasketForTrip(userId){
   return result[0];
 }
 async function createTripRoute(userId,bestRoute){
-    const sql = "INSERT INTO triproute (`user_id`, `route`,  ) VALUES(?, ?, )";
-    const result = await pool.query(sql, [userId, JSON.parse(bestRoute)]);
+  console.log("in the trip model");
+  //console.log("bestRoute: "+bestRoute);
+  console.log(JSON.stringify(bestRoute));
+
+    const sql = "INSERT INTO triproute (`user_id`, `route` ) VALUES(?, ?)";
+    const result = await pool.query(sql, [userId, JSON.stringify(bestRoute)]);
        await  basketModel.deleteAllBasket(userId);//when user get his trip- he dosnt need any more his old basket
     return result[0];
 }
