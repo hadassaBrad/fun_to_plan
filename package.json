@@ -29,9 +29,11 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.0",
     "mysql2": "^3.10.0",
+    "node-fetch": "^3.3.2",
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4",
     "npmlog": "^7.0.1",
+    "requirejs": "^2.3.6",
     "rimraf": "^5.0.7"
   },
   "devDependencies": {
