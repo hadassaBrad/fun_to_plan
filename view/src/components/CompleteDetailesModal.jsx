@@ -45,9 +45,11 @@ function CompleteDetailesModal({ isOpen, onClose }) {
       dateForTrip: dateForTrip
     }
     const response = await config.postData("trips", body);
+     localStorage.removeItem("basket");
     console.log("response");
     console.log(response);
     onClose(); // Close the modal after submission
+    navigate(`/home/tripRoutes`);
   };
   const handleSclose = (e) => {
     onClose();

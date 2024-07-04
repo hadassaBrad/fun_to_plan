@@ -3,16 +3,17 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const cors = require('cors');
-const { buildTripRoute } = require('../controllers/tripController');
+const { buildTripRoute,getAllRoutesForUser } = require('../controllers/tripController');
 router.use(cors({
     origin: 'http://localhost:5173', // Replace with your frontend app URL
     credentials: true
 }));
 router.get("/", async (req, res) => {
     try {
+        console.log("in geting the trip routs for the user")
         const userId = req.query.user_id;
-        const routes = getAllRoutesForUser(userId);
-
+        const routes =  await getAllRoutesForUser(userId);
+console.log(routes[0]);
         res.status(200).send(routes);
     } catch (err) {
         const error = {
@@ -25,7 +26,7 @@ router.post("/", async (req, res) => {
     try {
         console.log("in router tripsss, am i here?????")
         console.log(req.body);
-
+                                                    
         const response = await buildTripRoute(req.body.userId, req.body.wantsGuide, req.body.startPoint, req.body.cost, req.body.numOfHours, req.body.dateForTrip);
         console.log("response in router!!!!!!!!!!!!!")
         console.log(response);

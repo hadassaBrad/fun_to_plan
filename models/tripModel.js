@@ -62,7 +62,7 @@ async function addGuideToTrip(tripId, guideId, tripDate) {
 }
 
 async function getAllRoutesForUser(userId){
-  try{
+  try{ console.log("in the tripd mode, getAllRoutesForUser")
      const sql = `SELECT * FROM triproute WHERE user_id=?`;
   const result = await pool.query(sql, [userId]);
   return result[0];

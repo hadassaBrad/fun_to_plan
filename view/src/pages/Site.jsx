@@ -29,7 +29,7 @@ function Site() {
     return (
         <div className="site-container">
             <h2>Name:</h2>
-            <p className="value">{site.site_name}</p>
+            <p className="value">{site.siteName}</p>
             <img
                 alt={site.site_name}
                 title={site.site_name}
@@ -39,8 +39,8 @@ function Site() {
             />
             <h2>Description:</h2>
             <p className="value">{site.description}</p>
-            <h2>Popularity:</h2>
-            <p className="value">{site.popularity}</p>
+           
+            <p   className="value">    Popularity: {site.popularity}</p>
             <h2>Difficulty Level:</h2>
             <p className="value">{site.difficultyLevel}</p>
             <h2>Area:</h2>

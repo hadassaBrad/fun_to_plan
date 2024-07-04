@@ -141,7 +141,7 @@ async function addGuide(tripId, date) {
     try {
         console.log("trip id");
         console.log(tripId);
-        const allGuidesByDate = await model.getGuidesByDate(date, tripId);
+        const allGuidesByDate = await model.getGuidesByDate(tripId,date);
         console.log("all guides by date");
         console.log(allGuidesByDate);
         const result = await model.addGuideToTrip(tripId, allGuidesByDate.id, date);
@@ -178,6 +178,7 @@ async function getcoordinates(startPoint) {
 }
 async function getAllRoutesForUser(userId) {
     try {
+        console.log ("in getAllRoutesForUser in controler")
         return await model.getAllRoutesForUser(userId)
     } catch (err) {
         throw err;

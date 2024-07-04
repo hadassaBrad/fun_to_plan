@@ -66,7 +66,7 @@ function Header() {
                     <SlBasket />
                 </Link>
             )}
-                    {user !== null && user.role === "user" && <Link className="nav-link" to={`/home/tripRoute`}>My Trip Routes</Link>}
+                    {user !== null && user.role === "user" && <Link className="nav-link" to={`/home/tripRoutes`}>My Trip Routes</Link>}
                     {user !== null && user.role === "admin" && <Link className="nav-link" to="/home/admin">Admin</Link>}
                 </div>
                 <div className="nav-right">

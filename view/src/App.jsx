@@ -13,6 +13,7 @@ import Basket from "./pages/Basket";
 import UsersTable from "./pages/UsersTable";
  import PermissionsManagement from "./pages/PermissionsManagement";
 import config from './config.js';
+import TripRoutes from './pages/TripRoutes.jsx';
 
 export const UserContext = createContext();
 
@@ -51,7 +52,7 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="sites" element={<Sites />} />
             <Route path="sites/:siteId" element={<Site />} />
-            <Route path="tripRoute" element={<TripRoute />} />
+            <Route path="tripRoutes" element={<TripRoutes />} />
             <Route path="basket" element={<Basket />} />
             <Route path="admin/PermissionsManagement" element={<PermissionsManagement />} />
             <Route path="admin" element={<Admin />}></Route>

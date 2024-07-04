@@ -1,0 +1,17 @@
+.map-container {
+ 
+    /* margin: 0 auto; מרכז את הקוביה באמצעות margin */
+    width: 100%;
+    width:600px;
+         height:230px ;
+         border:rgb(17, 17, 17);
+    /* height: 50vh; גובה קבוע עבור המפה במצב מסך קטן */
+    /* top: 80%; */
+    right: 0;
+    margin-bottom: 30px;
+    min-height: 100vh;
+    /* position:fixed; */
+    /* הוספת min-height גם עבור גודל קטן */
+}
+
+
