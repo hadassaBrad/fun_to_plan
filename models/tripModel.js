@@ -61,5 +61,14 @@ async function addGuideToTrip(tripId, guideId, tripDate) {
   return result[0];
 }
 
-
-module.exports = { createTripRoute, getGuidesByDate, getBasketForTrip, addGuideToTrip, getTripRouteForUser }
+async function getAllRoutesForUser(userId){
+  try{
+     const sql = `SELECT * FROM triproute WHERE user_id=?`;
+  const result = await pool.query(sql, [userId]);
+  return result[0];
+  }
+ catch(err){
+  console.log(err);
+ }
+}
+module.exports = { createTripRoute, getGuidesByDate, getBasketForTrip, addGuideToTrip, getTripRouteForUser,getAllRoutesForUser }

@@ -8,7 +8,19 @@ router.use(cors({
     origin: 'http://localhost:5173', // Replace with your frontend app URL
     credentials: true
 }));
+router.get("/", async (req, res) => {
+    try {
+        const userId = req.query.user_id;
+        const routes = getAllRoutesForUser(userId);
 
+        res.status(200).send(routes);
+    } catch (err) {
+        const error = {
+            message: err.message
+        }
+        res.status(500).send(error);
+    }
+})
 router.post("/", async (req, res) => {
     try {
         console.log("in router tripsss, am i here?????")

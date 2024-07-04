@@ -176,5 +176,14 @@ async function getcoordinates(startPoint) {
         throw error;
     }
 }
+async function getAllRoutesForUser(userId) {
+    try {
+        return await model.getAllRoutesForUser(userId)
+    } catch (err) {
+        throw err;
+    }
+}
 
-module.exports = { buildTripRoute };
+module.exports = { buildTripRoute, getAllRoutesForUser };
+
+
