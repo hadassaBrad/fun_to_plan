@@ -69,7 +69,7 @@ CREATE TABLE age (
 CREATE TABLE sites (
     id INT AUTO_INCREMENT PRIMARY KEY,
     site_name VARCHAR(225) NOT NULL,
-    url VARCHAR(225) NOT NULL,
+    url VARCHAR(1024) NOT NULL,
     description VARCHAR(225),
     popularity INT NOT NULL,
     id_difficulty INT NOT NULL,
@@ -156,27 +156,26 @@ INSERT INTO  age(age_range) VALUES
 ('teen ager'),
 ('adults'),
 ('families');
--- הוספת נתונים לטבלה עם 20 אתרים ועם נתונים עבור שדות id_difficulty, id_area, id_age וקישורים תקינים לתמונות
 INSERT INTO sites (
     site_name, url, description, popularity, id_difficulty, id_area, price, id_age, opening_hour, closing_hour, latitude, longitude, track_length
 ) VALUES
-('מצדה', 'https://www.pexels.com/photo/aerial-photography-of-ancient-city-1128545/', 'מבצר עתיק במחוז הדרומי של ישראל.', 85, 1, 3, 50, 1, '08:00:00', '17:00:00', 31.3156, 35.3533, 700),
-('שמורת עין גדי', 'https://www.pexels.com/photo/nature-green-tree-outdoors-104827/', 'שמורת טבע הממוקמת מערבית לים המלח.', 90, 2, 3, 20, 2, '08:00:00', '16:00:00', 31.4542, 35.3882, 4000),
-('פארק תימנע', 'https://www.pexels.com/photo/brown-rock-formation-1167029/', 'פארק מדברי גדול במדבר הנגב.', 80, 1, 2, 30, 3, '08:00:00', '17:00:00', 29.7873, 34.9766, 10000),
-('הר חרמון', 'https://www.pexels.com/photo/snow-capped-mountain-under-clear-blue-sky-1462021/', 'הר הגבוה ביותר בישראל, הממוקם בצפון.', 95, 3, 1, 75, 3, '08:00:00', '16:00:00', 33.4167, 35.8500, 2000),
-('שמורת בניאס', 'https://www.pexels.com/photo/waterfall-against-trees-257360/', 'מעיין טבעי בגולן.', 85, 1, 1, 40, 2, '08:00:00', '16:00:00', 33.2481, 35.6902, 3500),
-('מכתש רמון', 'https://www.pexels.com/photo/canyon-under-blue-sky-1904232/', 'תופעה גיאולוגית במדבר הנגב.', 70, 2, 2, 20, 1, '08:00:00', '17:00:00', 30.6097, 34.8013, 4500),
-('שמורת יהודיה', 'https://www.pexels.com/photo/green-trees-during-daytime-6748807/', 'שמורת טבע במרכז הגולן.', 80, 1, 1, 25, 2, '08:00:00', '16:00:00', 32.9667, 35.6833, 6000),
-('פארק הר כרמל הלאומי', 'https://www.pexels.com/photo/trees-near-mountain-3720670/', 'פארק לאומי בצפון ישראל.', 85, 1, 1, 30, 2, '08:00:00', '17:00:00', 32.7447, 35.0395, 3000),
-('פארק ארבל הלאומי', 'https://www.pexels.com/photo/landscape-photo-of-mountains-7893967/', 'פארק לאומי ושמורה טבעית בצפון ישראל.', 75, 2, 1, 15, 3, '08:00:00', '17:00:00', 32.8333, 35.5000, 2500),
-('שמורת תל דן', 'https://www.pexels.com/photo/footpath-by-trees-in-forest-256481/', 'שמורת טבע ואתר ארכיאולוגי בצפון ישראל.', 85, 1, 1, 30, 1, '08:00:00', '17:00:00', 33.2490, 35.6534, 3500),
-('ים כנרת', 'https://www.pexels.com/photo/landscape-photography-of-body-of-water-7384869/', 'האגם הגדול ביותר בישראל.', 90, 1, 3, 40, 1, '08:00:00', '18:00:00', 32.8704, 35.6177, 0),
-('פארק חוף אחזיב הלאומי', 'https://www.pexels.com/photo/beach-shoreline-during-golden-hour-3286950/', 'פארק לאומי בחוף הצפוני של ישראל.', 80, 2, 1, 25, 2, '08:00:00', '17:00:00', 33.0247, 35.1024, 0),
-('שמורת עין עבדת', 'https://www.pexels.com/photo/photography-of-canyon-1324624/', 'נחל גדול במדבר הנגב.', 75, 3, 2, 30, 2, '08:00:00', '16:00:00', 30.7833, 34.7333, 0),
-('קיסריה המריטימה', 'https://www.pexels.com/photo/landscape-photography-of-sea-2486168/', 'עיר עתיקה על חופי הים התיכון של ישראל.', 85, 2, 1, 35, 1, '08:00:00', '18:00:00', 32.5000, 34.8958, 0),
-('העיר העתיקה בירושלים', 'https://www.pexels.com/photo/city-with-lights-at-night-1227985/', 'הלב ההיסטורי של ירושלים.', 95, 3, 1, 50, 1, '08:00:00', '19:00:00', 31.7780, 35.2355, 0),
-('ים המלח', 'https://www.pexels.com/photo/landscape-photography-of-desert-6755442/', 'הנקודה הנמוכה ביותר בכדור הארץ, מפורסם בשל מי הים העשירות במלח.', 90, 3, 3, 60, 2, '08:00:00', '18:00:00', 31.4965, 35.4945, 0),
-('עכו העתיקה', 'https://www.pexels.com/photo/cityscape-photography-of-a-old-city-3573381/', 'עיר היסטורית על חופי צפון ישראל.', 80, 1, 1, 30,)
+('מצדה', 'https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcRFmF_eLFHchAMgSnmOS7ml3lPFSk_blbwywDwuCTx8y0Vlv61wPS1jAFVwJ6pE7cyyQsTIHiopHXnT6TaIgBzaQ-3bnbmWAydkHjQ0cg', 'מבצר עתיק במחוז הדרומי של ישראל.', 85, 1, 3, 50, 1, '08:00:00', '17:00:00', 31.3156, 35.3533, 700),
+('שמורת עין גדי', 'https://reefdivinggroup.co.il/wp-content/uploads/2022/12/shutterstock_1770727010.jpg', 'שמורת טבע הממוקמת מערבית לים המלח.', 90, 2, 3, 20, 2, '08:00:00', '16:00:00', 31.4542, 35.3882, 4000),
+('פארק תימנע', 'https://baliletayel.co.il/wp-content/uploads/2020/10/DSC00713-1024x683.jpg', 'פארק מדברי גדול במדבר הנגב.', 80, 1, 2, 30, 3, '08:00:00', '17:00:00', 29.7873, 34.9766, 10000),
+('הר חרמון', 'https://www.kukutrip.co.il/wp-content/uploads/2022/03/274353783_10161789928178761_3163234694195470524_n_10161789922173761_resize_67.jpg', 'הר הגבוה ביותר בישראל, הממוקם בצפון.', 95, 3, 1, 75, 3, '08:00:00', '16:00:00', 33.4167, 35.8500, 2000),
+('שמורת בניאס', 'https://green-lady.co.il/wp-content/uploads/2020/10/Banias35.jpg', 'מעיין טבעי בגולן.', 85, 1, 1, 40, 2, '08:00:00', '16:00:00', 33.2481, 35.6902, 3500),
+('מכתש רמון', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/MakhteshRamonMar262022_01.jpg/1200px-MakhteshRamonMar262022_01.jpg', 'תופעה גיאולוגית במדבר הנגב.', 70, 2, 2, 20, 1, '08:00:00', '17:00:00', 30.6097, 34.8013, 4500),
+('שמורת יהודיה', 'https://static.parks.org.il/wp-content/uploads/2017/09/shmurat-teva-yaar-yeudia-jorji-norkin-compressed.jpg', 'שמורת טבע במרכז הגולן.', 80, 1, 1, 25, 2, '08:00:00', '16:00:00', 32.9667, 35.6833, 6000),
+('פארק הר כרמל הלאומי', 'https://static.parks.org.il/wp-content/uploads/2017/09/maad-carmel-archion.jpg', 'פארק לאומי בצפון ישראל.', 85, 1, 1, 30, 2, '08:00:00', '17:00:00', 32.7447, 35.0395, 3000),
+('פארק ארבל הלאומי', 'https://static.parks.org.il/wp-content/uploads/2017/10/arbel_2012_1-e1512900771516.jpg', 'פארק לאומי ושמורה טבעית בצפון ישראל.', 75, 2, 1, 15, 3, '08:00:00', '17:00:00', 32.8333, 35.5000, 2500),
+('שמורת תל דן', 'https://static.parks.org.il/wp-content/uploads/2017/08/DSC_7577.jpg', 'שמורת טבע ואתר ארכיאולוגי בצפון ישראל.', 85, 1, 1, 30, 1, '08:00:00', '17:00:00', 33.2490, 35.6534, 3500),
+('ים כנרת', 'https://psagot.ort.org.il/wp-content/uploads/thumbs/WhatsApp-Image-2022-01-20-at-13.27.21-3fbg2dnnqf24f859ghhdkw.jpeg', 'האגם הגדול ביותר בישראל.', 90, 1, 3, 40, 1, '08:00:00', '18:00:00', 32.8704, 35.6177, 0),
+('פארק חוף אחזיב הלאומי', 'https://familytrips.co.il/wp-content/uploads/elementor/thumbs/IMG-20210516-WA0047-qa7uxom8xsvgdhydz76gx2n016jdocw73bbrti3vds.jpg', 'פארק לאומי בחוף הצפוני של ישראל.', 80, 2, 1, 25, 2, '08:00:00', '17:00:00', 33.0247, 35.1024, 0),
+('שמורת עין עבדת', 'https://static.parks.org.il/wp-content/uploads/2017/09/eynot-zukim-doron-nisim-3.jpg', 'נחל גדול במדבר הנגב.', 75, 3, 2, 30, 2, '08:00:00', '16:00:00', 30.7833, 34.7333, 0),
+('קיסריה המרשימה', 'https://cdn.goodlifetv.co.il/wp-content/uploads/2021/08/09190333/shutterstock_491053702-640x405-1.jpg', 'עיר עתיקה על חופי הים התיכון של ישראל.', 85, 2, 1, 35, 1, '08:00:00', '18:00:00', 32.5000, 34.8958, 0),
+('העיר העתיקה בירושלים', 'https://cdn.exiteme.com/exitetogo/www.more-tourism.co.il/gallery/B4BE3D77-8D64-E1C5-D16A-7275FCE27852.jpg', 'הלב ההיסטורי של ירושלים.', 95, 3, 1, 50, 1, '08:00:00', '19:00:00', 31.7780, 35.2355, 0),
+('ים המלח', 'https://www.psoriasis.org.il/wp-content/uploads/2017/03/%D7%99%D7%9D-%D7%94%D7%9E%D7%9C%D7%97-%D7%A8%D7%A7%D7%A2-53585846_l.jpg', 'הנקודה הנמוכה ביותר בכדור הארץ, מפורסם בשל מי הים העשירות במלח.', 90, 3, 3, 60, 2, '08:00:00', '18:00:00', 31.4965, 35.4945, 0),
+('עכו העתיקה', 'https://cdn.exiteme.com/exitetogo/www.oldakko.co.il/userfiles/images/%D7%98%D7%99%D7%99%D7%9C%D7%AA_%D7%94%D7%97%D7%95%D7%9E%D7%95%D7%AA.jpg', 'עיר היסטורית על חופי צפון ישראל.', 80, 1, 1, 30,1,'08:00:00', '18:00:00',32.92228588536576, 35.07148851831015,0);
 
 insert into passwords(password, loginAttempts, lastLogin, account_status) values
 ('$2b$10$T8orXcY8jiNlOqImWUDp6uroW/u8P5IOJa0Mv/8dFMG9GzaBSJyja',1, '2024-06-15 21:35:39', 1);
