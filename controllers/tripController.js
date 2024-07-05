@@ -185,6 +185,15 @@ async function getAllRoutesForUser(userId) {
     }
 }
 
-module.exports = { buildTripRoute, getAllRoutesForUser };
+async function getAllRoutesFrGuide(guideId){
+    try {
+        console.log ("in getAllRoutesForUser in controler")
+        return await model.getAllRoutesFrGuide(guideId);
+    } catch (err) {
+        throw err;
+    }
+}
+
+module.exports = { buildTripRoute, getAllRoutesForUser, getAllRoutesFrGuide };
 
 

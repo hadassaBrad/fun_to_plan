@@ -8,6 +8,7 @@ router.use(cors({
  origin: 'http://localhost:5173', // Replace with your frontend app URL
  credentials: true
 }));
+
 router.get("/", async (req, res) => {
     try {
         const id = req.query.user_id;

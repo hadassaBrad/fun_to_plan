@@ -7,16 +7,30 @@ import { UserContext } from '../App.jsx';
 function TripRoutes() {
     const [tripRoutes, setTripRoutes] = useState([]);
     const { user } = useContext(UserContext);
-    const [loadingData, setLoadingData]=useState(true);
+    const [loadingData, setLoadingData] = useState(true);
     useEffect(() => {
         const fetchTrips = async () => {
             try {
-                setLoadingData(true)
-                const data = await config.getData('trips', null, null, null, null, null, user.id); // Example fetch function, adjust as needed
-                setTripRoutes(data);
-                setLoadingData(false);
-                console.log('the trips: ' );
-console.log(data);
+                setLoadingData(true);
+                let data = null;
+                if (user.role == "user") {
+                    data = await config.getData('trips', ["user_id"], [user.id], null, null, null, null); // Example fetch function, adjust as needed
+
+                }
+                if (user.role == "guide") {
+                    data = await config.getData('trips', ["guide_id"], [user.id], null, null, null, null); // Example fetch function, adjust as needed
+
+                }
+                if (data) {
+                    setTripRoutes(data);
+                    setLoadingData(false);
+                    console.log('the trips: ');
+                    console.log(data);
+                }
+                else {
+                    throw new Eroor("this permission can not get any trip routes");
+                }
+
             } catch (error) {
                 console.error('Error fetching data from DB:', error);
             }
@@ -24,7 +38,7 @@ console.log(data);
         };
 
         fetchTrips();
-    },[]);
+    }, []);
 
     return (
         <>
@@ -37,7 +51,7 @@ console.log(data);
             )}
         </>
     );
-    
+
 }
 export default TripRoutes;
 

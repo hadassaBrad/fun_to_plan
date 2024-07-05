@@ -71,4 +71,16 @@ async function getAllRoutesForUser(userId){
   console.log(err);
  }
 }
-module.exports = { createTripRoute, getGuidesByDate, getBasketForTrip, addGuideToTrip, getTripRouteForUser,getAllRoutesForUser }
+
+async function getAllRoutesFrGuide(guideId){
+  try{ console.log("in the tripd mode, getAllRoutesForעמדריך       ")
+     const sql = `SELECT * FROM triproute WHERE guide_id=?`;
+  const result = await pool.query(sql, [guideId]);
+  return result[0];
+  }
+ catch(err){
+  console.log(err);
+ }
+}
+
+module.exports = {getAllRoutesFrGuide, createTripRoute, getGuidesByDate, getBasketForTrip, addGuideToTrip, getTripRouteForUser,getAllRoutesForUser }
