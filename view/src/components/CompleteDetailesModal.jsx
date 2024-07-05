@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Modal from 'react-modal';
+import { useNavigate } from "react-router-dom";
 import '../css/completeDetails.css';
 import config from '../config'
 import { UserContext } from '../App';
@@ -7,6 +8,8 @@ import { UserContext } from '../App';
 Modal.setAppElement('#root'); // Set the app element to avoid screen reader issues
 
 function CompleteDetailesModal({ isOpen, onClose }) {
+  const navigate = useNavigate();
+
   const [startPoint, setStartPoint] = useState('');
   const [cost, setCost] = useState('');
   const [numOfHours, setNumOfHours] = useState('');
