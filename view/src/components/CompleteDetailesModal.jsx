@@ -128,7 +128,6 @@ function CompleteDetailesModal({ isOpen, onClose }) {
           <div>
             <label for="date">Select date for trip:</label>
             <input type="date" min={minDate} id="birthday" name="date" value={dateForTrip}
-            <input type="date" min={minDate} id="birthday" name="date" value={dateForTrip}
               onChange={(e) => setDateForTrip(e.target.value)}
             ></input>
           </div>
