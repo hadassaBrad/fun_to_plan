@@ -24,12 +24,14 @@ function CompleteDetailesModal({ isOpen, onClose }) {
 
   const handleSubmit = async (e) => {
 
+
     e.preventDefault();
     setCompleteDetailesError('');
     if (!user) {// need to show login!!
       setShowLogin(true);
     }
     if (!startPoint || !cost || !numOfHours) {
+      // alert('All fields are required!');
       // alert('All fields are required!');
       setCompleteDetailesError('All fields are required!')
       return;
@@ -42,7 +44,6 @@ function CompleteDetailesModal({ isOpen, onClose }) {
     // Handle form submission logic here
     alert(`Start Point: ${startPoint}, Cost: ${cost}, Number of Hours: ${numOfHours}, wants guide: ${wantsGuide}`);
 
-    const sites = localStorage.getItem("basket");
     const body = {
       userId: user.id,
       wantsGuide: wantsGuide,
@@ -59,6 +60,7 @@ function CompleteDetailesModal({ isOpen, onClose }) {
       onClose(); // Close the modal after submission
       navigate('/home/tripRoute', { state: { route: response.data } });
     }
+    catch (err) {
     catch (err) {
       console.log(err.message);
       setCompleteDetailesError(err.message)
@@ -127,13 +129,16 @@ function CompleteDetailesModal({ isOpen, onClose }) {
           <div>
             <label for="date">Select date for trip:</label>
             <input type="date" min={minDate} id="birthday" name="date" value={dateForTrip}
+            <input type="date" min={minDate} id="birthday" name="date" value={dateForTrip}
               onChange={(e) => setDateForTrip(e.target.value)}
             ></input>
           </div>
         }
 
+
         <button type="submit" className="button">Submit</button>
-        {completeDetailesError && <p className='error' >{signUpError}</p>}
+        {completeDetailesError && <p className='error' style={{color:'red'}} >{completeDetailesError}</p>}
+
 
 
       </form>
