@@ -9,7 +9,11 @@ function TripRoute() {
     const location = useLocation();
     const { route } = location.state || {};
     const mapRef = useRef();
+    console.log(route);
 
+    if (!route) {
+        return <div>Loading...</div>;
+    }
     const routeCoordinates = route.map(site => [
         site.latitude, site.longitude
     ]);
