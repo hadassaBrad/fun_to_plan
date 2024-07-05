@@ -1,7 +1,7 @@
 
 import React, { useState, useContext } from "react";
 import { useEffect } from "react";
-import TripRoute from '../pages/TripRoute'
+import TripRoute from '../components/TripRoute.jsx'
 import config from "../config";
 import { UserContext } from '../App.jsx';
 function TripRoutes() {
