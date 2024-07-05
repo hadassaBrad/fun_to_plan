@@ -61,7 +61,6 @@ function CompleteDetailesModal({ isOpen, onClose }) {
       navigate('/home/tripRoute', { state: { route: response.data } });
     }
     catch (err) {
-    catch (err) {
       console.log(err.message);
       setCompleteDetailesError(err.message)
     }
