@@ -12,6 +12,8 @@ function CompleteDetailesModal({ isOpen, onClose }) {
   const [numOfHours, setNumOfHours] = useState('');
   const [wantsGuide, setWantsGuide] = useState(false);
   const [dateForTrip, setDateForTrip] = useState(null);
+  const [completeDetailesError, setCompleteDetailesError] = useState('');
+
   const { user, setUser, showLogin, setShowLogin } = useContext(UserContext);
   const [minDate, setMinDate] = useState('');
 
@@ -19,17 +21,22 @@ function CompleteDetailesModal({ isOpen, onClose }) {
     const today = new Date().toISOString().split('T')[0];
     setMinDate(today);
   }, []);
+
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
+    setCompleteDetailesError('');
     if (!user) {// need to show login!!
       setShowLogin(true);
     }
     if (!startPoint || !cost || !numOfHours) {
-      alert('All fields are required!');
+     // alert('All fields are required!');
+      setCompleteDetailesError('All fields are required!')
       return;
     }
     if (wantsGuide && dateForTrip == null) {
-      alert('If you want a guide, you must enter date of trip');
+      setCompleteDetailesError('If you want a guide, you must enter date of trip');
+      // alert('If you want a guide, you must enter date of trip');
       return;
     }
     // Handle form submission logic here
@@ -44,12 +51,19 @@ function CompleteDetailesModal({ isOpen, onClose }) {
       numOfHours: numOfHours,
       dateForTrip: dateForTrip
     }
-    const response = await config.postData("trips", body);
+    try{
+          const response = await config.postData("trips", body);
      localStorage.removeItem("basket");
     console.log("response");
     console.log(response);
     onClose(); // Close the modal after submission
     navigate(`/home/tripRoutes`);
+    }
+    catch(err){
+      console.log(err.message);
+      setCompleteDetailesError(err.message)
+    }
+
   };
   const handleSclose = (e) => {
     onClose();
@@ -117,7 +131,11 @@ function CompleteDetailesModal({ isOpen, onClose }) {
             ></input>
           </div>
         }
+       
         <button type="submit" className="button">Submit</button>
+        {completeDetailesError && <p className='error' >{signUpError}</p>}
+
+      
       </form>
     </Modal>
   );
