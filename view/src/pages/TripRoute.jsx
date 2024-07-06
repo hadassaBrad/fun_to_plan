@@ -14,7 +14,7 @@ function TripRoute() {
     if (!route) {
         return <div>Loading...</div>;
     }
-    const routeCoordinates = route.map(site => [
+    const routeCoordinates = route.route.map(site => [
         site.latitude, site.longitude
     ]);
 

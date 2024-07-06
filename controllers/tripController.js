@@ -22,15 +22,17 @@ async function buildTripRoute(id, wantsGuide, startPoint, cost, numOfHours, date
         console.log("the basket: ");
         console.log(basket);
 
-        // 3. זימון האלגוריתם
+        // // 3. זימון האלגוריתם
         const startingPoint = { latitude: coordinates[0], longitude: coordinates[1], cost: 0 };
         console.log("startingPoint: " + startingPoint);
         const bestRoute = await geneticAlgorithm(basket, startingPoint, numOfHours, cost);
         console.log("the bestRoute: ");
         console.log(bestRoute);
-
+      //  bestRoute=[startingPoint,...bestRoute];
+     
         // 4. קריאה לפונקציית יצירת מסלול
-        const newRoute = await model.createTripRoute(id, bestRoute);
+   const newRoute = await model.createTripRoute(id, bestRoute);
+    //  const newRoute = await model.createTripRoute(id, basket);
         if (wantsGuide) {
             console.log("new route");
             console.log(newRoute);
