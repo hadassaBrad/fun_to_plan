@@ -1,17 +1,28 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
 .map-container {
- 
-    /* margin: 0 auto; מרכז את הקוביה באמצעות margin */
-    width: 100%;
-    width:600px;
-         height:230px ;
-         border:rgb(17, 17, 17);
-    /* height: 50vh; גובה קבוע עבור המפה במצב מסך קטן */
-    /* top: 80%; */
+    position: absolute;
     right: 0;
-    margin-bottom: 30px;
-    min-height: 100vh;
-    /* position:fixed; */
-    /* הוספת min-height גם עבור גודל קטן */
+    top: 0;
+    width: 50vw; /* חצי מרוחב העמוד */
+    height: 100vh; /* גובה מלא של העמוד */
+    border: 1px solid rgb(17, 17, 17); /* גבול מסביב לקוביה */
+    box-sizing: border-box; /* כולל את הגבול בחישוב הגודל */
+}
+
+.map {
+    width: 100%;
+    height: 100%;
 }
 
 
