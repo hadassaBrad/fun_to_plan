@@ -1,9 +1,9 @@
 const model = require('../models/sitesModel');
 
-async function getSites(start, limit) {
+async function getSites(age, area, difficulty, start, limit) {
     try {
         console.log("in controller' haddasssa is sweet");
-        return model.getSites(start, limit);
+        return model.getSites(age, area, difficulty, start, limit);
     } catch (err) {
         throw err;
     }

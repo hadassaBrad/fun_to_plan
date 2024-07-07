@@ -15,8 +15,11 @@ router.get("/", async (req, res) => {
     try {
         const start = parseInt(req.query._start) || 0;
         const limit = parseInt(req.query._limit) || 10;
+        const age = parseInt(req.query.age) || null;
+        const area = parseInt(req.query.area) || null;
+        const difficulty = parseInt(req.query.difficulty) || null;
         console.log("gaaaaaaa");
-        const allSites = await getSites(start, limit);
+        const allSites = await getSites(age, area, difficulty, start, limit);
         console.log("all sites....  "+allSites);
         console.log(allSites);
         const sitesToReturn = allSites.map(site => {

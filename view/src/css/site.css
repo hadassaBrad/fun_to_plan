@@ -77,3 +77,78 @@
         padding: 8px 16px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.sites-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+    width: 100%; /* Ensure the filters take the full width */
+    position: sticky; /* Keep the filters at the top */
+    top: 0;
+    z-index: 10; /* Ensure the filters are above other elements */
+}
+
+.sites {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    width: 100%;
+    margin-top: 20px; /* Add space to avoid overlap */
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+}

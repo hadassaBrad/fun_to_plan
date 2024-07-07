@@ -3,6 +3,10 @@ import config from '../config.js';
 import { UserContext } from '../App.jsx';
 import { Link } from "react-router-dom";
 import AdminSite from "./AdminSite.jsx";
+import { SlBasketLoaded } from "react-icons/sl";
+import { RiDeleteBin5Line } from "react-icons/ri";
+
+
 import "../css/siteCard.css";
 
 function SiteCard({ site, setSites, sites }) {
@@ -75,9 +79,9 @@ function SiteCard({ site, setSites, sites }) {
                     title={site.siteName}
                     src={site.url}
                 />
-                {isAdmin && <button className="site-card-button" onClick={deleteSite}>✖️</button>}
+                {isAdmin && <button className="site-card-button" onClick={deleteSite}><RiDeleteBin5Line /></button>}
                 {isAdmin && <button className="site-card-button" onClick={updateSite}>UPDATE SITE</button>}
-                {(user == null || user.role === "user") && <button className="site-card-button" onClick={addToBasket}>Add to basket</button>}
+                {(user == null || user.role === "user") && <button className="site-card-button" onClick={addToBasket}><SlBasketLoaded />                </button>}
                 <Link className="site-card-link" to={`/home/sites/${site.id}`}>Learn More</Link>
             </div>
             {showAdminSite && <AdminSite onClickSave={onClickSave} site={siteForUpdate} setSite={setSiteForUpdate} onClose={() => setShowAdminSite(false)} />}

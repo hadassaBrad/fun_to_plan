@@ -49,22 +49,6 @@ const getData = async (entity,
     }
 };
 
-// const putData = async (entity, idToUpdate, body) => {
-//     fetch(`${baseUrl}${entity}/${idToUpdate}`, {
-//         method: 'PUT',
-//         body: JSON.stringify(body),
-//         headers: {
-//             'Content-type': 'application/json; charset=UTF-8',
-//         },
-//     })
-//         .then((response) => response.json())
-//         .then((json) => {
-//             console.log("in config put dataaaaaaaaaaaa")
-//             console.log(json)
-//             return json;
-//         });
-// }
-
 const putData = async (entity, idToUpdate, body) => {
     return fetch(`${baseUrl}${entity}/${idToUpdate}`, {
         method: 'PUT',
