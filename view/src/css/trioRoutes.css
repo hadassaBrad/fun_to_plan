@@ -14,7 +14,7 @@ body, html {
     position: absolute;
     right: 0;
     top: 0;
-    width: 50vw; /* חצי מרוחב העמוד */
+    width: 100vw; /* חצי מרוחב העמוד */
     height: 100vh; /* גובה מלא של העמוד */
     border: 1px solid rgb(17, 17, 17); /* גבול מסביב לקוביה */
     box-sizing: border-box; /* כולל את הגבול בחישוב הגודל */
@@ -26,3 +26,121 @@ body, html {
 }
 
 
+.site-list {
+    display: flex;
+    flex-wrap: wrap; /* עטיפה של השורות */
+    justify-content: center; /* מרכוז במרכז */
+    padding: 10px; /* רווח פנימי */
+}
+
+.site-item {
+    display: flex;
+    align-items: center; /* יישור האייקונים והשמות לאותו הקו */
+    margin: 5px; /* רווח בין הפריטים */
+}
+
+.site-icon {
+    width: 24px; /* גודל האייקון */
+    height: 24px; /* גודל האייקון */
+    margin-right: 5px; /* רווח בין האייקון לשם האתר */
+}
+
+.site-name {
+    font-size: 14px; /* גודל הטקסט */
+    color: #333; /* צבע הטקסט */
+}
+.site-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+ 
+}.site-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  
+    padding: 200px;
+    margin-top: 20%;
+    margin-right: 30%;
+}
+
+.site-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.site-info {
+    display: flex;
+    align-items: center;
+}
+
+.site-name {
+    margin-left: 5px;
+}
+
+.dots {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px; /* Adjust if necessary */
+}
+
+.dots li {
+    line-height: 1; /* Adjust the space between dots if necessary */
+}
+.card {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000; /* ודא כי הכרטיס צף מוצג מעל כל המרכיבים האחרים */
+}
+
+.floating-card {
+    position: fixed;
+    top: 0;
+    left: 50%; /* ממוקם בחצי השמאלי של העמוד */
+    transform: translateX(-50%);
+    height: 100vh; /* ממלא גובה מלא של העמוד */
+    width: 50%; /* חצי מרוחב העמוד */
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* ודא כי הכרטיס צף מוצג מעל כל המרכיבים האחרים */
+    overflow-y: auto; /* סרגל גלילה אם יש יותר מדי תוכן */
+}
+
+
+.site-item {
+    margin-bottom: 10px; /* מרווח בין פריטי האתרים בתוך הכרטיס */
+}
+
+.site-info {
+    display: flex;
+    align-items: center;
+}
+
+.site-info svg {
+    margin-right: 5px;
+}
+
+.site-name {
+    margin-left: 5px;
+}
+
+.dots {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.dots li {
+    margin-right: 5px; /* מרווח בין הנקודות */
+}

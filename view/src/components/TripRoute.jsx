@@ -4,13 +4,12 @@ import "leaflet/dist/leaflet.css";
  import '../css/trioRoutes.css'; // ייבוא קובץ ה-CSS
 
 
- import React from 'react';
  
  function TripRoute({ route }) {
     const navigate=useNavigate();
 
     const chosenRoutes=route.route;
-
+console.log()
      const handleNavigate = (selectedRoute) => {
          navigate('/home/tripRoute', { state: { route: selectedRoute } });
      };

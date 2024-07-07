@@ -1,7 +1,6 @@
-/* הקובץ styles.css */
+
 .header {
-    /* transition: transform 0.5s, background-color 0.5s;
-    background-color: rgba(0, 0, 0, 0.1); */
+   
     background-color: rgb(168, 206, 211);
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -18,43 +17,43 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 20px; /* מרווח קטן מקצה העמוד */
+    padding: 0 20px; 
 }
 
 .nav-left,
 .nav-right {
-    flex: 1; /* מרחיב את הצדדים */
+    flex: 1; 
     display: flex;
     align-items: center;
 }
 
 .nav-center {
-    flex: 2; /* מרחיב את החלק המרכזי */
+    flex: 2; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .nav-link {
-    margin: 0 30px; /* רווחים גדולים יותר בין קישורים */
+    margin: 0 30px; 
     text-decoration: none;
-    color: #00796b; /* צבע טורקיז כהה */
+    color: #00796b; 
     font-weight: bold;
     font-size: 18px;
     transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #004d40; /* כהה יותר בעת מעבר עכבר */
-    text-decoration: underline; /* קו תחתי בעת מעבר עכבר */
+    color: #004d40;
+    text-decoration: underline; 
 }
 
 .nav-link:active {
-    text-decoration: underline; /* קו תחתי בעת לחיצה */
+    text-decoration: underline; 
 }
 
 .auth-button {
-    background-color: #00796b; /* צבע טורקיז כהה */
+    background-color: #00796b; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -66,7 +65,7 @@
 }
 
 .auth-button:hover {
-    background-color: #004d40; /* כהה יותר בעת מעבר עכבר */
+    background-color: #004d40; 
 }
 
 .logout-button {
@@ -74,17 +73,17 @@
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px; /* התאמת גודל הכפתור */
+    padding: 10px 20px; 
     font-size: 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
     transition: background-color 0.3s ease;
-    margin-left: 20px; /* מרווח קטן מקצה העמוד */
+    margin-left: 20px; 
 }
 
 .logout-button:hover {
-    background-color: #004d40; /* כהה יותר בעת מעבר עכבר */
+    background-color: #004d40; 
 }
 
 .icon {
@@ -95,7 +94,7 @@
     .navbar {
         flex-direction: column;
         align-items: center;
-        padding: 10px; /* התאמת המרווח למובייל */
+        padding: 10px;
     }
 
     .nav-left,
@@ -109,7 +108,7 @@
     }
 
     .nav-link {
-        margin: 10px 0; /* מרווחים מותאמים למובייל */
+        margin: 10px 0; 
     }
 
     .auth-button {
@@ -122,5 +121,5 @@
 }
 
 body {
-    padding-top: 100px; /* מרווח כדי להימנע מחפיפה עם הכותרת */
-}
+    padding-top: 100px;
+} 

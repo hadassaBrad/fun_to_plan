@@ -4,21 +4,24 @@ import { MapContainer, TileLayer, Polyline, Marker, Popup } from "react-leaflet"
 import "leaflet/dist/leaflet.css";
 import '../css/trioRoutes.css'; // ייבוא קובץ ה-CSS
 //import L from "leaflet";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 function TripRoute() {
     const location = useLocation();
     console.log(location.state);
     const { route } = location.state.route || {};
     const mapRef = useRef();
+        
+    console.log("route");
     console.log(route);
 
     if (!route) {
         return <div>Loading...</div>;
     }
-    const routeCoordinates = route.route.map(site => [
+    const routeCoordinates = route.map(site => [
         site.latitude, site.longitude
     ]);
-
+    console.log(routeCoordinates);
   
     useEffect(() => {
         if (mapRef.current) {
@@ -47,14 +50,43 @@ function TripRoute() {
                     </Marker>
                 ))}
             </MapContainer>
-            <div>
-            route.route.siteName
-            </div>
+       
+
         </div>
+       
     );
 }
 
 export default TripRoute;
+
+
+
+
+
+
+     {/* <div className="card">
+            <div className="floating-card"> */}
+    {/* <div className="site-list">
+        <div> date of trip: {}</div>
+        {route.map((site, index) => (
+            <div key={index} className="site-item">
+                <div className="site-info">
+                    <FaMapMarkerAlt />
+                    <span className="site-name">{index === 0 ? "your home" : site.site_name}</span>
+                </div>
+                {index < route.length - 1 && (
+                    <ul className="dots">
+                        {Array(10).fill(0).map((_, i) => (
+                            <li key={i}>.</li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+        ))}
+    </div> */}
+{/* </div> */}
+
+{/* </div> */}
 
 
 

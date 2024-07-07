@@ -8,7 +8,8 @@ async function getTripRouteForUser(id){
 }
 
 async function getBasketForTrip(userId) {
-  const sql = 'SELECT b.site_id AS id, s.longitude, s.latitude, s.price AS cost FROM basket b JOIN sites s ON b.site_id = s.id WHERE b.user_id = ?';
+  console.log("userId in the modek trip:"+userId);
+  const sql = 'SELECT b.site_id AS id, s.longitude, s.latitude,s.site_name, s.price AS cost FROM basket b JOIN sites s ON b.site_id = s.id WHERE b.user_id = ?';
   const result = await pool.query(sql, [userId]);
   console.log("result in getBasketForTrip model:  ");
   console.log(result[0]);
