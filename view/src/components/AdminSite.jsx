@@ -1,4 +1,3 @@
-
 import React, { useState, useContext } from "react";
 import { UserContext } from '../App.jsx';
 import config from '../config.js';
@@ -18,7 +17,6 @@ function AdminSite({ onClose, site, setSite, onClickSave }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // בדיקת תקינות טופס
         for (const key in site) {
             if (site[key] === "") {
                 setFormError("Please enter ${key.replace(/([A-Z])/g, ' $1').toLowerCase()}");
@@ -26,17 +24,15 @@ function AdminSite({ onClose, site, setSite, onClickSave }) {
             }
         }
 
-        // Reset form error
         setFormError('');
 
-        // לוגיקה לשליחת הנתונים לשרת
         try {
             console.log("site:   " + site.id);
-            const response = onClickSave(site);//await config.postData("sites", site)
+            const response = onClickSave(site);
             if (response) {
                 console.log("Site details submitted successfully");
                 alert("Site X successfuly")
-                onClose(); // Close the modal after successful submission
+                onClose();
             } else {
                 console.error("Failed to submit site details");
             }
@@ -75,4 +71,4 @@ function AdminSite({ onClose, site, setSite, onClickSave }) {
     );
 }
 
-export default AdminSite;
+export default AdminSite; 

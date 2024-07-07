@@ -2,19 +2,20 @@ import React, { useEffect, useRef } from "react";
 import { useLocation } from 'react-router-dom';
 import { MapContainer, TileLayer, Polyline, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
- import '../css/trioRoutes.css'; // ייבוא קובץ ה-CSS
-import L from "leaflet";
+import '../css/trioRoutes.css'; // ייבוא קובץ ה-CSS
+//import L from "leaflet";
 
 function TripRoute() {
     const location = useLocation();
-    const { route } = location.state || {};
+    console.log(location.state);
+    const { route } = location.state.route || {};
     const mapRef = useRef();
     console.log(route);
 
     if (!route) {
         return <div>Loading...</div>;
     }
-    const routeCoordinates = route.map(site => [
+    const routeCoordinates = route.route.map(site => [
         site.latitude, site.longitude
     ]);
 

@@ -73,7 +73,8 @@ async function getcoordinates(startPoint) {
             const { lat, lon } = data[0];
             console.log(`Latitude: ${lat}, Longitude: ${lon}`);
             return [lat, lon];
-        } else {
+        } 
+        else {
             console.log('Address not found.');
             return null;
         }

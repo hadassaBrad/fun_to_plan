@@ -61,7 +61,7 @@ function CompleteDetailesModal({ isOpen, onClose }) {
       console.log("response");
       console.log(response);
       onClose(); // Close the modal after submission
-      navigate('/home/tripRoute', { state: { route: response.data } });
+      navigate('/home/tripRoute', { state: { route: response } });
     }
     catch (err) {
       console.log(err.message);
