@@ -1,107 +1,107 @@
-// קבע את הנתונים הראשוניים
-const sites = [
-    { id: 1, cost: 20, latitude: '29.787300', longitude: '34.976600' },
-    { id: 2, cost: 15, latitude: '30.787300', longitude: '35.976600' },
-    { id: 3, cost: 30, latitude: '31.787300', longitude: '36.976600' },
-    { id: 4, cost: 25, latitude: '32.787300', longitude: '37.976600' },
-    { id: 5, cost: 10, latitude: '33.787300', longitude: '38.976600' }
-  ];
+// // קבע את הנתונים הראשוניים
+// const sites = [
+//     { id: 1, cost: 20, latitude: '29.787300', longitude: '34.976600' },
+//     { id: 2, cost: 15, latitude: '30.787300', longitude: '35.976600' },
+//     { id: 3, cost: 30, latitude: '31.787300', longitude: '36.976600' },
+//     { id: 4, cost: 25, latitude: '32.787300', longitude: '37.976600' },
+//     { id: 5, cost: 10, latitude: '33.787300', longitude: '38.976600' }
+//   ];
   
-  const maxBudget = 50; // התקציב המרבי לטיול
-  const maxHours = 5; // הזמן המרבי לטיול
+//   const maxBudget = 50; // התקציב המרבי לטיול
+//   const maxHours = 5; // הזמן המרבי לטיול
   
-  const startSite = { id: -1, cost: 0, latitude: '29.787300', longitude: '34.976600' }; // נקודת ההתחלה
+//   const startSite = { id: -1, cost: 0, latitude: '29.787300', longitude: '34.976600' }; // נקודת ההתחלה
   
-  const numSites = sites.length;
+//   const numSites = sites.length;
   
-  // פונקציה לחישוב ערך הפיטנסיה של פתרון נתון
-  function computeFitness(solution) {
-    let totalCost = 0;
-    let totalDistance = 0;
-    let totalTime = 0;
+//   // פונקציה לחישוב ערך הפיטנסיה של פתרון נתון
+//   function computeFitness(solution) {
+//     let totalCost = 0;
+//     let totalDistance = 0;
+//     let totalTime = 0;
   
-    // התחל בנקודת ההתחלה
-    let currentPoint = startSite;
+//     // התחל בנקודת ההתחלה
+//     let currentPoint = startSite;
   
-    // חישוב הערך של הפתרון
-    for (let i = 0; i < solution.length; i++) {
-      const nextSite = sites[solution[i]];
+//     // חישוב הערך של הפתרון
+//     for (let i = 0; i < solution.length; i++) {
+//       const nextSite = sites[solution[i]];
   
-      // חישוב מרחק בין שני האתרים
-      const distance = calculateDistance(currentPoint, nextSite);
-      totalDistance += distance;
+//       // חישוב מרחק בין שני האתרים
+//       const distance = calculateDistance(currentPoint, nextSite);
+//       totalDistance += distance;
   
-      // חישוב זמן הנסיעה בין האתרים
-      const travelTime = distance / 60; // בשעות, לפי קילומטר
-      totalTime += travelTime;
+//       // חישוב זמן הנסיעה בין האתרים
+//       const travelTime = distance / 60; // בשעות, לפי קילומטר
+//       totalTime += travelTime;
   
-      // חישוב עלויות הנסיעה לאתר הנוכחי
-      totalCost += nextSite.cost;
+//       // חישוב עלויות הנסיעה לאתר הנוכחי
+//       totalCost += nextSite.cost;
   
-      // העברה אל האתר הבא
-      currentPoint = nextSite;
-    }
+//       // העברה אל האתר הבא
+//       currentPoint = nextSite;
+//     }
   
-    // החזרת הערך של הפיטנסיה
-    return { totalCost, totalDistance, totalTime };
-  }
+//     // החזרת הערך של הפיטנסיה
+//     return { totalCost, totalDistance, totalTime };
+//   }
   
-  // פונקציה לחישוב מרחק בין שני נקודות
-  function calculateDistance(pointA, pointB) {
-    const lat1 = parseFloat(pointA.latitude);
-    const lon1 = parseFloat(pointA.longitude);
-    const lat2 = parseFloat(pointB.latitude);
-    const lon2 = parseFloat(pointB.longitude);
+//   // פונקציה לחישוב מרחק בין שני נקודות
+//   function calculateDistance(pointA, pointB) {
+//     const lat1 = parseFloat(pointA.latitude);
+//     const lon1 = parseFloat(pointA.longitude);
+//     const lat2 = parseFloat(pointB.latitude);
+//     const lon2 = parseFloat(pointB.longitude);
   
-    // חישוב המרחק בין שני הנקודות בקילומטרים
-    const R = 6371; // רדיוס של כדור הארץ בקילומטרים
-    const dLat = toRadians(lat2 - lat1);
-    const dLon = toRadians(lon2 - lon1);
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c;
+//     // חישוב המרחק בין שני הנקודות בקילומטרים
+//     const R = 6371; // רדיוס של כדור הארץ בקילומטרים
+//     const dLat = toRadians(lat2 - lat1);
+//     const dLon = toRadians(lon2 - lon1);
+//     const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+//               Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+//               Math.sin(dLon / 2) * Math.sin(dLon / 2);
+//     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+//     const distance = R * c;
   
-    return distance;
-  }
+//     return distance;
+//   }
   
-  // פונקציה להמרת מעלות לרדיאנים
-  function toRadians(degrees) {
-    return degrees * (Math.PI / 180);
-  }
+//   // פונקציה להמרת מעלות לרדיאנים
+//   function toRadians(degrees) {
+//     return degrees * (Math.PI / 180);
+//   }
   
-  // פונקציה ראשית להרצת האלגוריתם הגנטי
-  function geneticAlgorithm() {
-    // פתח ערכות קוד
-    let population = initializePopulation(10);
+//   // פונקציה ראשית להרצת האלגוריתם הגנטי
+//   function geneticAlgorithm() {
+//     // פתח ערכות קוד
+//     let population = initializePopulation(10);
   
-    let generations = 0;
-    let fittestSolution = null;
-    let fittestFitness = Infinity;
+//     let generations = 0;
+//     let fittestSolution = null;
+//     let fittestFitness = Infinity;
   
-    while (generations < 100) {
-      // חישוב הערכים לכל פתרון
-      let fitnessValues = population.map(solution => computeFitness(solution));
+//     while (generations < 100) {
+//       // חישוב הערכים לכל פתרון
+//       let fitnessValues = population.map(solution => computeFitness(solution));
   
-      // בחירת הפתרון הכי טוב
-      for (let i = 0; i < population.length; i++) {
-        const fitness = fitnessValues[i];
-        if (fitness.totalCost <= maxBudget && fitness.totalTime <= maxHours && fitness.totalCost < fittestFitness) {
-          fittestSolution = population[i];
-          fittestFitness = fitness.totalCost;
-        }
-      }
+//       // בחירת הפתרון הכי טוב
+//       for (let i = 0; i < population.length; i++) {
+//         const fitness = fitnessValues[i];
+//         if (fitness.totalCost <= maxBudget && fitness.totalTime <= maxHours && fitness.totalCost < fittestFitness) {
+//           fittestSolution = population[i];
+//           fittestFitness = fitness.totalCost;
+//         }
+//       }
   
-      // אם נמצא הפתרון האופטימלי מספר אלגוריתמים
-      generations++;
-      population = evolvePopulation(population);
-    }
+//       // אם נמצא הפתרון האופטימלי מספר אלגוריתמים
+//       generations++;
+//       population = evolvePopulation(population);
+//     }
   
-    // הדפסה של הפתרון הטוב ביותר
-    console.log('הפתרון הטוב ביותר:');
-    console.log(fittestSolution.map(index => sites[index]));
-  }
+//     // הדפסה של הפתרון הטוב ביותר
+//     console.log('הפתרון הטוב ביותר:');
+//     console.log(fittestSolution.map(index => sites[index]));
+//   }
   
   
   
@@ -279,5 +279,127 @@ const sites = [
 
 //     return bestIndividual ? bestIndividual.map(index => basket[index]) : [];
 // }
+// Helper functions
+function calculateDistance(site1, site2) {
+    const lat1 = site1.latitude;
+    const lon1 = site1.longitude;
+    const lat2 = site2.latitude;
+    const lon2 = site2.longitude;
+    const R = 6371; // Radius of the Earth in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in km
+}
+
+function calculateTime(distance) {
+    const averageSpeed = 60; // Average speed in km/h
+    return distance / averageSpeed;
+}
+
+function calculateCost(distance) {
+    const costPerKm = 2; // Cost per km in currency units
+    return distance * costPerKm;
+}
+
+function fitnessFunction(chromosome, basket, startingPoint, maxTime, maxCost) {
+    let totalDistance = 0;
+    let totalTime = 0;
+    let totalCost = 0;
+    let currentSite = startingPoint;
+
+    for (let i = 0; i < chromosome.length; i++) {
+        const nextSite = basket[chromosome[i]];
+        const distance = calculateDistance(currentSite, nextSite);
+        totalDistance += distance;
+        totalTime += calculateTime(distance);
+        totalCost += calculateCost(distance);
+        currentSite = nextSite;
+    }
+
+    // Adding the return to the starting point
+    const returnDistance = calculateDistance(currentSite, startingPoint);
+    totalDistance += returnDistance;
+    totalTime += calculateTime(returnDistance);
+    totalCost += calculateCost(returnDistance);
+
+    if (totalTime > maxTime || totalCost > maxCost) {
+        return Infinity; // Penalty for infeasible solutions
+    }
+
+    return 1 / (totalDistance + totalTime + totalCost);
+}
+
+function crossover(parent1, parent2) {
+    const crossoverPoint = Math.floor(Math.random() * parent1.length);
+    const child1 = parent1.slice(0, crossoverPoint).concat(parent2.filter(gene => !parent1.slice(0, crossoverPoint).includes(gene)));
+    const child2 = parent2.slice(0, crossoverPoint).concat(parent1.filter(gene => !parent2.slice(0, crossoverPoint).includes(gene)));
+    return [child1, child2];
+}
+
+function mutate(chromosome, mutationRate, basket) {
+    if (Math.random() < mutationRate) {
+        const mutationPoint = Math.floor(Math.random() * chromosome.length);
+        const newSiteIndex = Math.floor(Math.random() * basket.length);
+        chromosome[mutationPoint] = newSiteIndex;
+    }
+    return chromosome;
+}
+
+// Genetic Algorithm
+function geneticAlgorithm(basket, startingPoint, maxTime, maxCost, populationSize = 100, generations = 100, mutationRate = 0.01) {
+    // Initial population
+    let population = Array.from({ length: populationSize }, () => 
+        basket.map((_, index) => index).sort(() => Math.random() - 0.5)
+    );
+
+    for (let generation = 0; generation < generations; generation++) {
+        // Evaluate fitness
+        const fitnessScores = population.map(individual => fitnessFunction(individual, basket, startingPoint, maxTime, maxCost));
+
+        // Selection
+        const selectedPopulation = population.map((_, i) => ({
+            chromosome: population[i],
+            fitness: fitnessScores[i]
+        })).sort((a, b) => a.fitness - b.fitness)
+          .slice(0, populationSize / 2)
+          .map(ind => ind.chromosome);
+
+        // Crossover
+        const nextPopulation = [];
+        while (nextPopulation.length < populationSize) {
+            const parent1 = selectedPopulation[Math.floor(Math.random() * selectedPopulation.length)];
+            const parent2 = selectedPopulation[Math.floor(Math.random() * selectedPopulation.length)];
+            const [child1, child2] = crossover(parent1, parent2);
+            nextPopulation.push(child1, child2);
+        }
+
+        // Mutation
+        population = nextPopulation.map(individual => mutate(individual, mutationRate, basket));
+    }
+
+    // Get the best solution
+    const bestIndividual = population.reduce((best, individual) => 
+        fitnessFunction(individual, basket, startingPoint, maxTime, maxCost) < fitnessFunction(best, basket, startingPoint, maxTime, maxCost) ? individual : best, population[0]);
+    
+    return bestIndividual.map(index => basket[index]);
+}
+
+// Sample usage
+const startingPoint = { latitude: 32.0853, longitude: 34.7818 }; // Example starting point
+const maxTime = 8; // 8 hours
+const maxCost = 500; // Example budget
+
+const basket = [
+    { latitude: 32.0853, longitude: 34.7818, id: 1 },
+    { latitude: 31.7683, longitude: 35.2137, id: 2 },
+    // Add more sites with their respective latitude, longitude, and id
+];
+
+const bestRoute = geneticAlgorithm(basket, startingPoint, maxTime, maxCost);
+console.log("Best route:", bestRoute);
 
 module.exports = { geneticAlgorithm };

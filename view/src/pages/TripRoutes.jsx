@@ -1,60 +1,52 @@
+import React, { useEffect, useRef } from "react";
+import { useLocation } from 'react-router-dom';
+import { MapContainer, TileLayer, Polyline, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import '../css/trioRoutes.css'; // ייבוא קובץ ה-CSS
+import L from "leaflet";
 
-import React, { useState, useContext } from "react";
-import { useEffect } from "react";
-import TripRoute from '../components/TripRoute.jsx'
-import config from "../config";
-import { UserContext } from '../App.jsx';
-function TripRoutes() {
-    const [tripRoutes, setTripRoutes] = useState([]);
-    const { user } = useContext(UserContext);
-    const [loadingData, setLoadingData] = useState(true);
+function TripRoute() {
+    const location = useLocation();
+    const { route } = location.state || {};
+    const mapRef = useRef();
+    console.log(route);
+
+    if (!route) {
+        return <div>Loading...</div>;
+    }
+    const routeCoordinates = route.route.map(site => [
+        site.latitude, site.longitude
+    ]);
+
     useEffect(() => {
-        const fetchTrips = async () => {
-            try {
-                setLoadingData(true);
-                let data = null;
-                if (user.role == "user") {
-                    data = await config.getData('trips', ["user_id"], [user.id], null, null, null, null); // Example fetch function, adjust as needed
-
-                }
-                if (user.role == "guide") {
-                    data = await config.getData('trips', ["guide_id"], [user.id], null, null, null, null); // Example fetch function, adjust as needed
-
-                }
-                if (data) {
-                    setTripRoutes(data);
-                    setLoadingData(false);
-                    console.log('the trips: ');
-                    console.log(data);
-                }
-                else {
-                    throw new Eroor("this permission can not get any trip routes");
-                }
-
-            } catch (error) {
-                console.error('Error fetching data from DB:', error);
-            }
-
-        };
-
-        fetchTrips();
-    }, []);
+        if (mapRef.current) {
+            const map = mapRef.current;
+            map.fitBounds(routeCoordinates);
+        }
+    }, [routeCoordinates]);
 
     return (
-        <>
-            {loadingData ? (
-                <h1>loading routes...</h1>
-            ) : (
-                tripRoutes.map(route => (
-                    <TripRoute key={route.id} route={route} />
-                ))
-            )}
-        </>
+        <div className="container">
+            <MapContainer className="map-container"
+                center={[31.0461, 34.8516]}
+                zoom={8}
+                scrollWheelZoom={true}
+                ref={mapRef}>
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <Polyline positions={routeCoordinates} color="red" />
+                {routeCoordinates.map((position, index) => (
+                    <Marker key={index} position={position}>
+                        <Popup>
+                            נקודת ציון מספר {index + 1}
+                        </Popup>
+                    </Marker>
+                ))}
+            </MapContainer>
+        </div>
     );
-
 }
-export default TripRoutes;
 
-
-
-
+export default TripRoute;

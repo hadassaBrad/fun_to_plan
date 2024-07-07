@@ -24,6 +24,7 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "gauge": "^5.0.2",
+    "geolib": "^3.3.4",
     "glob": "^10.4.1",
     "inflight": "^1.0.6",
     "jsonwebtoken": "^9.0.2",
