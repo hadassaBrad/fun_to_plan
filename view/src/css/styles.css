@@ -123,3 +123,96 @@
 body {
     padding-top: 100px;
 } 
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #f8f9fa;
+    /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    max-width: 1200px;
+    margin: 0px;
+  
+}
+
+.nav-left, .nav-center, .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left {
+    flex: 0 0 20%;
+}
+
+.nav-center {
+    flex: 1;
+    justify-content: center;
+}
+
+.nav-right {
+    flex: 0 0 20%;
+    justify-content: flex-end;
+
+}
+
+.nav-link, .auth-button, .logout-button {
+    background-color: #f8f9fa;
+    color: #333;
+    text-decoration: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.nav-link:hover, .auth-button:hover, .logout-button:hover {
+    background-color: #e9ecef;
+}
+
+.nav-link.active {
+    color: #007bff;
+    font-weight: bold;
+    font-size: 14px;
+}
+.user-name {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.auth-button, .logout-button {
+    cursor: pointer;
+}
+
+/* Add some space below the header for the content */
+body {
+    padding-top: 60px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-left, .nav-center, .nav-right {
+        flex: 1;
+        justify-content: center;
+        margin: 5px 0;
+    }
+
+    .nav-right {
+        justify-content: center;
+    }
+}

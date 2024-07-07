@@ -1,0 +1,27 @@
+/* Sites.css */
+.sites-page {
+    display: flex;
+  }
+  
+  .sites {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px;
+    width: 75%; /* Adjust as needed for sidebar */
+  }
+  
+  .filters {
+    width: 25%; /* Adjust as needed for sidebar */
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .sites .site-card {
+    flex: 1 1 30%; /* Adjust as needed for responsiveness */
+    box-sizing: border-box;
+    margin: 10px;
+  }
+  

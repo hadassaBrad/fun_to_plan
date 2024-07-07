@@ -73,17 +73,18 @@ function SiteCard({ site, setSites, sites }) {
     return (
         <>
             <div className="site-card">
-                <h5 className="site-card-title">{site.siteName}</h5>
+              
                 <img
                     className="site-card-img"
                     alt={site.siteName}
                     title={site.siteName}
                     src={site.url}
                 />
+                  {/* <h5 className="site-card-title">{site.siteName}</h5> */}
                 {isAdmin && <button className="site-card-button" onClick={deleteSite}><RiDeleteBin5Line /></button>}
                 {isAdmin && <button className="site-card-button" onClick={updateSite}>UPDATE SITE</button>}
                 {(user == null || user.role === "user") && <button className="site-card-button" onClick={addToBasket}><SlBasketLoaded /></button>}
-                <Link className="site-card-link" to={`/home/sites/${site.id}`}>Learn More</Link>
+                <Link className="site-card-link" to={`/home/sites/${site.id}`}>{site.siteName}</Link>
             </div>
             {showAdminSite && <AdminSite onClickSave={onClickSave} site={siteForUpdate} setSite={setSiteForUpdate} onClose={() => setShowAdminSite(false)} />}
         </>

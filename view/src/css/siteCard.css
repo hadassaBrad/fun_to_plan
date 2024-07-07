@@ -1,48 +1,50 @@
 .site-card {
-    width: calc(33.33% - 20px); /* כאשר יש 3 מלבנים בכל שורה */
+    width: calc(20.33% - 20px);
+    /* כאשר יש 3 מלבנים בכל שורה */
     margin: 10px;
     padding: 15px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     display: inline-block;
     vertical-align: top;
     position: relative;
     background: #f9f9f9;
-  }
-  
-  .site-card .site-card-title {
+}
+
+.site-card .site-card-title {
     margin-top: 10px;
     font-weight: bold;
-  }
-  
-  .site-card .site-card-img {
+}
+
+.site-card .site-card-img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     border-bottom: 1px solid #ccc;
-    object-fit: cover; /* תמונה מותאמת למידות המסגרת */
-    object-position: center bottom; /* מיקום התמונה במסגרת */
-  }
-  
-  .site-card .site-card-details {
+    /* object-fit: cover;  */
+    object-position: center bottom;
+    /* מיקום התמונה במסגרת */
+}
+
+.site-card .site-card-details {
     padding: 10px;
-  }
-  
-  .site-card .site-card-details h2 {
+}
+
+.site-card .site-card-details h2 {
     margin: 0;
     font-size: 18px;
-  }
-  
-  .site-card .site-card-details .site-card-link {
+}
+
+.site-card .site-card-details .site-card-link {
     display: block;
     text-decoration: none;
-    color: #007bff;
+    color: #000000;
     font-weight: bold;
     margin-top: 5px;
-  }
-  
-  .site-card .site-card-add-basket {
+}
+
+.site-card .site-card-add-basket {
     margin-top: 10px;
     background-color: #007bff;
     color: white;
@@ -50,16 +52,20 @@
     border: none;
     cursor: pointer;
     border-radius: 5px;
-  }
-  
-  .site-card .site-card-add-basket:hover {
-    background-color: #0056b3;
-  }
-  
+}
+
+.site-card .site-card-add-basket:hover {
+    background-color: #000000;
+}
+
+.site-card .site-card-link:hover {
+    text-decoration: underline;
+}
+
 
 /* .site-card {
     width: calc(33.33% - 20px);  */
-    /* margin: 10px;
+/* margin: 10px;
     padding: 15px;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
