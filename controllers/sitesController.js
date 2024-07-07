@@ -2,7 +2,7 @@ const model = require('../models/sitesModel');
 
 async function getSites(age, area, difficulty, start, limit) {
     try {
-        console.log("in controller' haddasssa is sweet");
+        console.log("in controller' get sites ");
         return model.getSites(age, area, difficulty, start, limit);
     } catch (err) {
         throw err;

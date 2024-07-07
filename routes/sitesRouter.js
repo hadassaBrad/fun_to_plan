@@ -19,6 +19,7 @@ router.get("/", async (req, res) => {
         const area = parseInt(req.query.area) || null;
         const difficulty = parseInt(req.query.difficulty) || null;
         console.log("gaaaaaaa");
+        console.log(" area : "+ area +" difficulty:"+difficulty+"age:"+age);
         const allSites = await getSites(age, area, difficulty, start, limit);
         console.log("all sites....  "+allSites);
         console.log(allSites);

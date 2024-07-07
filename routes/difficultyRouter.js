@@ -11,8 +11,8 @@ router.use(cors({
 
 router.get("/", async (req, res) => {
     try {
-        console.log("id: " + id);
-        const result=await getDifficulty(id);
+    console.log("in dificulty roter ")
+        const result=await getDifficulty();
         console.log(result);       
         res.send(result);
     } catch (err) {

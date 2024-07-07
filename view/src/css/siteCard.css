@@ -1,80 +1,114 @@
-/* קונטיינר הכרטיסים */
-.site-cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-/* כרטיס יחיד */
 .site-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    background-color: #e0e0e0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, background-color 0.3s;
-}
-
-.site-card:hover {
-    transform: translateY(-5px);
-    background-color: #d0d0d0;
-}
-
-.site-card-img {
+    width: calc(33.33% - 20px); /* כאשר יש 3 מלבנים בכל שורה */
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    background: #f9f9f9;
+  }
+  
+  .site-card .site-card-title {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .site-card .site-card-img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
-}
-
-.site-card-title {
-    font-size: 1.2em;
-    margin: 12px 0;
-}
-
-.site-card-button {
-    background-color: #99f0e1;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s;
-    margin: 8px 0;
-}
-
-.site-card-button:hover {
-    background-color: #77d7c7;
-}
-
-.site-card-link {
+    display: block;
+    border-bottom: 1px solid #ccc;
+    object-fit: cover; /* תמונה מותאמת למידות המסגרת */
+    object-position: center bottom; /* מיקום התמונה במסגרת */
+  }
+  
+  .site-card .site-card-details {
+    padding: 10px;
+  }
+  
+  .site-card .site-card-details h2 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .site-card .site-card-details .site-card-link {
+    display: block;
     text-decoration: none;
     color: #007bff;
-    font-size: 1em;
-    margin: 8px 0;
-}
+    font-weight: bold;
+    margin-top: 5px;
+  }
+  
+  .site-card .site-card-add-basket {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .site-card .site-card-add-basket:hover {
+    background-color: #0056b3;
+  }
+  
 
-.site-card-link:hover {
+/* .site-card {
+    width: calc(33.33% - 20px);  */
+    /* margin: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    background: #f9f9f9;
+  }
+  
+  .site-card .site-card-title {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .site-card .site-card-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .site-card .site-card-button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .site-card .site-card-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .site-card .site-card-link {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .site-card .site-card-link:hover {
     text-decoration: underline;
-}
+  }
+  
 
-/* רספונסיביות */
-@media (max-width: 600px) {
-    .site-card {
-        max-width: 100%;
-        margin: 8px;
-    }
-
-    .site-card-title {
-        font-size: 1em;
-    }
-
-    .site-card-button {
-        font-size: 0.9em;
-        padding: 8px 16px;
-    }
-}
+ */

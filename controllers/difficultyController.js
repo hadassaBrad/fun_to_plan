@@ -1,8 +1,8 @@
 const model = require('../models/difficultyModel');
 
-async function getDifficulty(id) {
+async function getDifficulty() {
     try {
-        return model.getDifficulty(id);
+        return model.getDifficulty();
     } catch (err) {
         throw err;
     }

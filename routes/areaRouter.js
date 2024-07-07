@@ -11,9 +11,9 @@ router.use(cors({
 
 router.get("/", async (req, res) => {
     try {
-        console.log("id: " + id);
+        console.log("in area roter ");
         const result=await getAreas();
-        console.log(basket);       
+            
         res.send(result);
     } catch (err) {
         const error = {
