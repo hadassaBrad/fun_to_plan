@@ -28,4 +28,3 @@ console.log()
  }
  
  export default TripRoute;
- 

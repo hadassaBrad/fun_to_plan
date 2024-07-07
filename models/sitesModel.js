@@ -1,9 +1,18 @@
 const pool = require('../DB.js');
 
-async function getSites(start, limit) {
+async function getSites(age, area, difficulty, start, limit) {
   try {
     console.log("start" + start + " limit " + limit);
     const sql = 'SELECT id, site_name, url FROM sites limit ?, ?';
+    if(age!=null){
+      sql+=`NATRUAL JOIN age WHERE age=${age}`;
+    }
+    if(area!=null){
+      sql+=`NATRUAL JOIN area WHERE area=${area}`;
+    }
+    if(difficulty!=null){
+      sql+=`NATRUAL JOIN difficulty WHERE difficulty=${difficulty}`;
+    }
     const result = await pool.query(sql, [start, limit]);
     return result[0];
   } catch (err) {
