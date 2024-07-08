@@ -34,7 +34,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
-import '../css/trioRoutes.css'; // ייבוא קובץ ה-CSS
+// import '../css/trioRoutes.css'; // ייבוא קובץ ה-CSS
 import config from "../config";
 import { UserContext } from '../App';
 import TripRoute from "../components/TripRoute";
@@ -71,7 +71,7 @@ let data;
             {routes.map(route => (
                 <div key={route.id}>
                     <h1></h1>
-                    {console.log(route)}
+                    {console.log(" route in all triproutes: "+route)}
                     <TripRoute route={route} />
                 </div>
             ))}

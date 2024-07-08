@@ -14,7 +14,7 @@ body, html {
     position: absolute;
     right: 0;
     top: 137px;
-    width: 50vw; /* חצי מרוחב העמוד */
+    width:80vw; /* חצי מרוחב העמוד */
     height: 100vh; /* גובה מלא של העמוד */
     border: 1px solid rgb(17, 17, 17); /* גבול מסביב לקוביה */
     box-sizing: border-box; /* כולל את הגבול בחישוב הגודל */
