@@ -3,13 +3,19 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const { getBasket, createBasket, getSingleBasket, deleteAllBasket, deleteSingleBasket, createMultyPileBasket } = require('../controllers/basketController');
+
+const verifyJWT = require("../middlewares/verifyJWT");
+const verifyAdmin = require("../middlewares/verifyAdmin");
+const verifyUser = require("../middlewares/verifyUser");
+const verifyguide = require("../middlewares/verifyguide");
+
 const cors = require('cors');
 router.use(cors({
  origin: 'http://localhost:5173', // Replace with your frontend app URL
  credentials: true
 }));
 
-router.get("/", async (req, res) => {
+router.get("/", verifyJWT, verifyUser, async (req, res) => {
     try {
         const id = req.query.user_id;
         console.log("id: " + id);
@@ -25,7 +31,7 @@ router.get("/", async (req, res) => {
 })
 
 
-router.post("/",  async (req, res) => {
+router.post("/", verifyJWT, verifyUser,  async (req, res) => {
     try {
         console.log("in router basket, am i here?????")
         console.log(req.body);
@@ -47,7 +53,7 @@ router.post("/",  async (req, res) => {
     }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/", verifyJWT, verifyUser, async (req, res) => {
     try {
         console.log("in delete router!")
 
@@ -62,7 +68,7 @@ router.delete("/", async (req, res) => {
 });
 
 
-router.delete("/:id",  async (req, res) => {
+router.delete("/:id", verifyJWT, verifyUser,  async (req, res) => {
     try {
         console.log("in delete router!")
 
