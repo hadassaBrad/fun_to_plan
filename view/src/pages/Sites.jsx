@@ -5,6 +5,7 @@ import { UserContext } from '../App.jsx';
 import Filter from "../components/Filter.jsx";
 import config from '../config';
 import "../css/sites.css"
+import { FaAlignJustify } from "react-icons/fa";
 
 const Sites = () => {
   const [sites, setSites] = useState([]);
@@ -103,7 +104,7 @@ const Sites = () => {
           />
         </div>
       </div>
-      <button className="open-sidebar-btn" onClick={toggleSidebar}>Filters</button>
+      <button className="open-sidebar-btn" onClick={toggleSidebar}>Filters<br></br> <FaAlignJustify /></button>
       <div className="sites">
         {sites.map((site) => (
           <SiteCard key={site.id} site={site} />

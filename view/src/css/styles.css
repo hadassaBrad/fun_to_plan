@@ -1,7 +1,7 @@
 
 .header {
    
-    background-color: rgb(168, 206, 211);
+    /* background-color: rgb(168, 206, 211); */
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%; /* פריסת כל רוחב הדף */
@@ -129,7 +129,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
     /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
     width: 100%;
     justify-content: flex-start;
@@ -167,7 +167,7 @@ body {
 }
 
 .nav-link, .auth-button, .logout-button {
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
     color: #333;
     text-decoration: none;
     padding: 8px 16px;
@@ -178,7 +178,7 @@ body {
 }
 
 .nav-link:hover, .auth-button:hover, .logout-button:hover {
-    background-color: #e9ecef;
+    /* background-color: #e9ecef; */
 }
 
 .nav-link.active {
