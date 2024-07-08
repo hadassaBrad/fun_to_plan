@@ -13,9 +13,6 @@ router.get("/", async (req, res) => {
         console.log("in geting the trip routs for the user")
         const userId = req.query.user_id;
         const guideId=req.query.guide_id;
-
-
-        
         let routes=null;
         if(userId){
             routes =  await getAllRoutesForUser(userId);

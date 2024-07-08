@@ -1,13 +1,30 @@
+// import React from "react";
+// import { Outlet } from "react-router-dom";
+// import Header from "./Header";
+
+// function HomeLayout() {
+//   return (
+//     <>
+//       <Header />
+//       <Outlet />
+//     </>
+//   );
+// }
+
+// export default HomeLayout;
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
+import '../css/homeLayout.css'; // ייבוא קובץ ה-CSS
 
 function HomeLayout() {
   return (
-    <>
+    <div className="layout-container">
       <Header />
-      <Outlet />
-    </>
+      <div className="content">
+        <Outlet />
+      </div>
+    </div>
   );
 }
 

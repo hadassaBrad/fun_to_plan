@@ -1,52 +1,72 @@
-import React, { useEffect, useRef } from "react";
-import { useLocation } from 'react-router-dom';
-import { MapContainer, TileLayer, Polyline, Marker, Popup } from "react-leaflet";
+
+// import React, { useEffect, useContext, useState } from "react";
+// import { MapContainer, TileLayer, Polyline, Marker, Popup } from "react-leaflet";
+// import "leaflet/dist/leaflet.css";
+// import '../css/trioRoutes.css'; // ייבוא קובץ ה-CSS
+// import config from "../config";
+// import { UserContext } from '../App';
+
+// function TripRoutes() {
+//     const { user } = useContext(UserContext);
+//     const [routes, setRoutes] = useState([]);
+
+//     useEffect(() => {
+//         console.log("Fetching routes...");
+//         const fetchRoutes = async () => {
+//             const data = await config.getData("trips", ["user_id"], [user.id]);
+//             setRoutes(data);
+//             console.log("Routes fetched:", data);
+//         };
+//         fetchRoutes();
+//     }, [user.id]);
+
+//     return (
+//         <div className="container">
+//             <h1>vvvv</h1>
+//             <h1>vvvv</h1>
+//             {routes.map(route => <h1 key={route.id}>{route.id}</h1>)}
+//         </div>
+//     );
+// }
+
+// export default TripRoutes;
+
+import React, { useEffect, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
 import '../css/trioRoutes.css'; // ייבוא קובץ ה-CSS
-import L from "leaflet";
+import config from "../config";
+import { UserContext } from '../App';
+import TripRoute from "../components/TripRoute";
 
-function TripRoute() {
-    const location = useLocation();
-    const { route } = location.state || {};
-    const mapRef = useRef();
-    console.log(route);
-
-    if (!route) {
-        return <div>Loading...</div>;
-    }
-    const routeCoordinates = route.route.map(site => [
-        site.latitude, site.longitude
-    ]);
+function TripRoutes() {
+    const { user } = useContext(UserContext);
+    const [routes, setRoutes] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (mapRef.current) {
-            const map = mapRef.current;
-            map.fitBounds(routeCoordinates);
-        }
-    }, [routeCoordinates]);
+        console.log("Fetching routes...");
+        const fetchRoutes = async () => {
+            const data = await config.getData("trips", ["user_id"], [user.id]);
+            setRoutes(data);
+            console.log("Routes fetched:", data);
+        };
+        fetchRoutes();
+    }, [user.id]);
 
     return (
         <div className="container">
-            <MapContainer className="map-container"
-                center={[31.0461, 34.8516]}
-                zoom={8}
-                scrollWheelZoom={true}
-                ref={mapRef}>
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                <Polyline positions={routeCoordinates} color="red" />
-                {routeCoordinates.map((position, index) => (
-                    <Marker key={index} position={position}>
-                        <Popup>
-                            נקודת ציון מספר {index + 1}
-                        </Popup>
-                    </Marker>
-                ))}
-            </MapContainer>
+            <h1>Routes</h1>
+
+            {routes.map(route => (
+                <div key={route.id}>
+                    <h1></h1>
+                    {console.log(route)}
+                    <TripRoute route={route} />
+                </div>
+            ))}
         </div>
     );
 }
 
-export default TripRoute;
+export default TripRoutes;

@@ -1,0 +1,10 @@
+.layout-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content {
+    margin-top: 100px; /* התאמה לגובה הכותרת, אפשר לשנות בהתאם לצורך */
+    padding: 20px; /* אופציונלי: רווח פנימי לתוכן */
+  }
+  

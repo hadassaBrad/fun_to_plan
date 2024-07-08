@@ -8,7 +8,8 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 
 function TripRoute() {
     const location = useLocation();
-    console.log(location.state);
+    console.log("location.state")
+    console.log(location);
     const { route } = location.state.route || {};
     const mapRef = useRef();
         
