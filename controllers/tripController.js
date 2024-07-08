@@ -15,19 +15,15 @@ async function buildTripRoute(id, wantsGuide, startPoint, cost, numOfHours, date
     try {
         // 1. הפקת נקודת ציון מכתובת
 
-        try{
+      
                     const coordinates = await getcoordinates(startPoint);
         console.log("in controller, coordinates: " + coordinates[0] + " /" + coordinates[1]);
-        }
-catch(err)
-{
-    throw new Error(err);
-}
-        // 2. קבלת הסל שעבורו בודקים את המסלול
+      // 2. קבלת הסל שעבורו בודקים את המסלול
         const basket = await model.getBasketForTrip(id);
         console.log("the basket: ");
         console.log(basket);
-
+console.log("after basket");
+console.log(coordinates);
         // // 3. זימון האלגוריתם
         const startingPoint = { latitude: coordinates[0], longitude: coordinates[1], cost: 0 };
         console.log("startingPoint: " + startingPoint);
