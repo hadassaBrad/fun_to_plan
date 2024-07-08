@@ -70,12 +70,12 @@ const getData = async (entity,
         // Initialize URLSearchParams to build query parameters
         const params = new URLSearchParams();
 
-        // Add search keys and values to params
+       if(searchKey){ // Add search keys and values to params
         for (let i = 0; i < searchKey.length; i++) {
             if (searchValue[i]) {
                 params.append(searchKey[i], searchValue[i]);
             }
-        }
+        }}
 
         // Add pagination parameters
         if (limit) {
