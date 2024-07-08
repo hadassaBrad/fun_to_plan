@@ -37,7 +37,6 @@ router.get("/", async (req, res) => {
     }
 })
 
-
 router.post("/", verifyJWT, verifyUser, async (req, res) => {
     try {
         console.log("in router tripsss, am i here?????")
@@ -47,9 +46,6 @@ router.post("/", verifyJWT, verifyUser, async (req, res) => {
         console.log("response in router!!!!!!!!!!!!!")
         console.log(response);
         res.status(200).send(response);
-
-        // const response = await createBasket(req.body.user.id, req.body.site[0].id);
-
     } catch (err) {
         const error = {
             message: err.message
