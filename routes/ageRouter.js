@@ -12,7 +12,7 @@ router.use(cors({
 router.get("/", async (req, res) => {
     try {
         console.log("in age roter ")
-        const result=await getAge();
+        const result = await getAge();
         res.send(result);
     } catch (err) {
         const error = {
