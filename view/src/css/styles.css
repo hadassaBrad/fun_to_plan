@@ -22,6 +22,7 @@
 
 .nav-left,
 .nav-right {
+
     flex: 1; 
     display: flex;
     align-items: center;
@@ -39,7 +40,7 @@
     text-decoration: none;
     color: #00796b; 
     font-weight: bold;
-    font-size: 18px;
+    font-size: 30px;
     transition: color 0.3s ease;
 }
 
@@ -173,7 +174,7 @@ body {
     margin: 0 5px;
     border-radius: 4px;
     transition: all 0.3s ease;
-    font-size: 14px;
+    font-size:18px;
 }
 
 .nav-link:hover, .auth-button:hover, .logout-button:hover {

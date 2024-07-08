@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import AdminSite from "./AdminSite.jsx";
 import { SlBasketLoaded } from "react-icons/sl";
 import { RiDeleteBin5Line } from "react-icons/ri";
-
+// import "../css/site.css"
 import "../css/siteCard.css";
 
 function SiteCard({ site, setSites, sites }) {

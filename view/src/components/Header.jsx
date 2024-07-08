@@ -113,10 +113,10 @@ function Header() {
                             <span className="icon">🔐</span> Logout
                         </button>
                         <br />
-                        <h2>
+                        <h1>
                             {user.userName}
                             {/* {<FontAwesomeIcon icon={faUser} className="d-inline-block dropdown-toggle icon-no-margin" />  { user.userName} */}
-                        </h2>
+                        </h1>
                     </>}
                 </div>
                 <div className="nav-center">

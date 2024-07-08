@@ -1,5 +1,54 @@
 const baseUrl = "http://localhost:3000/";
 
+// const getData = async (entity,
+//     searchKey = [],
+//     searchValue = [],
+//     start = 0,
+//     limit = null,
+//     id = null,
+//     userId = null
+// ) => {
+//     try {
+//         let url = `${baseUrl}${entity}`;
+//         console.log('url' + url);
+//         if (id) {
+//             url += `/${id}`;
+//             console.log('url id');
+//         }
+//         console.log("searchKey");
+//         console.log(searchKey);
+//         if(searchKey)
+//         for (let i = 0; i < searchKey.length; i++) {
+//             url += `&?${searchKey[i]}=${searchValue[i]}`;
+//             console.log(' url += `& ?${searchKey}=${searchValue}`;');
+//         }
+//         if (limit) {
+//             url += `?&_start=${start}&_limit=${limit}`;
+//             console.log('rl += `?&_start=${start}&_limit=${limit}`;');
+//         }
+//         if (userId) {
+//             url += `?user_id=${userId}`
+//             console.log(' url +=`?user_id=${userId}`   ');
+//         }
+//         console.log("url  " + url);
+        
+//         const response = await fetch(url, {
+//             method: 'GET', // או POST, או כל שיטה אחרת שאתה משתמש בה
+//             credentials: 'include', // שולח את העוגיות עם הבקשה
+//         });
+
+//         console.log(response)
+//         const newData = await response.json();
+//         console.log("new data:  in config ");
+//         console.log(newData);
+//         return newData;
+//     } catch (error) {
+//         console.log('"Error fetching data:", error')
+//         console.error("Error fetching data:", error);
+
+//     }
+// };
+
 const getData = async (entity,
     searchKey = [],
     searchValue = [],
@@ -10,34 +59,49 @@ const getData = async (entity,
 ) => {
     try {
         let url = `${baseUrl}${entity}`;
-        console.log('url' + url);
+        console.log('url: ' + url);
+
+        // Add ID to URL if provided
         if (id) {
             url += `/${id}`;
-            console.log('url id');
+            console.log('url with id: ' + url);
         }
-        console.log("searchKey");
-        console.log(searchKey);
-        if(searchKey)
+
+        // Initialize URLSearchParams to build query parameters
+        const params = new URLSearchParams();
+
+        // Add search keys and values to params
         for (let i = 0; i < searchKey.length; i++) {
-            url += `?${searchKey[i]}=${searchValue[i]}`;
-            console.log(' url += `?${searchKey}=${searchValue}`;');
+            if (searchValue[i]) {
+                params.append(searchKey[i], searchValue[i]);
+            }
         }
+
+        // Add pagination parameters
         if (limit) {
-            url += `?&_start=${start}&_limit=${limit}`;
-            console.log('rl += `?&_start=${start}&_limit=${limit}`;');
+            params.append('_start', start);
+            params.append('_limit', limit);
         }
+
+        // Add user ID if provided
         if (userId) {
-            url += `?user_id=${userId}`
-            console.log(' url +=`?user_id=${userId}`   ');
+            params.append('user_id', userId);
         }
-        console.log("url  " + url);
-        
+
+        // Append query parameters to URL if there are any
+        const queryString = params.toString();
+        if (queryString) {
+            url += `?${queryString}`;
+        }
+
+        console.log("Final URL: " + url);
+
         const response = await fetch(url, {
-            method: 'GET', // או POST, או כל שיטה אחרת שאתה משתמש בה
-            credentials: 'include', // שולח את העוגיות עם הבקשה
+            method: 'GET',
+            credentials: 'include', // Send cookies with request
         });
 
-        console.log(response)
+        console.log(response);
         const newData = await response.json();
         console.log("new data:  in config ");
         console.log(newData);
@@ -45,7 +109,6 @@ const getData = async (entity,
     } catch (error) {
         console.log('"Error fetching data:", error')
         console.error("Error fetching data:", error);
-
     }
 };
 

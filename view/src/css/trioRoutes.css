@@ -13,7 +13,7 @@ body, html {
 .map-container {
     position: absolute;
     right: 0;
-    top: 0;
+    top: 137px;
     width: 50vw; /* חצי מרוחב העמוד */
     height: 100vh; /* גובה מלא של העמוד */
     border: 1px solid rgb(17, 17, 17); /* גבול מסביב לקוביה */

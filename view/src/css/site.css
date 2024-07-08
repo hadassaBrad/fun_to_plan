@@ -169,13 +169,13 @@
 
 
 
-
+/* 
 
 .sites-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+} */
 
 .filters {
     display: flex;
@@ -196,7 +196,7 @@
     justify-content: space-around;
     padding: 20px;
     width: 100%;
-    margin-top: 20px; /* Add space to avoid overlap */
+    margin-top: 880px; /* Add space to avoid overlap */
 }
 
 button {

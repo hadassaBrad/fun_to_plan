@@ -1,31 +1,17 @@
-/* Sites.css */
-.sites-page {
-    display: flex;
+/* filter.css */
+.filter-container {
+    margin-bottom: 20px;
   }
   
-  .sites {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 20px;
-    width: 75%; /* Adjust as needed for sidebar */
+  .filter-container h4 {
+    margin-bottom: 10px;
   }
   
-  .filters {
-    width: 25%; /* Adjust as needed for sidebar */
-    padding: 20px;
-    background-color: #f8f8f8;
-    border-right: 1px solid #ccc;
-    box-sizing: border-box;
+  .filter-container select {
+    width: 100%;
+    padding: 5px;
   }
-  
-  .sites .site-card {
-    flex: 1 1 30%; /* Adjust as needed for responsiveness */
-    box-sizing: border-box;
-    margin: 10px;
-  }
-  /* site.css */
-.sites-page {
+  .sites-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,6 +45,7 @@
   transition: transform 0.3s ease;
   z-index: 1000;
   padding: 20px;
+  overflow-y: auto; /* Allows scrolling within the sidebar */
 }
 
 .sidebar.open {
@@ -95,3 +82,4 @@
   padding: 5px;
   margin-bottom: 20px;
 }
+  
