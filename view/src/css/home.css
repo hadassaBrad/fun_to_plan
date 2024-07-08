@@ -1,0 +1,20 @@
+
+.img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.slick-dots {
+    bottom: 20px;
+}
+
+.slick-dots li button:before {
+    font-size: 12px;
+    color: white;
+}
+
+.slick-dots li.slick-active button:before {
+    color: rgb(248, 124, 0);
+}
+/* להבטיח שכל גוף הדף יתפוס את כל המסך */
