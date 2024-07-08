@@ -91,7 +91,9 @@ import { React, useContext, useState } from 'react';
 import { UserContext } from '../App';
 import { SlBasket } from "react-icons/sl";
 import "../css/styles.css"; // ייבוא קובץ ה-CSS
-
+import SignUp from "./SignUp"
+import Login from "./Login";
+// import "../css/styles.css"; // ׳”׳•׳¡׳₪׳× ׳§׳•׳‘׳¥ ׳”-CSS
 function Header() {
     const { user, setUser, showLogin, setShowLogin } = useContext(UserContext);
     const navigate = useNavigate();

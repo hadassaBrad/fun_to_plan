@@ -47,9 +47,19 @@ function TripRoutes() {
     useEffect(() => {
         console.log("Fetching routes...");
         const fetchRoutes = async () => {
-            const data = await config.getData("trips", ["user_id"], [user.id]);
+let data;
+            if(user.role=="user"){
+                            data = await config.getData("trips", ["user_id"], [user.id]);
+
+            }
+            if(user.role=="guide"){
+                data = await config.getData("trips", ["guide_id"], [user.id]);
+
+            }
             setRoutes(data);
             console.log("Routes fetched:", data);
+
+
         };
         fetchRoutes();
     }, [user.id]);
