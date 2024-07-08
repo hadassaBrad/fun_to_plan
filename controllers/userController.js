@@ -157,6 +157,8 @@ async function getGuides() {
 
 async function updateUserPermition(id, role) {
   try {
+    await sendMail(req.body.email, "Welcome!", `שלום ${req.body.userName},
+      התקבלת לעבודה! אנחנו שמחים מאד לראות אותך בתור חלק מהצוות. הכישורים הנדירים שלך יתרמו ללא ספק לקידום ופיתוח החברה. מחכים לך בכיליון עיניים!!!`);
     console.log("in updateUser by id controler");
     return model.updateUserPermition(id, role);
   } catch (err) {

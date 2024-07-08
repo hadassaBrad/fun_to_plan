@@ -19,7 +19,7 @@ function Home() {
     return (
         <Slider {...settings}>
             <div>
-                <img className="img" src="/images/0242-0252 copy - e1 final.jpg" alt="img1" />
+                <img className="img" src="/images/AA12sapl.png" alt="img1" />
             </div>
             <div>
                 <img className="img" src="/images/img133351.jpg" alt="img2" />

@@ -37,10 +37,10 @@ console.log(coordinates);
 
         //  const newRoute = await model.createTripRoute(id, basket);
         if (wantsGuide) {
-            console.log("new route");
+            console.log("wantsGuide");
             console.log(newRoute);
             console.log(newRoute.insertId);
-            addGuide(newRoute.insertId, date);
+           await  addGuide(newRoute.insertId, date);
         }
         return await model.getTripRouteForUser(newRoute.insertId);
     } catch (err) {
@@ -52,10 +52,12 @@ async function addGuide(tripId, date) {
     try {
         console.log("trip id");
         console.log(tripId);
-        const allGuidesByDate = await model.getGuidesByDate(tripId, date);
-        console.log("all guides by date");
+        const allGuidesByDate = await model.getGuidesByDate( date);
+        console.log("all guides by date in trip controler");
         console.log(allGuidesByDate);
-        const result = await model.addGuideToTrip(tripId, allGuidesByDate.id, date);
+        console.log(allGuidesByDate.id);
+
+        const result = await model.addGuideToTrip(tripId, allGuidesByDate[0].id, date);
         console.log(result);
         return result;
     } catch (err) {
