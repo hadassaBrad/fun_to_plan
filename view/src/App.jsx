@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 import './App.css';
 import Home from './pages/Home';
 import HomeLayout from './components/homeLayout';
@@ -18,6 +19,7 @@ import TripRoutes from './pages/TripRoutes.jsx';
 export const UserContext = createContext();
 
 function App() {
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showLogin, setShowLogin] = useState(false);
@@ -32,14 +34,15 @@ function App() {
     else
     setUser(null);
       setLoading(false);
+    
     }
 
     fetchData();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>; // Show a loading indicator while user data is being fetched
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>; // Show a loading indicator while user data is being fetched
+  // }
 
   return (
     <UserContext.Provider value={{ user, setUser, showLogin, setShowLogin }}>

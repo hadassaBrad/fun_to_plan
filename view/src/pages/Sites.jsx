@@ -56,7 +56,7 @@ const Sites = () => {
       console.log(area + " " + difficulty + " " + age);
       const searchKey = ['area', 'difficulty', 'age'];
       const searchValue = [area, difficulty, age];
-      const data = await config.getData('sites', searchKey, searchValue, begin, limit);
+      const data = await config.getData('sites', searchKey, searchValue, 0, 10);
       if (begin === 0) {
         setSites(data);
       } else {
