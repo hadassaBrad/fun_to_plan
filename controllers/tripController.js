@@ -5,7 +5,7 @@ router.use(express.urlencoded({ extended: true }));
 const cors = require('cors');
 const model = require('../models/tripModel');
 const basketModel= require('../models/basketModel');
-const { geneticAlgorithm } = require("../services/tripService");
+const { findOptimalRoute } = require("../services/tripService");
 
 router.use(cors({
     origin: 'http://localhost:5173', // Replace with your frontend app URL
@@ -16,19 +16,19 @@ async function buildTripRoute(id, wantsGuide, startPoint, cost, numOfHours, date
     try {
         // 1. הפקת נקודת ציון מכתובת
 
-      
-                    const coordinates = await getcoordinates(startPoint);
+
+        const coordinates = await getcoordinates(startPoint);
         console.log("in controller, coordinates: " + coordinates[0] + " /" + coordinates[1]);
-      // 2. קבלת הסל שעבורו בודקים את המסלול
+        // 2. קבלת הסל שעבורו בודקים את המסלול
         const basket = await model.getBasketForTrip(id);
         console.log("the basket: ");
         console.log(basket);
-console.log("after basket");
-console.log(coordinates);
+        console.log("after basket");
+        console.log(coordinates);
         // // 3. זימון האלגוריתם
         const startingPoint = { latitude: coordinates[0], longitude: coordinates[1], cost: 0 };
         console.log("startingPoint: " + startingPoint);
-        let bestRoute = await geneticAlgorithm(basket, startingPoint, numOfHours, cost);
+        let bestRoute = await findOptimalRoute(basket, startingPoint, numOfHours, cost);
         console.log("the bestRoute: ");
         console.log(bestRoute);
         bestRoute = [startingPoint, ...bestRoute];
@@ -41,7 +41,7 @@ console.log(coordinates);
             console.log("wantsGuide");
             console.log(newRoute);
             console.log(newRoute.insertId);
-           await  addGuide(newRoute.insertId, date);
+            await addGuide(newRoute.insertId, date);
         }
         await basketModel.deleteAllBasket(id);//when user get his trip- he dosnt need any more his old basket
         return await model.getTripRouteForUser(newRoute.insertId);
@@ -54,7 +54,7 @@ async function addGuide(tripId, date) {
     try {
         console.log("trip id");
         console.log(tripId);
-        const allGuidesByDate = await model.getGuidesByDate( date);
+        const allGuidesByDate = await model.getGuidesByDate(date);
         console.log("all guides by date in trip controler");
         console.log(allGuidesByDate);
         console.log(allGuidesByDate.id);
