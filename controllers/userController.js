@@ -1,7 +1,7 @@
 const { error } = require('npmlog');
 const model = require('../models/userModel');
 const jwt = require('jsonwebtoken');
-
+const verifyAdmin = require("../middlewares/verifyAdmin");
 // const session = require('express-session');
 const bcrypt = require("bcrypt")
 const numSaltRoundss = 10;
@@ -33,7 +33,7 @@ async function handleGuide(req, res) {
     // return res.status(500).json({ error: "Failed to send email" });
 
   }
-}
+ }
 async function getAllWaitinGuides() {
   try {
     console.log("in user controler, getAllWaitinGuides");
@@ -43,6 +43,22 @@ async function getAllWaitinGuides() {
     return allWaitinGuides;
   } catch (err) {
     throw err;
+  }
+}
+async function getAllWaitinGuidesWithAdminCheck(req, res) {
+  try {
+      await verifyAdmin(req, res, async () => {
+          console.log("in user controler, getAllWaitinGuides");
+          const allWaitinGuides = await getAllWaitinGuides();
+          console.log("all waiting guides...");
+          console.log(allWaitinGuides);
+          res.status(200).send(allWaitinGuides);
+      });
+  } catch (err) {
+      const error = {
+          message: err.message
+      };
+      res.status(500).send(error);
   }
 }
 async function createUser(req, res) {
@@ -172,4 +188,4 @@ async function updateUserPermition(id, role) {
     throw err;
   }
 }
-module.exports = {getGuide, getUsers, createUser, getUser, postLogin, getUserByEmail, getUserById, getAllWaitinGuides, updateUserPermition, getGuides }
+module.exports = {getGuide, getUsers, createUser, getUser, postLogin, getUserByEmail, getUserById,  updateUserPermition, getGuides,getAllWaitinGuidesWithAdminCheck };

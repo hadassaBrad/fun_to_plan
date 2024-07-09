@@ -1,34 +1,61 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useContext, useRef, useState } from "react";
+
 import { useLocation } from 'react-router-dom';
 import { MapContainer, TileLayer, Polyline, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import '../css/tripRoutePage.css'; // Import CSS
 import config from '../config.js';
+import { UserContext } from '../App';
 function TripRoute() {
     const location = useLocation();
+    const { user, setUser } = useContext(UserContext);
     console.log("location.state");
     console.log(location);
-    // const { route } = location.state.route || {};
-    // const { guide_id } = location.state.guide_id || {};
-    // const { trip_date } = location.state.trip_date || {};
-    const { route, guide_id, id, trip_date } = location.state || {};
-    console.log("the guide id:"+guide_id+" the date: "+trip_date+"id: "+id)
+
+    const route = location.state || {};
+    const guide_id = route.guide_id;
+    const id = route.id;
+    const trip_date = route.trip_date;
+
+    console.log("the guide id:" + guide_id + " the date: " + trip_date + "id: " + id)
     console.log(route);
     const mapRef = useRef();
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [guideDetails,setGuideDetails]=useState("no guide");
-async function fetchGuideDetails(){
-   const  data = await config.getData("guide", null, null,null,null ,null,guide_id );
-    return data;
-}
-   async function toggleSidebar ()  {
+    const [guidename, setGuidename] = useState(null);
+    const [guideemail, setGuideEmail] = useState(null);
+    const [username, setUsername] = useState(null);
+    const [useremail, setUserEmail] = useState(null);
+    async function fetchDetails(entity, id) {
+        const data = await config.getData(entity, null, null, null, null, null, id);
+        return data;
+    }
+    async function toggleSidebar() {
         setSidebarOpen(!sidebarOpen);
-        if(guide_id){
-            console.log("in fetching guide Name")
-            const theguideDetails= await fetchGuideDetails();
-            setGuideDetails(theguideDetails[0]. user_name);
-        }
+        try {
+            if (user.role === "user") {
+                if (guide_id) {
+                    console.log("in fetching guide Name")
+                    if (guidename == null) {
+                        const theguideDetails = await fetchDetails("guide", guide_id);
+                        console.log(theguideDetails[0])
+                        setGuidename(theguideDetails[0].user_name);
+                        setGuideEmail(theguideDetails[0].email)
+                    }
+                }
 
+            }
+            if (user.role === "guide") {
+                if (username == null) {
+                    const theuserDetails = await fetchDetails("users", route.user_id);
+                    console.log("the traveler details: ");
+                    console.log(theuserDetails[0])
+                    setUsername(theuserDetails.user_name);
+                    setUserEmail(theuserDetails.email)
+                }
+            }
+        } catch (err) {
+            throw err;
+        }
 
     };
 
@@ -55,9 +82,13 @@ async function fetchGuideDetails(){
                 </button>
                 {console.log("guide")}
                 <div className="trip details">
-                    {guide_id ? (
+                    {/* {user.role === "user"?():}   */}
+
+                    {user.role === "user" ? (<>  {guide_id ? (
                         <p>
-                            Your guide: {guideDetails}
+                            Your guide: {guidename}
+                            <br></br>
+                            conect to your guide with email:  {guideemail}
                             <br />
                             Date of trip: {trip_date}
                         </p>
@@ -67,7 +98,15 @@ async function fetchGuideDetails(){
                             <br />
                             Date of trip: no date
                         </p>
-                    )}
+                    )}</>) : (<>
+                        the traveler name:
+                        <br></br>{username}
+                        <br></br>
+                        the traveler email:
+                        <br></br>{useremail}
+                    </>)}
+
+
                     {route.route.map((currentRoute, index) => (
                         <div className="route-item" key={currentRoute.id}>
                             <div className="circle"></div>
@@ -90,7 +129,7 @@ async function fetchGuideDetails(){
                 {routeCoordinates.map((position, index) => (
                     <Marker key={index} position={position}>
                         <Popup>
-                          {route.route[index].site_name}
+                            {route.route[index].site_name}
                         </Popup>
                     </Marker>
                 ))}

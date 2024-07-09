@@ -24,7 +24,7 @@ async function createTripRoute(userId, bestRoute) {
 
   const sql = "INSERT INTO triproute (`user_id`, `route` ) VALUES(?, ?)";
   const result = await pool.query(sql, [userId, JSON.stringify(bestRoute)]);
-  await basketModel.deleteAllBasket(userId);//when user get his trip- he dosnt need any more his old basket
+ 
   console.log("result of creating trip///");
   console.log(result[0]);
   return result[0];

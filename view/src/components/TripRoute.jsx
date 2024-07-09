@@ -32,11 +32,14 @@
 // export default TripRoute;
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
 import "leaflet/dist/leaflet.css";
 import '../css/tripRouteComponent.css'; // ייבוא קובץ ה-CSS
 
 function TripRoute({ route }) {
+
     const navigate = useNavigate();
+   console.log("route");
     console.log(route);
     const chosenRoutes = route.route;
 
@@ -45,7 +48,9 @@ function TripRoute({ route }) {
         console.log(route);
         console.log( "route.guide_id: "+route.guide_id);
         console.log("route.trip_date : "+route.trip_date)
-        navigate('/home/tripRoute', { state: { route: selectedRoute, guide_id: route.guide_id, id: route.id ,trip_date: route.trip_date  } });
+        navigate('/home/tripRoute', { state: route });
+
+        //navigate('/home/tripRoute', { state: { route: selectedRoute, guide_id: route.guide_id, id: route.id ,trip_date: route.trip_date  } });
     };
 
     return (

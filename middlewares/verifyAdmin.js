@@ -1,8 +1,10 @@
 const { getUserById } = require('../controllers/userController');
 require('dotenv').config();
+
 const verifyAdmin = async (req, res, next) => {
   try {
     console.log("in midllwear verifyAdmin");
+    console.log(req.user);
     const user = await getUserById(req.user);
     console.log(user);
     console.log(user[0].role_id)

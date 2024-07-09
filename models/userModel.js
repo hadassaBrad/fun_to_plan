@@ -269,7 +269,10 @@ async function getGuide(id){
     console.log("in user model, getAllGuides");
     const sql = 'SELECT users.id, users.user_name, users.email, permissions.role AS role_name FROM users INNER JOIN permissions ON users.role_id = permissions.id WHERE users.id = ?';
     const result = await pool.query(sql, [id]);
-
+const guideDetails={
+  user_name:result[0].user_name,
+  email:result[0].email
+}
     console.log(result[0]);
     return result[0];
   } catch (err) {

@@ -4,6 +4,7 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const cors = require('cors');
 const model = require('../models/tripModel');
+const basketModel= require('../models/basketModel');
 const { findOptimalRoute } = require("../services/tripService");
 
 router.use(cors({
@@ -42,6 +43,7 @@ async function buildTripRoute(id, wantsGuide, startPoint, cost, numOfHours, date
             console.log(newRoute.insertId);
             await addGuide(newRoute.insertId, date);
         }
+        await basketModel.deleteAllBasket(id);//when user get his trip- he dosnt need any more his old basket
         return await model.getTripRouteForUser(newRoute.insertId);
     } catch (err) {
         throw err;
@@ -83,6 +85,7 @@ async function getcoordinates(startPoint) {
         }
         else {
             console.log('Address not found.');
+            throw new Error('Address not found.');
             return null;
         }
     } catch (error) {
@@ -90,6 +93,7 @@ async function getcoordinates(startPoint) {
         throw error;
     }
 }
+
 async function getAllRoutesForUser(userId) {
     try {
         console.log("in getAllRoutesForUser in controler")
