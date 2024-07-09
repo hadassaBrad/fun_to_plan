@@ -1,7 +1,6 @@
 const { error } = require('npmlog');
 const model = require('../models/userModel');
 const jwt = require('jsonwebtoken');
-const verifyAdmin = require("../middlewares/verifyAdmin");
 // const session = require('express-session');
 const bcrypt = require("bcrypt")
 const numSaltRoundss = 10;
@@ -15,7 +14,7 @@ async function getUsers() {
     throw err;
   }
 }
-async function getGuide(id){
+async function getGuide(id) {
   try {
     console.log("in controller getguide");
     return model.getGuide(id);
@@ -23,6 +22,7 @@ async function getGuide(id){
     throw err;
   }
 }
+
 async function handleGuide(req, res) {
   try {
     req.body.role_id = 4;
@@ -33,7 +33,7 @@ async function handleGuide(req, res) {
     // return res.status(500).json({ error: "Failed to send email" });
 
   }
- }
+}
 async function getAllWaitinGuides() {
   try {
     console.log("in user controler, getAllWaitinGuides");
@@ -45,22 +45,23 @@ async function getAllWaitinGuides() {
     throw err;
   }
 }
-async function getAllWaitinGuidesWithAdminCheck(req, res) {
-  try {
-      await verifyAdmin(req, res, async () => {
-          console.log("in user controler, getAllWaitinGuides");
-          const allWaitinGuides = await getAllWaitinGuides();
-          console.log("all waiting guides...");
-          console.log(allWaitinGuides);
-          res.status(200).send(allWaitinGuides);
-      });
-  } catch (err) {
-      const error = {
-          message: err.message
-      };
-      res.status(500).send(error);
-  }
-}
+// async function getAllWaitinGuidesWithAdminCheck(req, res) {
+//   try {
+//     await verifyAdmin(req, res, async () => {
+//       console.log("in user controler, getAllWaitinGuides");
+//       const allWaitinGuides = await getAllWaitinGuides();
+//       console.log("all waiting guides...");
+//       console.log(allWaitinGuides);
+//       res.status(200).send(allWaitinGuides);
+//     });
+//   } catch (err) {
+//     const error = {
+//       message: err.message
+//     };
+//     res.status(500).send(error);
+//   }
+// }
+
 async function createUser(req, res) {
   let role_id = req.body.role_id;
   const password = req.body.password;
@@ -72,11 +73,11 @@ async function createUser(req, res) {
 
     if (confirmguide) {
       role_id = 4;
-       await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!
+      await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!
         we will be in touch with you in the next days`);
- //send to the admin:       await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!
-       //   we will be in touch with you on the next days`);
-     
+      //send to the admin:       await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!
+      //   we will be in touch with you on the next days`);
+
       console.log("Email sent successfully");
     };
     const result = await model.getUserByEmail(email);//checkes if he exists
@@ -188,4 +189,4 @@ async function updateUserPermition(id, role) {
     throw err;
   }
 }
-module.exports = {getGuide, getUsers, createUser, getUser, postLogin, getUserByEmail, getUserById,  updateUserPermition, getGuides,getAllWaitinGuidesWithAdminCheck };
+module.exports = { getGuide,getAllWaitinGuides, getUsers, createUser, getUser, postLogin, getUserByEmail, getUserById, updateUserPermition, getGuides  };

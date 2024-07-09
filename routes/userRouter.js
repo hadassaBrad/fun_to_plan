@@ -6,7 +6,7 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const verifyJWT = require("../middlewares/verifyJWT");
 const verifyAdmin = require("../middlewares/verifyAdmin");
-const { getUserById, getUsers, getAllWaitinGuidesWithAdminCheck, updateUserPermition } = require('../controllers/userController');
+const { getUserById, getUsers, getAllWaitinGuides, updateUserPermition } = require('../controllers/userController');
 const cors = require('cors');
 router.use(cors({
     origin: 'http://localhost:5173', // Replace with your frontend app URL
@@ -15,15 +15,15 @@ router.use(cors({
 router.get("/", verifyJWT, async (req, res) => {
     try {
         const id = req.query.user_id;
-        console.log("in the user roter' the userid is: "+id);
+        console.log("in the user roter' the userid is: " + id);
         if (id) {
-         
+
             const result = await getUserById(id)
             userresult = {
                 user_name: result[0].user_name,
                 email: result[0].email
             }
-            console.log("returning tje user deails for the guide trip: " );
+            console.log("returning tje user deails for the guide trip: ");
             console.log(userresult)
             res.send(userresult);
         }
@@ -32,10 +32,20 @@ router.get("/", verifyJWT, async (req, res) => {
             const role_id = req.query.role;
             if (role_id == 4) {
                 console.log("in user router, getAllWaitinGuides");
-                const allWaitinGuides =  await getAllWaitinGuidesWithAdminCheck(req, res);
-                console.log("all waiting guides in router...");
-                console.log(allWaitinGuides);
-                res.status(200).send(allWaitinGuides);
+// const allWaitinGuides=
+                // await verifyAdmin(req, res, async () => {
+                //   return   await getAllWaitinGuides();
+                // });
+                verifyAdmin(req, res, async () => {
+                    const allWaitingGuides = await getAllWaitinGuides();
+                    console.log("All waiting guides in router:");
+                    console.log(allWaitingGuides);
+                    res.status(200).send(allWaitingGuides);
+                });
+                // const allWaitinGuides =  await getAllWaitinGuidesWithAdminCheck(req, res);
+                // console.log("all waiting guides in router...");
+                // console.log(allWaitinGuides);
+                // res.status(200).send(allWaitinGuides);
             }
             else {
                 console.log("getUsers router in else");

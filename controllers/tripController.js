@@ -58,6 +58,9 @@ async function addGuide(tripId, date) {
         console.log("all guides by date in trip controler");
         console.log(allGuidesByDate);
         console.log(allGuidesByDate.id);
+        if(allGuidesByDate.length==0){
+            throw new Error("there are no available guide for this date");
+        }
 
         const result = await model.addGuideToTrip(tripId, allGuidesByDate[0].id, date);
         console.log(result);

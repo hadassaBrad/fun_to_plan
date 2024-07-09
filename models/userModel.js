@@ -84,24 +84,7 @@ async function createUser(role_id, password, userName, email) {
     throw err;
   }
 }
-// async function putFailLogin (email) {
-//   try {
-//     const sql = "SELECT  password_id  FROM users where users.email =?"
-//     const result = await pool.query(sql, [email]);
-//     const sql3 = "SELECT  loginAttempts  FROM passwords where id =?"
-//     const newresult = await pool.query(sql3, [result[0][0].password_id]);
-//     if (newresult[0] > 5) {
-//       throw new Error("to Mach Incorrect access requests")
-//     }
-//     const sql2 = `UPDATE passwords SET lastFailedLogin = ?, loginAttempts= ? WHERE id = ?`;
-//     const result3 = await pool.query(sql2, [currentDate, newresult[0][0].loginAttempts + 1, result[0][0].password_id]);
-//   }
-//   catch (err) {
-//     console.log(err)
-//     throw err;
 
-//   }
-// }
 async function putFailLogin(email) {
   try {
     // עדכון מספר ניסיונות הכניסה ותאריך הכשלון האחרון
@@ -279,4 +262,5 @@ const guideDetails={
     throw new Error(err);
   }
 }
+
 module.exports = { getGuide,getGuides, getGuidesByDate, getAllUsers, getUsers, createUser, putSuccsesLogin, getUserByEmail, getUser, getRole, putFailLogin, getUserById, getAllWaitinGuides, updateUserPermition };
