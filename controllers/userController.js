@@ -15,7 +15,14 @@ async function getUsers() {
     throw err;
   }
 }
-
+async function getGuide(id){
+  try {
+    console.log("in controller getguide");
+    return model.getGuide(id);
+  } catch (err) {
+    throw err;
+  }
+}
 async function handleGuide(req, res) {
   try {
     req.body.role_id = 4;
@@ -157,12 +164,12 @@ async function getGuides() {
 
 async function updateUserPermition(id, role) {
   try {
-    await sendMail(req.body.email, "Welcome!", `שלום ${req.body.userName},
-      התקבלת לעבודה! אנחנו שמחים מאד לראות אותך בתור חלק מהצוות. הכישורים הנדירים שלך יתרמו ללא ספק לקידום ופיתוח החברה. מחכים לך בכיליון עיניים!!!`);
+    // await sendMail(req.body.email, "Welcome!", `שלום ${req.body.userName},
+    //   התקבלת לעבודה! אנחנו שמחים מאד לראות אותך בתור חלק מהצוות. הכישורים הנדירים שלך יתרמו ללא ספק לקידום ופיתוח החברה. מחכים לך בכיליון עיניים!!!`);
     console.log("in updateUser by id controler");
     return model.updateUserPermition(id, role);
   } catch (err) {
     throw err;
   }
 }
-module.exports = { getUsers, createUser, getUser, postLogin, getUserByEmail, getUserById, getAllWaitinGuides, updateUserPermition, getGuides }
+module.exports = {getGuide, getUsers, createUser, getUser, postLogin, getUserByEmail, getUserById, getAllWaitinGuides, updateUserPermition, getGuides }

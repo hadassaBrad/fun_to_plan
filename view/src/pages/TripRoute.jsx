@@ -3,20 +3,33 @@ import { useLocation } from 'react-router-dom';
 import { MapContainer, TileLayer, Polyline, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import '../css/tripRoutePage.css'; // Import CSS
-
+import config from '../config.js';
 function TripRoute() {
     const location = useLocation();
     console.log("location.state");
     console.log(location);
-    const { route } = location.state.route || {};
-    const { guide_id } = location.state.guide_id || {};
-    const { trip_date } = location.state.trip_date || {};
+    // const { route } = location.state.route || {};
+    // const { guide_id } = location.state.guide_id || {};
+    // const { trip_date } = location.state.trip_date || {};
+    const { route, guide_id, id, trip_date } = location.state || {};
+    console.log("the guide id:"+guide_id+" the date: "+trip_date+"id: "+id)
+    console.log(route);
     const mapRef = useRef();
     const [sidebarOpen, setSidebarOpen] = useState(false);
-
-    const toggleSidebar = () => {
+    const [guideDetails,setGuideDetails]=useState("no guide");
+async function fetchGuideDetails(){
+   const  data = await config.getData("guide", null, null,null,null ,null,guide_id );
+    return data;
+}
+   async function toggleSidebar ()  {
         setSidebarOpen(!sidebarOpen);
-        
+        if(guide_id){
+            console.log("in fetching guide Name")
+            const theguideDetails= await fetchGuideDetails();
+            setGuideDetails(theguideDetails[0]. user_name);
+        }
+
+
     };
 
     useEffect(() => {
@@ -30,7 +43,7 @@ function TripRoute() {
         return <div>Loading...</div>;
     }
 
-    const routeCoordinates = route.map(site => [
+    const routeCoordinates = route.route.map(site => [
         site.latitude, site.longitude
     ]);
 
@@ -44,7 +57,7 @@ function TripRoute() {
                 <div className="trip details">
                     {guide_id ? (
                         <p>
-                            Your guide: {guide_id}
+                            Your guide: {guideDetails}
                             <br />
                             Date of trip: {trip_date}
                         </p>
@@ -55,11 +68,11 @@ function TripRoute() {
                             Date of trip: no date
                         </p>
                     )}
-                    {route.map((currentRoute, index) => (
+                    {route.route.map((currentRoute, index) => (
                         <div className="route-item" key={currentRoute.id}>
                             <div className="circle"></div>
                             <h2 className="site-name">{currentRoute.site_name}</h2>
-                            {index < route.length - 1 && <div className="dashed-line"></div>}
+                            {index < route.route.length - 1 && <div className="dashed-line"></div>}
                         </div>
                     ))}
                 </div>
@@ -77,7 +90,7 @@ function TripRoute() {
                 {routeCoordinates.map((position, index) => (
                     <Marker key={index} position={position}>
                         <Popup>
-                          {route[index].site_name}
+                          {route.route[index].site_name}
                         </Popup>
                     </Marker>
                 ))}

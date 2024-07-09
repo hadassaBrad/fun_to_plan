@@ -6,18 +6,25 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const verifyJWT = require("../middlewares/verifyJWT");
 const verifyAdmin = require("../middlewares/verifyAdmin");
-const { getGuides } = require('../controllers/userController');
+const { getGuides ,getGuide} = require('../controllers/userController');
 const cors = require('cors');
 router.use(cors({
     origin: 'http://localhost:5173', // Replace with your frontend app URL
     credentials: true
 }));
 router.get("/", async (req, res) => {
-    try {
-            const guides = await getGuides();
+    try {    const id = req.query.user_id;
+        let response;
+        if(id){
+            response = await getGuide(id);
+        }
+        else{
+            response = await getGuides();
+        }
+      
             console.log("all guides in router...");
-            console.log(guides);
-            res.status(200).send(guides);
+            console.log(  response );
+            res.status(200).send(  response);
         
     } catch (err) {
         const error = {

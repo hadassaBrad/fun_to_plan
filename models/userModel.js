@@ -264,4 +264,16 @@ async function getGuidesByDate(date) {
   }
 }
 
-module.exports = { getGuides, getGuidesByDate, getAllUsers, getUsers, createUser, putSuccsesLogin, getUserByEmail, getUser, getRole, putFailLogin, getUserById, getAllWaitinGuides, updateUserPermition };
+async function getGuide(id){
+  try {
+    console.log("in user model, getAllGuides");
+    const sql = 'SELECT users.id, users.user_name, users.email, permissions.role AS role_name FROM users INNER JOIN permissions ON users.role_id = permissions.id WHERE users.id = ?';
+    const result = await pool.query(sql, [id]);
+
+    console.log(result[0]);
+    return result[0];
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+module.exports = { getGuide,getGuides, getGuidesByDate, getAllUsers, getUsers, createUser, putSuccsesLogin, getUserByEmail, getUser, getRole, putFailLogin, getUserById, getAllWaitinGuides, updateUserPermition };
