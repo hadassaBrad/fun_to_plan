@@ -4,6 +4,7 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const cors = require('cors');
 const model = require('../models/tripModel');
+const basketModel= require('../models/basketModel');
 const { geneticAlgorithm } = require("../services/tripService");
 
 router.use(cors({
@@ -42,6 +43,7 @@ console.log(coordinates);
             console.log(newRoute.insertId);
            await  addGuide(newRoute.insertId, date);
         }
+        await basketModel.deleteAllBasket(id);//when user get his trip- he dosnt need any more his old basket
         return await model.getTripRouteForUser(newRoute.insertId);
     } catch (err) {
         throw err;

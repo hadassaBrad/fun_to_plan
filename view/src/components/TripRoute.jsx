@@ -32,11 +32,14 @@
 // export default TripRoute;
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
 import "leaflet/dist/leaflet.css";
 import '../css/tripRouteComponent.css'; // ייבוא קובץ ה-CSS
 
 function TripRoute({ route }) {
+
     const navigate = useNavigate();
+   console.log("route");
     console.log(route);
     const chosenRoutes = route.route;
 
