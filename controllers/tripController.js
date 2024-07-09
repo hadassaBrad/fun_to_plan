@@ -85,6 +85,7 @@ async function getcoordinates(startPoint) {
         }
         else {
             console.log('Address not found.');
+            throw new Error('Address not found.');
             return null;
         }
     } catch (error) {
@@ -92,6 +93,7 @@ async function getcoordinates(startPoint) {
         throw error;
     }
 }
+
 async function getAllRoutesForUser(userId) {
     try {
         console.log("in getAllRoutesForUser in controler")

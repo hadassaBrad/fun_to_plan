@@ -48,7 +48,9 @@ function TripRoute({ route }) {
         console.log(route);
         console.log( "route.guide_id: "+route.guide_id);
         console.log("route.trip_date : "+route.trip_date)
-        navigate('/home/tripRoute', { state: { route: selectedRoute, guide_id: route.guide_id, id: route.id ,trip_date: route.trip_date  } });
+        navigate('/home/tripRoute', { state: route });
+
+        //navigate('/home/tripRoute', { state: { route: selectedRoute, guide_id: route.guide_id, id: route.id ,trip_date: route.trip_date  } });
     };
 
     return (

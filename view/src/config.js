@@ -1,54 +1,5 @@
 const baseUrl = "http://localhost:3000/";
 
-// const getData = async (entity,
-//     searchKey = [],
-//     searchValue = [],
-//     start = 0,
-//     limit = null,
-//     id = null,
-//     userId = null
-// ) => {
-//     try {
-//         let url = `${baseUrl}${entity}`;
-//         console.log('url' + url);
-//         if (id) {
-//             url += `/${id}`;
-//             console.log('url id');
-//         }
-//         console.log("searchKey");
-//         console.log(searchKey);
-//         if(searchKey)
-//         for (let i = 0; i < searchKey.length; i++) {
-//             url += `&?${searchKey[i]}=${searchValue[i]}`;
-//             console.log(' url += `& ?${searchKey}=${searchValue}`;');
-//         }
-//         if (limit) {
-//             url += `?&_start=${start}&_limit=${limit}`;
-//             console.log('rl += `?&_start=${start}&_limit=${limit}`;');
-//         }
-//         if (userId) {
-//             url += `?user_id=${userId}`
-//             console.log(' url +=`?user_id=${userId}`   ');
-//         }
-//         console.log("url  " + url);
-        
-//         const response = await fetch(url, {
-//             method: 'GET', // או POST, או כל שיטה אחרת שאתה משתמש בה
-//             credentials: 'include', // שולח את העוגיות עם הבקשה
-//         });
-
-//         console.log(response)
-//         const newData = await response.json();
-//         console.log("new data:  in config ");
-//         console.log(newData);
-//         return newData;
-//     } catch (error) {
-//         console.log('"Error fetching data:", error')
-//         console.error("Error fetching data:", error);
-
-//     }
-// };
-
 const getData = async (entity,
     searchKey = [],
     searchValue = [],
@@ -61,34 +12,29 @@ const getData = async (entity,
         let url = `${baseUrl}${entity}`;
         console.log('url: ' + url);
 
-        // Add ID to URL if provided
         if (id) {
             url += `/${id}`;
             console.log('url with id: ' + url);
         }
 
-        // Initialize URLSearchParams to build query parameters
         const params = new URLSearchParams();
 
-       if(searchKey){ // Add search keys and values to params
+       if(searchKey){ 
         for (let i = 0; i < searchKey.length; i++) {
             if (searchValue[i]) {
                 params.append(searchKey[i], searchValue[i]);
             }
         }}
 
-        // Add pagination parameters
         if (limit) {
             params.append('_start', start);
             params.append('_limit', limit);
         }
 
-        // Add user ID if provided
         if (userId) {
             params.append('user_id', userId);
         }
 
-        // Append query parameters to URL if there are any
         const queryString = params.toString();
         if (queryString) {
             url += `?${queryString}`;
@@ -109,6 +55,7 @@ const getData = async (entity,
     } catch (error) {
         console.log('"Error fetching data:", error')
         console.error("Error fetching data:", error);
+        throw new Error(error.message);
     }
 };
 
@@ -145,8 +92,10 @@ const postData = async (entity, body) => {
             const responseData = await response.json();
             console.log("response data");
             console.log(responseData);
-            if (responseData && responseData.error) {
-                const error = new Error(responseData.error);
+            if (responseData && responseData.message) {
+                const error = new Error(responseData.message);
+                console.log(response.message);
+                console.log(error);
                 throw error;
             } else {
                 throw new Error('Failed to post data');
@@ -158,9 +107,9 @@ const postData = async (entity, body) => {
         console.log(json);
         return json;
     } catch (error) {
-        console.error('Error:', error.message);
+        console.error('Error:', error);
         console.log(error.message);
-        throw error;
+        throw new Error(error.message);
     }
 
 }

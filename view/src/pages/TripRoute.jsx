@@ -11,10 +11,12 @@ function TripRoute() {
     const { user, setUser } = useContext(UserContext);
     console.log("location.state");
     console.log(location);
-    // const { route } = location.state.route || {};
-    // const { guide_id } = location.state.guide_id || {};
-    // const { trip_date } = location.state.trip_date || {};
-    const { route, guide_id, id, trip_date } = location.state || {};
+
+    const route = location.state || {};
+    const guide_id = route.guide_id;
+    const id = route.id;
+    const trip_date = route.trip_date;
+
     console.log("the guide id:" + guide_id + " the date: " + trip_date + "id: " + id)
     console.log(route);
     const mapRef = useRef();
@@ -22,9 +24,9 @@ function TripRoute() {
     const [guidename, setGuidename] = useState(null);
     const [guideemail, setGuideEmail] = useState(null);
     const [username, setUsername] = useState(null);
-    const [useremail, setUserEmail] = useState(null); 
-    async function fetchDetails(entity,id) {
-        const data = await config.getData(entity, null, null, null, null, null,id);
+    const [useremail, setUserEmail] = useState(null);
+    async function fetchDetails(entity, id) {
+        const data = await config.getData(entity, null, null, null, null, null, id);
         return data;
     }
     async function toggleSidebar() {
@@ -33,24 +35,24 @@ function TripRoute() {
             if (user.role === "user") {
                 if (guide_id) {
                     console.log("in fetching guide Name")
-                  if(guidename==null)
-                 { const theguideDetails = await fetchDetails("guide", guide_id);
-                    console.log(theguideDetails[0])
-                    setGuidename(theguideDetails[0].user_name);
-                    setGuideEmail(theguideDetails[0].email)
-                }  
+                    if (guidename == null) {
+                        const theguideDetails = await fetchDetails("guide", guide_id);
+                        console.log(theguideDetails[0])
+                        setGuidename(theguideDetails[0].user_name);
+                        setGuideEmail(theguideDetails[0].email)
+                    }
                 }
 
             }
-           if(user.role === "guide") {
-            if(username==null)
-            { const theuserDetails = await fetchDetails("users",route.user_id);
-            console.log("the traveler details: ")  ;
-            console.log(theuserDetails[0])
-               setUsername(theuserDetails.user_name);
-               setUserEmail(theuserDetails.email)
-           }  
-           }
+            if (user.role === "guide") {
+                if (username == null) {
+                    const theuserDetails = await fetchDetails("users", route.user_id);
+                    console.log("the traveler details: ");
+                    console.log(theuserDetails[0])
+                    setUsername(theuserDetails.user_name);
+                    setUserEmail(theuserDetails.email)
+                }
+            }
         } catch (err) {
             throw err;
         }
@@ -80,9 +82,9 @@ function TripRoute() {
                 </button>
                 {console.log("guide")}
                 <div className="trip details">
-                 {/* {user.role === "user"?():}   */}
+                    {/* {user.role === "user"?():}   */}
 
-{user.role === "user"?(<>  {guide_id ? (
+                    {user.role === "user" ? (<>  {guide_id ? (
                         <p>
                             Your guide: {guidename}
                             <br></br>
@@ -96,15 +98,15 @@ function TripRoute() {
                             <br />
                             Date of trip: no date
                         </p>
-                    )}</>):(<>
-                    the traveler name: 
-                    <br></br>{username}
-                    <br></br>
-                    the traveler email: 
-                    <br></br>{useremail}
+                    )}</>) : (<>
+                        the traveler name:
+                        <br></br>{username}
+                        <br></br>
+                        the traveler email:
+                        <br></br>{useremail}
                     </>)}
 
-                
+
                     {route.route.map((currentRoute, index) => (
                         <div className="route-item" key={currentRoute.id}>
                             <div className="circle"></div>
