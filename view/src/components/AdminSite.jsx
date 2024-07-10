@@ -1,9 +1,6 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from '../App.jsx';
-import config from '../config.js';
 
 function AdminSite({ onClose, site, setSite, onClickSave }) {
-    const { user, setUser } = useContext(UserContext);
     const [formError, setFormError] = useState('');
 
     const changeHandler = (e) => {
@@ -27,10 +24,8 @@ function AdminSite({ onClose, site, setSite, onClickSave }) {
         setFormError('');
 
         try {
-            console.log("site:   " + site.id);
             const response = onClickSave(site);
             if (response) {
-                console.log("Site details submitted successfully");
                 alert("Site X successfuly")
                 onClose();
             } else {
@@ -44,8 +39,6 @@ function AdminSite({ onClose, site, setSite, onClickSave }) {
     return (
         <div className="overlay">
             <div className="modal">
-            {console.log(site)}
-
                 <button className="close-button" onClick={onClose}>X</button>
                 <form className="form login" onSubmit={handleSubmit}>
                     <h1 className="title">Enter site details</h1>

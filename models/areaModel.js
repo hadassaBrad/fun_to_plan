@@ -5,8 +5,8 @@ async function getAreas() {
     const sql = 'SELECT * FROM area';
     const result = await pool.query(sql, []);
     return result[0];
-  } catch (err) {
-    console.log(err);
+  } 
+  catch (err) {
     throw err;
   }
 }

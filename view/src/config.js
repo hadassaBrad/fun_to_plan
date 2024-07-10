@@ -10,11 +10,9 @@ const getData = async (entity,
 ) => {
     try {
         let url = `${baseUrl}${entity}`;
-        console.log('url: ' + url);
 
         if (id) {
             url += `/${id}`;
-            console.log('url with id: ' + url);
         }
 
         const params = new URLSearchParams();
@@ -40,20 +38,14 @@ const getData = async (entity,
             url += `?${queryString}`;
         }
 
-        console.log("Final URL: " + url);
-
         const response = await fetch(url, {
             method: 'GET',
             credentials: 'include', // Send cookies with request
         });
 
-        console.log(response);
         const newData = await response.json();
-        console.log("new data:  in config ");
-        console.log(newData);
         return newData;
     } catch (error) {
-        console.log('"Error fetching data:", error')
         console.error("Error fetching data:", error);
         throw new Error(error.message);
     }
@@ -70,8 +62,6 @@ const putData = async (entity, idToUpdate, body) => {
     })
         .then((response) => response.json())
         .then((json) => {
-            console.log("in config put dataaaaaaaaaaaa")
-            console.log(json)
             return json;
         });
 }

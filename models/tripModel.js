@@ -24,7 +24,7 @@ async function createTripRoute(userId, bestRoute) {
 
   const sql = "INSERT INTO triproute (`user_id`, `route` ) VALUES(?, ?)";
   const result = await pool.query(sql, [userId, JSON.stringify(bestRoute)]);
- 
+
   console.log("result of creating trip///");
   console.log(result[0]);
   return result[0];
@@ -45,21 +45,13 @@ async function getGuidesByDate(date) {
 }
 
 async function addGuideToTrip(tripId, guideId, tripDate) {
-  console.log("trip id");
-  console.log(tripId);
-  console.log("in addGuideToTrip ");
-  console.log("guideId: ")
-  console.log(guideId);
   const sql = `UPDATE triproute SET guide_id = ?,trip_date = ? WHERE id = ?`
   const result = await pool.query(sql, [guideId, tripDate, tripId]);
-  console.log("result in addGuideToTrip model:  ");
-  console.log(result[0][0]);
   return result[0];
 }
 
 async function getAllRoutesForUser(userId) {
   try {
-    console.log("in the tripd mode, getAllRoutesForUser")
     const sql = `SELECT * FROM triproute WHERE user_id=?`;
     const result = await pool.query(sql, [userId]);
     return result[0];
@@ -71,7 +63,6 @@ async function getAllRoutesForUser(userId) {
 
 async function getAllRoutesFrGuide(guideId) {
   try {
-    console.log("in the tripd mode, getAllRoutesForעמדריך       ")
     const sql = `SELECT * FROM triproute WHERE guide_id=?`;
     const result = await pool.query(sql, [guideId]);
     return result[0];

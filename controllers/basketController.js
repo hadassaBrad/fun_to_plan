@@ -10,7 +10,7 @@ async function getBasket(id) {
 }
 async function createBasket(userid,siteId) {
     try {
-        console.log("basket controller.. in single basket"+userid+" "+siteId);
+    
         return model.createBasket(userid,siteId);
     } catch (err) {
         throw err;
@@ -18,8 +18,6 @@ async function createBasket(userid,siteId) {
 }
 async function createMultyPileBasket(data){
     try {
-        console.log("basket controller. MultyPileBasket.");
-        console.log(data);
         return model.createMultyPileBasket(data);
     } catch (err) {
         throw err;
@@ -40,13 +38,8 @@ async function deleteAllBasket(id) {
     }
 }
 async function deleteSingleBasket (user_id,site_id) {
-    try {
-        console.log("in delete controler basket")
-        
+    try {        
         const response= model.deleteSingleBasket(user_id, site_id);
-
-        console.log("deleted user...  ");
-        console.log(response);
         return response;
     } catch (err) {
         throw err;

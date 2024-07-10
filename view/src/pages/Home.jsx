@@ -16,24 +16,15 @@ function Home() {
         arrows: false
     };
 
+
     return (
-        <Slider {...settings}>
-            <div>
-                <img className="img" src="/images/AA12sapl.png" alt="img1" />
-            </div>
-            <div>
-                <img className="img" src="/images/img133351.jpg" alt="img2" />
-            </div>
-            <div>
-                <img className="img" src="/images/img168341.jpg" alt="img3" />
-            </div>
-            <div>
-                <img className="img" src="/images/israel-476955_1280-1g.jpg" alt="img4" />
-            </div>
-            <div>
-                <img className="img" src="/images/israel-lanscape.jpg" alt="img5" />
-            </div>
-        </Slider>
+        
+        <>
+   <img className="img" src="/images/7a60f8a1cec5946cd5b978ec2841bf80.jpg" alt="img1" />
+              
+        
+        </>
+      
     );
 }
 

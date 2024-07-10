@@ -17,7 +17,6 @@ function Basket() {
         try {
           const data = await config.getData('basket', null, null, null, null, null, user.id); // Example fetch function, adjust as needed
           setSites(data);
-          console.log('the basket: ' + data);
           if (data.length > 0) localStorage.setItem('basket', JSON.stringify(data));
         } catch (error) {
           console.error('Error fetching data from DB:', error);
@@ -32,19 +31,14 @@ function Basket() {
   }, [user, renderPage]);
 
   const openModal = () => {
-    if (!user) {// need to show login!!
+    if (!user) {
       setShowLogin(true);
       console.log(user);
     }
-    // while(!user){
-    //   console.log("please log in");
-    // }
-    // if(user){
-    if(showLogin==false&&user){
-            setIsModalOpen(true);
+    if (showLogin == false && user) {
+      setIsModalOpen(true);
 
     }
-    // }
   };
 
   const closeModal = () => {

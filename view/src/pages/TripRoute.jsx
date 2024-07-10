@@ -8,36 +8,31 @@ import config from '../config.js';
 import { UserContext } from '../App';
 function TripRoute() {
     const location = useLocation();
-    const { user, setUser } = useContext(UserContext);
-    console.log("location.state");
-    console.log(location);
-
+    const { user } = useContext(UserContext);
     const route = location.state || {};
     const guide_id = route.guide_id;
-    const id = route.id;
     const trip_date = route.trip_date;
 
-    console.log("the guide id:" + guide_id + " the date: " + trip_date + "id: " + id)
-    console.log(route);
     const mapRef = useRef();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [guidename, setGuidename] = useState(null);
     const [guideemail, setGuideEmail] = useState(null);
     const [username, setUsername] = useState(null);
     const [useremail, setUserEmail] = useState(null);
+
     async function fetchDetails(entity, id) {
         const data = await config.getData(entity, null, null, null, null, null, id);
         return data;
     }
+
     async function toggleSidebar() {
         setSidebarOpen(!sidebarOpen);
         try {
             if (user.role === "user") {
                 if (guide_id) {
-                    console.log("in fetching guide Name")
                     if (guidename == null) {
                         const theguideDetails = await fetchDetails("guide", guide_id);
-                        console.log(theguideDetails[0])
+                      
                         setGuidename(theguideDetails[0].user_name);
                         setGuideEmail(theguideDetails[0].email)
                     }
@@ -47,8 +42,6 @@ function TripRoute() {
             if (user.role === "guide") {
                 if (username == null) {
                     const theuserDetails = await fetchDetails("users", route.user_id);
-                    console.log("the traveler details: ");
-                    console.log(theuserDetails[0])
                     setUsername(theuserDetails.user_name);
                     setUserEmail(theuserDetails.email)
                 }

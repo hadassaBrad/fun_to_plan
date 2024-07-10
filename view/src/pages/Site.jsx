@@ -10,10 +10,8 @@ function Site() {
     useEffect(() => {
         const fetchSite = async () => {
             try {
-                console.log("fetching data of site... " + siteId);
                 const data = await config.getData("sites", [], [], null, null, siteId);
                 setSite(data);
-                console.log("data in specific site " + data.id);
             } catch (error) {
                 console.error("Error fetching site data:", error);
             }
@@ -25,6 +23,7 @@ function Site() {
     if (!site) {
         return <div>Loading...</div>;
     }
+
 
     return (
         <div className="site-container">

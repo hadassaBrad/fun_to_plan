@@ -5,15 +5,13 @@ router.use(express.urlencoded({ extended: true }));
 const { getAreas } = require('../controllers/areaController');
 const cors = require('cors');
 router.use(cors({
- origin: 'http://localhost:5173', // Replace with your frontend app URL
+ origin: 'http://localhost:5173', 
  credentials: true
 }));
 
 router.get("/", async (req, res) => {
     try {
-        console.log("in area roter ");
-        const result=await getAreas();
-            
+        const result=await getAreas();       
         res.send(result);
     } catch (err) {
         const error = {

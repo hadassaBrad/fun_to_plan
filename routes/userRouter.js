@@ -42,10 +42,7 @@ router.get("/", verifyJWT, async (req, res) => {
                     console.log(allWaitingGuides);
                     res.status(200).send(allWaitingGuides);
                 });
-                // const allWaitinGuides =  await getAllWaitinGuidesWithAdminCheck(req, res);
-                // console.log("all waiting guides in router...");
-                // console.log(allWaitinGuides);
-                // res.status(200).send(allWaitinGuides);
+
             }
             else {
                 console.log("getUsers router in else");

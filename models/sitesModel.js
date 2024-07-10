@@ -1,42 +1,7 @@
 const pool = require('../DB.js');
 
-// async function getSites(age, area, difficulty, start, limit) {
-//   try {
-//     console.log("start" + start + " limit " + limit);
-//     let sql = 'SELECT sites.id, site_name, url FROM sites';
-//     console.log("sql1: "+sql);
-//     let flag = false;
-//     if(age!=null){
-//       //sql+=`INNER JOIN age ON sites.id_age = '${age}'`;
-//       sql+=` INNER JOIN age ON sites.id_age = age.id WHERE age.age_range = '${age}' `;
-//       // flag=true;
-//       console.log("sql2: "+sql);
-//     }
-//     if(area!=null){
-//       // if(flag==true){
-//       //   sql+=` AND `;
-//       // }
-//       sql+=` INNER JOIN area ON sites.id_area = area.id WHERE area.name_area = '${area}' `;
-//       console.log("sql3: "+sql);
-//     }
-//     if(difficulty!=null){
-//       // if(flag==true){
-//       //   sql+=` AND `;
-//       // }
-//       sql+=` INNER JOIN difficulty ON sites.id_difficulty = difficulty.id WHERE difficulty.level = '${difficulty}' `;
-//       console.log("sql4: "+sql);
-//     }
-//     sql+=` limit 0, 10 `
-//     const result = await pool.query(sql, [start, limit]);
-//     return result[0];
-//   } catch (err) {
-//     console.log(err);
-//     throw err;
-//   }
-// }
 async function getSites(age, area, difficulty, start, limit) {
   try {
-    console.log("start: " + start + ", limit: " + limit);
     let sql = 'SELECT sites.id, site_name, url FROM sites';
     
     let joins = [];
@@ -46,10 +11,12 @@ async function getSites(age, area, difficulty, start, limit) {
       joins.push('INNER JOIN age ON sites.id_age = age.id');
       conditions.push(`age.age_range = '${age}'`);
     }
+
     if (area != null) {
       joins.push('INNER JOIN area ON sites.id_area = area.id');
       conditions.push(`area.name_area = '${area}'`);
     }
+
     if (difficulty != null) {
       joins.push('INNER JOIN difficulty ON sites.id_difficulty = difficulty.id');
       conditions.push(`difficulty.level = '${difficulty}'`);
@@ -64,7 +31,7 @@ async function getSites(age, area, difficulty, start, limit) {
     }
     
     sql += ` LIMIT ${start}, ${limit}`;
-    console.log("Final SQL: " + sql);
+   
 
     const result = await pool.query(sql);
     return result[0];

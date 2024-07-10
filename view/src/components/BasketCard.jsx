@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import config from '../config.js';
 import { UserContext } from '../App.jsx';
-import '../css/basketCard.css'; // קובץ CSS לעיצוב
-
+import '../css/basketCard.css';
 function BasketCard({ site, renderSites, className }) {
     const { user } = useContext(UserContext);
 
@@ -13,7 +12,7 @@ function BasketCard({ site, renderSites, className }) {
         localStorage.setItem("basket", JSON.stringify(updatedSites));
 
         if (user) {
-            console.log("delete from local");
+
             await config.deleteData("basket", site.site_id, user.id);
         }
 
@@ -26,17 +25,15 @@ function BasketCard({ site, renderSites, className }) {
 
     return (
         <div className={`basket-card ${className}`}>
-            <h2>{site.site_name}</h2>{
-               
-            }
-.            <img
+            <h2>{site.site_name}</h2>
+            <img
                 className="basket-card-img"
                 alt={site.site_name}
-               
+
                 src={site.url}
             />
             <div className="basket-card-content">
-                
+
                 <button className="basket-card-button" onClick={removeFromBasket}>
                     Remove From Basket
                 </button>

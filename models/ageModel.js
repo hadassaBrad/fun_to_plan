@@ -5,8 +5,8 @@ async function getAge() {
     const sql = 'SELECT * FROM age';
     const result = await pool.query(sql, []);
     return result[0];
-  } catch (err) {
-    console.log(err);
+  }
+   catch (err) {
     throw err;
   }
 }

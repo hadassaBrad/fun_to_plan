@@ -11,14 +11,14 @@ const verifyguide = require("../middlewares/verifyguide");
 
 const cors = require('cors');
 router.use(cors({
- origin: 'http://localhost:5173', // Replace with your frontend app URL
+ origin: 'http://localhost:5173', 
  credentials: true
 }));
 
 router.get("/", verifyJWT, verifyUser, async (req, res) => {
     try {
         const id = req.query.user_id;
-        console.log("id: " + id);
+     
         const basket=await getBasket(id);
         console.log(basket);       
         res.send(basket);
@@ -33,12 +33,9 @@ router.get("/", verifyJWT, verifyUser, async (req, res) => {
 
 router.post("/", verifyJWT, verifyUser,  async (req, res) => {
     try {
-        console.log("in router basket, am i here?????")
-        console.log(req.body);
+
         if (req.body.site.length == 1) {
-            console.log("in single basket....... ")
             const response = await createBasket(req.body.user.id, req.body.site[0].id);
-            console.log("response in post single basket")
             res.send(await getSingleBasket(response.id));
         }
         else {

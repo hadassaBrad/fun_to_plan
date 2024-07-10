@@ -12,7 +12,6 @@ router.use(cors({
 }));
 router.get("/", async (req, res) => {
     try {
-        console.log("in geting the trip routs for the user")
         const userId = req.query.user_id;
         const guideId = req.query.guide_id;
         let routes = null;
@@ -23,7 +22,6 @@ router.get("/", async (req, res) => {
             routes = await getAllRoutesFrGuide(guideId);
         }
         if (routes) {
-            console.log(routes[0]);
             res.status(200).send(routes);
         }
         else {
@@ -39,12 +37,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", verifyJWT, verifyUser, async (req, res) => {
     try {
-        console.log("in router tripsss, am i here?????")
-        console.log(req.body);
-
         const response = await buildTripRoute(req.body.userId, req.body.wantsGuide, req.body.startPoint, req.body.cost, req.body.numOfHours, req.body.dateForTrip);
-        console.log("response in router!!!!!!!!!!!!!")
-        console.log(response);
         res.status(200).send(response);
     } catch (err) {
         const error = {

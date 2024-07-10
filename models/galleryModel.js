@@ -2,7 +2,6 @@ const pool = require('../DB');
 
 async function getGallery(start, limit) {
   try {
-    console.log("start"+start+" limit "+limit);
     const sql = 'SELECT * FROM gallery limit ?, ?';
     const result = await pool.query(sql, [start, limit]);
     return result[0];
@@ -23,15 +22,5 @@ async function createPhoto(id, url, name) {
   }
 }
 
-async function deletePhoto(id) {
-  try {
-    const sql = `DELETE FROM comments WHERE id = ?`;
-    await pool.query(sql, [id]);
-  } catch (err) {
-    console.error('Error deleting photo:', err);
-    throw err;
-  }
-}
 
-
-module.exports = { getGallery, createPhoto, deletePhoto } 
+module.exports = { getGallery, createPhoto } 

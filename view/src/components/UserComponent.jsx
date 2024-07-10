@@ -4,7 +4,7 @@ import { UserContext } from '../App.jsx';
 import config from '../config.js';
 
 const UserComponent = ({ id, name, email, role, guides, setGuides, setHasGuides }) => {
-  console.log("role: "+role);
+
   const [selectedRole, setSelectedRole] = useState(role);
   const [isChanged, setIsChanged] = useState(false);
 
@@ -20,24 +20,18 @@ const UserComponent = ({ id, name, email, role, guides, setGuides, setHasGuides 
       const body = {
         role: selectedRole
       }
-      console.log("in confirm click");
-      await config.putData("users", id, body);
-      console.log(`Updated role for ${name}: ${selectedRole}`);
-      setIsChanged(false);
 
-      console.log("guides");
-      console.log(guides);
-      //to check why this is not working.....
+      await config.putData("users", id, body);
+      setIsChanged(false);
       const guidesUpdated = guides.filter(guide => guide.id != id);
+     
       if (guidesUpdated.length == 0)
         setHasGuides(false);
-      console.log("guides");
-      console.log(guidesUpdated);
       setGuides(guidesUpdated);
     } catch (error) {
       console.error("Error fetching site:", error);
     }
-    // כאן תוכל להוסיף לוגיקה לעדכון התפקיד בבקאנד או בקונטקסט
+  
   };
 
   return (

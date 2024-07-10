@@ -11,7 +11,6 @@ import Site from './pages/Site';
 import Admin from './pages/Admin';
 import TripRoute from "./pages/TripRoute";
 import Basket from "./pages/Basket";
-import UsersTable from "./pages/UsersTable";
  import PermissionsManagement from "./pages/PermissionsManagement";
 import config from './config.js';
 import TripRoutes from './pages/TripRoutes.jsx';
@@ -26,7 +25,7 @@ function App() {
 
 
   useEffect(() => {
-    
+  
     async function fetchData() {
       const currentUser = await config.getData("authentication", null, null, null, null, null, null);
      if(currentUser)
@@ -39,10 +38,6 @@ function App() {
 
     fetchData();
   }, []);
-
-  // if (loading) {
-  //   return <div>Loading...</div>; // Show a loading indicator while user data is being fetched
-  // }
 
   return (
     <UserContext.Provider value={{ user, setUser, showLogin, setShowLogin }}>
@@ -60,7 +55,6 @@ function App() {
             <Route path="basket" element={<Basket />} />
             <Route path="admin/PermissionsManagement" element={<PermissionsManagement />} />
             <Route path="admin" element={<Admin />}></Route>
-            <Route path="usersTable" element={<UsersTable />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -4,7 +4,7 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const cors = require('cors');
 const model = require('../models/tripModel');
-const basketModel= require('../models/basketModel');
+const basketModel = require('../models/basketModel');
 const { findOptimalRoute } = require("../services/tripService");
 
 router.use(cors({
@@ -15,22 +15,14 @@ router.use(cors({
 async function buildTripRoute(id, wantsGuide, startPoint, cost, numOfHours, date) {
     try {
         // 1. הפקת נקודת ציון מכתובת
-
-
         const coordinates = await getcoordinates(startPoint);
-        console.log("in controller, coordinates: " + coordinates[0] + " /" + coordinates[1]);
+
         // 2. קבלת הסל שעבורו בודקים את המסלול
         const basket = await model.getBasketForTrip(id);
-        console.log("the basket: ");
-        console.log(basket);
-        console.log("after basket");
-        console.log(coordinates);
-        // // 3. זימון האלגוריתם
         const startingPoint = { latitude: coordinates[0], longitude: coordinates[1], cost: 0 };
-        console.log("startingPoint: " + startingPoint);
+
+        //שלב 3- קבלת המסלול האופטימלי
         let bestRoute = await findOptimalRoute(basket, startingPoint, numOfHours, cost);
-        console.log("the bestRoute: ");
-        console.log(bestRoute);
         bestRoute = [startingPoint, ...bestRoute];
 
         // 4. קריאה לפונקציית יצירת מסלול
@@ -38,9 +30,6 @@ async function buildTripRoute(id, wantsGuide, startPoint, cost, numOfHours, date
 
         //  const newRoute = await model.createTripRoute(id, basket);
         if (wantsGuide) {
-            console.log("wantsGuide");
-            console.log(newRoute);
-            console.log(newRoute.insertId);
             await addGuide(newRoute.insertId, date);
         }
         await basketModel.deleteAllBasket(id);//when user get his trip- he dosnt need any more his old basket
@@ -52,18 +41,11 @@ async function buildTripRoute(id, wantsGuide, startPoint, cost, numOfHours, date
 
 async function addGuide(tripId, date) {
     try {
-        console.log("trip id");
-        console.log(tripId);
         const allGuidesByDate = await model.getGuidesByDate(date);
-        console.log("all guides by date in trip controler");
-        console.log(allGuidesByDate);
-        console.log(allGuidesByDate.id);
-        if(allGuidesByDate.length==0){
+        if (allGuidesByDate.length == 0) {
             throw new Error("there are no available guide for this date");
         }
-
         const result = await model.addGuideToTrip(tripId, allGuidesByDate[0].id, date);
-        console.log(result);
         return result;
     } catch (err) {
         throw err;
@@ -74,8 +56,6 @@ async function getcoordinates(startPoint) {
     try {
         const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-        console.log("in getCoordinates in the controller");
-
         const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(startPoint)}`;
 
         const response = await fetch(url);
@@ -83,11 +63,9 @@ async function getcoordinates(startPoint) {
 
         if (data.length > 0) {
             const { lat, lon } = data[0];
-            console.log(`Latitude: ${lat}, Longitude: ${lon}`);
             return [lat, lon];
         }
         else {
-            console.log('Address not found.');
             throw new Error('Address not found.');
             return null;
         }
@@ -99,7 +77,6 @@ async function getcoordinates(startPoint) {
 
 async function getAllRoutesForUser(userId) {
     try {
-        console.log("in getAllRoutesForUser in controler")
         return await model.getAllRoutesForUser(userId)
     } catch (err) {
         throw err;
@@ -108,7 +85,6 @@ async function getAllRoutesForUser(userId) {
 
 async function getAllRoutesFrGuide(guideId) {
     try {
-        console.log("in getAllRoutesForUser in controler")
         return await model.getAllRoutesFrGuide(guideId);
     } catch (err) {
         throw err;

@@ -9,15 +9,14 @@ const { createPhoto, getGallery, deletePhoto } = require('../controllers/gallery
 
 const cors = require('cors');
 router.use(cors({
- origin: 'http://localhost:5173', // Replace with your frontend app URL
+ origin: 'http://localhost:5173',
  credentials: true
 }));
+
 router.get("/", async (req, res) => {
     try {
         const start = parseInt(req.query._start) || 0;
         const limit = parseInt(req.query._limit) || 10;
-        console.log("gaaaaaaa")
-
         res.send(await getGallery(start, limit));
     } catch (err) {
         const error = {

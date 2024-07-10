@@ -1,8 +1,8 @@
 const model = require('../models/ageModel');
 
-async function getAge(id) {
+async function getAge() {
     try {
-        return model.getAge(id);
+        return model.getAge();
     } catch (err) {
         throw err;
     }

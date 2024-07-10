@@ -5,10 +5,8 @@ import { UserContext } from '../App.jsx';
 
 
 function Login({ onClose, openSignUp }) {
-    const { user, setUser } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
     const [loginError, setLoginError] = useState('');
-
-
     const [formLogInData, setFormLogInData] = useState({
         email: "",
         password: "",
@@ -25,12 +23,9 @@ function Login({ onClose, openSignUp }) {
     }
 
     async function deleteBasketFromDBAddToLS(connectedUser) {
-        console.log("deleting basket of database");
         await config.deleteAllDataByKey("basket", "user_id", connectedUser.id);
         const items = localStorage.getItem("basket");
         if (items) {
-            console.log("items... ");
-            console.log(JSON.parse(items));
             const body = {
                 site: JSON.parse(items),
                 user: connectedUser
@@ -38,15 +33,13 @@ function Login({ onClose, openSignUp }) {
             config.postData("basket", body);
         }
     }
+
     async function deleteBasketFromLSAddToDB(connectedUser) {
-        console.log("in getting basket from local storage");
         if (localStorage.getItem("basket") != null)
             localStorage.removeItem(
                 "basket"
             );
         const items = await config.getData("basket", ["user_id"], [connectedUser.id]);
-        console.log("items...  ")
-        console.log(items.message);
         if (items.length) {
             localStorage.setItem("basket", JSON.stringify(items));
         }
@@ -63,11 +56,9 @@ function Login({ onClose, openSignUp }) {
 
         const result = window.confirm("Do you want to change the basket you had before in DB with the new one?");
         if (result) {
-            //deletes all data that existed before in DB
             deleteBasketFromDBAddToLS(connectedUser);
         }
         else {
-            //deletes all data it had before in local-storage
             deleteBasketFromLSAddToDB(connectedUser)
         }
     }
@@ -76,39 +67,29 @@ function Login({ onClose, openSignUp }) {
         e.preventDefault();
         if (formLogInData.email === "" || formLogInData.password === "")
             alert("please enter all the required details");
-        else {                                                              //create new user in the server
+
+        else {                                 
             const body = {
                 email: formLogInData.email,
                 password: formLogInData.password
             }
             try {
-
                 const response = await config.postData("login", body)
-                console.log(response);
-                // const token = response.token;
                 if (response) {
-                    console.log("response.user: " + response.user)
                     setUser(response.user);
-                    console.log("user: " + response.id)
-
                     alert("succesfully connected");
-                    console.log("response........");
-                    console.log(response.user);
                     addBasketToDB(response.user);
                     onClose();
                 } else {
-                    // alert("Uncorrect email or Password");
                     setFormLogInData({
                         email: "",
                         password: "",
                         confirmPassword: "",
                     });
-                    //   navigate("/login");
                 }
             }
 
             catch (err) {
-                console.log(err);
                 setLoginError(err.message);
             }
 
@@ -151,7 +132,6 @@ function Login({ onClose, openSignUp }) {
                     <button className="button okey-log" type="submit">Continue</button><br />
                     {loginError && <p className='error' style={{ color: loginError == "Registration successful" ? 'green' : "red" }}>{loginError}</p>}
                     <br />
-                    {/* <button onClick={moveToSignUp}>not signed up? sign up</button> */}
                     <a href="#" onClick={moveToSignUp}>not signed up? sign up</a>
                     <br />
                 </form>

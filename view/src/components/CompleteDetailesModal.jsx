@@ -5,7 +5,7 @@ import '../css/completeDetails.css';
 import config from '../config'
 import { UserContext } from '../App';
 
-Modal.setAppElement('#root'); // Set the app element to avoid screen reader issues
+Modal.setAppElement('#root');
 
 function CompleteDetailesModal({ isOpen, onClose }) {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ function CompleteDetailesModal({ isOpen, onClose }) {
   const [dateForTrip, setDateForTrip] = useState(null);
   const [completeDetailesError, setCompleteDetailesError] = useState('');
 
-  const { user, setUser, showLogin, setShowLogin } = useContext(UserContext);
+  const { user, setShowLogin } = useContext(UserContext);
   const [minDate, setMinDate] = useState('');
 
   useEffect(() => {
@@ -27,25 +27,23 @@ function CompleteDetailesModal({ isOpen, onClose }) {
 
   const handleSubmit = async (e) => {
 
-
     e.preventDefault();
     setCompleteDetailesError('');
-    if (!user) {// need to show login!!
+
+    if (!user) {
       setShowLogin(true);
     }
+
     if (!startPoint || !cost || !numOfHours) {
-      // alert('All fields are required!');
-      // alert('All fields are required!');
       setCompleteDetailesError('All fields are required!')
       return;
     }
+
     if (wantsGuide && dateForTrip == null) {
       setCompleteDetailesError('If you want a guide, you must enter date of trip');
-      // alert('If you want a guide, you must enter date of trip');
       return;
     }
-    // Handle form submission logic here
-    alert(`Start Point: ${startPoint}, Cost: ${cost}, Number of Hours: ${numOfHours}, wants guide: ${wantsGuide}`);
+    
 
     const body = {
       userId: user.id,
@@ -55,17 +53,15 @@ function CompleteDetailesModal({ isOpen, onClose }) {
       numOfHours: numOfHours,
       dateForTrip: dateForTrip
     }
+
     try {
       const response = await config.postData("trips", body);
       localStorage.removeItem("basket");
-      console.log("response");
-      console.log(response);
-      onClose(); // Close the modal after submission
-      console.log("the statte: " + response.guide_id, + response.id + response.trip_date  );
+      onClose(); 
       navigate('/home/tripRoute', { state:  response  });
     }
+
     catch (err) {
-      console.log(err.message);
       setCompleteDetailesError(err.message)
     }
 
@@ -73,6 +69,7 @@ function CompleteDetailesModal({ isOpen, onClose }) {
   const handleSclose = (e) => {
     onClose();
   }
+
   const changeHandler = (event) => {
     const { name, checked } = event.target;
     setWantsGuide(checked);
@@ -136,13 +133,8 @@ function CompleteDetailesModal({ isOpen, onClose }) {
             ></input>
           </div>
         }
-
-
         <button type="submit" className="button">Submit</button>
         {completeDetailesError && <p className='error' style={{color:'red'}} >{completeDetailesError}</p>}
-
-
-
       </form>
     </Modal>
   );

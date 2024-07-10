@@ -15,11 +15,8 @@ router.use(cors({
 router.post("/", async (req, res) => {
     try {
         const response = await createUser(req,res);
-        console.log("response in signup router: ");
-        console.log(response);
         res.send(response);
     } catch (err) {
-        console.log("Error in signup: ", err);
         res.status(500).json({ error: "User creation failed" });
     }
 });

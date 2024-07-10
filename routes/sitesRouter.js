@@ -5,7 +5,7 @@ router.use(express.urlencoded({ extended: true }));
 const { createSite, getSites, getSite, deleteSite, updateSite } = require('../controllers/sitesController');
 const cors = require('cors');
 router.use(cors({
- origin: 'http://localhost:5173', // Replace with your frontend app URL
+ origin: 'http://localhost:5173',
  credentials: true
 }));
 const verifyJWT=require("../middlewares/verifyJWT");
@@ -18,11 +18,7 @@ router.get("/", async (req, res) => {
         const age = (req.query.age) || null;
         const area = (req.query.area) || null;
         const difficulty = (req.query.difficulty) || null;
-        console.log("gaaaaaaa");
-        console.log(" area : "+ area +" difficulty:"+difficulty+"age:"+age);
         const allSites = await getSites(age, area, difficulty, start, limit);
-        console.log("all sites....  "+allSites);
-        console.log(allSites);
         const sitesToReturn = allSites.map(site => {
             return {
                 id: site.id,
@@ -59,8 +55,6 @@ router.get("/:id", async (req, res) => {
             longitude: site.longitude,
             trackLength: site.track_length
         }
-        console.log("in result of get site router:");
-console.log(newSite);
         res.status(200).send(newSite);
     } catch (err) {
         const error = {
@@ -139,7 +133,6 @@ router.put("/:id",verifyJWT, verifyAdmin, async (req, res) => {
 router.delete("/:id", verifyJWT, verifyAdmin, async (req, res) => {
     try {
         const id = req.params.id;
-        console.log("in delete router!!!!!")
         await deleteSite(id);
         res.send();
     } catch (err) {

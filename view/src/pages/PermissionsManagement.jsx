@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import config from '../config.js';
-import { UserContext } from '../App.jsx';
 import UserComponent from '../components/UserComponent.jsx';
 
 function PermissionsManagement() {
@@ -10,8 +9,7 @@ function PermissionsManagement() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await config.getData("users", ["role"], [4], null, null, null, ); // Example fetch function, adjust as needed
-                console.log("the guides that wating: " + data);
+                const data = await config.getData("users", ["role"], [4], null, null, null, );
                 if (data.length == 0) {
                     setHasGuides(false);
                 }

@@ -8,7 +8,6 @@ const sendMail = require('../services/mailService'); // וודא שהנתיב נ
 const SECRET_KEY = process.env.SECRET_KEY;
 async function getUsers() {
   try {
-    console.log("in controller getUsers");
     return model.getAllUsers();
   } catch (err) {
     throw err;
@@ -16,51 +15,21 @@ async function getUsers() {
 }
 async function getGuide(id) {
   try {
-    console.log("in controller getguide");
     return model.getGuide(id);
   } catch (err) {
     throw err;
   }
 }
 
-async function handleGuide(req, res) {
-  try {
-    req.body.role_id = 4;
-    // await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!`);
-    console.log("Email sent successfully");
-  } catch (mailError) {
-    throw new Error("Failed to send email: ", mailError);
-    // return res.status(500).json({ error: "Failed to send email" });
 
-  }
-}
 async function getAllWaitinGuides() {
   try {
-    console.log("in user controler, getAllWaitinGuides");
     const allWaitinGuides = await model.getAllWaitinGuides();
-    console.log("all waiting guides...");
-    console.log(allWaitinGuides);
     return allWaitinGuides;
   } catch (err) {
     throw err;
   }
 }
-// async function getAllWaitinGuidesWithAdminCheck(req, res) {
-//   try {
-//     await verifyAdmin(req, res, async () => {
-//       console.log("in user controler, getAllWaitinGuides");
-//       const allWaitinGuides = await getAllWaitinGuides();
-//       console.log("all waiting guides...");
-//       console.log(allWaitinGuides);
-//       res.status(200).send(allWaitinGuides);
-//     });
-//   } catch (err) {
-//     const error = {
-//       message: err.message
-//     };
-//     res.status(500).send(error);
-//   }
-// }
 
 async function createUser(req, res) {
   let role_id = req.body.role_id;
@@ -75,17 +44,13 @@ async function createUser(req, res) {
       role_id = 4;
       await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!
         we will be in touch with you in the next days`);
-      //send to the admin:       await sendMail(req.body.email, "Welcome!", `Hello ${req.body.userName}, welcome to our service!
-      //   we will be in touch with you on the next days`);
-
-      console.log("Email sent successfully");
     };
-    const result = await model.getUserByEmail(email);//checkes if he exists
+    const result = await model.getUserByEmail(email);
+
     if (result.length != 0) {
-      console.log("the user already exist")
       throw new Error("user already exists, please login");
     }
-    //יצירת הצפנה
+
     const hash = await bcrypt.hash(password, numSaltRoundss);
     const newUser = await model.createUser(role_id, hash, userName, email);
 
@@ -105,42 +70,41 @@ async function postLogin(req, res) {
   const email = req.body.email;
   const password = req.body.password;
   try {
-    console.log("email, in user login controller  " + email);
+
+
     const result = await model.getUser(email);
     if (result.length == 0) {
-      console.log("this user does not exist, please signup ")
       throw new Error("this user does not exist, please signup");
     }
     const tablePassword = result[0].password;
 
     if (!(await bcrypt.compare(password, tablePassword))) {
-      console.log("not Exist")
       await model.putFailLogin(email);
       throw new Error("not valid password");
     }
     else {
+
       const user = {
         id: result[0].id,
         role: result[0].role_name,
         userName: result[0].user_name,
         email: result[0].email,
       };
+
       await model.putSuccsesLogin(user.email);
+      
       const token = jwt.sign(
         { "userId": user.id },
         process.env.SECRET_KEY,
         { expiresIn: '1d' }
       );
-      console.log("token; " + token);
+
       res.cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
-      console.log(res.cookie);
       return { user: user, token: token };
-      // return user;
 
     }
   }
   catch (err) {
-    console.log(err);
     throw err;
   }
 }
@@ -162,8 +126,6 @@ async function getUserById(id) {
 }
 async function getUserByEmail(email) {
   try {
-    console.log("in create user get by id");
-
     return model.getUserByEmail(email);
   } catch (err) {
     throw err;
@@ -172,7 +134,6 @@ async function getUserByEmail(email) {
 
 async function getGuides() {
   try {
-    console.log("in updateUser by id controler");
     return model.getGuides();
   } catch (err) {
     throw err;
@@ -181,9 +142,6 @@ async function getGuides() {
 
 async function updateUserPermition(id, role) {
   try {
-    // await sendMail(req.body.email, "Welcome!", `שלום ${req.body.userName},
-    //   התקבלת לעבודה! אנחנו שמחים מאד לראות אותך בתור חלק מהצוות. הכישורים הנדירים שלך יתרמו ללא ספק לקידום ופיתוח החברה. מחכים לך בכיליון עיניים!!!`);
-    console.log("in updateUser by id controler");
     return model.updateUserPermition(id, role);
   } catch (err) {
     throw err;

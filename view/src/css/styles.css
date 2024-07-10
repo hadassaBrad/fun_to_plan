@@ -2,6 +2,151 @@
 
 
 .header {
+    background-color: #b1b4bd;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; /* פריסת כל רוחב הדף */
+    position: fixed; /* קיבוע למעלה */
+    top: 0; /* למעלה */
+    left: 0; /* בקו התחלה של הדף */
+    z-index: 1000; /* עליונות על אלמנטים אחרים */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px; 
+}
+
+.nav-left,
+.nav-right {
+    flex: 1; 
+    display: flex;
+    align-items: center;
+}
+
+.nav-center {
+    flex: 2; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-link {
+    margin: 0 30px; 
+    text-decoration: none;
+    color: #00796b; 
+    font-weight: bold;
+    font-size: 30px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #77ffc6;
+    text-decoration: underline; 
+}
+
+.nav-link:active {
+    text-decoration: underline; 
+}
+
+.auth-button {
+    background-color: #00796b; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: #004d40; 
+}
+
+.logout-button {
+    background-color: #004d40; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px; 
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    margin-left: 20px; 
+}
+
+.logout-button:hover {
+    background-color: #004d40; 
+}
+
+.icon {
+    margin-right: 8px;
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .nav-left,
+    .nav-right {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .nav-center {
+        margin-bottom: 20px;
+    }
+
+    .nav-link {
+        margin: 10px 0; 
+    }
+
+    .auth-button {
+        margin: 10px 0;
+    }
+
+    .logout-button {
+        margin: 10px 0;
+    }
+}
+
+body {
+    padding-top: 1000px; /* התאמה לגובה הכותרת */
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.header {
    
     background-color: rgb(168, 206, 211);
     padding: 20px;

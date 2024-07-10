@@ -25,8 +25,6 @@ function SignUp({ onClose, openLogin }) {
     function addBasketToDB(newUser) {
         const items = localStorage.getItem("basket")
         if (items) {
-            console.log("items... ");
-            console.log( JSON.parse(items));
             const body={
                 site:JSON.parse(items),
                 user:newUser
@@ -49,10 +47,8 @@ function SignUp({ onClose, openLogin }) {
                 confirmguide: formSignUpData.confirmguide
             }
             try {
-                console.log(body);
                 const response = await config.postData("signUp", body);
-                console.log("response  1  " );
-                console.log(response.user);
+
                 if (response.user) {
                     setUser(response.user);
                     alert("Successfully registered");
@@ -69,11 +65,9 @@ function SignUp({ onClose, openLogin }) {
                     });
                 }
             } catch (err) {
-                console.log(err.message);
                 setSignUpError(err.message);
             }
             if (localStorage.getItem("basket") != []) {
-                //לשלוח את כל הסל ולהוסיף אותו
             }
         }
     }

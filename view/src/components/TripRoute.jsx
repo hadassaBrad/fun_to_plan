@@ -39,18 +39,10 @@ import '../css/tripRouteComponent.css'; // ייבוא קובץ ה-CSS
 function TripRoute({ route }) {
 
     const navigate = useNavigate();
-   console.log("route");
-    console.log(route);
     const chosenRoutes = route.route;
 
-    const handleNavigate = (selectedRoute) => {
-        console.log("route... in trip route component");
-        console.log(route);
-        console.log( "route.guide_id: "+route.guide_id);
-        console.log("route.trip_date : "+route.trip_date)
+    const handleNavigate = () => {
         navigate('/home/tripRoute', { state: route });
-
-        //navigate('/home/tripRoute', { state: { route: selectedRoute, guide_id: route.guide_id, id: route.id ,trip_date: route.trip_date  } });
     };
 
     return (
@@ -58,11 +50,11 @@ function TripRoute({ route }) {
             {chosenRoutes.map((currentRoute, index) => (
                 <div className="route-item" key={currentRoute.id}>
                     <div className="circle"></div>
-                    <h2 className="site-name">Name: {currentRoute.site_name}</h2>
+                    <h2 className="site-name"> {currentRoute.site_name}</h2>
                     {index < chosenRoutes.length - 1 && <div className="dashed-line"></div>}
                 </div>
             ))}
-            <button onClick={() => handleNavigate(route)}>View Details</button>
+            <button onClick={() => handleNavigate()}>View Details</button>
         </div>
     );
 }

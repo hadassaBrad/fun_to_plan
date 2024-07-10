@@ -1,6 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import config from '../config';
+import "../css/galery.css";
 
 function Gallery() {
     const [photos, setPhotos] = useState([]);
@@ -10,11 +10,8 @@ function Gallery() {
     useEffect(() => {
         const fetchPhotos = async () => {
             try {
-                console.log("fetching data of gallery... ");
                 const data = await config.getData("gallery", [], [], begin, limit);
-                console.log(data);
                 setPhotos(photos => [...photos, ...data]);
-                console.log(photos);
             } catch (error) {
                 console.error("Error fetching photos:", error);
             }
@@ -35,23 +32,26 @@ function Gallery() {
     }, []);
 
     return (
-        <>
+        <div className="gallery-container">
             {photos.length > 0 ? (
                 photos.map(photo => (
-                    <img
-                        key={photo.id}
-                        src={photo.url}
-                        alt={photo.name}
-                        title={photo.name} // Setting the title attribute to display the name on hover
-                        height={100}
-                        width={180}
-                    />
+                    <div className="gallery-item" key={photo.id}>
+                        <img
+                            src={photo.url}
+                            alt={photo.name}
+                            title={photo.name}
+                            height={100}
+                            width={180}
+                        />
+                        <div className="photo-name">{photo.name}</div>
+                    </div>
                 ))
             ) : (
                 <p>No photos available</p>
             )}
-        </>
+        </div>
     );
 }
 
 export default Gallery;
+

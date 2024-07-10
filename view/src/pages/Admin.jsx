@@ -1,23 +1,10 @@
 import { React, useContext, useState, } from 'react'
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AdminSite from "../components/AdminSite";
 import config from '../config.js';
 
 import { UserContext } from '../App';
 
-
-// function Admin() {
-//     const { user, setUser } = useContext(UserContext);
-//     const [showAdminSite, setShowAdminSite] = useState(false);
-
-
-//     return (
-//         <>   {user && user.role === "admin" &&
-//             <button className="auth-button" onClick={() => setShowAdminSite(true)}>Admin</button>}
-//             {showAdminSite && <AdminSite onClose={() => setShowAdminSite(false)} />}</>
-//     );
-// }
-// export default Admin;
 async function onClickSave(site) {
     try {
         const result = await config.postData("sites", site)
@@ -28,18 +15,8 @@ async function onClickSave(site) {
     }
 }
 
-async function PermissionsManagement() {
-    try {
-        const result = await config.postData("sites", site)
-        return result;
-    } catch (err) {
-        console.log(err);
-        throw err;
-    }
-}
-
 function Admin() {
-    const { user, setUser } = useContext(UserContext);
+    const { user, } = useContext(UserContext);
     const [showAdminSite, setShowAdminSite] = useState(false);
     const [site, setSite] = useState({
         siteName: "",
