@@ -175,11 +175,20 @@ INSERT INTO sites (
 ('Caesarea', 'https://cdn.goodlifetv.co.il/wp-content/uploads/2021/08/09190333/shutterstock_491053702-640x405-1.jpg', 'Ancient city on the Mediterranean coast of Israel.', 85, 2, 1, 35, 1, '08:00:00', '18:00:00', 32.5000, 34.8958, 0),
 ('Old City of Jerusalem', 'https://cdn.exiteme.com/exitetogo/www.more-tourism.co.il/gallery/B4BE3D77-8D64-E1C5-D16A-7275FCE27852.jpg', 'The historic heart of Jerusalem.', 95, 3, 1, 50, 1, '08:00:00', '19:00:00', 31.7780, 35.2355, 0),
 ('Dead Sea', 'https://www.psoriasis.org.il/wp-content/uploads/2017/03/%D7%99%D7%9D-%D7%94%D7%9E%D7%9C%D7%97-%D7%A8%D7%A7%D7%A2-53585846_l.jpg', 'The lowest point on Earth, famous for its rich salt content.', 90, 3, 3, 60, 2, '08:00:00', '18:00:00', 31.4965, 35.4945, 0),
-('Old Acre', 'https://cdn.exiteme.com/exitetogo/www.oldakko.co.il/userfiles/images/%D7%98%D7%99%D7%99%D7%9C%D7%AA_%D7%94%D7%97%D7%95%D7%9E%D7%95%D7%AA.jpg', 'Historical city on the northern coast of Israel.', 80, 1, 1, 30, 1, '08:00:00', '18:00:00', 32.92228588536576, 35.07148851831015, 0)
+('Old Acre', 'https://cdn.exiteme.com/exitetogo/www.oldakko.co.il/userfiles/images/%D7%98%D7%99%D7%99%D7%9C%D7%AA_%D7%94%D7%97%D7%95%D7%9E%D7%95%D7%AA.jpg', 'Historical city on the northern coast of Israel.', 80, 1, 1, 30, 1, '08:00:00', '18:00:00', 32.92228588536576, 35.07148851831015, 0);
+
+insert into passwords(password, loginAttempts, lastLogin, account_status) values
+('$2b$10$T8orXcY8jiNlOqImWUDp6uroW/u8P5IOJa0Mv/8dFMG9GzaBSJyja',1, '2024-06-15 21:35:39', 1);
+
+insert into passwords(password, loginAttempts, lastLogin, account_status) values
+('$2b$10$T8orXcY8jiNlOqImWUDp6uroW/u8P5IOJa0Mv/8dFMG9GzaBSJyja',1, '2024-06-15 21:35:39', 1);
 
 insert into passwords(password, loginAttempts, lastLogin, account_status) values
 ('$2b$10$T8orXcY8jiNlOqImWUDp6uroW/u8P5IOJa0Mv/8dFMG9GzaBSJyja',1, '2024-06-15 21:35:39', 1);
 insert into users(role_id, user_name, password_id, email) values
 (2, 'admin', 1, 'admin@gmail.com');
+insert into users(role_id, user_name, password_id, email) values
+(3, 'guide', 2, 'guide@gmail.com');
 
-  SELECT * FROM users  INNER JOIN passwords ON users.password_id = passwords.id INNER JOIN permissions ON users.role_id = permissions.id WHERE users.email = 'hadassa26162@gmail.com';
+ insert into users(role_id, user_name, password_id, email) values
+(1, 'The Traveler', 3, 't@gmail.com');

@@ -100,12 +100,12 @@ body, html {
     height: 100%;
 }
 
-.container {
+/* .container {
     position: relative;
     width: 100vw;
     height: 100vh;
     transition: margin-right 0.3s;
-}
+} */
 
 .map-container {
     position: absolute;
