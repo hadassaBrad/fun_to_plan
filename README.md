@@ -4,8 +4,10 @@
 
 ## Key Features
 - 🎉 User-friendly interface for personalized event planning.
-- 🗓️ Tools for managing schedules, participant lists, and tasks.
-- 🎁 Share events with participants and receive real-time feedback.
+- 🗺️ Map integration for location-based event planning.
+- 🔒 Secure authentication and session management.
+- 📧 Email notifications using SendGrid and Nodemailer.
+- 🛠️ Easy-to-use tools for managing participants and tasks.
 
 ---
 
@@ -36,12 +38,15 @@
 ---
 
 ## Technologies Used
-- **Next.js**: Framework for building advanced React applications.
-- **Redux**: For state management.
-- **TypeScript**: Ensures secure and modular code.
-- **MongoDB with Prisma**: Flexible and efficient database management.
-- **NextAuth**: For user authentication.
-- **Cloudinary**: For image storage and management.
+- **Node.js**: Backend runtime environment.
+- **Express.js**: Framework for handling routes and API endpoints.
+- **MySQL**: Additional database support for relational data.
+- **React** (with React Router): Frontend framework for creating interactive user interfaces.
+- **Leaflet** and **React-Leaflet**: For interactive maps and geolocation features.
+- **SendGrid** and **Nodemailer**: For sending email notifications.
+- **jsonwebtoken**: For secure authentication and token management.
+- **bcrypt**: For password hashing and security.
+- **dotenv**: For managing environment variables.
 
 ---
 
@@ -53,9 +58,9 @@ We welcome ideas and collaborations!
 ---
 
 ## License
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [ISC License](LICENSE).
 
 ---
 
 ## Contact
-For additional questions or collaborations, feel free to reach out via [GitHub](https://github.com/hadassaBrad).
+For additional questions or collaborations, feel free to reach out via [GitHub: Hadassa Bradpiece](https://github.com/hadassaBrad) or [GitHub: Ruchama Bricker](https://github.com/ruchamabricker).
